@@ -1,0 +1,50 @@
+package client;
+
+import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+
+import model.Product;
+import model.Store;
+import model.StoreModel;
+import server.RIServer;
+import view.MainView;
+import viewmodel.MainViewViewModel;
+
+public class Client implements IClient, RIClient, Serializable
+{
+
+   private StoreModel model;
+   private RIServer server;
+
+   public Client(StoreModel model) throws RemoteException, NotBoundException, MalformedURLException
+   {
+      this.model = model;
+      this.model.setClient(this);
+      server = (RIServer) Naming.lookup("rmi://localhost:1099/store");
+      server.addClient(this);
+      UnicastRemoteObject.exportObject(this, 0);
+   }
+
+
+   @Override
+   public void getProducts(Product[] products) throws RemoteException
+   {
+      model.getProducts(products);
+   }
+
+
+   @Override
+   public void requestProducts() throws RemoteException
+   {
+      server.getProducts(this);
+   }
+
+
+}
