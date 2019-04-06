@@ -31,15 +31,14 @@ public class Store implements StoreModel,Serializable
    }
 
    @Override
-   public void getProducts(Product[] values)
+   public void getProductsFromServer(ArrayList<Product> values)
    {
-      products = new ArrayList<Product>();
-      for (int i = 0 ;i < values.length;i++)
+      for (Product product: values)
       {
-         products.add(values[i]);
-         System.out.println(values[i].getName());
+         System.out.println(product);
       }
-      support.firePropertyChange("SEND", "", products);
+      products = values;
+      support.firePropertyChange("SEND", "", values);
    }
 
    @Override
@@ -52,5 +51,11 @@ public class Store implements StoreModel,Serializable
    public void requestProducts() throws RemoteException
    {
       client.requestProducts();
+   }
+
+   @Override
+   public ArrayList<Product> getProducts()
+   {
+    return products;  
    }
 }

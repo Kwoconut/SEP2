@@ -8,5 +8,5 @@ import model.Product;
 
 public interface RIClient extends Remote
 {
-   void getProducts(Product[] products) throws RemoteException;
+   void getProducts(ArrayList<Product> products) throws RemoteException;
 }

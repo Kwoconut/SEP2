@@ -8,7 +8,9 @@ import client.Client;
 
 public interface StoreModel
 {
-   void getProducts(Product[] products);
+   ArrayList<Product> getProducts();
+   
+   void getProductsFromServer(ArrayList<Product> products);
    
    void setClient(Client client);
    

@@ -15,15 +15,15 @@ public class test extends Application
    {
       StoreModel model = new Store();
       model.addProduct(new Product(Product.TYPE_METAL_SHEET, 1500, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
       model.addProduct(new Product(Product.TYPE_METAL_TILE, 2000, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
       model.addProduct(new Product(Product.TYPE_PLATED_SHEET, 3000, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
       model.addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
       model.addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
       MainViewViewModel mvvm = new MainViewViewModel(model);
       MainView view = new MainView(mvvm);
       view.start(stage);

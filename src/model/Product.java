@@ -6,7 +6,6 @@ public class Product implements Serializable
 {
    private String name;
    private String finish;
-   private String details;
    private String colour;
    private String type;
    private int price;
@@ -16,15 +15,20 @@ public class Product implements Serializable
    public static String TYPE_RAIN_SYSTEM = "Rain System";
    public static String TYPE_METAL_TILE = "Metal Tile";
 
-   public Product(String name, int price, String finish, String details,
-         String colour, String type)
+   public Product(String name, int price, String finish, String colour,
+         String type)
    {
       this.name = name;
       this.price = price;
       this.finish = finish;
-      this.details = details;
       this.colour = colour;
       this.type = type;
+   }
+
+   public Product(String name, int price)
+   {
+      this.name = name;
+      this.price = price;
    }
 
    public String getName()
@@ -47,11 +51,6 @@ public class Product implements Serializable
       return finish;
    }
 
-   public String getDetails()
-   {
-      return details;
-   }
-
    public String getColour()
    {
       return colour;
@@ -72,7 +71,7 @@ public class Product implements Serializable
       Product other = (Product) obj;
       return name.equals(other.getName()) && finish.equals(other.getFinish())
             && colour.equals(other.getColour())
-            && details.equals(other.getDetails())
+
             && type.equals(other.getType()) && price == other.getPrice();
    }
 
@@ -80,8 +79,7 @@ public class Product implements Serializable
    {
       String s = "";
 
-      s += name + "\n" + finish + "\n" + colour + "\n" + details + "\n" + type
-            + "\n" + price;
+      s += name + "\n" + finish + "\n" + colour + "\n" + type + "\n" + price;
       return s;
    }
 

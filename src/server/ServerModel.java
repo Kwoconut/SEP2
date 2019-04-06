@@ -17,15 +17,15 @@ public class ServerModel
    private void sampleData()
    {
       addProduct(new Product(Product.TYPE_METAL_SHEET, 1500, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
       addProduct(new Product(Product.TYPE_METAL_TILE, 2000, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
       addProduct(new Product(Product.TYPE_PLATED_SHEET, 3000, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
       addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
       addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000, "cacat",
-            "Sa mori tu", "nicoleta", "sugator pentru gicu"));
+            "Sa mori tu", "sugator pentru gicu"));
    }
 
    public void addProduct(Product product)
@@ -33,13 +33,13 @@ public class ServerModel
       products.add(product);
    }
 
-   public Product[] getProducts()
+   public ArrayList<Product> getProducts()
    {
-      Product[] values = new Product[products.size()];
-      for (int i = 0; i < products.size(); i++)
-      {
-         values[i] = products.get(i);
-      }
-      return values;
+      return products;
+   }
+   
+   public ArrayList<Product> getServerProducts()
+   {
+      return products;
    }
 }
