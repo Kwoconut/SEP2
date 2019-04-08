@@ -58,4 +58,9 @@ public class Store implements StoreModel,Serializable
    {
     return products;  
    }
+
+@Override
+public Client getClient() {
+	return client;
+}
 }

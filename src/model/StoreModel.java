@@ -20,4 +20,6 @@ public interface StoreModel
    
    void requestProducts() throws RemoteException;
    
+   Client getClient();
+   
 }
