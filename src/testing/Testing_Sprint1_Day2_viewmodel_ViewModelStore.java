@@ -19,7 +19,7 @@ import server.Server;
 import server.ServerModel;
 import viewmodel.ViewModelStore;
 
-public class Testing_Sprint1_Day1_viewmodel_ViewModelStore 
+public class Testing_Sprint1_Day2_viewmodel_ViewModelStore 
 	{
 	   private StringProperty[] names = new StringProperty[5];
 	   private StringProperty[] prices = new StringProperty[5];

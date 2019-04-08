@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import model.Offer;
 
-public class Testing_Sprint1_Day1_model_Offer 
+public class Testing_Sprint1_Day2_model_Offer 
 {
 	private Offer offer1;
 	private Offer offer2;

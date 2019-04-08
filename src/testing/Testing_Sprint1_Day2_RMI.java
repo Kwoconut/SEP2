@@ -16,7 +16,7 @@ import model.StoreModel;
 import server.Server;
 import server.ServerModel;
 
-public class Testing_Sprint1_Day1_RMI
+public class Testing_Sprint1_Day2_RMI
 {
    private Client client;
    private Server server;

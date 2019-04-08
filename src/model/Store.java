@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import client.Client;
 
-public class Store implements StoreModel,Serializable
+public class Store implements StoreModel, Serializable
 {
    private ArrayList<Product> products;
    private Client client;
@@ -27,20 +27,20 @@ public class Store implements StoreModel,Serializable
    @Override
    public ArrayList<Product> getProducts()
    {
-	   return products;  
+      return products;
    }
-   
+
    @Override
    public void getProductsFromServer(ArrayList<Product> values)
    {
-	   for (Product product: values)
-	   {
-		   System.out.println(product);
-	   }
-	   products = values;
-	   support.firePropertyChange("SEND", "", values);
+      for (Product product : values)
+      {
+         System.out.println(product);
+      }
+      products = values;
+      support.firePropertyChange("SEND", "", values);
    }
-   
+
    @Override
    public void setClient(Client client)
    {
@@ -48,21 +48,29 @@ public class Store implements StoreModel,Serializable
    }
 
    @Override
-   public Client getClient() 
+   public Client getClient()
    {
-	   return client;
+      return client;
    }
-   
+
    @Override
    public void requestProducts() throws RemoteException
    {
-	   client.requestProducts();
+      client.requestProducts();
    }
 
    @Override
    public void addListener(PropertyChangeListener listener)
    {
       support.addPropertyChangeListener(listener);
+   }
+
+   @Override
+   public void sendOfferToServer(ArrayList<String> offerInfo)
+   {
+      Offer offer = new Offer(offerInfo.get(0), offerInfo.get(1),
+            offerInfo.get(2), offerInfo.get(3));
+      System.out.println(offer);
    }
 
 }

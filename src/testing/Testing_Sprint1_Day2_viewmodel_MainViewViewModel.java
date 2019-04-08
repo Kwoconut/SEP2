@@ -11,7 +11,7 @@ import model.StoreModel;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelStore;
 
-public class Testing_Sprint1_Day1_viewmodel_MaiViewViewModel 
+public class Testing_Sprint1_Day2_viewmodel_MainViewViewModel 
 	{
 	   private MainViewViewModel mvvm;
 	   private ViewModelStore viewModelStore;

@@ -22,4 +22,6 @@ public interface StoreModel
    
    Client getClient();
    
+   void sendOfferToServer(ArrayList<String> offerInfo);
+   
 }

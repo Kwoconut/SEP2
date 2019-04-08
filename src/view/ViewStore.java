@@ -1,5 +1,6 @@
 package view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.fxml.FXML;
@@ -25,6 +26,11 @@ public class ViewStore
    private Scene scene;
 
    private String title;
+   
+   public ViewStore()
+   {
+      
+   }
 
    public void init(ViewModelStore viewModel, MainView view, Scene scene,
          String title)
@@ -39,6 +45,12 @@ public class ViewStore
          priceLabelList.get(i).textProperty().bind(viewModel.getPriceProperty(i));
       }
          
+   }
+   
+   public void onRequestOfferButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("OFFER");
    }
 
    public String getTitle()

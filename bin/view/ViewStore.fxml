@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -10,34 +11,23 @@
 <?import javafx.scene.text.Font?>
 <?import java.util.ArrayList?>
 
-<VBox prefHeight="700.0" prefWidth="1200.0"
-	xmlns="http://javafx.com/javafx/10.0.1"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewStore">
+<VBox prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewStore">
 	<children>
 		<AnchorPane VBox.vgrow="ALWAYS">
 			<children>
-				<GridPane gridLinesVisible="true" hgap="10.0"
-					layoutX="74.0" layoutY="161.0" prefHeight="393.0"
-					prefWidth="1064.0">
+				<GridPane gridLinesVisible="true" hgap="10.0" layoutX="74.0" layoutY="161.0" prefHeight="393.0" prefWidth="1064.0">
 					<columnConstraints>
-						<ColumnConstraints hgrow="SOMETIMES"
-							minWidth="8.0" prefWidth="150.0" />
-						<ColumnConstraints hgrow="SOMETIMES"
-							minWidth="10.0" prefWidth="150.0" />
-						<ColumnConstraints hgrow="SOMETIMES"
-							minWidth="10.0" prefWidth="150.0" />
-						<ColumnConstraints hgrow="SOMETIMES"
-							minWidth="10.0" prefWidth="150.0" />
-						<ColumnConstraints hgrow="SOMETIMES"
-							minWidth="10.0" prefWidth="150.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="8.0" prefWidth="150.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
 					</columnConstraints>
 					<rowConstraints>
-						<RowConstraints minHeight="10.0" prefHeight="100.0"
-							vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<Label fx:id="label02" text="Detalii"
-							GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label02" text="Detalii" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>
@@ -45,8 +35,7 @@
 								<Insets bottom="10.0" />
 							</GridPane.margin>
 						</Label>
-						<Label fx:id="label01" text="Pret"
-							GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label01" text="Pret" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="21.0" />
 							</font>
@@ -54,8 +43,7 @@
 								<Insets bottom="60.0" />
 							</GridPane.margin>
 						</Label>
-						<Label fx:id="label00" alignment="CENTER" text="Denumire"
-							GridPane.halignment="CENTER" GridPane.valignment="TOP">
+						<Label fx:id="label00" alignment="CENTER" text="Denumire" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
 							</GridPane.margin>
@@ -63,9 +51,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-						<Label fx:id="label10" alignment="CENTER" text="Denumire"
-							GridPane.columnIndex="1" GridPane.halignment="CENTER"
-							GridPane.valignment="TOP">
+						<Label fx:id="label10" alignment="CENTER" text="Denumire" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
 							</GridPane.margin>
@@ -73,9 +59,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-						<Label fx:id="label12" text="Detalii"
-							GridPane.columnIndex="1" GridPane.halignment="CENTER"
-							GridPane.valignment="BOTTOM">
+						<Label fx:id="label12" text="Detalii" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>
@@ -83,8 +67,7 @@
 								<Insets bottom="10.0" />
 							</GridPane.margin>
 						</Label>
-						<Label fx:id="label11" text="Pret" GridPane.columnIndex="1"
-							GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label11" text="Pret" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="21.0" />
 							</font>
@@ -92,9 +75,7 @@
 								<Insets bottom="60.0" />
 							</GridPane.margin>
 						</Label>
-						<Label fx:id="label30" alignment="CENTER" text="Denumire"
-							GridPane.columnIndex="3" GridPane.halignment="CENTER"
-							GridPane.valignment="TOP">
+						<Label fx:id="label30" alignment="CENTER" text="Denumire" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
 							</GridPane.margin>
@@ -102,9 +83,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-						<Label fx:id="label32" text="Detalii"
-							GridPane.columnIndex="3" GridPane.halignment="CENTER"
-							GridPane.valignment="BOTTOM">
+						<Label fx:id="label32" text="Detalii" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>
@@ -112,8 +91,7 @@
 								<Insets bottom="10.0" />
 							</GridPane.margin>
 						</Label>
-						<Label fx:id="label31" text="Pret" GridPane.columnIndex="3"
-							GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label31" text="Pret" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<GridPane.margin>
 								<Insets bottom="60.0" />
 							</GridPane.margin>
@@ -121,9 +99,7 @@
 								<Font size="21.0" />
 							</font>
 						</Label>
-						<Label fx:id="label20" alignment="CENTER" text="Denumire"
-							GridPane.columnIndex="2" GridPane.halignment="CENTER"
-							GridPane.valignment="TOP">
+						<Label fx:id="label20" alignment="CENTER" text="Denumire" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
 							</GridPane.margin>
@@ -131,9 +107,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-						<Label fx:id="label22" text="Detalii"
-							GridPane.columnIndex="2" GridPane.halignment="CENTER"
-							GridPane.valignment="BOTTOM">
+						<Label fx:id="label22" text="Detalii" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>
@@ -141,8 +115,7 @@
 								<Insets bottom="10.0" />
 							</GridPane.margin>
 						</Label>
-						<Label fx:id="label21" text="Pret" GridPane.columnIndex="2"
-							GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label21" text="Pret" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="21.0" />
 							</font>
@@ -150,9 +123,7 @@
 								<Insets bottom="60.0" />
 							</GridPane.margin>
 						</Label>
-						<Label fx:id="label40" alignment="CENTER" text="Denumire"
-							GridPane.columnIndex="4" GridPane.halignment="CENTER"
-							GridPane.valignment="TOP">
+						<Label fx:id="label40" alignment="CENTER" text="Denumire" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
 							</GridPane.margin>
@@ -160,9 +131,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-						<Label fx:id="label42" text="Detalii"
-							GridPane.columnIndex="4" GridPane.halignment="CENTER"
-							GridPane.valignment="BOTTOM">
+						<Label fx:id="label42" text="Detalii" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>
@@ -170,8 +139,7 @@
 								<Insets bottom="10.0" />
 							</GridPane.margin>
 						</Label>
-						<Label fx:id="label41" text="Pret" GridPane.columnIndex="4"
-							GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label41" text="Pret" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<GridPane.margin>
 								<Insets bottom="60.0" />
 							</GridPane.margin>
@@ -198,9 +166,8 @@
 						</fx:define>
 					</children>
 				</GridPane>
+            <Button onAction="#onRequestOfferButtonPressed" layoutX="979.0" layoutY="49.0" mnemonicParsing="false" text="Request Offer" />
 			</children>
 		</AnchorPane>
 	</children>
 </VBox>
-
-

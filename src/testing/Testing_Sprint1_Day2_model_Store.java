@@ -7,7 +7,7 @@ import org.junit.Test;
 import model.Product;
 import model.Store;
 
-public class Testing_Sprint1_Day1_model_Store 
+public class Testing_Sprint1_Day2_model_Store 
 {
 	   private Store store;
 	   private Product product1;
