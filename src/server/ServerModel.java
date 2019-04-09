@@ -2,15 +2,18 @@ package server;
 
 import java.util.ArrayList;
 
+import model.Offer;
 import model.Product;
 
 public class ServerModel
 {
    private ArrayList<Product> products;
+   private ArrayList<Offer> offers;
 
    public ServerModel()
    {
       products = new ArrayList<Product>();
+      offers = new ArrayList<Offer>();
       sampleData();
    }
 
@@ -41,5 +44,11 @@ public class ServerModel
    public ArrayList<Product> getServerProducts()
    {
       return products;
+   }
+   
+   public void addOffer(Offer offer)
+   {
+      offers.add(offer);
+      System.out.println(offers);
    }
 }

@@ -15,13 +15,11 @@ public class Server implements RIServer
 {
    private ServerModel model;
    private ArrayList<RIClient> clients;
-   private ArrayList<Offer> offers;
 
    public Server(ServerModel model) throws RemoteException
    {
       this.model = model;
       clients = new ArrayList<RIClient>();
-      offers = new ArrayList<Offer>();
       UnicastRemoteObject.exportObject(this, 0);
    }
 
@@ -57,7 +55,6 @@ public class Server implements RIServer
    @Override
    public void sendOffer(Offer offer) throws RemoteException
    {
-      offers.add(offer);
-      System.out.println(offers);
+      model.addOffer(offer);
    }
 }
