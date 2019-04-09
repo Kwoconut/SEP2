@@ -1,6 +1,8 @@
 package model;
 
-public class Offer
+import java.io.Serializable;
+
+public class Offer implements Serializable
 {
    private String name;
    private String phoneNo;

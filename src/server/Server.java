@@ -8,17 +8,20 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import client.RIClient;
+import model.Offer;
 import model.Product;
 
 public class Server implements RIServer
 {
    private ServerModel model;
    private ArrayList<RIClient> clients;
+   private ArrayList<Offer> offers;
 
    public Server(ServerModel model) throws RemoteException
    {
       this.model = model;
       clients = new ArrayList<RIClient>();
+      offers = new ArrayList<Offer>();
       UnicastRemoteObject.exportObject(this, 0);
    }
 
@@ -49,5 +52,12 @@ public class Server implements RIServer
    {
       sender.getProducts(model.getProducts());
 
+   }
+
+   @Override
+   public void sendOffer(Offer offer) throws RemoteException
+   {
+      offers.add(offer);
+      System.out.println(offers);
    }
 }

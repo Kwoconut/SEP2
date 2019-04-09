@@ -70,7 +70,15 @@ public class Store implements StoreModel, Serializable
    {
       Offer offer = new Offer(offerInfo.get(0), offerInfo.get(1),
             offerInfo.get(2), offerInfo.get(3));
-      System.out.println(offer);
+      try
+      {
+         client.sendOfferToServer(offer);
+      }
+      catch (RemoteException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
    }
 
 }

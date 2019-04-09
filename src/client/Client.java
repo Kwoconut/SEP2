@@ -10,6 +10,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import model.Offer;
 import model.Product;
 import model.Store;
 import model.StoreModel;
@@ -44,6 +45,13 @@ public class Client implements IClient, RIClient, Serializable
    public void requestProducts() throws RemoteException
    {
       server.getProducts(this);
+   }
+
+
+   @Override
+   public void sendOfferToServer(Offer offer) throws RemoteException
+   {
+      server.sendOffer(offer);      
    }
 
 
