@@ -57,21 +57,21 @@ public class ViewModelOffer
 
       if (nameProperty.get().equals(""))
       {
-         errorProperty.set("Fields empty");
+         errorProperty.set("Please input a name");
       }
       else if (phoneProperty.get().equals("")
-            || phoneProperty.get().length() < 10)
+            || phoneProperty.get().length() < 8)
       {
-         errorProperty.set("Fields empty");
+         errorProperty.set("Please input a valid phone number");
       }
-      else if (nameProperty.get().equals(""))
+      else if (emailProperty.get().equals(""))
       {
 
-         errorProperty.set("Fields empty");
+         errorProperty.set("Please input a valid email address");
       }
       else if (messageProperty.get().equals(""))
       {
-         errorProperty.set("Fields empty");
+         errorProperty.set("Please leave a message");
       }
       else
       {
