@@ -51,4 +51,9 @@ public class ServerModel
       offers.add(offer);
       System.out.println(offers);
    }
+   
+   public ArrayList<Offer> getOffers()
+   {
+	   return offers;
+   }
 }
