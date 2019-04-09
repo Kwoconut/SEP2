@@ -64,7 +64,8 @@ public class ViewModelOffer
       {
          errorProperty.set("Please input a valid phone number");
       }
-      else if (emailProperty.get().equals(""))
+      else if (emailProperty.get().equals("") || !(emailProperty.get()
+            .matches("^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z" + "A-Z]{2,7}$")))
       {
 
          errorProperty.set("Please input a valid email address");
