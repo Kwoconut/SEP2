@@ -19,12 +19,9 @@ import server.ServerModel;
 
 public class Testing_Sprint1_Day3_RMI
 {
-   private Client client;
    private Server server;
    private StoreModel model;
    private ServerModel serverModel;
-   private ArrayList<Product> products;
-   private Store store;
    private ArrayList<String> offer;
 
    
@@ -34,21 +31,11 @@ public class Testing_Sprint1_Day3_RMI
    {
       model = new Store();
       serverModel = new ServerModel();
-      products = new ArrayList<Product>(5);
-      store = new Store();
 	  offer = new ArrayList<String>(); 
 	  offer.add("one");
 	  offer.add("two");
 	  offer.add("three");
 	  offer.add("four");
-      try
-      {
-         client = new Client(model);
-      }
-      catch (RemoteException | MalformedURLException | NotBoundException e)
-      {    
-         e.printStackTrace();      
-      }
       try
       {
          server = new Server(serverModel);       
@@ -59,47 +46,16 @@ public class Testing_Sprint1_Day3_RMI
          e.printStackTrace();
       }
    }
-   //Server Client Testings Store.requestProducts(),  Store.getProductsFromServer(ArrayList<Product> values)
-   @Test
-   public void testGetProducts()
-   {
-      try
-      {
-         model.requestProducts();
-      }
-      catch (RemoteException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      products = model.getProducts();
-      assertEquals(products, serverModel.getProducts());
-   }
-   
-   //Store.setClient(Client client) testing
-   @Test
-   public void setClient()
-   {
-	   assertEquals(null,store.getClient());
-	   store.setClient(client);   
-	   assertNotNull(client);
-   }
-   
-   //Store.getClient() testing
-   @Test
-   public void getClient()
-   {
-	  store.setClient(client); 
-	  assertEquals(client,store.getClient());
-   }
    
    //Store.sendOfferToServer(ArrayList<String> offerInfo) testing
    @Test
    public void  sendOfferToServer() throws RemoteException
    {
-
-	//  model.sendOfferToServer(offer);
+	   Offer offer = new Offer("gicu","s","d","s");
+	   ArrayList<Offer> offers = new ArrayList<Offer>();
+	   offers.add(offer);
 	   server.sendOffer(new Offer("gicu","s","d","s"));
 	   assertEquals(1, serverModel.getOffers().size());  
+	   assertEquals(offers,serverModel.getOffers());
    }
 }
