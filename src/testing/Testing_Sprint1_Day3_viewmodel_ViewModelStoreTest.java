@@ -36,17 +36,4 @@ public class Testing_Sprint1_Day3_viewmodel_ViewModelStoreTest
 		System.out.println(s+"ssssssssssssssss");
 		assertEquals("s",vms.getNameProperty(0));
 	}
-	
-	@Test
-	public void getPriceProperty()
-	{
-		
-	}
-	// needs evt
-	@Test
-	public void updateProducts()
-	{
-		vms.updateProducts(evt);
-	}
-
 }

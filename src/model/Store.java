@@ -30,6 +30,12 @@ public class Store implements StoreModel, Serializable
    {
       return products;
    }
+   
+   @Override
+   public ArrayList<Offer> getOffers() 
+   {
+	   return offers;
+   }
 
    @Override
    public void getProductsFromServer(ArrayList<Product> values)
@@ -124,5 +130,6 @@ public class Store implements StoreModel, Serializable
       }
 
    }
+
 
 }

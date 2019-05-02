@@ -39,6 +39,12 @@ public class Client implements IClient, RIClient, Serializable
    {
       model.getProductsFromServer(products);
    }
+   
+   @Override
+   public void getOffers(ArrayList<Offer> offers) throws RemoteException
+   {
+	   model.getOffersFromServer(offers);
+   }
 
 
    @Override

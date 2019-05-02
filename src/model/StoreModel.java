@@ -10,6 +10,8 @@ public interface StoreModel
 {
    ArrayList<Product> getProducts();
    
+   ArrayList<Offer> getOffers();
+   
    void getProductsFromServer(ArrayList<Product> products);
    
    void getOffersFromServer(ArrayList<Offer> offers);
@@ -25,5 +27,7 @@ public interface StoreModel
    Client getClient();
    
    void sendOfferToServer(ArrayList<String> offerInfo);
+
+
    
 }
