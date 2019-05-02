@@ -44,6 +44,7 @@ public class Client implements IClient, RIClient, Serializable
    public void getOffers(ArrayList<Offer> offers) throws RemoteException
    {
 	   model.getOffersFromServer(offers);
+	   System.out.println("------");
    }
 
 
@@ -51,6 +52,13 @@ public class Client implements IClient, RIClient, Serializable
    public void requestProducts() throws RemoteException
    {
       server.getProducts(this);
+   }
+   
+   @Override
+   public void requestOffers() throws RemoteException
+   {
+      server.getOffers(this);
+ 
    }
 
 

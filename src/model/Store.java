@@ -20,6 +20,7 @@ public class Store implements StoreModel, Serializable
       offers = new ArrayList<Offer>();
    }
 
+   @Override
    public void addProduct(Product product)
    {
       products.add(product);
@@ -52,7 +53,8 @@ public class Store implements StoreModel, Serializable
    public void getOffersFromServer(ArrayList<Offer> offers)
    {
       this.offers = offers;
-      support.firePropertyChange("OFFERSEND", "", offers);
+      support.firePropertyChange("OFFERLIST", "", offers);
+
    }
 
    @Override
@@ -68,6 +70,13 @@ public class Store implements StoreModel, Serializable
    }
 
    @Override
+   public void requestOffers() throws RemoteException
+   {
+      client.requestOffers();
+      
+   }
+   
+   @Override
    public void requestProducts() throws RemoteException
    {
       client.requestProducts();
@@ -80,11 +89,8 @@ public class Store implements StoreModel, Serializable
    }
 
    @Override
-   public void sendOfferToServer(ArrayList<String> offerInfo)
+   public void addOffer(Offer offer)
    {
-      Offer offer = new Offer(offerInfo.get(0), offerInfo.get(1),
-            offerInfo.get(2), offerInfo.get(3));
-
       int errorCase = offer.checkFormat();
 
       switch (errorCase)
@@ -116,7 +122,6 @@ public class Store implements StoreModel, Serializable
          {
             try
             {
-               support.firePropertyChange("clear", " ", "");
                offers.add(offer);
                client.sendOfferToServer(offer);
             }
@@ -130,6 +135,7 @@ public class Store implements StoreModel, Serializable
       }
 
    }
+
 
 
 }

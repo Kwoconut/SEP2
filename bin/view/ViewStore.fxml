@@ -166,7 +166,8 @@
 						</fx:define>
 					</children>
 				</GridPane>
-            <Button onAction="#onRequestOfferButtonPressed" layoutX="979.0" layoutY="49.0" mnemonicParsing="false" text="Request Offer" />
+            <Button layoutX="979.0" layoutY="49.0" mnemonicParsing="false" onAction="#onRequestOfferButtonPressed" text="Request Offer" />
+            <Button layoutX="137.0" layoutY="49.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" text="Check Offers" />
 			</children>
 		</AnchorPane>
 	</children>

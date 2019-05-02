@@ -14,5 +14,7 @@ public interface RIServer extends Remote
    
    void getProducts(RIClient sender) throws RemoteException;
    
+   void getOffers(RIClient sender) throws RemoteException;
+   
    void sendOffer(Offer offer) throws RemoteException;
 }

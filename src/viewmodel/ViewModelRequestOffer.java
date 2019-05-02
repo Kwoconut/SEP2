@@ -8,9 +8,10 @@ import java.util.regex.Pattern;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.Offer;
 import model.StoreModel;
 
-public class ViewModelOffer implements PropertyChangeListener
+public class ViewModelRequestOffer implements PropertyChangeListener
 {
    private StringProperty nameProperty;
    private StringProperty phoneProperty;
@@ -19,13 +20,24 @@ public class ViewModelOffer implements PropertyChangeListener
    private StringProperty errorProperty;
    private StoreModel model;
 
-   public ViewModelOffer(StoreModel model)
+   public ViewModelRequestOffer(StoreModel model)
    {
       this.model = model;
       nameProperty = new SimpleStringProperty("");
       phoneProperty = new SimpleStringProperty("");
       emailProperty = new SimpleStringProperty("");
       messageProperty = new SimpleStringProperty("");
+      errorProperty = new SimpleStringProperty("");
+      this.model.addListener(this);
+   }
+
+   public ViewModelRequestOffer(StoreModel model, Offer offer)
+   {
+      this.model = model;
+      nameProperty = new SimpleStringProperty(offer.getName());
+      phoneProperty = new SimpleStringProperty(offer.getPhoneNo());
+      emailProperty = new SimpleStringProperty(offer.getEmail());
+      messageProperty = new SimpleStringProperty(offer.getMessage());
       errorProperty = new SimpleStringProperty("");
       this.model.addListener(this);
    }
@@ -55,15 +67,12 @@ public class ViewModelOffer implements PropertyChangeListener
       return errorProperty;
    }
 
-   public void sendValuesToServer()
+   public void addOffer()
    {
 
-      ArrayList<String> offer = new ArrayList<String>();
-      offer.add(nameProperty.get());
-      offer.add(phoneProperty.get());
-      offer.add(emailProperty.get());
-      offer.add(messageProperty.get());
-      model.sendOfferToServer(offer);
+      Offer offer = new Offer(nameProperty.get(), phoneProperty.get(),
+            emailProperty.get(), messageProperty.get());
+      model.addOffer(offer);
    }
 
    @Override
@@ -72,7 +81,7 @@ public class ViewModelOffer implements PropertyChangeListener
       if (evt.getPropertyName().equals("nameInvalid"))
       {
          errorProperty.set((String) evt.getNewValue());
-      } 
+      }
       else if (evt.getPropertyName().equals("phoneInvalid"))
       {
          errorProperty.set((String) evt.getNewValue());
@@ -85,14 +94,20 @@ public class ViewModelOffer implements PropertyChangeListener
       {
          errorProperty.set((String) evt.getNewValue());
       }
-      else if (evt.getPropertyName().equals("clear"))
-      {
-         errorProperty.set((String) evt.getNewValue());
-         nameProperty.set((String) evt.getNewValue());
-         phoneProperty.set((String) evt.getNewValue());
-         emailProperty.set((String) evt.getNewValue());
-         messageProperty.set((String) evt.getNewValue());
-      }
 
+   }
+
+   public boolean equals(Object obj)
+   {
+      if (!(obj instanceof ViewModelRequestOffer))
+      {
+         return false;
+      }
+      ViewModelRequestOffer other = (ViewModelRequestOffer) obj;
+      return other.getNameProperty().get().equals(nameProperty.get())
+            && other.getPhoneProperty().get().equals(phoneProperty.get())
+            && other.getEmailProperty().get().equals(emailProperty.get())
+            && other.getMessageProperty().get().equals(messageProperty.get())
+            && other.getErrorProperty().get().equals(errorProperty.get());
    }
 }

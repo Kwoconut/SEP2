@@ -9,18 +9,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Store;
 import model.StoreModel;
-import viewmodel.ViewModelOffer;
+import viewmodel.ViewModelRequestOffer;
 
 public class Testing_Sprint1_Day3_viewmodel_ViewModelOffer 
 {
 	
-	private ViewModelOffer vmo;
+	private ViewModelRequestOffer vmo;
 	private StoreModel model;
 	@Before
 	public void init()
 	{
 		this.model = new Store();
-		vmo = new ViewModelOffer(model);
+		vmo = new ViewModelRequestOffer(model);
 	}
 
 	@Test
@@ -65,7 +65,7 @@ public class Testing_Sprint1_Day3_viewmodel_ViewModelOffer
 	public void sendValuesToServer()
 	{
 		StringProperty s = new SimpleStringProperty("Please input a name");
-		vmo.sendValuesToServer();
+		vmo.addOffer();
 		assertEquals(s.getValue(),vmo.getErrorProperty().getValue());
 	}
 }

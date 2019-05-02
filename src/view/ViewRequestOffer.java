@@ -6,9 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import viewmodel.ViewModelOffer;
+import viewmodel.ViewModelRequestOffer;
 
-public class ViewOffer
+public class ViewRequestOffer
 {
    @FXML
    TextField nameField;
@@ -25,7 +25,7 @@ public class ViewOffer
    @FXML
    Label errorLabel;
 
-   private ViewModelOffer model;
+   private ViewModelRequestOffer model;
 
    private MainView view;
 
@@ -33,12 +33,12 @@ public class ViewOffer
 
    private String title;
 
-   public ViewOffer()
+   public ViewRequestOffer()
    {
 
    }
 
-   public void init(ViewModelOffer viewModel, MainView view, Scene scene,
+   public void init(ViewModelRequestOffer viewModel, MainView view, Scene scene,
          String title)
    {
       this.model = viewModel;
@@ -56,10 +56,19 @@ public class ViewOffer
 
    public void onSubmitButton() throws IOException
    {
-      model.sendValuesToServer();
+      model.addOffer();
       if (errorLabel.getText().equals(""))
       {
          getScene().getWindow().hide();
+         nameField.setText("");
+         phoneField.setText("");
+         emailField.setText("");
+         messageField.setText("");
+         nameField.setPromptText("Name");
+         phoneField.setPromptText("Phone");
+         emailField.setPromptText("Email");
+         messageField.setPromptText("Message");
+         errorLabel.setText("");
          view.setWindow("START");
       }
    }

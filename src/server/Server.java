@@ -51,10 +51,22 @@ public class Server implements RIServer
       sender.getProducts(model.getProducts());
 
    }
+   
+   @Override
+   public void getOffers(RIClient sender) throws RemoteException
+   {
+      sender.getOffers(model.getOffers());
+      
+   }
 
    @Override
    public void sendOffer(Offer offer) throws RemoteException
    {
       model.addOffer(offer);
+      
+      for (RIClient element : clients)
+      {
+         element.getOffers(model.getOffers());
+      }
    }
 }

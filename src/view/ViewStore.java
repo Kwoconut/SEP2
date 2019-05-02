@@ -52,6 +52,12 @@ public class ViewStore
       getScene().getWindow().hide();
       view.setWindow("OFFER");
    }
+   
+   public void onCheckOfferButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("OFFERLIST");
+   }
 
    public String getTitle()
    {

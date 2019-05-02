@@ -8,14 +8,16 @@ public class MainViewViewModel
 {
    
    private ViewModelStore viewModelStore;
-   private ViewModelOffer viewModelOffer;
+   private ViewModelRequestOffer viewModelRequestOffer;
+   private ViewModelOfferList viewModelOfferList;
    private StoreModel model;
    
    public MainViewViewModel(StoreModel model) throws RemoteException
    {
       this.model = model;
       viewModelStore = new ViewModelStore(model);
-      viewModelOffer = new ViewModelOffer(model);
+      viewModelRequestOffer = new ViewModelRequestOffer(model);
+      viewModelOfferList = new ViewModelOfferList(model);
    }
    
    public ViewModelStore getViewModelStore()
@@ -23,9 +25,14 @@ public class MainViewViewModel
       return viewModelStore;
    }
    
-   public ViewModelOffer getViewModelOffer()
+   public ViewModelRequestOffer getViewModelRequestOffer()
    {
-      return viewModelOffer;
+      return viewModelRequestOffer;
+   }
+   
+   public ViewModelOfferList getViewModelOfferList()
+   {
+      return viewModelOfferList;
    }
 
 }
