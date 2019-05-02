@@ -53,7 +53,7 @@ public class Testing_Sprint2_Day1_RMI
          e.printStackTrace();
       }
    }
-   //Server Client Testings Store.requestProducts(),  Store.getProductsFromServer(ArrayList<Product> values)
+   //Server Client Testings Store.requestOffers(),  Store.getOffersFromServer(ArrayList<Offer> values)
    @Test
    public void testGetOffers()
    {

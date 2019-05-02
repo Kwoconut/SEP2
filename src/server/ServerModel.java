@@ -29,6 +29,7 @@ public class ServerModel
             "Sa mori tu", "sugator pentru gicu"));
       addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000,
             "Sa mori tu", "sugator pentru gicu"));
+      addOffer(new Offer("Gicu","59423249","Gicu@gmail.com","hello my friends i want new roof"));
    }
 
    public void addProduct(Product product)
