@@ -12,6 +12,8 @@ public interface StoreModel
    
    void getProductsFromServer(ArrayList<Product> products);
    
+   void getOffersFromServer(ArrayList<Offer> offers);
+   
    void setClient(Client client);
    
    void addProduct(Product product);

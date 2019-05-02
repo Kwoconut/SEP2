@@ -50,7 +50,7 @@ public class ViewOffer
       emailField.textProperty().bindBidirectional(viewModel.getEmailProperty());
       messageField.textProperty()
             .bindBidirectional(viewModel.getMessageProperty());
-      errorLabel.textProperty().bind(viewModel.getErrorProperty());
+      errorLabel.textProperty().bindBidirectional(viewModel.getErrorProperty());
 
    }
 
@@ -67,6 +67,15 @@ public class ViewOffer
    public void onCancelButton() throws IOException
    {
       getScene().getWindow().hide();
+      nameField.setText("");
+      phoneField.setText("");
+      emailField.setText("");
+      messageField.setText("");
+      nameField.setPromptText("Name");
+      phoneField.setPromptText("Phone");
+      emailField.setPromptText("Email");
+      messageField.setPromptText("Message");
+      errorLabel.setText("");
       view.setWindow("START");
    }
 

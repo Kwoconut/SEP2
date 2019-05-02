@@ -5,18 +5,19 @@ import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
 import client.Client;
 
 public class Store implements StoreModel, Serializable
 {
    private ArrayList<Product> products;
+   private ArrayList<Offer> offers;
    private Client client;
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
 
    public Store()
    {
       products = new ArrayList<Product>();
+      offers = new ArrayList<Offer>();
    }
 
    public void addProduct(Product product)
@@ -39,6 +40,13 @@ public class Store implements StoreModel, Serializable
       }
       products = values;
       support.firePropertyChange("SEND", "", values);
+   }
+   
+   @Override
+   public void getOffersFromServer(ArrayList<Offer> offers)
+   {
+      this.offers = offers;
+      support.firePropertyChange("OFFERSEND", "", offers);
    }
 
    @Override
@@ -103,6 +111,7 @@ public class Store implements StoreModel, Serializable
             try
             {
                support.firePropertyChange("clear", " ", "");
+               offers.add(offer);
                client.sendOfferToServer(offer);
             }
             catch (RemoteException e)
