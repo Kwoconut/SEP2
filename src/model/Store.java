@@ -70,15 +70,50 @@ public class Store implements StoreModel, Serializable
    {
       Offer offer = new Offer(offerInfo.get(0), offerInfo.get(1),
             offerInfo.get(2), offerInfo.get(3));
-      try
+
+      int errorCase = offer.checkFormat();
+
+      switch (errorCase)
       {
-         client.sendOfferToServer(offer);
+         case 0:
+         {
+            support.firePropertyChange("nameInvalid", "",
+                  "Please input a name");
+            break;
+         }
+         case 1:
+         {
+            support.firePropertyChange("phoneInvalid", "",
+                  "Invalid phone number");
+            break;
+         }
+         case 2:
+         {
+            support.firePropertyChange("emailInvalid", "", "Invalid email");
+            break;
+         }
+         case 3:
+         {
+            support.firePropertyChange("messageInvalid", "",
+                  "Please input a message");
+            break;
+         }
+         case 4:
+         {
+            try
+            {
+               support.firePropertyChange("clear", " ", "");
+               client.sendOfferToServer(offer);
+            }
+            catch (RemoteException e)
+            {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+            }
+
+         }
       }
-      catch (RemoteException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
+
    }
 
 }

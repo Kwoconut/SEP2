@@ -1,5 +1,7 @@
 package viewmodel;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,7 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.StoreModel;
 
-public class ViewModelOffer
+public class ViewModelOffer implements PropertyChangeListener
 {
    private StringProperty nameProperty;
    private StringProperty phoneProperty;
@@ -25,6 +27,7 @@ public class ViewModelOffer
       emailProperty = new SimpleStringProperty("");
       messageProperty = new SimpleStringProperty("");
       errorProperty = new SimpleStringProperty("");
+      this.model.addListener(this);
    }
 
    public StringProperty getNameProperty()
@@ -55,38 +58,41 @@ public class ViewModelOffer
    public void sendValuesToServer()
    {
 
-      if (nameProperty.get().equals(""))
-      {
-         errorProperty.set("Please input a name");
-      }
-      else if (phoneProperty.get().equals("")
-            || phoneProperty.get().length() < 8)
-      {
-         errorProperty.set("Please input a valid phone number");
-      }
-      else if (emailProperty.get().equals("") || !(emailProperty.get()
-            .matches("^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z" + "A-Z]{2,7}$")))
-      {
+      ArrayList<String> offer = new ArrayList<String>();
+      offer.add(nameProperty.get());
+      offer.add(phoneProperty.get());
+      offer.add(emailProperty.get());
+      offer.add(messageProperty.get());
+      model.sendOfferToServer(offer);
+   }
 
-         errorProperty.set("Please input a valid email address");
-      }
-      else if (messageProperty.get().equals(""))
+   @Override
+   public void propertyChange(PropertyChangeEvent evt)
+   {
+      if (evt.getPropertyName().equals("nameInvalid"))
       {
-         errorProperty.set("Please leave a message");
-      }
-      else
+         errorProperty.set((String) evt.getNewValue());
+      } 
+      else if (evt.getPropertyName().equals("phoneInvalid"))
       {
-         errorProperty.set("");
-         ArrayList<String> list = new ArrayList<String>();
-         list.add(nameProperty.get());
-         list.add(phoneProperty.get());
-         list.add(emailProperty.get());
-         list.add(messageProperty.get());
-         model.sendOfferToServer(list);
-         nameProperty.set("");
-         phoneProperty.set("");
-         emailProperty.set("");
-         messageProperty.set("");
+         errorProperty.set((String) evt.getNewValue());
       }
+      else if (evt.getPropertyName().equals("emailInvalid"))
+      {
+         errorProperty.set((String) evt.getNewValue());
+      }
+      else if (evt.getPropertyName().equals("messageInvalid"))
+      {
+         errorProperty.set((String) evt.getNewValue());
+      }
+      else if (evt.getPropertyName().equals("clear"))
+      {
+         errorProperty.set((String) evt.getNewValue());
+         nameProperty.set((String) evt.getNewValue());
+         phoneProperty.set((String) evt.getNewValue());
+         emailProperty.set((String) evt.getNewValue());
+         messageProperty.set((String) evt.getNewValue());
+      }
+
    }
 }

@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class Product implements Serializable
 {
    private String name;
-   private String finish;
    private String colour;
    private String type;
    private int price;
@@ -15,12 +14,11 @@ public class Product implements Serializable
    public static String TYPE_RAIN_SYSTEM = "Rain System";
    public static String TYPE_METAL_TILE = "Metal Tile";
 
-   public Product(String name, int price, String finish, String colour,
+   public Product(String name, int price, String colour,
          String type)
    {
       this.name = name;
       this.price = price;
-      this.finish = finish;
       this.colour = colour;
       this.type = type;
    }
@@ -46,11 +44,6 @@ public class Product implements Serializable
       this.price = price;
    }
 
-   public String getFinish()
-   {
-      return finish;
-   }
-
    public String getColour()
    {
       return colour;
@@ -69,7 +62,7 @@ public class Product implements Serializable
       }
 
       Product other = (Product) obj;
-      return name.equals(other.getName()) && finish.equals(other.getFinish())
+      return name.equals(other.getName())
             && colour.equals(other.getColour())
 
             && type.equals(other.getType()) && price == other.getPrice();
@@ -79,7 +72,7 @@ public class Product implements Serializable
    {
       String s = "";
 
-      s += name + "\n" + finish + "\n" + colour + "\n" + type + "\n" + price;
+      s += name + "\n" + "\n" + colour + "\n" + type + "\n" + price;
       return s;
    }
 

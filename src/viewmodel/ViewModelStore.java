@@ -60,6 +60,9 @@ public class ViewModelStore implements PropertyChangeListener
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
-      updateProducts(evt);
+      if (evt.getPropertyName().equals("SEND"))
+      {
+         updateProducts(evt);
+      }
    }
 }

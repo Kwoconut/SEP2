@@ -56,6 +56,33 @@ public class Offer implements Serializable
    {
       return message;
    }
+   
+   public int checkFormat()
+   {
+      if (name.equals(""))
+      {
+         return 0;
+      }
+      else if (phoneNo.equals("")
+            || phoneNo.length() < 8)
+      {
+         return 1;
+      }
+      else if (email.equals("") || !(email
+            .matches("^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z" + "A-Z]{2,7}$")))
+      {
+
+         return 2;
+      }
+      else if (message.equals(""))
+      {
+         return 3;
+      }
+      else
+      {
+         return 4;
+      }
+   }
 
    public boolean equals(Object obj)
    {

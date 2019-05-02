@@ -17,8 +17,8 @@ public class Testing_Sprint1_Day2_model_Store
 	   @Before
 	   public void setup()
 	   {
-		  product1 = new Product( "Name1", 100, "finish1", "colour1", "type1");
-		  product2 = new Product( "Name2", 200, "finish2", "colour2", "type2");
+		  product1 = new Product( "Name1", 100, "colour1", "type1");
+		  product2 = new Product( "Name2", 200, "colour2", "type2");
 	      store = new Store();
 	      productsTest = new ArrayList<Product>();
 	   }

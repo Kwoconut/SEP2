@@ -14,15 +14,15 @@ public class test extends Application
    public void start(Stage stage) throws Exception
    {
       StoreModel model = new Store();
-      model.addProduct(new Product(Product.TYPE_METAL_SHEET, 1500, "cacat",
+      model.addProduct(new Product(Product.TYPE_METAL_SHEET, 1500,
             "Sa mori tu", "sugator pentru gicu"));
-      model.addProduct(new Product(Product.TYPE_METAL_TILE, 2000, "cacat",
+      model.addProduct(new Product(Product.TYPE_METAL_TILE, 2000,
             "Sa mori tu", "sugator pentru gicu"));
-      model.addProduct(new Product(Product.TYPE_PLATED_SHEET, 3000, "cacat",
+      model.addProduct(new Product(Product.TYPE_PLATED_SHEET, 3000,
             "Sa mori tu", "sugator pentru gicu"));
-      model.addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000, "cacat",
+      model.addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000,
             "Sa mori tu", "sugator pentru gicu"));
-      model.addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000, "cacat",
+      model.addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000,
             "Sa mori tu", "sugator pentru gicu"));
       MainViewViewModel mvvm = new MainViewViewModel(model);
       MainView view = new MainView(mvvm);

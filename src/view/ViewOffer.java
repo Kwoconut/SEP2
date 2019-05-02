@@ -12,19 +12,19 @@ public class ViewOffer
 {
    @FXML
    TextField nameField;
-   
+
    @FXML
    TextField phoneField;
-   
+
    @FXML
    TextField emailField;
-   
+
    @FXML
    TextField messageField;
-   
+
    @FXML
    Label errorLabel;
-   
+
    private ViewModelOffer model;
 
    private MainView view;
@@ -32,10 +32,10 @@ public class ViewOffer
    private Scene scene;
 
    private String title;
-   
+
    public ViewOffer()
    {
-      
+
    }
 
    public void init(ViewModelOffer viewModel, MainView view, Scene scene,
@@ -48,38 +48,35 @@ public class ViewOffer
       nameField.textProperty().bindBidirectional(viewModel.getNameProperty());
       phoneField.textProperty().bindBidirectional(viewModel.getPhoneProperty());
       emailField.textProperty().bindBidirectional(viewModel.getEmailProperty());
-      messageField.textProperty().bindBidirectional(viewModel.getMessageProperty());
+      messageField.textProperty()
+            .bindBidirectional(viewModel.getMessageProperty());
       errorLabel.textProperty().bind(viewModel.getErrorProperty());
-         
+
    }
-   
+
    public void onSubmitButton() throws IOException
    {
       model.sendValuesToServer();
-      nextWindow();
-   }
-   
-   public void onCancelButton() throws IOException
-   {
-      nextWindow();
-   }
-   
-   public void nextWindow() throws IOException
-   {
       if (errorLabel.getText().equals(""))
       {
          getScene().getWindow().hide();
-      view.setWindow("START");
+         view.setWindow("START");
       }
    }
-   
+
+   public void onCancelButton() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("START");
+   }
+
    public String getTitle()
    {
       return title;
    }
 
    public Scene getScene()
-   {        
+   {
       return scene;
    }
 }

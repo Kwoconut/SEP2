@@ -15,9 +15,9 @@ public class Testing_Sprint1_Day2_model_Product
 	@Before
 	public void init()
 	{
-		  product1 = new Product( "Name1", 100, "finish1", "colour1", "type1");
-		  product2 = new Product( "Name2", 200, "finish2", "colour2", "type2");
-		  product3 = new Product( "Name2", 200, "finish2", "colour2", "type2");
+		  product1 = new Product( "Name1", 100, "colour1", "type1");
+		  product2 = new Product( "Name2", 200, "colour2", "type2");
+		  product3 = new Product( "Name2", 200, "colour2", "type2");
 	}
 	
 	
@@ -33,12 +33,7 @@ public class Testing_Sprint1_Day2_model_Product
 	      
 	      assertEquals(100, product1.getPrice());
 	   }
-	@Test
-	   public void getFinish()
-	   {
-	      
-	      assertEquals("finish1", product1.getFinish());
-	   }
+
 	@Test
 	   public void getColour()
 	   {

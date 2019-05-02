@@ -19,15 +19,15 @@ public class ServerModel
 
    private void sampleData()
    {
-      addProduct(new Product(Product.TYPE_METAL_SHEET, 1500, "cacat",
+      addProduct(new Product(Product.TYPE_METAL_SHEET, 1500,
             "Sa mori tu", "sugator pentru gicu"));
-      addProduct(new Product(Product.TYPE_METAL_TILE, 2000, "cacat",
+      addProduct(new Product(Product.TYPE_METAL_TILE, 2000,
             "Sa mori tu", "sugator pentru gicu"));
-      addProduct(new Product(Product.TYPE_PLATED_SHEET, 3000, "cacat",
+      addProduct(new Product(Product.TYPE_PLATED_SHEET, 3000,
             "Sa mori tu", "sugator pentru gicu"));
-      addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000, "cacat",
+      addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000,
             "Sa mori tu", "sugator pentru gicu"));
-      addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000, "cacat",
+      addProduct(new Product(Product.TYPE_RAIN_SYSTEM, 5000,
             "Sa mori tu", "sugator pentru gicu"));
    }
 
