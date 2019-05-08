@@ -7,10 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelOfferList;
 import viewmodel.ViewModelRequestOffer;
 
-public class ViewOfferList
+public class ViewOfferList implements View
 {
    @FXML
    private TableView<ViewModelRequestOffer> offerListTable;
@@ -29,10 +30,10 @@ public class ViewOfferList
    private ViewModelOfferList viewModel;
 
 
-   public void init(ViewModelOfferList viewModel, MainView view, Scene scene,
-         String title) throws RemoteException
+   public void init(MainViewViewModel viewModel, MainView view, Scene scene,
+         String title)
    {
-      this.viewModel = viewModel;
+      this.viewModel = viewModel.getViewModelOfferList();
       this.view = view;
       this.scene = scene;
       this.title = title;
@@ -46,7 +47,7 @@ public class ViewOfferList
       messageColumn.setCellValueFactory(
             cellData -> cellData.getValue().getMessageProperty());
       
-      offerListTable.setItems(viewModel.getOffers());
+      offerListTable.setItems(this.viewModel.getOffers());
    }
    
    public Scene getScene()
@@ -69,7 +70,7 @@ public class ViewOfferList
    public void nextWindow() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("START");
+      view.setWindow("start");
    }
 
 }

@@ -12,9 +12,9 @@ import javafx.stage.Stage;
 public class MainView
 {
    private Stage primaryStage;
-   private ViewStore viewStore;
-   private ViewRequestOffer viewRequestOffer;
-   private ViewOfferList viewOfferList;
+
+   private View view;
+   
    private String currentViewID;
 
    private MainViewViewModel viewModel;
@@ -26,98 +26,19 @@ public class MainView
 
    public void start(Stage primaryStage) throws IOException
    {
-      this.primaryStage = primaryStage;
-      setWindow("START");
+     this.primaryStage = primaryStage;
+     setWindow("start");
    }
 
    public void setWindow(String id) throws IOException
    {
-      currentViewID = id;
-      switch (id)
-      {
-         case "START":
-            loadStartWindow("Store", "ViewStore.fxml", 1200, 700);
-            break;
-         case "OFFER":
-            loadOfferWindow("Offer", "ViewRequestOffer.fxml", 1200, 700);
-            break;
-         case "OFFERLIST":
-            loadOfferListWindow("OfferList", "ViewOfferList.fxml",1200, 700);
-            break;
-      }
-   }
+     
+     view = ViewFactory.getView(id, viewModel, this); 
+     
+     primaryStage.setScene(view.getScene());
+     primaryStage.setTitle(view.getTitle());
+     primaryStage.show();
 
-   private void loadStartWindow(String title, String fxmlFile, double width,
-         double height)
-   {
-      if (viewStore == null)
-      {
-         try
-         {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, width, height);
-            viewStore = loader.getController();
-            viewStore.init(viewModel.getViewModelStore(), this, scene, title);
-         }
-         catch (Exception e)
-         {
-            e.printStackTrace();
-         }
-      }
-      primaryStage.setScene(viewStore.getScene());
-      primaryStage.setTitle(viewStore.getTitle());
-      primaryStage.show();
-   }
-
-   private void loadOfferWindow(String title, String fxmlFile, double width,
-         double height)
-   {
-      if (viewRequestOffer == null)
-      {
-         try
-         {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, width, height);
-            viewRequestOffer = loader.getController();
-            viewRequestOffer.init(viewModel.getViewModelRequestOffer(), this, scene, title);
-         }
-         catch (Exception e)
-         {
-            e.printStackTrace();
-         }
-      }
-      primaryStage.setScene(viewRequestOffer.getScene());
-      primaryStage.setTitle(viewRequestOffer.getTitle());
-      primaryStage.show();
-   }
-   
-   private void loadOfferListWindow(String title, String fxmlFile, double width,
-         double height) throws RemoteException
-   {
-      if (viewOfferList == null)
-      {
-         try
-         {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, width, height);
-            viewOfferList = loader.getController();
-            viewOfferList.init(viewModel.getViewModelOfferList(), this, scene, title);
-         }
-         catch (Exception e)
-         {
-            e.printStackTrace();
-         }
-      }
-      
-      primaryStage.setScene(viewOfferList.getScene());
-      primaryStage.setTitle(viewOfferList.getTitle());
-      primaryStage.show();
    }
 
 }

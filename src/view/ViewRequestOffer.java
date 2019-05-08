@@ -6,9 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelRequestOffer;
 
-public class ViewRequestOffer
+public class ViewRequestOffer implements View
 {
    @FXML
    TextField nameField;
@@ -38,19 +39,19 @@ public class ViewRequestOffer
 
    }
 
-   public void init(ViewModelRequestOffer viewModel, MainView view, Scene scene,
+   public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
-      this.model = viewModel;
+      this.model = viewModel.getViewModelRequestOffer();
       this.view = view;
       this.scene = scene;
       this.title = title;
-      nameField.textProperty().bindBidirectional(viewModel.getNameProperty());
-      phoneField.textProperty().bindBidirectional(viewModel.getPhoneProperty());
-      emailField.textProperty().bindBidirectional(viewModel.getEmailProperty());
+      nameField.textProperty().bindBidirectional(model.getNameProperty());
+      phoneField.textProperty().bindBidirectional(model.getPhoneProperty());
+      emailField.textProperty().bindBidirectional(model.getEmailProperty());
       messageField.textProperty()
-            .bindBidirectional(viewModel.getMessageProperty());
-      errorLabel.textProperty().bindBidirectional(viewModel.getErrorProperty());
+            .bindBidirectional(model.getMessageProperty());
+      errorLabel.textProperty().bindBidirectional(model.getErrorProperty());
 
    }
 
@@ -69,7 +70,7 @@ public class ViewRequestOffer
          emailField.setPromptText("Email");
          messageField.setPromptText("Message");
          errorLabel.setText("");
-         view.setWindow("START");
+         view.setWindow("start");
       }
    }
 
@@ -85,7 +86,7 @@ public class ViewRequestOffer
       emailField.setPromptText("Email");
       messageField.setPromptText("Message");
       errorLabel.setText("");
-      view.setWindow("START");
+      view.setWindow("start");
    }
 
    public String getTitle()

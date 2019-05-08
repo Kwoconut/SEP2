@@ -8,9 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
+import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelStore;
 
-public class ViewStore
+public class ViewStore implements View
 {
    
    @FXML
@@ -32,17 +33,17 @@ public class ViewStore
       
    }
 
-   public void init(ViewModelStore viewModel, MainView view, Scene scene,
+   public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
-      this.model = viewModel;
+      this.model = viewModel.getViewModelStore();
       this.view = view;
       this.scene = scene;
       this.title = title;
       for (int i = 0 ; i<5;i++)
       {
-         nameLabelList.get(i).textProperty().bind(viewModel.getNameProperty(i));
-         priceLabelList.get(i).textProperty().bind(viewModel.getPriceProperty(i));
+         nameLabelList.get(i).textProperty().bind(model.getNameProperty(i));
+         priceLabelList.get(i).textProperty().bind(model.getPriceProperty(i));
       }
          
    }
@@ -50,13 +51,13 @@ public class ViewStore
    public void onRequestOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("OFFER");
+      view.setWindow("offer");
    }
    
    public void onCheckOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("OFFERLIST");
+      view.setWindow("offerlist");
    }
 
    public String getTitle()
