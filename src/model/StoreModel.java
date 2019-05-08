@@ -31,6 +31,8 @@ public interface StoreModel
    Client getClient();
    
    void addOffer(Offer offer);
+   
+   int generateOfferID();
 
 
    

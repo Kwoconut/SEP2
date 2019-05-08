@@ -45,8 +45,7 @@ public class OfferDatabaseHandler implements StoreOfferPersistence
       }
       return offers;
    }
-
-// use this method if you update field / fields or you create a new object 
+   
    @Override
    public void addOffer(Offer offer) throws SQLException
    {
@@ -88,21 +87,4 @@ public class OfferDatabaseHandler implements StoreOfferPersistence
             .prepareStatement("TRUNCATE TABLE Offer CASCADE");
       truncateStatement.executeUpdate();
    }
-
-// @Override
-// public void saveOffers(ArrayList<Offer> offers) throws SQLException
-// {
-//  clearOffers();
-//  for(Offer offer: offers)
-//  {
-//     PreparedStatement insertStatement = connection
-//           .prepareStatement("INSERT INTO Offer (name, phone, email, message) VALUES (?, ?, ?, ?)");
-//     insertStatement.setString(1, offer.getName());
-//     insertStatement.setString(2, offer.getPhoneNo());
-//     insertStatement.setString(3, offer.getEmail());
-//     insertStatement.setString(4, offer.getMessage());
-//     insertStatement.executeUpdate();             
-//  }
-// }
-
 }

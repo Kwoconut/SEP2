@@ -5,6 +5,8 @@ import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Random;
+
 import client.Client;
 
 public class Store implements StoreModel, Serializable
@@ -13,7 +15,7 @@ public class Store implements StoreModel, Serializable
    private ArrayList<Offer> offers;
    private Client client;
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
-
+   
    public Store()
    {
       products = new ArrayList<Product>();
@@ -136,6 +138,15 @@ public class Store implements StoreModel, Serializable
          }
       }
 
+   }
+
+   @Override
+   public int generateOfferID()
+   {
+      Random random = new Random();
+      int one = random.nextInt(9) + 1;
+      int two = random.nextInt(9) + 1;
+      return one * 10 + two;
    }
 
 

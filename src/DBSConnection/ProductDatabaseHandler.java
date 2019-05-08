@@ -46,116 +46,15 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    }
 
    @Override
-   public ArrayList<Product> loadPlatedSheets() throws SQLException
-   {
-      ArrayList<Product> products = new ArrayList<Product>();
-      PreparedStatement selectStatement = connection.prepareStatement(
-            "SELECT product_id, name, price, color, product_type WHERE product_type = 'Plated Sheet' FROM Product");
-      ResultSet rs = selectStatement.executeQuery();
-      while (rs.next())
-      {
-         Product product = new Product(rs.getInt("product_id"),
-               rs.getString("name"), rs.getInt("price"), rs.getString("color"),
-               rs.getString("product_type"));
-         products.add(product);
-      }
-      return products;
-   }
-
-   @Override
-   public ArrayList<Product> loadMetalSheets() throws SQLException
-   {
-      ArrayList<Product> products = new ArrayList<Product>();
-      PreparedStatement selectStatement = connection.prepareStatement(
-            "SELECT product_id, name, price, color, product_type WHERE product_type = 'Metal Sheet' FROM Product");
-      ResultSet rs = selectStatement.executeQuery();
-      while (rs.next())
-      {
-         Product product = new Product(rs.getInt("product_id"),
-               rs.getString("name"), rs.getInt("price"), rs.getString("color"),
-               rs.getString("product_type"));
-         products.add(product);
-      }
-      return products;
-   }
-
-   @Override
-   public ArrayList<Product> loadClickSheet() throws SQLException
-   {
-      ArrayList<Product> products = new ArrayList<Product>();
-      PreparedStatement selectStatement = connection.prepareStatement(
-            "SELECT product_id, name, price, color, product_type WHERE product_type = 'Click Sheet' FROM Product");
-      ResultSet rs = selectStatement.executeQuery();
-      while (rs.next())
-      {
-         Product product = new Product(rs.getInt("product_id"),
-               rs.getString("name"), rs.getInt("price"), rs.getString("color"),
-               rs.getString("product_type"));
-         products.add(product);
-      }
-      return products;
-   }
-
-   @Override
-   public ArrayList<Product> loadRainSystem() throws SQLException
-   {
-      ArrayList<Product> products = new ArrayList<Product>();
-      PreparedStatement selectStatement = connection.prepareStatement(
-            "SELECT product_id, name, price, color, product_type WHERE product_type = 'Rain System' FROM Product");
-      ResultSet rs = selectStatement.executeQuery();
-      while (rs.next())
-      {
-         Product product = new Product(rs.getInt("product_id"),
-               rs.getString("name"), rs.getInt("price"), rs.getString("color"),
-               rs.getString("product_type"));
-         products.add(product);
-      }
-      return products;
-   }
-
-   @Override
-   public ArrayList<Product> loadMetalTile() throws SQLException
-   {
-      ArrayList<Product> products = new ArrayList<Product>();
-      PreparedStatement selectStatement = connection.prepareStatement(
-            "SELECT product_id, name, price, color, product_type WHERE product_type = 'Metal Tile' FROM Product");
-      ResultSet rs = selectStatement.executeQuery();
-      while (rs.next())
-      {
-         Product product = new Product(rs.getInt("product_id"),
-               rs.getString("name"), rs.getInt("price"), rs.getString("color"),
-               rs.getString("product_type"));
-         products.add(product);
-      }
-      return products;
-   }
-
-//   @Override
-//   public void saveProducts(ArrayList<Product> products) throws SQLException
-//   {
-//      clearProducts();
-//      for(Product product: products)
-//      {
-//         PreparedStatement insertStatement = connection
-//               .prepareStatement("INSERT INTO Product (name, price, color, product_type) VALUES (?, ?, ?, ?)");
-//         insertStatement.setString(1, product.getName());
-//         insertStatement.setInt(2, product.getPrice());
-//         insertStatement.setString(3, product.getColour());
-//         insertStatement.setString(4, product.getType());
-//         insertStatement.executeUpdate();             
-//      }
-//   }
-
-   // use this method if you update field / fields or you create a new object
-   @Override
    public void addProduct(Product product) throws SQLException
    {
       PreparedStatement insertStatement = connection.prepareStatement(
-            "INSERT INTO Product (name, price, color, product_type) VALUES (?, ?, ?, ?)");
-      insertStatement.setString(1, product.getName());
-      insertStatement.setInt(2, product.getPrice());
-      insertStatement.setString(3, product.getColour());
-      insertStatement.setString(4, product.getType());
+            "INSERT INTO Product (product_id, name, price, color, product_type) VALUES (?, ?, ?, ?, ?)");
+      insertStatement.setInt(1, product.getID());
+      insertStatement.setString(2, product.getName());
+      insertStatement.setInt(3, product.getPrice());
+      insertStatement.setString(4, product.getColour());
+      insertStatement.setString(5, product.getType());
       insertStatement.executeUpdate();
    }
 
