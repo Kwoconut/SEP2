@@ -59,10 +59,6 @@ public class ViewOfferList
       return title;
    }
    
-   public void requestOffers() throws RemoteException
-   {
-      viewModel.requestOffers();
-   }
 
    @FXML
    private void cancelButtonPressed() throws IOException

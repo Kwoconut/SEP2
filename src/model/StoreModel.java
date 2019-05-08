@@ -18,6 +18,8 @@ public interface StoreModel
    
    void getOffersFromServer(ArrayList<Offer> offers);
    
+   void addOfferFromServer(Offer offer);
+   
    void setClient(Client client);
    
    void addListener(PropertyChangeListener listener);

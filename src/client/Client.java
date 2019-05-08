@@ -29,8 +29,8 @@ public class Client implements IClient, RIClient, Serializable
       this.model = model;
       this.model.setClient(this);
       server = (RIServer) Naming.lookup("rmi://localhost:1099/store");
-      server.addClient(this);
       UnicastRemoteObject.exportObject(this, 0);
+      server.addClient(this);
    }
 
 
@@ -44,9 +44,7 @@ public class Client implements IClient, RIClient, Serializable
    public void getOffers(ArrayList<Offer> offers) throws RemoteException
    {
 	   model.getOffersFromServer(offers);
-	   System.out.println("------");
    }
-
 
    @Override
    public void requestProducts() throws RemoteException
@@ -61,11 +59,18 @@ public class Client implements IClient, RIClient, Serializable
  
    }
 
-
    @Override
    public void sendOfferToServer(Offer offer) throws RemoteException
    {
       server.sendOffer(offer);      
+   }
+
+   @Override
+   public void addOffer(Offer offer) throws RemoteException
+   {
+      model.addOfferFromServer(offer);
+      System.out.println("----");
+      
    }
 
 

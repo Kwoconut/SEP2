@@ -1,5 +1,7 @@
 package server;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -11,7 +13,7 @@ import client.RIClient;
 import model.Offer;
 import model.Product;
 
-public class Server implements RIServer
+public class Server implements RIServer, PropertyChangeListener
 {
    private ServerModel model;
    private ArrayList<RIClient> clients;
@@ -20,6 +22,7 @@ public class Server implements RIServer
    {
       this.model = model;
       clients = new ArrayList<RIClient>();
+      this.model.addPropertyChangeListener(this);
       UnicastRemoteObject.exportObject(this, 0);
    }
 
@@ -63,10 +66,23 @@ public class Server implements RIServer
    public void sendOffer(Offer offer) throws RemoteException
    {
       model.addOffer(offer);
-      
+   }
+
+   @Override
+   public void propertyChange(PropertyChangeEvent evt)
+   {
       for (RIClient element : clients)
       {
-         element.getOffers(model.getOffers());
+         try
+         {
+            element.addOffer((Offer) evt.getNewValue());
+         }
+         catch (RemoteException e)
+         {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+         }
       }
+      
    }
 }

@@ -41,10 +41,7 @@ public class Store implements StoreModel, Serializable
    @Override
    public void getProductsFromServer(ArrayList<Product> values)
    {
-      for (Product product : values)
-      {
-         System.out.println(product);
-      }
+
       products = values;
       support.firePropertyChange("SEND", "", values);
    }
@@ -55,6 +52,11 @@ public class Store implements StoreModel, Serializable
       this.offers = offers;
       support.firePropertyChange("OFFERLIST", "", offers);
 
+   }
+   
+   public void addOfferFromServer(Offer offer)
+   {
+      support.firePropertyChange("NEWOFFER", "", offer);
    }
 
    @Override

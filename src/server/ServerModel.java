@@ -1,5 +1,7 @@
 package server;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 import model.Offer;
@@ -9,6 +11,8 @@ public class ServerModel
 {
    private ArrayList<Product> products;
    private ArrayList<Offer> offers;
+   
+   private PropertyChangeSupport support = new PropertyChangeSupport(this);
 
    public ServerModel()
    {
@@ -50,11 +54,16 @@ public class ServerModel
    public void addOffer(Offer offer)
    {
       offers.add(offer);
-      System.out.println(offers);
+      support.firePropertyChange("OFFERADDED", null, offer);
    }
    
    public ArrayList<Offer> getOffers()
    {
 	   return offers;
+   }
+   
+   public void addPropertyChangeListener(PropertyChangeListener listener)
+   {
+      support.addPropertyChangeListener(listener);
    }
 }

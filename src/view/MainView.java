@@ -114,7 +114,7 @@ public class MainView
             e.printStackTrace();
          }
       }
-      viewOfferList.requestOffers();
+      
       primaryStage.setScene(viewOfferList.getScene());
       primaryStage.setTitle(viewOfferList.getTitle());
       primaryStage.show();

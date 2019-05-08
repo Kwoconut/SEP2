@@ -1,6 +1,6 @@
-/testing/
+/modelmanager/
 /view/
-/viewmodel/
 /model/
-/client/
 /server/
+/client/
+/viewmodel/

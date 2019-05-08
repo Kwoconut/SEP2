@@ -16,21 +16,17 @@ public class ViewModelOfferList implements PropertyChangeListener
    private ObservableList<ViewModelRequestOffer> offers;
    private StoreModel model;
 
-   public ViewModelOfferList(StoreModel model)
+   public ViewModelOfferList(StoreModel model) throws RemoteException
    {
       this.model = model;
       this.model.addListener(this);
       this.offers = FXCollections.observableArrayList();
+      this.model.requestOffers();
    }
 
    public ObservableList<ViewModelRequestOffer> getOffers()
    {
       return offers;
-   }
-   
-   public void requestOffers() throws RemoteException
-   {
-      model.requestOffers();
    }
 
    @Override
@@ -38,7 +34,7 @@ public class ViewModelOfferList implements PropertyChangeListener
    {
       Platform.runLater(() -> executePropertyChange(evt));
    }
-   
+
    @SuppressWarnings("unchecked")
    public void executePropertyChange(PropertyChangeEvent evt)
    {
@@ -51,6 +47,11 @@ public class ViewModelOfferList implements PropertyChangeListener
          {
             offers.add(new ViewModelRequestOffer(model, element));
          }
+      }
+      else if (evt.getPropertyName().equals("NEWOFFER"))
+      {
+         Offer offer = (Offer) evt.getNewValue();
+         offers.add(new ViewModelRequestOffer(model, offer));
       }
 
    }
