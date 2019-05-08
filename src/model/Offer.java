@@ -4,10 +4,20 @@ import java.io.Serializable;
 
 public class Offer implements Serializable
 {
+   private int ID;
    private String name;
    private String phoneNo;
    private String email;
    private String message;
+   
+   public Offer(int ID, String name, String phoneNo, String email, String message)
+   {
+      this.ID = ID;
+      this.name = name;
+      this.phoneNo = phoneNo;
+      this.email = email;
+      this.message = message;
+   }
 
    public Offer(String name, String phoneNo, String email, String message)
    {
@@ -15,6 +25,16 @@ public class Offer implements Serializable
       this.phoneNo = phoneNo;
       this.email = email;
       this.message = message;
+   }
+   
+   public int getID()
+   {
+      return ID;
+   }
+
+   public void setID(int iD)
+   {
+      ID = iD;
    }
 
    public void setName(String name)

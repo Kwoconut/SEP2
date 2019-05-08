@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Product implements Serializable
 {
+   private int ID;
    private String name;
    private String colour;
    private String type;
@@ -14,6 +15,16 @@ public class Product implements Serializable
    public static String TYPE_RAIN_SYSTEM = "Rain System";
    public static String TYPE_METAL_TILE = "Metal Tile";
 
+   public Product(int ID, String name, int price, String colour,
+         String type)
+   {
+      this.ID = ID;
+      this.name = name;
+      this.price = price;
+      this.colour = colour;
+      this.type = type;
+   }
+   
    public Product(String name, int price, String colour,
          String type)
    {
@@ -27,6 +38,16 @@ public class Product implements Serializable
    {
       this.name = name;
       this.price = price;
+   }
+   
+   public int getID()
+   {
+      return ID;
+   }
+
+   public void setID(int iD)
+   {
+      ID = iD;
    }
 
    public String getName()

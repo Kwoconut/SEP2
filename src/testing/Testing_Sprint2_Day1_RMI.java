@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -29,7 +30,7 @@ public class Testing_Sprint2_Day1_RMI
    
    
    @Before
-   public void setup()
+   public void setup() throws SQLException
    {
       model = new Store();
       serverModel = new ServerModel();

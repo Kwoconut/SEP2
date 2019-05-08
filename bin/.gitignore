@@ -1,7 +1,4 @@
-/modelmanager/
-/view/
-/model/
-/server/
-/client/
-/viewmodel/
 /DBSConnection/
+/server/
+/testing/
+/model/
