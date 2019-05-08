@@ -62,7 +62,7 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    public void updateProduct(Product product) throws SQLException
    {
       PreparedStatement updateStatement = connection.prepareStatement(
-            "UPDATE Product SET name = '?', price = '?', color = '?', product_type = '?' WHERE prodct_id = '?'");
+            "UPDATE Product SET name = ?, price = ?, color = ?, product_type = ? WHERE product_id = ?");
       updateStatement.setString(1, product.getName());
       updateStatement.setInt(2, product.getPrice());
       updateStatement.setString(3, product.getColour());
@@ -75,8 +75,8 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    public void removeProduct(Product product) throws SQLException
    {
       PreparedStatement deleteStatement = connection
-            .prepareStatement("DELETE FROM Product WHERE name = '?')");
-      deleteStatement.setString(1, product.getName());
+            .prepareStatement("DELETE FROM Product WHERE product_id = ?");
+      deleteStatement.setInt(1, product.getID());
       deleteStatement.executeUpdate();
    }
 

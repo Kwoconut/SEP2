@@ -50,11 +50,12 @@ public class OfferDatabaseHandler implements StoreOfferPersistence
    public void addOffer(Offer offer) throws SQLException
    {
       PreparedStatement insertStatement = connection.prepareStatement(
-            "INSERT INTO Offer (name, phone, email, message) VALUES (?, ?, ?, ?)");
-      insertStatement.setString(1, offer.getName());
-      insertStatement.setString(2, offer.getPhoneNo());
-      insertStatement.setString(3, offer.getEmail());
-      insertStatement.setString(4, offer.getMessage());
+            "INSERT INTO Offer (offer_id, name, phone, email, message) VALUES (?, ?, ?, ?, ?)");
+      insertStatement.setInt(1, offer.getID());
+      insertStatement.setString(2, offer.getName());
+      insertStatement.setString(3, offer.getPhoneNo());
+      insertStatement.setString(4, offer.getEmail());
+      insertStatement.setString(5, offer.getMessage());
       insertStatement.executeUpdate();
    }
 
@@ -75,7 +76,7 @@ public class OfferDatabaseHandler implements StoreOfferPersistence
    public void removeOffer(Offer offer) throws SQLException
    {
       PreparedStatement deleteStatement = connection
-            .prepareStatement("DELETE FROM Offer WHERE name = '?'");
+            .prepareStatement("DELETE FROM Offer WHERE offer_id = '?'");
       deleteStatement.setString(1, offer.getName());
       deleteStatement.executeUpdate();
    }

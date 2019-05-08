@@ -27,7 +27,8 @@ public class ServerModel
       offers = new ArrayList<Offer>();
       databaseProductAccess = new ProductDatabaseHandler();
       databaseOfferAccess = new OfferDatabaseHandler();
-      sampleDataForCreation();
+      //sampleDataForCreation();
+      removeProduct(new Product(100, "Sugi pula", 555, "Red", Product.TYPE_METAL_SHEET));
       loadProducts();
       loadOffers();
    }
