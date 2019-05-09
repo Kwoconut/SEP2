@@ -37,6 +37,9 @@ public class ViewModelStore implements PropertyChangeListener
 
       });
    }
+   public void getProduct(String type) {
+      model.getProductsByType(type);
+   }
 
    public StringProperty getNameProperty(int i)
    {

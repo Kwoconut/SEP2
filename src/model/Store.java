@@ -39,6 +39,16 @@ public class Store implements StoreModel, Serializable
    {
 	   return offers;
    }
+   public void getProductsByType(String type)
+   {
+      ArrayList<Product> elements = new ArrayList<Product>();
+      for(Product value: products) {
+         if(value.getType().equals(type)) {
+            elements.add(value);
+         }
+      }
+      support.firePropertyChange("DETAILS", null, elements);
+   }
 
    @Override
    public void getProductsFromServer(ArrayList<Product> values)

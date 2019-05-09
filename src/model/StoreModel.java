@@ -18,6 +18,8 @@ public interface StoreModel
    
    void getOffersFromServer(ArrayList<Offer> offers);
    
+   void getProductsByType(String type);
+   
    void addOfferFromServer(Offer offer);
    
    void setClient(Client client);

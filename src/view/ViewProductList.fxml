@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewProductList">
+   <children>
+      <TableView fx:id="productTable" prefHeight="700.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="productID" prefWidth="61.60000532865524" text="ID" />
+          <TableColumn fx:id="productName" prefWidth="340.79999923706055" text="Name" />
+            <TableColumn fx:id="productType" prefWidth="288.79998779296875" text="Type" />
+            <TableColumn fx:id="productColour" minWidth="0.0" prefWidth="130.39999389648438" text="Colour" />
+            <TableColumn fx:id="productPrice" prefWidth="176.79998779296875" text="Price" />
+        </columns>
+      </TableView>
+      <Button layoutX="1060.0" layoutY="619.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="90.0" onAction="#backToMain"  text="Back">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
