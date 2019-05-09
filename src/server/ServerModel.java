@@ -36,15 +36,15 @@ public class ServerModel
    private void sampleDataForCreation() throws SQLException
    {
       databaseProductAccess
-            .addProduct(new Product(100, "Metal Sheet", 8888, "Red", Product.TYPE_METAL_SHEET));
+            .addProduct(new Product(1, "Metal Sheet", 8888, "Red", Product.TYPE_METAL_SHEET));
       databaseProductAccess
-            .addProduct(new Product(200, "Click Sheet", 9999, "Black", Product.TYPE_CLICK_SHEET));
+            .addProduct(new Product(2, "Click Sheet", 9999, "Black", Product.TYPE_CLICK_SHEET));
       databaseProductAccess
-            .addProduct(new Product(300, "Plated Sheet", 10000, "Silver", Product.TYPE_PLATED_SHEET));
+            .addProduct(new Product(3, "Plated Sheet", 10000, "Silver", Product.TYPE_PLATED_SHEET));
       databaseProductAccess
-            .addProduct(new Product(400, "Rain System", 3333, "Silver", Product.TYPE_RAIN_SYSTEM));
+            .addProduct(new Product(4, "Rain System", 3333, "Silver", Product.TYPE_RAIN_SYSTEM));
       databaseProductAccess
-            .addProduct(new Product(500, "Metal Tile", 666, "Red", Product.TYPE_METAL_TILE));
+            .addProduct(new Product(5, "Metal Tile", 666, "Red", Product.TYPE_METAL_TILE));
    }
    
    //getters for ArrayLists
