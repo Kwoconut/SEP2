@@ -32,7 +32,10 @@ public interface StoreModel
    
    void addOffer(Offer offer);
    
+   int generateProductID();
+   
    int generateOfferID();
+   
 
 
    

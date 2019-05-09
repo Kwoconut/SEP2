@@ -139,16 +139,72 @@ public class Store implements StoreModel, Serializable
       }
 
    }
-
+   
+   @Override
+   public int generateProductID()
+   {
+      for(int i = 1; i < generateProductMaxID(); i++)
+      {
+         boolean flag = false;
+         for(Product product: products)
+         {
+            if(product.getID() == i)
+            {
+               flag = true;
+            }
+         }
+         if(!flag)
+         {
+            return i;
+         }
+      }
+      return products.size() + 1;
+   }
+   
+   private int generateProductMaxID()
+   {
+      int maxi = 1;
+      for(Product product:products)
+      {
+         if(product.getID() > maxi)
+         {
+            maxi = product.getID();
+         }
+      }
+      return maxi;
+   }
+   
    @Override
    public int generateOfferID()
    {
-      Random random = new Random();
-      int one = random.nextInt(9) + 1;
-      int two = random.nextInt(9) + 1;
-      return one * 10 + two;
+      for(int i = 1; i < generateOfferMaxID(); i++)
+      {
+         boolean flag = false;
+         for(Offer offer: offers)
+         {
+            if(offer.getID() == i)
+            {
+               flag = true;
+            }
+         }
+         if(!flag)
+         {
+            return i;
+         }
+      }
+      return offers.size() + 1;
    }
 
-
-
+   private int generateOfferMaxID()
+   {
+      int maxi = 1;
+      for(Offer offer:offers)
+      {
+         if(offer.getID() > maxi)
+         {
+            maxi = offer.getID();
+         }
+      }
+      return maxi;
+   }
 }

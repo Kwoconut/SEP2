@@ -28,7 +28,6 @@ public class ServerModel
       databaseProductAccess = new ProductDatabaseHandler();
       databaseOfferAccess = new OfferDatabaseHandler();
       //sampleDataForCreation();
-      removeProduct(new Product(100, "Sugi pula", 555, "Red", Product.TYPE_METAL_SHEET));
       loadProducts();
       loadOffers();
    }
@@ -98,7 +97,6 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }    
-      loadProducts();
       support.firePropertyChange("PRODUCTADDED", null, product);
    }
    
@@ -113,7 +111,6 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      loadOffers();
       support.firePropertyChange("OFFERADDED", null, offer);
    }
    
@@ -129,7 +126,6 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      loadProducts();
    }
    
    public void updateOffer(Offer offer)
@@ -143,7 +139,6 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      loadOffers();
    }
    
    //remove methods
@@ -159,7 +154,6 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      loadProducts();
    }
    
    public void removeOffer(Offer offer)
@@ -173,7 +167,6 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      loadOffers();
    }
    
    //clear methods

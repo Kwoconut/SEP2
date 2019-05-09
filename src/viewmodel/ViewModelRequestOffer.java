@@ -70,7 +70,7 @@ public class ViewModelRequestOffer implements PropertyChangeListener
    public void addOffer()
    {
 
-      Offer offer = new Offer(100 * model.generateOfferID(), nameProperty.get(), phoneProperty.get(),
+      Offer offer = new Offer(model.generateOfferID(), nameProperty.get(), phoneProperty.get(),
             emailProperty.get(), messageProperty.get());
       model.addOffer(offer);
    }

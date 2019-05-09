@@ -69,8 +69,6 @@ public class Client implements IClient, RIClient, Serializable
    public void addOffer(Offer offer) throws RemoteException
    {
       model.addOfferFromServer(offer);
-      System.out.println("----");
-      
    }
 
 

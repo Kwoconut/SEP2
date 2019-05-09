@@ -1,2 +1,5 @@
-/DBSConnection/
 /server/
+/DBSConnection/
+/model/
+/viewmodel/
+/client/
