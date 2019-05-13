@@ -94,6 +94,10 @@ public class ViewModelRequestOffer implements PropertyChangeListener
       {
          errorProperty.set((String) evt.getNewValue());
       }
+      else if (evt.getPropertyName().equals("valid"))
+      {
+         errorProperty.set("");
+      }
 
    }
 

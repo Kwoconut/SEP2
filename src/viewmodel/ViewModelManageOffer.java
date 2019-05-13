@@ -1,5 +1,7 @@
 package viewmodel;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -7,7 +9,7 @@ import javafx.beans.property.StringProperty;
 import model.Offer;
 import model.StoreModel;
 
-public class ViewModelManageOffer {
+public class ViewModelManageOffer implements PropertyChangeListener {
 	
 	private StoreModel model;
 	private StringProperty name;
@@ -21,16 +23,13 @@ public class ViewModelManageOffer {
 		email = new SimpleStringProperty("");
 		phoneNumber = new SimpleStringProperty("");
 		message = new SimpleStringProperty("");
-	}
-	
-	public Offer getTheOffer()
-	{
-		return model.getTheOffer();
+		this.model.addListener(this);
 	}
 	
 	public void removeOffer() 
 	{
-		model.removeOffer();
+	   Offer offer = new Offer(name.get(),email.get(),phoneNumber.get(),message.get());
+		model.removeOffer(offer);
 	}
 	public StringProperty getName()
 	{ 
@@ -48,11 +47,21 @@ public class ViewModelManageOffer {
 	{
 		return message;
 	}
-	public void update()
+	private void update(Offer offer)
 	{
-		name.set(model.getTheOffer().getName());
-		email.set(model.getTheOffer().getEmail());
-		phoneNumber.set(model.getTheOffer().getPhoneNo());
-		message.set(model.getTheOffer().getMessage());
+		name.set(offer.getName());
+		email.set(offer.getEmail());
+		phoneNumber.set(offer.getPhoneNo());
+		message.set(offer.getMessage());
 	}
+   @Override
+   public void propertyChange(PropertyChangeEvent evt)
+   {
+      if (evt.getPropertyName().equals("MANAGEOFFER"))
+      {
+         Offer offer = (Offer) evt.getNewValue();
+         update(offer);
+      }
+      
+   }
 }

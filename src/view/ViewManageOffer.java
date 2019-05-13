@@ -61,7 +61,7 @@ public class ViewManageOffer implements View{
 	      alert.showAndWait();
 	      if (alert.getResult() == ButtonType.YES) 
 	      {
-	        viewModel.removeOffer();
+	      viewModel.removeOffer();
 	 		getScene().getWindow().hide();
 			view.setWindow("offerlist");
 	      }

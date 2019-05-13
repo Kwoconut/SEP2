@@ -61,9 +61,9 @@ public class ViewModelOfferList implements PropertyChangeListener
 
    }
    
-   public void saveIndex(int index)
+   public void getOffer(int index)
    {
-	   model.saveIndex( index);
+	   model.getOffer(index);
    }
 
 }

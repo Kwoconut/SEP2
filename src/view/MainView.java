@@ -41,9 +41,5 @@ public class MainView
 
    }
    
-   public MainViewViewModel getMainViewViewModel()
-   {
-	   return viewModel;
-   }
 
 }

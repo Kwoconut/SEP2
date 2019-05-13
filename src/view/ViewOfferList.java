@@ -26,12 +26,11 @@ public class ViewOfferList implements View
    private TableColumn<ViewModelRequestOffer, String> messageColumn;
    @FXML
    private Label errorLabel;
-   
+
    private String title;
    private Scene scene;
    private MainView view;
    private ViewModelOfferList viewModel;
-
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
@@ -49,10 +48,10 @@ public class ViewOfferList implements View
             cellData -> cellData.getValue().getEmailProperty());
       messageColumn.setCellValueFactory(
             cellData -> cellData.getValue().getMessageProperty());
-      
+
       offerListTable.setItems(this.viewModel.getOffers());
    }
-   
+
    public Scene getScene()
    {
       return scene;
@@ -62,36 +61,36 @@ public class ViewOfferList implements View
    {
       return title;
    }
-   
 
    @FXML
    private void cancelButtonPressed() throws IOException
    {
       nextWindow();
    }
-   
+
    public void nextWindow() throws IOException
    {
       getScene().getWindow().hide();
       view.setWindow("start");
    }
-   
+
    @FXML
    private void manageButtonPressed() throws IOException
    {
-	   int index2;
-	      index2=offerListTable.getSelectionModel().getSelectedIndex();
-	      if (index2 == -1)
-	      {
-	         errorLabel.setText("Please select the employee");
-	         return;
-	      }
-	      int index = offerListTable.getSelectionModel().getSelectedIndex();
-	      errorLabel.setText("");
-	      viewModel.saveIndex(index);
-		   view.getMainViewViewModel().getViewModelManageOffer().update();
-	   getScene().getWindow().hide();
-	   view.setWindow("manageoffer");
+
+      int index = offerListTable.getSelectionModel().getSelectedIndex();
+      if (index == -1)
+      {
+         errorLabel.setText("Please select an offer");
+         return;
+      }
+      else
+      {
+         errorLabel.setText("");
+         viewModel.getOffer(index);
+         getScene().getWindow().hide();
+         view.setWindow("manageoffer");
+      }
 
    }
 

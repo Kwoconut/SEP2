@@ -15,8 +15,7 @@ public class Store implements StoreModel, Serializable
    private ArrayList<Offer> offers;
    private Client client;
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
-   private int index;
-   
+
    public Store()
    {
       products = new ArrayList<Product>();
@@ -34,17 +33,20 @@ public class Store implements StoreModel, Serializable
    {
       return products;
    }
-   
+
    @Override
-   public ArrayList<Offer> getOffers() 
+   public ArrayList<Offer> getOffers()
    {
-	   return offers;
+      return offers;
    }
+
    public void getProductsByType(String type)
    {
       ArrayList<Product> elements = new ArrayList<Product>();
-      for(Product value: products) {
-         if(value.getType().equals(type)) {
+      for (Product value : products)
+      {
+         if (value.getType().equals(type))
+         {
             elements.add(value);
          }
       }
@@ -58,7 +60,7 @@ public class Store implements StoreModel, Serializable
       products = values;
       support.firePropertyChange("SEND", "", values);
    }
-   
+
    @Override
    public void getOffersFromServer(ArrayList<Offer> offers)
    {
@@ -66,7 +68,7 @@ public class Store implements StoreModel, Serializable
       support.firePropertyChange("OFFERLIST", "", offers);
 
    }
-   
+
    public void addOfferFromServer(Offer offer)
    {
       support.firePropertyChange("NEWOFFER", "", offer);
@@ -88,9 +90,9 @@ public class Store implements StoreModel, Serializable
    public void requestOffers() throws RemoteException
    {
       client.requestOffers();
-      
+
    }
-   
+
    @Override
    public void requestProducts() throws RemoteException
    {
@@ -137,6 +139,7 @@ public class Store implements StoreModel, Serializable
          {
             try
             {
+               support.firePropertyChange("valid", null, " ");
                offers.add(offer);
                client.sendOfferToServer(offer);
             }
@@ -150,55 +153,55 @@ public class Store implements StoreModel, Serializable
       }
 
    }
-   
+
    @Override
    public int generateProductID()
    {
-      for(int i = 1; i < generateProductMaxID(); i++)
+      for (int i = 1; i < generateProductMaxID(); i++)
       {
          boolean flag = false;
-         for(Product product: products)
+         for (Product product : products)
          {
-            if(product.getID() == i)
+            if (product.getID() == i)
             {
                flag = true;
             }
          }
-         if(!flag)
+         if (!flag)
          {
             return i;
          }
       }
       return products.size() + 1;
    }
-   
+
    private int generateProductMaxID()
    {
       int maxi = 1;
-      for(Product product:products)
+      for (Product product : products)
       {
-         if(product.getID() > maxi)
+         if (product.getID() > maxi)
          {
             maxi = product.getID();
          }
       }
       return maxi;
    }
-   
+
    @Override
    public int generateOfferID()
    {
-      for(int i = 1; i < generateOfferMaxID(); i++)
+      for (int i = 1; i < generateOfferMaxID(); i++)
       {
          boolean flag = false;
-         for(Offer offer: offers)
+         for (Offer offer : offers)
          {
-            if(offer.getID() == i)
+            if (offer.getID() == i)
             {
                flag = true;
             }
          }
-         if(!flag)
+         if (!flag)
          {
             return i;
          }
@@ -209,44 +212,44 @@ public class Store implements StoreModel, Serializable
    private int generateOfferMaxID()
    {
       int maxi = 1;
-      for(Offer offer:offers)
+      for (Offer offer : offers)
       {
-         if(offer.getID() > maxi)
+         if (offer.getID() > maxi)
          {
             maxi = offer.getID();
          }
       }
       return maxi;
    }
-   
+
    @Override
-   public void removeOffer() 
+   public void removeOffer(Offer offer)
    {
-	   Offer offer = offers.get(index);
-	   try 
-	{
-        offers.remove(index);
-	    client.removeOfferFromServer(offer);
-	} 
-	    catch (RemoteException e) 
-	{
-	    e.printStackTrace();
-	}
+      try
+      {
+         for (Offer element : offers)
+         {
+            if (element.getMessage().equals(offer.getMessage()))
+            {
+               client.removeOfferFromServer(element);
+            }
+         }
+      }
+      catch (RemoteException e)
+      {
+         e.printStackTrace();
+      }
    }
-	   
-   public void saveIndex(int index)
+
+   public void getOffer(int index)
    {
-	   this.index = index;
-	   System.out.println(offers.get(index));
+      support.firePropertyChange("MANAGEOFFER", "", offers.get(index));
    }
-   
+
    public void removeOfferFromServer(Offer offer)
    {
+      offers.remove(offer);
       support.firePropertyChange("MINUSOFFER", "", offer);
    }
-   
-   public Offer getTheOffer()
-   {
-	   return offers.get(index);
-   }
+
 }

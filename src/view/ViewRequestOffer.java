@@ -69,7 +69,6 @@ public class ViewRequestOffer implements View
          phoneField.setPromptText("Phone");
          emailField.setPromptText("Email");
          messageField.setPromptText("Message");
-         errorLabel.setText("");
          view.setWindow("start");
       }
    }
