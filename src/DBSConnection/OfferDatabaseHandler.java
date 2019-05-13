@@ -76,9 +76,10 @@ public class OfferDatabaseHandler implements StoreOfferPersistence
    public void removeOffer(Offer offer) throws SQLException
    {
       PreparedStatement deleteStatement = connection
-            .prepareStatement("DELETE FROM Offer WHERE name = '?'");
-      deleteStatement.setString(1, offer.getName());
+            .prepareStatement("DELETE FROM Offer WHERE offer_id = ?");
+      deleteStatement.setInt(1, offer.getID());
       deleteStatement.executeUpdate();
+      System.out.println("succesfull delete");
    }
 
    @Override

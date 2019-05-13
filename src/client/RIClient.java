@@ -14,4 +14,6 @@ public interface RIClient extends Remote
    void getOffers(ArrayList<Offer> offers) throws RemoteException;
    
    void addOffer(Offer offer) throws RemoteException;
+   
+   void removeOffer(Offer offer) throws RemoteException;
 }

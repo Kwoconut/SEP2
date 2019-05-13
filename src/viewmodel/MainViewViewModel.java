@@ -10,6 +10,7 @@ public class MainViewViewModel
    private ViewModelStore viewModelStore;
    private ViewModelRequestOffer viewModelRequestOffer;
    private ViewModelOfferList viewModelOfferList;
+   private ViewModelManageOffer viewModelManageOffer;
    private StoreModel model;
    
    public MainViewViewModel(StoreModel model) throws RemoteException
@@ -18,6 +19,7 @@ public class MainViewViewModel
       viewModelStore = new ViewModelStore(model);
       viewModelRequestOffer = new ViewModelRequestOffer(model);
       viewModelOfferList = new ViewModelOfferList(model);
+      viewModelManageOffer = new ViewModelManageOffer(model);
    }
    
    public ViewModelStore getViewModelStore()
@@ -33,6 +35,11 @@ public class MainViewViewModel
    public ViewModelOfferList getViewModelOfferList()
    {
       return viewModelOfferList;
+   }
+   
+   public ViewModelManageOffer getViewModelManageOffer()
+   {
+      return viewModelManageOffer;
    }
 
 }

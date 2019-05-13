@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import viewmodel.MainViewViewModel;
@@ -23,6 +24,8 @@ public class ViewOfferList implements View
    private TableColumn<ViewModelRequestOffer, String> emailColumn;
    @FXML
    private TableColumn<ViewModelRequestOffer, String> messageColumn;
+   @FXML
+   private Label errorLabel;
    
    private String title;
    private Scene scene;
@@ -64,13 +67,27 @@ public class ViewOfferList implements View
    @FXML
    private void cancelButtonPressed() throws IOException
    {
-      nextWindow();
+	   getScene().getWindow().hide();
+	   view.setWindow("start");
    }
    
-   public void nextWindow() throws IOException
+   @FXML
+   private void manageButtonPressed() throws IOException
    {
-      getScene().getWindow().hide();
-      view.setWindow("start");
+	   int index2;
+	      index2=offerListTable.getSelectionModel().getSelectedIndex();
+	      if (index2 == -1)
+	      {
+	         errorLabel.setText("Please select the employee");
+	         return;
+	      }
+	      int index = offerListTable.getSelectionModel().getSelectedIndex();
+	      errorLabel.setText("");
+	      viewModel.saveIndex(index);
+		   view.getMainViewViewModel().getViewModelManageOffer().update();
+	   getScene().getWindow().hide();
+	   view.setWindow("manageoffer");
+
    }
 
 }

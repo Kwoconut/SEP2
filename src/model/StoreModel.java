@@ -31,6 +31,14 @@ public interface StoreModel
    Client getClient();
    
    void addOffer(Offer offer);
+   
+   void saveIndex(int index);
+   
+   Offer getTheOffer();
+   
+   void removeOffer();
+   
+   void removeOfferFromServer(Offer offer);
 
 
    

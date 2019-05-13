@@ -53,7 +53,17 @@ public class ViewModelOfferList implements PropertyChangeListener
          Offer offer = (Offer) evt.getNewValue();
          offers.add(new ViewModelRequestOffer(model, offer));
       }
+      else if (evt.getPropertyName().equals("MINUSOFFER"))
+      {
+         Offer offer = (Offer) evt.getNewValue();
+         offers.remove(new ViewModelRequestOffer(model,offer));
+      }
 
+   }
+   
+   public void saveIndex(int index)
+   {
+	   model.saveIndex( index);
    }
 
 }

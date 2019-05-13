@@ -67,10 +67,19 @@ public class Server implements RIServer, PropertyChangeListener
    {
       model.addOffer(offer);
    }
+   
+   @Override
+   public void removeOffer(Offer offer) throws RemoteException
+   {
+   	model.removeOffer(offer);
+   	
+   }
 
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
+	   if(evt.getPropertyName().equals("OFFERADDED"))
+	   {
       for (RIClient element : clients)
       {
          try
@@ -83,6 +92,23 @@ public class Server implements RIServer, PropertyChangeListener
             e.printStackTrace();
          }
       }
+      }
+		   if (evt.getPropertyName().equals("OFFERREMOVED"))
+				   {
+			   for (RIClient element : clients)
+			   {
+				   try
+				   {
+					   element.removeOffer((Offer) evt.getNewValue());
+				   }
+				   catch (RemoteException e)
+				   {
+					   e.printStackTrace();
+				   }
+			   }
+				   }
+	   }
       
    }
-}
+
+

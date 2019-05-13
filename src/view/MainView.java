@@ -38,7 +38,10 @@ public class MainView
      primaryStage.setScene(view.getScene());
      primaryStage.setTitle(view.getTitle());
      primaryStage.show();
-
+   }
+   public MainViewViewModel getMainViewViewModel()
+   {
+	   return viewModel;
    }
 
 }

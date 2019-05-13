@@ -18,60 +18,63 @@ import server.RIServer;
 import view.MainView;
 import viewmodel.MainViewViewModel;
 
-public class Client implements IClient, RIClient, Serializable
-{
+public class Client implements IClient, RIClient, Serializable {
 
-   private StoreModel model;
-   private RIServer server;
+	private StoreModel model;
+	private RIServer server;
 
-   public Client(StoreModel model) throws RemoteException, NotBoundException, MalformedURLException
-   {
-      this.model = model;
-      this.model.setClient(this);
-      server = (RIServer) Naming.lookup("rmi://localhost:1099/store");
-      UnicastRemoteObject.exportObject(this, 0);
-      server.addClient(this);
-   }
+	public Client(StoreModel model) throws RemoteException, NotBoundException, MalformedURLException {
+		this.model = model;
+		this.model.setClient(this);
+		server = (RIServer) Naming.lookup("rmi://localhost:1099/store");
+		UnicastRemoteObject.exportObject(this, 0);
+		server.addClient(this);
+	}
 
+	@Override
+	public void getProducts(ArrayList<Product> products) throws RemoteException {
+		model.getProductsFromServer(products);
+	}
 
-   @Override
-   public void getProducts(ArrayList<Product> products) throws RemoteException
-   {
-      model.getProductsFromServer(products);
-   }
-   
-   @Override
-   public void getOffers(ArrayList<Offer> offers) throws RemoteException
-   {
-	   model.getOffersFromServer(offers);
-   }
+	@Override
+	public void getOffers(ArrayList<Offer> offers) throws RemoteException {
+		model.getOffersFromServer(offers);
+	}
 
-   @Override
-   public void requestProducts() throws RemoteException
-   {
-      server.getProducts(this);
-   }
-   
-   @Override
-   public void requestOffers() throws RemoteException
-   {
-      server.getOffers(this);
- 
-   }
+	@Override
+	public void requestProducts() throws RemoteException {
+		server.getProducts(this);
+	}
 
-   @Override
-   public void sendOfferToServer(Offer offer) throws RemoteException
-   {
-      server.sendOffer(offer);      
-   }
+	@Override
+	public void requestOffers() throws RemoteException {
+		server.getOffers(this);
 
-   @Override
-   public void addOffer(Offer offer) throws RemoteException
-   {
-      model.addOfferFromServer(offer);
-      System.out.println("----");
-      
-   }
+	}
 
+	@Override
+	public void sendOfferToServer(Offer offer) throws RemoteException {
+		server.sendOffer(offer);
+	}
+
+	@Override
+	public void removeOfferFromServer(Offer offer) throws RemoteException {
+		System.out.println("1");
+		server.removeOffer(offer);
+		System.out.println("2");
+	}
+
+	@Override
+	public void addOffer(Offer offer) throws RemoteException {
+		model.addOfferFromServer(offer);
+		System.out.println("----");
+
+	}
+
+	@Override
+	public void removeOffer(Offer offer) throws RemoteException {
+		model.removeOfferFromServer(offer);
+
+	}
 
 }
