@@ -38,6 +38,14 @@ public interface StoreModel
    
    int generateOfferID();
    
+   void saveIndex(int index);
+   
+   Offer getTheOffer();
+   
+   void removeOffer();
+   
+   void removeOfferFromServer(Offer offer);
+   
 
 
    

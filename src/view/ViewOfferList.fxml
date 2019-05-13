@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,5 +22,11 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <Button layoutX="75.0" layoutY="625.0" mnemonicParsing="false" onAction="#manageButtonPressed" text="Manage">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label fx:id="errorLabel" layoutX="675.0" layoutY="625.0" prefHeight="41.0" prefWidth="238.0" textFill="#df1b1b" />
    </children>
 </AnchorPane>

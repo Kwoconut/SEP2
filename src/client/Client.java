@@ -70,6 +70,16 @@ public class Client implements IClient, RIClient, Serializable
    {
       model.addOfferFromServer(offer);
    }
+   
+   @Override
+   public void removeOffer(Offer offer) throws RemoteException 
+   {
+	  model.removeOfferFromServer(offer);
+   }
 
+   @Override
+   public void removeOfferFromServer(Offer offer) throws RemoteException {
+	   server.removeOffer(offer);
+   }
 
 }

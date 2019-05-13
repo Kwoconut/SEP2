@@ -40,5 +40,10 @@ public class MainView
      primaryStage.show();
 
    }
+   
+   public MainViewViewModel getMainViewViewModel()
+   {
+	   return viewModel;
+   }
 
 }

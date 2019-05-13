@@ -15,6 +15,7 @@ public class Store implements StoreModel, Serializable
    private ArrayList<Offer> offers;
    private Client client;
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
+   private int index;
    
    public Store()
    {
@@ -216,5 +217,36 @@ public class Store implements StoreModel, Serializable
          }
       }
       return maxi;
+   }
+   
+   @Override
+   public void removeOffer() 
+   {
+	   Offer offer = offers.get(index);
+	   try 
+	{
+        offers.remove(index);
+	    client.removeOfferFromServer(offer);
+	} 
+	    catch (RemoteException e) 
+	{
+	    e.printStackTrace();
+	}
+   }
+	   
+   public void saveIndex(int index)
+   {
+	   this.index = index;
+	   System.out.println(offers.get(index));
+   }
+   
+   public void removeOfferFromServer(Offer offer)
+   {
+      support.firePropertyChange("MINUSOFFER", "", offer);
+   }
+   
+   public Offer getTheOffer()
+   {
+	   return offers.get(index);
    }
 }

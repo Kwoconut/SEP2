@@ -12,4 +12,6 @@ public interface IClient
    void requestOffers() throws RemoteException;
    
    void sendOfferToServer(Offer offer) throws RemoteException;
+   
+   void removeOfferFromServer(Offer offer) throws RemoteException;
 }

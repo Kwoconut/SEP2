@@ -156,18 +156,16 @@ public class ServerModel
       }
    }
    
-   public void removeOffer(Offer offer)
+   public void removeOffer(Offer offer) 
    {
-      try
-      {
-         databaseOfferAccess.removeOffer(offer);
-      }
-      catch (SQLException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-   }
+		try {
+			databaseOfferAccess.removeOffer(offer);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		support.firePropertyChange("OFFERREMOVED", null, offer);	
+	}
    
    //clear methods
    public void clearProducts() throws SQLException
