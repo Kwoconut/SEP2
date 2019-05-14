@@ -79,7 +79,7 @@ public class Client implements IClient, RIClient, Serializable
 
    @Override
    public void removeOfferFromServer(Offer offer) throws RemoteException {
-	   server.removeOffer(offer);
+	  server.removeOffer(offer);
    }
 
 }

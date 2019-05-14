@@ -22,8 +22,7 @@ public class ViewModelStore implements PropertyChangeListener
       this.model = model;
       reinitializeArrays();
       this.model.addListener(this);
-      this.model.requestProducts();
-   }
+      this.model.requestProducts();   }
 
    public void updateProducts(PropertyChangeEvent evt)
    {
