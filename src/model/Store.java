@@ -232,6 +232,7 @@ public class Store implements StoreModel, Serializable
             if (element.getMessage().equals(offer.getMessage()))
             {
                client.removeOfferFromServer(element);
+               break;
             }
          }
       }
