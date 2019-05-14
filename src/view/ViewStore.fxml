@@ -18,6 +18,7 @@
 	<children>
 		<AnchorPane VBox.vgrow="ALWAYS">
 			<children>
+            <Pane opacity="0.1" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: lightgrey;" />
 				<GridPane hgap="10.0" layoutX="74.0" layoutY="161.0" prefHeight="393.0" prefWidth="1064.0">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" minWidth="8.0" prefWidth="150.0" />
@@ -30,15 +31,20 @@
 						<RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
                      <children>
                         <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../MG_7313-LR-fara-suruburi.jpg" />
                            </image>
                         </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="3.0" layoutY="-140.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Logo.png" />
+                           </image>
+                        </ImageView>
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="5.0" />
                      </GridPane.margin>
@@ -67,7 +73,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" GridPane.columnIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1">
                      <children>
                         <ImageView fitHeight="122.0" fitWidth="195.0" layoutX="5.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -75,7 +81,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="5.0" />
                      </GridPane.margin>
@@ -104,7 +110,7 @@
 								<Insets bottom="60.0" />
 							</GridPane.margin>
 						</Label>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" GridPane.columnIndex="3">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="3">
                      <children>
                         <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -112,7 +118,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="5.0" />
                      </GridPane.margin>
@@ -141,7 +147,7 @@
 								<Font size="21.0" />
 							</font>
 						</Label>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" GridPane.columnIndex="2">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="2">
                      <children>
                         <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -149,7 +155,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="5.0" />
                      </GridPane.margin>
@@ -178,7 +184,7 @@
 								<Insets bottom="60.0" />
 							</GridPane.margin>
 						</Label>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" GridPane.columnIndex="4">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="4">
                      <children>
                         <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -186,7 +192,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="5.0" />
                      </GridPane.margin>
@@ -235,7 +241,7 @@
 					</children>
 				</GridPane>
             <Button layoutX="979.0" layoutY="49.0" mnemonicParsing="false" onAction="#onRequestOfferButtonPressed" text="Request Offer" />
-            <Button layoutX="137.0" layoutY="49.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" text="Check Offers" />
+            <Button layoutX="870.0" layoutY="49.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" text="Check Offers" />
 			</children>
 		</AnchorPane>
 	</children>
