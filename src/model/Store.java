@@ -5,8 +5,6 @@ import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Random;
-
 import client.Client;
 
 public class Store implements StoreModel, Serializable

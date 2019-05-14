@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -15,7 +16,7 @@
 	<children>
 		<AnchorPane VBox.vgrow="ALWAYS">
 			<children>
-				<GridPane gridLinesVisible="true" hgap="10.0" layoutX="74.0" layoutY="161.0" prefHeight="393.0" prefWidth="1064.0">
+				<GridPane hgap="10.0" layoutX="74.0" layoutY="161.0" prefHeight="393.0" prefWidth="1064.0">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" minWidth="8.0" prefWidth="150.0" />
 						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
@@ -27,7 +28,13 @@
 						<RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<Label fx:id="label02" onMouseClicked="#onDetailsLabelPressedClick" text="Detalii" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" />
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" />
+                     </GridPane.margin>
+                  </Pane>
+						<Label fx:id="label02" onMouseClicked="#onDetailsLabelPressedClick" text="Details" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>
@@ -51,6 +58,12 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" GridPane.columnIndex="1" />
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" />
+                     </GridPane.margin>
+                  </Pane>
 						<Label fx:id="label10" alignment="CENTER" text="Denumire" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
@@ -59,7 +72,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-						<Label fx:id="label12" onMouseClicked="#onDetailsLabelPressedMetal" text="Detalii" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label12" onMouseClicked="#onDetailsLabelPressedMetal" text="Details" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>
@@ -75,6 +88,12 @@
 								<Insets bottom="60.0" />
 							</GridPane.margin>
 						</Label>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" GridPane.columnIndex="3" />
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" />
+                     </GridPane.margin>
+                  </Pane>
 						<Label fx:id="label30" alignment="CENTER" text="Denumire" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
@@ -83,7 +102,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-						<Label fx:id="label32" onMouseClicked="#onDetailsLabelPressedMetalTile" text="Detalii" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label32" onMouseClicked="#onDetailsLabelPressedMetalTile" text="Details" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>
@@ -99,6 +118,12 @@
 								<Font size="21.0" />
 							</font>
 						</Label>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" GridPane.columnIndex="2" />
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" />
+                     </GridPane.margin>
+                  </Pane>
 						<Label fx:id="label20" alignment="CENTER" text="Denumire" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
@@ -107,7 +132,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-						<Label fx:id="label22" onMouseClicked="#onDetailsLabelPressedPlated" text="Detalii" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label22" onMouseClicked="#onDetailsLabelPressedPlated" text="Details" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>
@@ -123,6 +148,12 @@
 								<Insets bottom="60.0" />
 							</GridPane.margin>
 						</Label>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" GridPane.columnIndex="4" />
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: teal;" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" />
+                     </GridPane.margin>
+                  </Pane>
 						<Label fx:id="label40" alignment="CENTER" text="Denumire" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
@@ -131,7 +162,7 @@
 								<Font size="31.0" />
 							</font>
 						</Label>
-						<Label fx:id="label42" onMouseClicked="#onDetailsLabelPressedRain" text="Detalii" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+						<Label fx:id="label42" onMouseClicked="#onDetailsLabelPressedRain" text="Details" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="17.0" />
 							</font>

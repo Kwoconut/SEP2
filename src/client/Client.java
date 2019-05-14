@@ -33,7 +33,6 @@ public class Client implements IClient, RIClient, Serializable
       server.addClient(this);
    }
 
-
    @Override
    public void getProducts(ArrayList<Product> products) throws RemoteException
    {
