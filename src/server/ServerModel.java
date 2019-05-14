@@ -89,6 +89,7 @@ public class ServerModel
    //adding methods
    public void addProduct(Product product)
    {
+      
       try
       {
          databaseProductAccess.addProduct(product);
@@ -103,6 +104,7 @@ public class ServerModel
    
    public void addOffer(Offer offer)
    {
+      offers.add(offer);
       try
       {
          databaseOfferAccess.addOffer(offer);
@@ -159,6 +161,7 @@ public class ServerModel
    
    public void removeOffer(Offer offer) 
    {
+      offers.remove(offer);
 		try {
 			databaseOfferAccess.removeOffer(offer);
 		} catch (SQLException e) {
