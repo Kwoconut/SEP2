@@ -28,11 +28,6 @@ public class ViewStore implements View
    private Scene scene;
 
    private String title;
-   
-   public ViewStore()
-   {
-      
-   }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)

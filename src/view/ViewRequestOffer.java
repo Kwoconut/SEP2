@@ -34,11 +34,6 @@ public class ViewRequestOffer implements View
 
    private String title;
 
-   public ViewRequestOffer()
-   {
-
-   }
-
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
