@@ -14,6 +14,7 @@ import model.Offer;
 import model.Product;
 import model.Store;
 import model.StoreModel;
+import model.StoreModelClientHandler;
 import server.RIServer;
 import view.MainView;
 import viewmodel.MainViewViewModel;
@@ -21,14 +22,14 @@ import viewmodel.MainViewViewModel;
 public class Client implements IClient, RIClient, Serializable
 {
 
-   private StoreModel model;
+   private StoreModelClientHandler model;
    private RIServer server;
 
-   public Client(StoreModel model) throws RemoteException, NotBoundException, MalformedURLException
+   public Client(StoreModelClientHandler model) throws RemoteException, NotBoundException, MalformedURLException
    {
       this.model = model;
       this.model.setClient(this);
-      server = (RIServer) Naming.lookup("rmi://localhost:1099/store");
+      server = (RIServer) Naming.lookup("rmi://10.152.194.6:1099/store");
       UnicastRemoteObject.exportObject(this, 0);
       server.addClient(this);
    }
@@ -74,6 +75,7 @@ public class Client implements IClient, RIClient, Serializable
    public void removeOffer(Offer offer) throws RemoteException 
    {
 	  model.removeOfferFromServer(offer);
+	  System.out.println("__________");
    }
 
    @Override

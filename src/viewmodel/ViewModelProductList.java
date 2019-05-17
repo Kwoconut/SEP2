@@ -8,16 +8,15 @@ import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Offer;
 import model.Product;
-import model.StoreModel;
+import model.SProductModel;
 
 public class ViewModelProductList implements PropertyChangeListener
 {
    private ObservableList<ViewModelProduct> product;
-   private StoreModel model;
+   private SProductModel model;
    
-   public ViewModelProductList (StoreModel model) throws RemoteException
+   public ViewModelProductList (SProductModel model) throws RemoteException
    {
       this.model = model;
       this.model.addListener(this);

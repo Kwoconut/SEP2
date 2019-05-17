@@ -9,14 +9,15 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Offer;
+import model.SOfferModel;
 import model.StoreModel;
 
 public class ViewModelOfferList implements PropertyChangeListener
 {
    private ObservableList<ViewModelRequestOffer> offers;
-   private StoreModel model;
+   private SOfferModel model;
 
-   public ViewModelOfferList(StoreModel model) throws RemoteException
+   public ViewModelOfferList(SOfferModel model) throws RemoteException
    {
       this.model = model;
       this.model.addListener(this);

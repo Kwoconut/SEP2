@@ -6,45 +6,7 @@ import java.util.ArrayList;
 
 import client.Client;
 
-public interface StoreModel
+public interface StoreModel extends SProductModel, SOfferModel, StoreModelClientHandler
 {
-   ArrayList<Product> getProducts();
-   
-   ArrayList<Offer> getOffers();
-   
-   void addProduct(Product product);
-   
-   void getProductsFromServer(ArrayList<Product> products);
-   
-   void getOffersFromServer(ArrayList<Offer> offers);
-   
-   void getProductsByType(String type);
-   
-   void addOfferFromServer(Offer offer);
-   
-   void setClient(Client client);
-   
-   void addListener(PropertyChangeListener listener);
-   
-   void requestProducts() throws RemoteException;
-   
-   void requestOffers() throws RemoteException;
-   
-   Client getClient();
-   
-   void addOffer(Offer offer);
-   
-   int generateProductID();
-   
-   int generateOfferID();
-   
-   void getOffer(int index);
-   
-   void removeOffer(Offer offer);
-   
-   void removeOfferFromServer(Offer offer);
-   
 
-
-   
 }

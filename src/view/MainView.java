@@ -12,11 +12,7 @@ import javafx.stage.Stage;
 public class MainView
 {
    private Stage primaryStage;
-
    private View view;
-   
-   private String currentViewID;
-
    private MainViewViewModel viewModel;
 
    public MainView(MainViewViewModel viewModel)
@@ -26,20 +22,19 @@ public class MainView
 
    public void start(Stage primaryStage) throws IOException
    {
-     this.primaryStage = primaryStage;
-     setWindow("start");
+      this.primaryStage = primaryStage;
+      setWindow("start");
    }
 
    public void setWindow(String id) throws IOException
    {
-     
-     view = ViewFactory.getView(id, viewModel, this); 
-     
-     primaryStage.setScene(view.getScene());
-     primaryStage.setTitle(view.getTitle());
-     primaryStage.show();
+
+      view = ViewFactory.getView(id, viewModel, this);
+
+      primaryStage.setScene(view.getScene());
+      primaryStage.setTitle(view.getTitle());
+      primaryStage.show();
 
    }
-   
 
 }

@@ -9,21 +9,26 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Product;
+import model.SProductModel;
 import model.StoreModel;
 
 public class ViewModelStore implements PropertyChangeListener
 {
-   private StoreModel model;
-   private StringProperty[] names = new StringProperty[5];
-   private StringProperty[] prices = new StringProperty[5];
+   private SProductModel model;
+   private StringProperty[] names;
+   private StringProperty[] prices;
 
-   public ViewModelStore(StoreModel model) throws RemoteException
+   public ViewModelStore(SProductModel model) throws RemoteException
    {
       this.model = model;
+      names = new StringProperty[5];
+      prices = new StringProperty[5];
       reinitializeArrays();
       this.model.addListener(this);
-      this.model.requestProducts();   }
+      this.model.requestProducts();
+   }
 
+   @SuppressWarnings("unchecked")
    public void updateProducts(PropertyChangeEvent evt)
    {
       Platform.runLater(() -> {
@@ -36,7 +41,9 @@ public class ViewModelStore implements PropertyChangeListener
 
       });
    }
-   public void getProduct(String type) {
+
+   public void getProduct(String type)
+   {
       model.getProductsByType(type);
    }
 

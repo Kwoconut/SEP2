@@ -1,14 +1,11 @@
 package viewmodel;
 
-import java.beans.PropertyChangeListener;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import model.Offer;
 import model.Product;
-import model.StoreModel;
+import model.SProductModel;
 
 public class ViewModelProduct
 {
@@ -17,9 +14,9 @@ public class ViewModelProduct
    private StringProperty typeProperty;
    private StringProperty colourProperty;
    private IntegerProperty priceProperty;
-   private StoreModel model;
+   private SProductModel model;
    
-   public ViewModelProduct (StoreModel model)
+   public ViewModelProduct (SProductModel model)
    {
       this.model = model;
       idProperty = new SimpleIntegerProperty();
@@ -29,7 +26,7 @@ public class ViewModelProduct
       priceProperty = new SimpleIntegerProperty();
       
    }
-   public ViewModelProduct (StoreModel model, Product product)
+   public ViewModelProduct (SProductModel model, Product product)
    {
       this.model = model;
       idProperty = new SimpleIntegerProperty(product.getID());

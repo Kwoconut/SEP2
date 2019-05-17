@@ -2,14 +2,11 @@ package viewmodel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Offer;
-import model.StoreModel;
+import model.SOfferModel;
 
 public class ViewModelRequestOffer implements PropertyChangeListener
 {
@@ -18,9 +15,9 @@ public class ViewModelRequestOffer implements PropertyChangeListener
    private StringProperty emailProperty;
    private StringProperty messageProperty;
    private StringProperty errorProperty;
-   private StoreModel model;
+   private SOfferModel model;
 
-   public ViewModelRequestOffer(StoreModel model)
+   public ViewModelRequestOffer(SOfferModel model)
    {
       this.model = model;
       nameProperty = new SimpleStringProperty("");
@@ -31,7 +28,7 @@ public class ViewModelRequestOffer implements PropertyChangeListener
       this.model.addListener(this);
    }
 
-   public ViewModelRequestOffer(StoreModel model, Offer offer)
+   public ViewModelRequestOffer(SOfferModel model, Offer offer)
    {
       this.model = model;
       nameProperty = new SimpleStringProperty(offer.getName());
@@ -69,10 +66,8 @@ public class ViewModelRequestOffer implements PropertyChangeListener
 
    public void addOffer()
    {
-
-      Offer offer = new Offer(model.generateOfferID(), nameProperty.get(), phoneProperty.get(),
+      model.addOffer(nameProperty.get(), phoneProperty.get(),
             emailProperty.get(), messageProperty.get());
-      model.addOffer(offer);
    }
 
    @Override

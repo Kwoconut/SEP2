@@ -115,13 +115,13 @@ public class Offer implements Serializable
          return false;
       }
       Offer other = (Offer) obj;
-      return name.equals(other.getName()) && phoneNo.equals(other.getPhoneNo())
+      return ID == other.getID() && name.equals(other.getName()) && phoneNo.equals(other.getPhoneNo())
             && email.equals(other.getEmail())
             && message.equals(other.getMessage());
    }
 
    public String toString()
    {
-      return name + "\n" + phoneNo + "\n" + email + "\n" + message;
+      return ID + "\n" + name + "\n" + phoneNo + "\n" + email + "\n" + message;
    }
 }
