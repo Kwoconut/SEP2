@@ -57,7 +57,7 @@ public class OfferTest
    {
       emptyNameOffer = new Offer(1, "", "+45748563857",
             "jack.jackson@gmail.com", "I want to buy some roof.");
-      wrongNameOffer = new Offer(1, "slkzghsda;ghslakdhgksadgflkasjkfhaslfdlasfhk", "+45748563857",
+      wrongNameOffer = new Offer(1, "slkzghsda;ghslakdhgksadgflkasjkfhaslfdlasfksldjga;sldag;lsadjg;ldashg;lhsghk", "+45748563857",
             "jack.jackson@gmail.com", "I want to buy some roof.");
       wrongEmailOffer = new Offer(1, "Jack", "+45748563857",
             "jack.jacksongmail.com", "I want to buy some roof.");
@@ -84,11 +84,11 @@ public class OfferTest
       assertEquals(true,offer.equals(offer));
       assertEquals(false,offer.equals(offer3));
    }
-
+   
    @Test
-   public void testToString()
+   public void TestEqualsNullObject()
    {
-      fail("Not yet implemented");
+      assertEquals(false,offer.equals(null));
    }
 
 }

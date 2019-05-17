@@ -7,8 +7,6 @@ public interface SOfferModel
 {
    void requestOffers() throws RemoteException;
 
-   Offer getOffer(int index);
-
    void addOffer(String name, String phone, String email, String message);
 
    void removeOffer(int id, String name, String phone, String email,

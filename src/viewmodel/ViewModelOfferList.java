@@ -6,6 +6,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Offer;
@@ -15,11 +19,15 @@ import model.StoreModel;
 public class ViewModelOfferList implements PropertyChangeListener
 {
    private ObservableList<ViewModelRequestOffer> offers;
+   private ObjectProperty<ViewModelRequestOffer> selected;
+   private StringProperty error;
    private SOfferModel model;
 
    public ViewModelOfferList(SOfferModel model) throws RemoteException
    {
       this.model = model;
+      error = new SimpleStringProperty("");
+      selected = new SimpleObjectProperty<ViewModelRequestOffer>();
       this.model.addListener(this);
       this.offers = FXCollections.observableArrayList();
       this.model.requestOffers();
@@ -28,6 +36,16 @@ public class ViewModelOfferList implements PropertyChangeListener
    public ObservableList<ViewModelRequestOffer> getOffers()
    {
       return offers;
+   }
+   
+   public StringProperty getErrorProperty()
+   {
+      return error;
+   }
+   
+   public ObjectProperty<ViewModelRequestOffer> getSelected()
+   {
+      return selected;
    }
 
    @Override
@@ -62,9 +80,10 @@ public class ViewModelOfferList implements PropertyChangeListener
 
    }
    
-   public void getOffer(int index)
+   public void setSelected(ViewModelRequestOffer newValue)
    {
-	   model.getOffer(index);
+       selected.set(newValue);  
    }
+   
 
 }

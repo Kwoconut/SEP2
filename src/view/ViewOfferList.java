@@ -49,7 +49,16 @@ public class ViewOfferList implements View
       messageColumn.setCellValueFactory(
             cellData -> cellData.getValue().getMessageProperty());
 
+      errorLabel.textProperty().bindBidirectional(this.viewModel.getErrorProperty());
+
       offerListTable.setItems(this.viewModel.getOffers());
+
+      offerListTable.getSelectionModel().selectedItemProperty().addListener(
+            (obs, oldValue, newValue) -> this.viewModel.setSelected(newValue));
+      offerListTable.getSelectionModel().selectedItemProperty()
+            .addListener((obs, oldValue, newValue) -> viewModel
+                  .getViewModelManageOffer().setSelected(newValue));
+
    }
 
    public Scene getScene()
@@ -77,21 +86,15 @@ public class ViewOfferList implements View
    @FXML
    private void manageButtonPressed() throws IOException
    {
-
-      int index = offerListTable.getSelectionModel().getSelectedIndex();
-      if (index == -1)
-      {
-         errorLabel.setText("Please select an offer");
-         return;
-      }
-      else
-      {
-         errorLabel.setText("");
-         viewModel.getOffer(index);
-         getScene().getWindow().hide();
-         view.setWindow("manageoffer");
-      }
-
+     if (this.viewModel.getSelected() == null)
+     {
+        errorLabel.setText("Please select an offer");
+     }
+     else
+     {
+        getScene().getWindow().hide();
+        view.setWindow("manageoffer");
+     }
    }
 
 }

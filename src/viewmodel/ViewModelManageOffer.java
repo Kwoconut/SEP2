@@ -6,14 +6,16 @@ import java.rmi.RemoteException;
 
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Offer;
 import model.SOfferModel;
 import model.StoreModel;
 
-public class ViewModelManageOffer implements PropertyChangeListener
+public class ViewModelManageOffer
 {
 
    private SOfferModel model;
@@ -22,6 +24,7 @@ public class ViewModelManageOffer implements PropertyChangeListener
    private StringProperty email;
    private StringProperty phoneNumber;
    private StringProperty message;
+   private ObjectProperty<ViewModelRequestOffer> selected;
 
    public ViewModelManageOffer(SOfferModel model) throws RemoteException
    {
@@ -31,7 +34,7 @@ public class ViewModelManageOffer implements PropertyChangeListener
       email = new SimpleStringProperty("");
       phoneNumber = new SimpleStringProperty("");
       message = new SimpleStringProperty("");
-      this.model.addListener(this);
+      selected = new SimpleObjectProperty<ViewModelRequestOffer>();
    }
 
    public void removeOffer() throws RemoteException
@@ -64,30 +67,13 @@ public class ViewModelManageOffer implements PropertyChangeListener
    {
       return message;
    }
-
-   public void executePropertyChange(PropertyChangeEvent evt)
-   {
-      Platform.runLater(() -> executePropertyChange(evt));
-   }
-
-   @Override
-   public void propertyChange(PropertyChangeEvent evt)
-   {
-      if (evt.getPropertyName().equals("MANAGEOFFER"))
-      {
-         Offer offer = (Offer) evt.getNewValue();
-         update(offer);
-      }
-
-   }
    
-   private void update(Offer offer)
+   public void setSelected(ViewModelRequestOffer newValue)
    {
-      ID.set(offer.getID());
-      name.set(offer.getName());
-      email.set(offer.getEmail());
-      phoneNumber.set(offer.getPhoneNo());
-      message.set(offer.getMessage());
+      name.set(newValue.getNameProperty().get());
+      phoneNumber.set(newValue.getPhoneProperty().get());
+      email.set(newValue.getEmailProperty().get());
+      message.set(newValue.getMessageProperty().get());
    }
    
 }

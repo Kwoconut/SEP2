@@ -88,13 +88,6 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
-   public Offer getOffer(int index)
-   {
-      support.firePropertyChange("MANAGEOFFER", "", offers.get(index + 1));
-      return offers.get(index);
-   }
-
-   @Override
    public void removeOffer(int id, String name, String phone, String email,
          String message) throws RemoteException
    {

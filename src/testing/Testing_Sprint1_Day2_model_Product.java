@@ -48,7 +48,7 @@ public class Testing_Sprint1_Day2_model_Product
 	      assertEquals(true, product3.equals(product2));
 	   }
 
-	@Test
+@Test
 	   public void toStringTest()
 	   {
 	      assertEquals("Name1" + "\n" + "finish1" +"\n" +"colour1"+"\n" +"type1"+"\n" +"100", product1.toString());
