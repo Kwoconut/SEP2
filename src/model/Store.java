@@ -90,7 +90,7 @@ public class Store implements Serializable, StoreModel
    @Override
    public Offer getOffer(int index)
    {
-      support.firePropertyChange("MANAGEOFFER", "", offers.get(index));
+      support.firePropertyChange("MANAGEOFFER", "", offers.get(index + 1));
       return offers.get(index);
    }
 
