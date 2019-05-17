@@ -36,7 +36,7 @@ public class ViewModelManageOffer implements PropertyChangeListener
 
    public void removeOffer() throws RemoteException
    {
-      model.removeOffer(ID.get(),name.get(), email.get(), phoneNumber.get(),
+      model.removeOffer(ID.get(),name.get(), phoneNumber.get(), email.get(),
             message.get());
    }
    
