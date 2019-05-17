@@ -24,7 +24,6 @@ public class ViewModelManageOffer
    private StringProperty email;
    private StringProperty phoneNumber;
    private StringProperty message;
-   private ObjectProperty<ViewModelRequestOffer> selected;
 
    public ViewModelManageOffer(SOfferModel model) throws RemoteException
    {
@@ -34,7 +33,6 @@ public class ViewModelManageOffer
       email = new SimpleStringProperty("");
       phoneNumber = new SimpleStringProperty("");
       message = new SimpleStringProperty("");
-      selected = new SimpleObjectProperty<ViewModelRequestOffer>();
    }
 
    public void removeOffer() throws RemoteException
