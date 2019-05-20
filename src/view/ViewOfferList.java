@@ -86,7 +86,7 @@ public class ViewOfferList implements View
    @FXML
    private void manageButtonPressed() throws IOException
    {
-     if (this.viewModel.getSelected() == null)
+     if (this.viewModel.getSelected().getValue() == null)
      {
         errorLabel.setText("Please select an offer");
      }
@@ -94,6 +94,7 @@ public class ViewOfferList implements View
      {
         getScene().getWindow().hide();
         view.setWindow("manageoffer");
+        errorLabel.setText("");
      }
    }
 
