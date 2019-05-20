@@ -55,6 +55,7 @@ public class ViewModelStore implements PropertyChangeListener
    public StringProperty getPriceProperty(int i)
    {
       return prices[i];
+      
    }
 
    private void reinitializeArrays()

@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import java.util.ArrayList?>
 
-<VBox prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewStore">
+<VBox prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewStore">
 	<children>
 		<AnchorPane VBox.vgrow="ALWAYS">
 			<children>
@@ -33,14 +33,14 @@
 					<children>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
                      <children>
-                        <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../MG_7313-LR-fara-suruburi.jpg" />
-                           </image>
-                        </ImageView>
                         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="3.0" layoutY="-140.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Logo.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="122.0" fitWidth="195.0" layoutX="5.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../tabla_click-1.png" />
                            </image>
                         </ImageView>
                      </children></Pane>
@@ -70,14 +70,14 @@
 								<Insets top="30.0" />
 							</GridPane.margin>
 							<font>
-								<Font size="31.0" />
+								<Font size="25.0" />
 							</font>
 						</Label>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1">
                      <children>
-                        <ImageView fitHeight="122.0" fitWidth="195.0" layoutX="5.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../tabla_click-1.png" />
+                              <Image url="@../../tabla_cutata-1.png" />
                            </image>
                         </ImageView>
                      </children></Pane>
@@ -91,7 +91,7 @@
 								<Insets top="30.0" />
 							</GridPane.margin>
 							<font>
-								<Font size="31.0" />
+								<Font size="25.0" />
 							</font>
 						</Label>
 						<Label fx:id="label12" onMouseClicked="#onDetailsLabelPressedMetal" text="Details" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
@@ -114,7 +114,7 @@
                      <children>
                         <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../bg_image_overlay-sisteme-colectare.jpg" />
+                              <Image url="@../../MG_7313-LR-fara-suruburi.jpg" />
                            </image>
                         </ImageView>
                      </children></Pane>
@@ -128,7 +128,7 @@
 								<Insets top="30.0" />
 							</GridPane.margin>
 							<font>
-								<Font size="31.0" />
+								<Font size="25.0" />
 							</font>
 						</Label>
 						<Label fx:id="label32" onMouseClicked="#onDetailsLabelPressedMetalTile" text="Details" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
@@ -149,9 +149,9 @@
 						</Label>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="2">
                      <children>
-                        <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../tabla_cutata-1.png" />
+                              <Image url="@../../bpblackline-1.png" />
                            </image>
                         </ImageView>
                      </children></Pane>
@@ -165,7 +165,7 @@
 								<Insets top="30.0" />
 							</GridPane.margin>
 							<font>
-								<Font size="31.0" />
+								<Font size="25.0" />
 							</font>
 						</Label>
 						<Label fx:id="label22" onMouseClicked="#onDetailsLabelPressedPlated" text="Details" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
@@ -186,9 +186,9 @@
 						</Label>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="4">
                      <children>
-                        <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../bpblackline-1.png" />
+                              <Image url="@../../bg_image_overlay-sisteme-colectare.jpg" />
                            </image>
                         </ImageView>
                      </children></Pane>
@@ -202,7 +202,7 @@
 								<Insets top="30.0" />
 							</GridPane.margin>
 							<font>
-								<Font size="31.0" />
+								<Font size="25.0" />
 							</font>
 						</Label>
 						<Label fx:id="label42" onMouseClicked="#onDetailsLabelPressedRain" text="Details" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">

@@ -113,9 +113,50 @@ public class Store implements Serializable, StoreModel
    @Override
    public void getProductsFromServer(ArrayList<Product> values)
    {
-
       products = values;
-      support.firePropertyChange("SEND", "", values);
+      ArrayList<Product> firstfiveproducts; 
+      firstfiveproducts = new ArrayList<Product>();
+      for(int i=0;i<products.size();i++)
+      {
+    	  if (products.get(i).getType().equals("Click Sheet"))
+    	  {
+    	    firstfiveproducts.add(products.get(i));
+    	    break;
+    	  }
+      }
+      for(int i=0;i<products.size();i++)
+      {
+    	  if (products.get(i).getType().equals("Metal Sheet"))
+		  {
+			firstfiveproducts.add(products.get(i));
+			break;
+		  }
+      }
+      for(int i=0;i<products.size();i++)
+      {
+    	  if (products.get(i).getType().equals("Plated Sheet"))
+		  {
+			firstfiveproducts.add(products.get(i));
+			break;
+		  }
+      }
+      for(int i=0;i<products.size();i++)
+      {
+    	  if (products.get(i).getType().equals(Product.TYPE_METAL_TILE))
+		  {
+			firstfiveproducts.add(products.get(i));
+			break;
+		  }
+      }
+      for(int i=0;i<products.size();i++)
+      {
+    	  if (products.get(i).getType().equals(Product.TYPE_RAIN_SYSTEM))
+		  {
+			firstfiveproducts.add(products.get(i));
+			break;
+		  }
+      }
+      support.firePropertyChange("SEND", "", firstfiveproducts);
    }
 
    @Override
