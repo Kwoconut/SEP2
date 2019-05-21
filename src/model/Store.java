@@ -13,6 +13,7 @@ public class Store implements Serializable, StoreModel
    private ArrayList<Offer> offers;
    private Client client;
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
+   private ArrayList<Sale> sales;
 
    public Store()
    {
@@ -87,6 +88,11 @@ public class Store implements Serializable, StoreModel
       return offers;
    }
 
+   public ArrayList<Sale> getSales()
+   {
+      return sales;
+   }
+
    @Override
    public void removeOffer(int id, String name, String phone, String email,
          String message) throws RemoteException
@@ -114,47 +120,47 @@ public class Store implements Serializable, StoreModel
    public void getProductsFromServer(ArrayList<Product> values)
    {
       products = values;
-      ArrayList<Product> firstfiveproducts; 
+      ArrayList<Product> firstfiveproducts;
       firstfiveproducts = new ArrayList<Product>();
-      for(int i=0;i<products.size();i++)
+      for (int i = 0; i < products.size(); i++)
       {
-    	  if (products.get(i).getType().equals("Click Sheet"))
-    	  {
-    	    firstfiveproducts.add(products.get(i));
-    	    break;
-    	  }
+         if (products.get(i).getType().equals("Click Sheet"))
+         {
+            firstfiveproducts.add(products.get(i));
+            break;
+         }
       }
-      for(int i=0;i<products.size();i++)
+      for (int i = 0; i < products.size(); i++)
       {
-    	  if (products.get(i).getType().equals("Metal Sheet"))
-		  {
-			firstfiveproducts.add(products.get(i));
-			break;
-		  }
+         if (products.get(i).getType().equals("Metal Sheet"))
+         {
+            firstfiveproducts.add(products.get(i));
+            break;
+         }
       }
-      for(int i=0;i<products.size();i++)
+      for (int i = 0; i < products.size(); i++)
       {
-    	  if (products.get(i).getType().equals("Plated Sheet"))
-		  {
-			firstfiveproducts.add(products.get(i));
-			break;
-		  }
+         if (products.get(i).getType().equals("Plated Sheet"))
+         {
+            firstfiveproducts.add(products.get(i));
+            break;
+         }
       }
-      for(int i=0;i<products.size();i++)
+      for (int i = 0; i < products.size(); i++)
       {
-    	  if (products.get(i).getType().equals(Product.TYPE_METAL_TILE))
-		  {
-			firstfiveproducts.add(products.get(i));
-			break;
-		  }
+         if (products.get(i).getType().equals(Product.TYPE_METAL_TILE))
+         {
+            firstfiveproducts.add(products.get(i));
+            break;
+         }
       }
-      for(int i=0;i<products.size();i++)
+      for (int i = 0; i < products.size(); i++)
       {
-    	  if (products.get(i).getType().equals(Product.TYPE_RAIN_SYSTEM))
-		  {
-			firstfiveproducts.add(products.get(i));
-			break;
-		  }
+         if (products.get(i).getType().equals(Product.TYPE_RAIN_SYSTEM))
+         {
+            firstfiveproducts.add(products.get(i));
+            break;
+         }
       }
       support.firePropertyChange("SEND", "", firstfiveproducts);
    }
@@ -210,4 +216,50 @@ public class Store implements Serializable, StoreModel
       support.addPropertyChangeListener(listener);
    }
 
+   @Override
+   public void requestSales() throws RemoteException
+   {
+      // client.requestSales();
+   }
+
+   @Override
+   public void addSale(MyDate startDate, MyDate endDate, Product product,
+         int amount)
+   {
+      Sale sale = new Sale(startDate, endDate, product, amount);
+      sales.add(sale);
+   // client.sendSaleToServer(sale);
+   }
+
+   @Override
+   public void removeSale(MyDate startDate, MyDate endDate, Product product,
+         int amount)
+   {
+      Sale sale = new Sale(startDate, endDate, product, amount);
+      System.out.println("Removing Sale with product " + sale.getProduct().getName());
+     // client.removeSaleFromServer(sale);  
+   }
+
+   @Override
+   public void getSalesFromServer(ArrayList<Sale> sale)
+   {
+      this.sales = sale;
+      support.firePropertyChange("SALESLIST", "", sale);
+
+   }
+
+   @Override
+   public void addSaleFromServer(Sale sale)
+   {
+      sales.add(sale);
+      support.firePropertyChange("NEWSALE", "", sale);
+   }
+
+   @Override
+   public void removeSaleFromServer(Sale sale)
+   {
+      sales.remove(sale);
+      support.firePropertyChange("MINUSSALE", "", sale);
+   }
+   
 }

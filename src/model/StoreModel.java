@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import client.Client;
 
-public interface StoreModel extends SProductModel, SOfferModel, StoreModelClientHandler
+public interface StoreModel extends SProductModel, SOfferModel, StoreModelClientHandler, SSalesModel
 {
 
 }
