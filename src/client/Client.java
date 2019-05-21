@@ -31,7 +31,7 @@ public class Client implements IClient, RIClient, Serializable
    {
       this.model = model;
       this.model.setClient(this);
-      access = (ServerAccess) Naming.lookup("rmi://localhost:1099/store");
+      access = (ServerAccess) Naming.lookup("rmi://10.152.194.56:1099/store");
       UnicastRemoteObject.exportObject(this, 0);
       RIServerWrite server = access.acquireWrite();
       server.addClient(this);
@@ -53,7 +53,7 @@ public class Client implements IClient, RIClient, Serializable
    @Override
    public void requestProducts() throws RemoteException
    {
-	  RIServerRead server = access.acquireRead();
+	   RIServerRead server = access.acquireRead();
       server.getProducts(this);
       access.releaseRead();
    }

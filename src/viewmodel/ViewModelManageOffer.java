@@ -79,11 +79,22 @@ public class ViewModelManageOffer
 
    public void setSelected(ViewModelManageOffer newValue)
    {
+     try
+     {
       ID.set(newValue.getID().get());
       name.set(newValue.getName().get());
       phoneNumber.set(newValue.getPhoneNumber().get());
       email.set(newValue.getEmail().get());
       message.set(newValue.getMessage().get());
+     }
+     catch (NullPointerException e)
+     {
+        ID.set(0);
+        name.set("");
+        phoneNumber.set("");
+        email.set("");
+        message.set("");
+     }
    }
 
    public boolean equals(Object obj)
