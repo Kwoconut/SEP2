@@ -13,6 +13,7 @@ public class Store implements Serializable, StoreModel
    private ArrayList<Offer> offers;
    private Client client;
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
+   private ArrayList<Sale> sales;
 
    public Store()
    {
@@ -86,6 +87,11 @@ public class Store implements Serializable, StoreModel
    {
       return offers;
    }
+   
+   public ArrayList<Sale> getSales()
+   {
+	   return sales;
+   }
 
    @Override
    public void removeOffer(int id, String name, String phone, String email,
@@ -130,7 +136,6 @@ public class Store implements Serializable, StoreModel
    {
       this.offers = offers;
       support.firePropertyChange("OFFERLIST", "", offers);
-
    }
 
    @Override
@@ -175,5 +180,51 @@ public class Store implements Serializable, StoreModel
    {
       support.addPropertyChangeListener(listener);
    }
+   
+   @Override
+   public void requestSales() throws RemoteException
+   {
+      // client.requestSales();
+   }
 
+   @Override
+   public void addSale(MyDate startDate, MyDate endDate, Product product,
+         int amount)
+   {
+      Sale sale = new Sale(startDate, endDate, product, amount);
+      sales.add(sale);
+   // client.sendSaleToServer(sale);
+   }
+
+   @Override
+   public void removeSale(MyDate startDate, MyDate endDate, Product product,
+         int amount)
+   {
+      Sale sale = new Sale(startDate, endDate, product, amount);
+      System.out.println("Removing Sale with product " + sale.getProduct().getName());
+     // client.removeSaleFromServer(sale);  
+   }
+
+   @Override
+   public void getSalesFromServer(ArrayList<Sale> sale)
+   {
+      this.sales = sale;
+      support.firePropertyChange("SALESLIST", "", sale);
+
+   }
+
+   @Override
+   public void addSaleFromServer(Sale sale)
+   {
+      sales.add(sale);
+      support.firePropertyChange("NEWSALE", "", sale);
+   }
+
+   @Override
+   public void removeSaleFromServer(Sale sale)
+   {
+      sales.remove(sale);
+      support.firePropertyChange("MINUSSALE", "", sale);
+   }
+   
 }
