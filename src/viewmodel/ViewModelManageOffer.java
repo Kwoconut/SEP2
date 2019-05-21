@@ -30,17 +30,28 @@ public class ViewModelManageOffer
       this.model = model;
       ID = new SimpleIntegerProperty();
       name = new SimpleStringProperty("");
-      email = new SimpleStringProperty("");
       phoneNumber = new SimpleStringProperty("");
+      email = new SimpleStringProperty("");
       message = new SimpleStringProperty("");
+   }
+
+   public ViewModelManageOffer(SOfferModel model, Offer offer)
+         throws RemoteException
+   {
+      this.model = model;
+      ID = new SimpleIntegerProperty(offer.getID());
+      name = new SimpleStringProperty(offer.getName());
+      phoneNumber = new SimpleStringProperty(offer.getPhoneNo());
+      email = new SimpleStringProperty(offer.getEmail());
+      message = new SimpleStringProperty(offer.getMessage());
    }
 
    public void removeOffer() throws RemoteException
    {
-      model.removeOffer(ID.get(),name.get(), phoneNumber.get(), email.get(),
+      model.removeOffer(ID.get(), name.get(), phoneNumber.get(), email.get(),
             message.get());
    }
-   
+
    public IntegerProperty getID()
    {
       return ID;
@@ -65,13 +76,28 @@ public class ViewModelManageOffer
    {
       return message;
    }
-   
-   public void setSelected(ViewModelRequestOffer newValue)
+
+   public void setSelected(ViewModelManageOffer newValue)
    {
-      name.set(newValue.getNameProperty().get());
-      phoneNumber.set(newValue.getPhoneProperty().get());
-      email.set(newValue.getEmailProperty().get());
-      message.set(newValue.getMessageProperty().get());
+      ID.set(newValue.getID().get());
+      name.set(newValue.getName().get());
+      phoneNumber.set(newValue.getPhoneNumber().get());
+      email.set(newValue.getEmail().get());
+      message.set(newValue.getMessage().get());
    }
-   
+
+   public boolean equals(Object obj)
+   {
+      if (!(obj instanceof ViewModelManageOffer))
+      {
+         return false;
+      }
+      ViewModelManageOffer other = (ViewModelManageOffer) obj;
+      return other.getID().get() == ID.get()
+            && other.getName().get().equals(name.get())
+            && other.getPhoneNumber().get().equals(phoneNumber.get())
+            && other.getEmail().get().equals(email.get())
+            && other.getMessage().get().equals(message.get());
+   }
+
 }

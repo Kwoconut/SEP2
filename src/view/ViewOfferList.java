@@ -9,21 +9,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import viewmodel.MainViewViewModel;
+import viewmodel.ViewModelManageOffer;
 import viewmodel.ViewModelOfferList;
 import viewmodel.ViewModelRequestOffer;
 
 public class ViewOfferList implements View
 {
    @FXML
-   private TableView<ViewModelRequestOffer> offerListTable;
+   private TableView<ViewModelManageOffer> offerListTable;
    @FXML
-   private TableColumn<ViewModelRequestOffer, String> nameColumn;
+   private TableColumn<ViewModelManageOffer, String> nameColumn;
    @FXML
-   private TableColumn<ViewModelRequestOffer, String> phoneColumn;
+   private TableColumn<ViewModelManageOffer, String> phoneColumn;
    @FXML
-   private TableColumn<ViewModelRequestOffer, String> emailColumn;
+   private TableColumn<ViewModelManageOffer, String> emailColumn;
    @FXML
-   private TableColumn<ViewModelRequestOffer, String> messageColumn;
+   private TableColumn<ViewModelManageOffer, String> messageColumn;
    @FXML
    private Label errorLabel;
 
@@ -41,13 +42,13 @@ public class ViewOfferList implements View
       this.title = title;
 
       nameColumn.setCellValueFactory(
-            cellData -> cellData.getValue().getNameProperty());
+            cellData -> cellData.getValue().getName());
       phoneColumn.setCellValueFactory(
-            cellData -> cellData.getValue().getPhoneProperty());
+            cellData -> cellData.getValue().getPhoneNumber());
       emailColumn.setCellValueFactory(
-            cellData -> cellData.getValue().getEmailProperty());
+            cellData -> cellData.getValue().getEmail());
       messageColumn.setCellValueFactory(
-            cellData -> cellData.getValue().getMessageProperty());
+            cellData -> cellData.getValue().getMessage());
 
       errorLabel.textProperty().bindBidirectional(this.viewModel.getErrorProperty());
 

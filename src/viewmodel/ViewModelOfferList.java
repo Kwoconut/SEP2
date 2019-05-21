@@ -18,8 +18,8 @@ import model.StoreModel;
 
 public class ViewModelOfferList implements PropertyChangeListener
 {
-   private ObservableList<ViewModelRequestOffer> offers;
-   private ObjectProperty<ViewModelRequestOffer> selected;
+   private ObservableList<ViewModelManageOffer> offers;
+   private ObjectProperty<ViewModelManageOffer> selected;
    private StringProperty error;
    private SOfferModel model;
 
@@ -27,13 +27,13 @@ public class ViewModelOfferList implements PropertyChangeListener
    {
       this.model = model;
       error = new SimpleStringProperty("");
-      selected = new SimpleObjectProperty<ViewModelRequestOffer>();
+      selected = new SimpleObjectProperty<ViewModelManageOffer>();
       this.model.addListener(this);
       this.offers = FXCollections.observableArrayList();
       this.model.requestOffers();
    }
 
-   public ObservableList<ViewModelRequestOffer> getOffers()
+   public ObservableList<ViewModelManageOffer> getOffers()
    {
       return offers;
    }
@@ -43,7 +43,7 @@ public class ViewModelOfferList implements PropertyChangeListener
       return error;
    }
    
-   public ObjectProperty<ViewModelRequestOffer> getSelected()
+   public ObjectProperty<ViewModelManageOffer> getSelected()
    {
       return selected;
    }
@@ -51,11 +51,21 @@ public class ViewModelOfferList implements PropertyChangeListener
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
-      Platform.runLater(() -> executePropertyChange(evt));
+      Platform.runLater(() -> {
+         try
+         {
+            executePropertyChange(evt);
+         }
+         catch (RemoteException e)
+         {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+         }
+      });
    }
 
    @SuppressWarnings("unchecked")
-   public void executePropertyChange(PropertyChangeEvent evt)
+   public void executePropertyChange(PropertyChangeEvent evt) throws RemoteException
    {
       if (evt.getPropertyName().equals("OFFERLIST"))
       {
@@ -64,23 +74,24 @@ public class ViewModelOfferList implements PropertyChangeListener
 
          for (Offer element : elements)
          {
-            offers.add(new ViewModelRequestOffer(model, element));
+            offers.add(new ViewModelManageOffer(model, element));
          }
       }
       else if (evt.getPropertyName().equals("NEWOFFER"))
       {
          Offer offer = (Offer) evt.getNewValue();
-         offers.add(new ViewModelRequestOffer(model, offer));
+         offers.add(new ViewModelManageOffer(model, offer));
       }
       else if (evt.getPropertyName().equals("MINUSOFFER"))
       {
+         System.out.println("----");
          Offer offer = (Offer) evt.getNewValue();
-         offers.remove(new ViewModelRequestOffer(model,offer));
+         offers.remove(new ViewModelManageOffer(model,offer));
       }
 
    }
    
-   public void setSelected(ViewModelRequestOffer newValue)
+   public void setSelected(ViewModelManageOffer newValue)
    {
        selected.set(newValue);  
    }
