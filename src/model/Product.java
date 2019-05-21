@@ -93,7 +93,7 @@ public class Product implements Serializable
    {
       String s = "";
 
-      s += name + "\n" + "\n" + colour + "\n" + type + "\n" + price;
+      s += name + "\n" + ID + "\n" + colour + "\n" + type + "\n" + price;
       return s;
    }
 

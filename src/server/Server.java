@@ -2,6 +2,7 @@ package server;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serializable;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -13,7 +14,7 @@ import client.RIClient;
 import model.Offer;
 import model.Product;
 
-public class Server implements RIServer, PropertyChangeListener
+public class Server implements RIServerWrite, PropertyChangeListener
 {
    private ServerModel model;
    private ArrayList<RIClient> clients;
@@ -32,8 +33,9 @@ public class Server implements RIServer, PropertyChangeListener
       {
          LocateRegistry.createRegistry(1099);
          ServerModel model = new ServerModel();
-         RIServer server = new Server(model);
-         Naming.rebind("store", server);
+         Server server = new Server(model);
+         ServerAccess threadSafeServer = new ThreadSafeServer(server);
+         Naming.rebind("store", threadSafeServer);
          System.out.println("Starting server...");
       }
       catch (Exception e)

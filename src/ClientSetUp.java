@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import model.Product;
 import model.Store;
 import model.StoreModel;
+import server.ServerAccess;
 import view.MainView;
 import viewmodel.MainViewViewModel;
 

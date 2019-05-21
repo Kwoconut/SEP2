@@ -15,7 +15,9 @@ import model.Product;
 import model.Store;
 import model.StoreModel;
 import model.StoreModelClientHandler;
-import server.RIServer;
+import server.RIServerRead;
+import server.RIServerWrite;
+import server.ServerAccess;
 import view.MainView;
 import viewmodel.MainViewViewModel;
 
@@ -23,15 +25,17 @@ public class Client implements IClient, RIClient, Serializable
 {
 
    private StoreModelClientHandler model;
-   private RIServer server;
+   private ServerAccess access;
 
    public Client(StoreModelClientHandler model) throws RemoteException, NotBoundException, MalformedURLException
    {
       this.model = model;
       this.model.setClient(this);
-      server = (RIServer) Naming.lookup("rmi://localhost/store");
+      access = (ServerAccess) Naming.lookup("rmi://localhost:1099/store");
       UnicastRemoteObject.exportObject(this, 0);
+      RIServerWrite server = access.acquireWrite();
       server.addClient(this);
+      access.releaseWrite();
    }
 
    @Override
@@ -49,20 +53,26 @@ public class Client implements IClient, RIClient, Serializable
    @Override
    public void requestProducts() throws RemoteException
    {
+	  RIServerRead server = access.acquireRead();
       server.getProducts(this);
+      access.releaseRead();
    }
    
    @Override
    public void requestOffers() throws RemoteException
    {
+	  RIServerRead server = access.acquireRead();
       server.getOffers(this);
+      access.releaseRead();
  
    }
 
    @Override
    public void sendOfferToServer(Offer offer) throws RemoteException
    {
-      server.sendOffer(offer);      
+	  RIServerWrite server = access.acquireWrite();
+      server.sendOffer(offer); 
+      access.releaseWrite();
    }
 
    @Override
@@ -75,12 +85,14 @@ public class Client implements IClient, RIClient, Serializable
    public void removeOffer(Offer offer) throws RemoteException 
    {
 	  model.removeOfferFromServer(offer);
-	  System.out.println("__________");
    }
 
    @Override
-   public void removeOfferFromServer(Offer offer) throws RemoteException {
+   public void removeOfferFromServer(Offer offer) throws RemoteException 
+   {
+	  RIServerWrite server = access.acquireWrite();
 	  server.removeOffer(offer);
+	  access.releaseWrite();
    }
 
 }
