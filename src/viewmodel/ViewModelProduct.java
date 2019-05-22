@@ -37,6 +37,16 @@ public class ViewModelProduct
       
    }
    
+   public ViewModelProduct (Product product)
+   {
+      idProperty = new SimpleIntegerProperty(product.getID());
+      nameProperty = new SimpleStringProperty(product.getName());
+      typeProperty = new SimpleStringProperty(product.getType());
+      colourProperty = new SimpleStringProperty(product.getColour());
+      priceProperty = new SimpleIntegerProperty(product.getPrice());
+      
+   }
+   
    public IntegerProperty getIdProperty() {
       return idProperty;
    }

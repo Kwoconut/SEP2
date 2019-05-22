@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import client.Client;
+import viewmodel.ViewModelProduct;
 
 public class Store implements Serializable, StoreModel
 {
@@ -188,21 +189,32 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
-   public void addSale(MyDate startDate, MyDate endDate, Product product,
-         int amount)
+   public void addSale(MyDate startDate, MyDate endDate,
+         ViewModelProduct product, int amount)
    {
-      Sale sale = new Sale(startDate, endDate, product, amount);
-      sales.add(sale);
-   // client.sendSaleToServer(sale);
+      {
+         Product sampleProduct = new Product(product.getIdProperty().get(),
+               product.getNameProperty().get(),
+               product.getPriceProperty().get(),
+               product.getColourProperty().get(),
+               product.getTypeProperty().get());
+         Sale sale = new Sale(startDate, endDate, sampleProduct, amount);
+         // client.sendSaleToServer(sale);
+      }
    }
 
    @Override
-   public void removeSale(MyDate startDate, MyDate endDate, Product product,
-         int amount)
+   public void removeSale(MyDate startDate, MyDate endDate,
+         ViewModelProduct product, int amount)
    {
-      Sale sale = new Sale(startDate, endDate, product, amount);
-      System.out.println("Removing Sale with product " + sale.getProduct().getName());
-     // client.removeSaleFromServer(sale);  
+
+      Product sampleProduct = new Product(product.getIdProperty().get(),
+            product.getNameProperty().get(), product.getPriceProperty().get(),
+            product.getColourProperty().get(), product.getTypeProperty().get());
+      Sale sale = new Sale(startDate, endDate, sampleProduct, amount);
+      System.out.println(
+            "Removing Sale with product " + sale.getProduct().getName());
+      // client.removeSaleFromServer(sale);
    }
 
    @Override
