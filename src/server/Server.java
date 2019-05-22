@@ -37,6 +37,8 @@ public class Server implements RIServerWrite, PropertyChangeListener
          ServerAccess threadSafeServer = new ThreadSafeServer(server);
          Naming.rebind("store", threadSafeServer);
          System.out.println("Starting server...");
+         Thread taskScheduler = new Thread(new TaskScheduler(model));
+         taskScheduler.start();
       }
       catch (Exception e)
       {

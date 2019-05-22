@@ -32,7 +32,7 @@ public class ServerModel
             "postgres", "password");
       databaseProductAccess = new ProductDatabaseHandler(queryHandler);
       databaseOfferAccess = new OfferDatabaseHandler(queryHandler);
-      clearProducts();
+      //clearProducts();
       //sampleDataForCreation();
       loadProducts();
       loadOffers();
