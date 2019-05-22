@@ -200,20 +200,17 @@ public class Server implements RIServerWrite, PropertyChangeListener
    }
 
 @Override
-public void saleRemoveUpdate(Sale sale) {
-	model.updateRemoveSale(sale);
-	
+public void saleRemoveUpdate(Sale sale) throws RemoteException{
+	model.updateRemoveSale(sale);	
 }
 
 @Override
-public void saleAddUpdate(Sale sale) {
-	model.updateAddSale(sale);
-	
+public void saleAddUpdate(Sale sale) throws RemoteException{
+	model.updateAddSale(sale);	
 }
 
 @Override
-public void changeValue(Sale sale) {
+public void changeValue(Sale sale) throws RemoteException{
 	model.ChangedValue(sale);
-	
 }
 }

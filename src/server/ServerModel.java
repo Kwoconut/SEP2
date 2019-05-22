@@ -38,7 +38,7 @@ public class ServerModel
             "postgres", "password");
       databaseProductAccess = new ProductDatabaseHandler(queryHandler);
       databaseOfferAccess = new OfferDatabaseHandler(queryHandler);
-      databaseSaleAccess = new SaleDatabaseHandler(querryHandler);
+      databaseSaleAccess = new SaleDatabaseHandler(queryHandler);
       //clearProducts();
       //sampleDataForCreation();
       loadProducts();
@@ -237,29 +237,13 @@ public void updateRemoveSale(Sale sale) {
 			break;
 		}
 	}
-    try
-    {
-    	databaseSaleAccess.updateRemoveSale(sale);
-    }
-    catch (SQLException e)
-    {
-       // TODO Auto-generated catch block
-       e.printStackTrace();
-    }
+    databaseSaleAccess.updateRemoveSale(sale);
     support.firePropertyChange("SALEREMOVEUPDATED", null, sale);
  }
 
 public void removeSale(Sale sale) {
 	sales.remove(sale);
-    try
-    {
-    	databaseSaleAccess.removeSale(sale);
-    }
-    catch (SQLException e)
-    {
-       // TODO Auto-generated catch block
-       e.printStackTrace();
-    }
+    databaseSaleAccess.removeSale(sale);
     support.firePropertyChange("SALEREMOVED", null, sale);
 	
 }
@@ -273,15 +257,7 @@ public void updateAddSale(Sale sale) {
 			break;
 		}
 	}
-	try
-    {
-		databaseSaleAccess.updateAddSale(sale);
-    }
-    catch (SQLException e)
-    {
-       // TODO Auto-generated catch block
-       e.printStackTrace();
-    }
+	databaseSaleAccess.updateAddSale(sale);
     support.firePropertyChange("SALEADDUPDATED", null, sale);
 	}
 
@@ -295,30 +271,14 @@ public void ChangedValue(Sale sale)
 	}
 		break;
 	}
-	try
-    {
-       databaseSaleAccess.changedValue(sale);
-    }
-    catch (SQLException e)
-    {
-       // TODO Auto-generated catch block
-       e.printStackTrace();
-    }
+	databaseSaleAccess.changedValue(sale);
     support.firePropertyChange("CHANGEDVALUE", null, sale);
 	
 }
 
 public void addSale(Sale sale) {
 	sales.add(sale);
-    try
-    {
-       databaseSaleAccess.addSale(sale);
-    }
-    catch (SQLException e)
-    {
-       // TODO Auto-generated catch block
-       e.printStackTrace();
-    }
+    databaseSaleAccess.addSale(sale);
     support.firePropertyChange("SALEADDED", null, sale);
 }
 }
