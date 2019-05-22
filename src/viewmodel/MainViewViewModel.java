@@ -28,12 +28,12 @@ public class MainViewViewModel
       viewModelManageSalesList = new ViewModelManageSalesList(model);
    }
 
-   public ViewModelProductList viewModelProductList()
+   public ViewModelProductList getViewModelProductList()
    {
       return viewModelProductList;
    }
 
-   public ViewModelProduct viewModelProduct()
+   public ViewModelProduct getViewModelProduct()
    {
       return viewModelProduct;
    }
