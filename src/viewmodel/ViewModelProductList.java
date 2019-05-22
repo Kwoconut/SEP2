@@ -20,6 +20,7 @@ public class ViewModelProductList implements PropertyChangeListener
       this.model = model;
       this.model.addListener(this);
       this.products = FXCollections.observableArrayList();
+
    }
 
    public ObservableList<ViewModelProduct> getProducts()
@@ -30,7 +31,7 @@ public class ViewModelProductList implements PropertyChangeListener
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
-      Platform.runLater(() -> executePropertyChange(evt));
+         executePropertyChange(evt);  
    }
 
    @SuppressWarnings("unchecked")
@@ -38,14 +39,15 @@ public class ViewModelProductList implements PropertyChangeListener
    {
       if (evt.getPropertyName().equals("DETAILS"))
       {
-         ArrayList<Product> elements = new ArrayList<Product>();
-         elements = (ArrayList<Product>) evt.getNewValue();
          products.clear();
-         for (Product element : elements)
+         ArrayList<Product> product = new ArrayList<Product>();
+         product = (ArrayList<Product>) evt.getNewValue();
+         for (Product element : product)
          {
             products.add(new ViewModelProduct(model, element));
          }
       }
+
    }
 
 }

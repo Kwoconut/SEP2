@@ -8,7 +8,7 @@ public interface SProductModel
 {
    void requestProducts() throws RemoteException;
    
-   void getProductsByType(String type);
+   ArrayList<Product> getProductsByType(String type);
    
    void addListener(PropertyChangeListener listener);
    
