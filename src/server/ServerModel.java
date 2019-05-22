@@ -13,11 +13,13 @@ import DBSConnection.StoreOfferPersistence;
 import DBSConnection.StoreProductPersistence;
 import model.Offer;
 import model.Product;
+import model.Sale;
 
 public class ServerModel
 {
    private ArrayList<Product> products;
    private ArrayList<Offer> offers;
+   private ArrayList<Sale> sales;
    private StoreProductPersistence databaseProductAccess;
    private StoreOfferPersistence databaseOfferAccess;
    private DBSQuery queryHandler;
@@ -28,11 +30,12 @@ public class ServerModel
    {
       products = new ArrayList<Product>();
       offers = new ArrayList<Offer>();
+      sales = new ArrayList<Sale>();
       queryHandler = new DBSQuery("jdbc:postgresql://localhost:5432/postgres",
             "postgres", "password");
       databaseProductAccess = new ProductDatabaseHandler(queryHandler);
       databaseOfferAccess = new OfferDatabaseHandler(queryHandler);
-      clearProducts();
+      //clearProducts();
       //sampleDataForCreation();
       loadProducts();
       loadOffers();
@@ -62,6 +65,10 @@ public class ServerModel
    public ArrayList<Offer> getOffers()
    {
       return offers;
+   }
+   
+   public ArrayList<Sale> getSales(){
+      return sales;
    }
 
    // loading methods

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import model.Offer;
 import model.Product;
+import model.Sale;
 
 public interface RIClient extends Remote
 {
@@ -13,7 +14,13 @@ public interface RIClient extends Remote
    
    void getOffers(ArrayList<Offer> offers) throws RemoteException;
    
+   void getSales(ArrayList<Sale> sale) throws RemoteException;
+   
    void addOffer(Offer offer) throws RemoteException;
    
    void removeOffer(Offer offer) throws RemoteException;
+   
+   void addSale(Sale sale) throws RemoteException;
+   
+   void removeSale(Sale sale) throws RemoteException;
 }
