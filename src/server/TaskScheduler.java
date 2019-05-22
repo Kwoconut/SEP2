@@ -56,7 +56,7 @@ public class TaskScheduler implements Runnable
 	    	  int time = getHoursUntilTarget();
 	         try
 	         {
-	            Thread.sleep(time*1000);
+	            Thread.sleep(time*1000*60*60);
 	         }
 	         catch (InterruptedException e)
 	         {
