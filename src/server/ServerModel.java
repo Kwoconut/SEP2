@@ -43,7 +43,7 @@ public class ServerModel
       // sampleDataForCreation();
       loadProducts();
       loadOffers();
-      loadSales();
+      //loadSales();
    }
 
    // add data for first setup
@@ -236,8 +236,6 @@ public class ServerModel
    {
       support.addPropertyChangeListener(listener);
    }
-
-<<<<<<< HEAD
 public void updateRemoveSale(Sale sale) {
 	int newPrice = 0;
 	for(int i=0;i<products.size();i++)
@@ -260,7 +258,6 @@ public void updateRemoveSale(Sale sale) {
 	}
     support.firePropertyChange("SALEREMOVEUPDATED", null, sale);
  }
-
 public void removeSale(Sale sale) {
 	sales.remove(sale);
     try {
@@ -336,66 +333,4 @@ public void addSale(Sale sale) {
 	}
     support.firePropertyChange("SALEADDED", null, sale);
 }
-=======
-   public void updateRemoveSale(Sale sale)
-   {
-      for (int i = 0; i < products.size(); i++)
-      {
-         if (products.get(i).getID() == sale.getProduct().getID())
-         {
-            int C = sale.getPrice();
-            int B = sale.getAmount();
-            products.get(i).setPrice(C / (100 - B) * 100);
-            break;
-         }
-      }
-      databaseSaleAccess.updateRemoveSale(sale);
-      support.firePropertyChange("SALEREMOVEUPDATED", null, sale);
-   }
-
-   public void removeSale(Sale sale)
-   {
-      sales.remove(sale);
-      databaseSaleAccess.removeSale(sale);
-      support.firePropertyChange("SALEREMOVED", null, sale);
-
-   }
-
-   public void updateAddSale(Sale sale)
-   {
-      for (int i = 0; i < products.size(); i++)
-      {
-         if (products.get(i).getID() == sale.getProduct().getID())
-         {
-            products.get(i).setPrice(
-                  sale.getPrice() - sale.getPrice() / sale.getAmount());
-            break;
-         }
-      }
-      databaseSaleAccess.updateAddSale(sale);
-      support.firePropertyChange("SALEADDUPDATED", null, sale);
-   }
-
-   public void ChangedValue(Sale sale)
-   {
-      for (int i = 0; i < sales.size(); i++)
-      {
-         if (sales.get(i).equals(sale))
-         {
-            sales.get(i).getIsChangedValue();
-         }
-         break;
-      }
-      databaseSaleAccess.changedValue(sale);
-      support.firePropertyChange("CHANGEDVALUE", null, sale);
-
-   }
-
-   public void addSale(Sale sale)
-   {
-      sales.add(sale);
-      databaseSaleAccess.addSale(sale);
-      support.firePropertyChange("SALEADDED", null, sale);
-   }
->>>>>>> 7df624db27cabf959efc7318a4b63bcec6ec7f38
 }
