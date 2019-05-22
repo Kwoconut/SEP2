@@ -132,15 +132,6 @@ public class ServerModel
    // update methods
    public void updateProduct(Product product)
    {
-      for (Product productToUpdate : products)
-      {
-         if (product.getID() == productToUpdate.getID())
-            ;
-         {
-            productToUpdate.setPrice(product.getPrice());
-            ;
-         }
-      }
       try
       {
          databaseProductAccess.updateProduct(product);
@@ -230,4 +221,61 @@ public class ServerModel
    {
       support.addPropertyChangeListener(listener);
    }
+
+public void updateRemoveSale(Sale sale) {
+    try
+    {
+       SaleDatabaseHandler.updateRemoveSale(sale);
+    }
+    catch (SQLException e)
+    {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+    }
+    support.firePropertyChange("SALEREMOVEUPDATED", null, sale);
+ }
+
+public void removeSale(Sale sale) {
+	sales.remove(sale);
+    try
+    {
+       SaleDatabaseHandler.removeSale(sale);
+    }
+    catch (SQLException e)
+    {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+    }
+    support.firePropertyChange("SALEREMOVED", null, sale);
+	
+}
+
+public void updateAddSale(Sale sale) {
+	try
+    {
+       SaleDatabaseHandler.updateAddSale(sale);
+    }
+    catch (SQLException e)
+    {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+    }
+    support.firePropertyChange("SALEADDUPDATED", null, sale);
+	
+}
+
+public void ChangedValue(Sale sale) 
+{
+	try
+    {
+       SaleDatabaseHandler.changedValue(sale);
+    }
+    catch (SQLException e)
+    {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+    }
+    support.firePropertyChange("CHANGEDVALUE", null, sale);
+	
+}
 }

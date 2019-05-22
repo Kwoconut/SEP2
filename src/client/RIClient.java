@@ -23,4 +23,10 @@ public interface RIClient extends Remote
    void addSale(Sale sale) throws RemoteException;
    
    void removeSale(Sale sale) throws RemoteException;
+
+void saleRemoveUpdate(Sale newValue);
+
+void saleAddUpdate(Sale newValue);
+
+void changeValue(Sale newValue);
 }

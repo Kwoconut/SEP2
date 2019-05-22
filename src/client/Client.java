@@ -109,8 +109,7 @@ public class Client implements IClient, RIClient, Serializable
    @Override
    public void removeSale(Sale sale) throws RemoteException
    {
-      model.removeSaleFromServer(sale);
-      
+      model.removeSaleFromServer(sale);    
    }
 
    @Override
@@ -136,5 +135,25 @@ public class Client implements IClient, RIClient, Serializable
       server.removeSale(sale);
       access.releaseWrite();
    }
+
+@Override
+public void saleRemoveUpdate(Sale newValue) {
+	
+	
+	newValue.getProduct().getID()
+	
+}
+
+@Override
+public void saleAddUpdate(Sale newValue) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void changeValue(Sale newValue) {
+	// TODO Auto-generated method stub
+	
+}
 
 }

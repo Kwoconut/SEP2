@@ -105,6 +105,60 @@ public class Server implements RIServerWrite, PropertyChangeListener
             }
          }
       }
+      if (evt.getPropertyName().equals("SALEREMOVED"))
+      {
+    	  for (RIClient element : clients)
+    	  {
+    		  try 
+    		  {
+    			  element.removeSale((Sale) evt.getNewValue()); 
+    		  }
+    		  catch (RemoteException e)
+    		  {
+    			  e.printStackTrace();
+    		  }
+    	  }
+      }
+      if (evt.getPropertyName().equals("SALEREMOVEUPDATED"))
+      {
+    	  for (RIClient element : clients)
+    	  {
+    		  try 
+    		  {
+    			  element.saleRemoveUpdate((Sale) evt.getNewValue()); 
+    		  }
+    		  catch (RemoteException e)
+    		  {
+    			  e.printStackTrace();
+    		  }
+    	  }
+      }if (evt.getPropertyName().equals("SALEADDUPDATED"))
+      {
+    	  for (RIClient element : clients)
+    	  {
+    		  try 
+    		  {
+    			  element.saleAddUpdate((Sale) evt.getNewValue()); 
+    		  }
+    		  catch (RemoteException e)
+    		  {
+    			  e.printStackTrace();
+    		  }
+    	  }
+      }if (evt.getPropertyName().equals("CHANGEDVALUE"))
+      {
+    	  for (RIClient element : clients)
+    	  {
+    		  try 
+    		  {
+    			  element.changeValue((Sale) evt.getNewValue()); 
+    		  }
+    		  catch (RemoteException e)
+    		  {
+    			  e.printStackTrace();
+    		  }
+    	  }
+      }
    }
 
    @Override
