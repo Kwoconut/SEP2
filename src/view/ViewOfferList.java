@@ -83,6 +83,30 @@ public class ViewOfferList implements View
       view.setWindow("start");
    }
 
+   public void onCheckOfferButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("offerlist");
+   }
+
+   public void onHomeButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("start");
+   }
+
+   public void onRequestOfferButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("offer");
+   }
+
+   public void onManageSaleButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("saleslist");
+   }
+
    @FXML
    private void manageButtonPressed() throws IOException
    {

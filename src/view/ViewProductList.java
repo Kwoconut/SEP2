@@ -12,18 +12,6 @@ import viewmodel.ViewModelProductList;
 
 public class ViewProductList implements View
 {
-   @FXML
-   private TableView<ViewModelProduct> productTable;
-   @FXML
-   private TableColumn<ViewModelProduct, Number> productID;
-   @FXML
-   private TableColumn<ViewModelProduct, String> productName;
-   @FXML
-   private TableColumn<ViewModelProduct, String> productType;
-   @FXML
-   private TableColumn<ViewModelProduct, String> productColour;
-   @FXML
-   private TableColumn<ViewModelProduct, Number> productPrice;
    
    private String title;
    private Scene scene;
@@ -39,18 +27,6 @@ public class ViewProductList implements View
       this.scene = scene;
       this.title = title;
 
-      productID.setCellValueFactory(
-            cellData -> cellData.getValue().getIdProperty());
-      productName.setCellValueFactory(
-            cellData -> cellData.getValue().getNameProperty());
-      productType.setCellValueFactory(
-            cellData -> cellData.getValue().getTypeProperty());
-      productColour.setCellValueFactory(
-            cellData -> cellData.getValue().getColourProperty());
-      productPrice.setCellValueFactory(
-            cellData -> cellData.getValue().getPriceProperty());
-      
-      productTable.setItems(this.viewModel.getProduct());
    }
    
    public Scene getScene()
@@ -63,17 +39,28 @@ public class ViewProductList implements View
       return title;
    }
    
-
-   @FXML
-   public void backToMain() throws IOException 
+   public void onCheckOfferButtonPressed() throws IOException
    {
-      nextWindow();
+      getScene().getWindow().hide();
+      view.setWindow("offerlist");
    }
    
-   public void nextWindow() throws IOException
+   public void onHomeButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
       view.setWindow("start");
+   }
+   
+   public void onRequestOfferButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("offer");
+   }
+   
+   public void onManageSaleButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("saleslist");
    }
 
 }

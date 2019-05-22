@@ -130,6 +130,7 @@ public class Store implements Serializable, StoreModel
       firstfiveproducts.add(values.stream().filter(product -> product.getType().equals(Product.TYPE_METAL_TILE)).findFirst().get());
       firstfiveproducts.add(values.stream().filter(product -> product.getType().equals(Product.TYPE_RAIN_SYSTEM)).findFirst().get());
       support.firePropertyChange("SEND", "", firstfiveproducts);
+      support.firePropertyChange("ALLPRODUCTS", "", products);
    }
 
    @Override

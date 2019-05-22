@@ -44,11 +44,6 @@ public class ViewStore implements View
          
    }
    
-   public void onRequestOfferButtonPressed() throws IOException
-   {
-      getScene().getWindow().hide();
-      view.setWindow("offer");
-   }
    public void onDetailsLabelPressedClick() throws IOException
    {
       
@@ -93,6 +88,18 @@ public class ViewStore implements View
    {
       getScene().getWindow().hide();
       view.setWindow("start");
+   }
+   
+   public void onRequestOfferButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("offer");
+   }
+   
+   public void onManageSaleButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("saleslist");
    }
 
    public String getTitle()
