@@ -5,25 +5,22 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import model.Offer;
 import model.Product;
-import model.Store;
-import model.StoreModel;
+import model.Sale;
 import model.StoreModelClientHandler;
 import server.RIServerRead;
 import server.RIServerWrite;
 import server.ServerAccess;
-import view.MainView;
-import viewmodel.MainViewViewModel;
+
 
 public class Client implements IClient, RIClient, Serializable
 {
 
+   private static final long serialVersionUID = 1L;
    private StoreModelClientHandler model;
    private ServerAccess access;
 
@@ -93,6 +90,51 @@ public class Client implements IClient, RIClient, Serializable
 	  RIServerWrite server = access.acquireWrite();
 	  server.removeOffer(offer);
 	  access.releaseWrite();
+   }
+
+   @Override
+   public void getSales(ArrayList<Sale> sale) throws RemoteException
+   {
+      model.getSalesFromServer(sale);
+      
+   }
+
+   @Override
+   public void addSale(Sale sale) throws RemoteException
+   {
+      model.addSaleFromServer(sale);
+      
+   }
+
+   @Override
+   public void removeSale(Sale sale) throws RemoteException
+   {
+      model.removeSaleFromServer(sale);
+      
+   }
+
+   @Override
+   public void requestSales() throws RemoteException
+   {
+      RIServerRead server = access.acquireRead();
+      server.getSales(this);
+      access.releaseRead();
+   }
+
+   @Override
+   public void sendSaleToServer(Sale sale) throws RemoteException
+   {
+      RIServerWrite server = access.acquireWrite();
+      server.sendSale(sale); 
+      access.releaseWrite();
+   }
+
+   @Override
+   public void removeSaleFromServer(Sale sale) throws RemoteException
+   {
+      RIServerWrite server = access.acquireWrite();
+      server.removeSale(sale);
+      access.releaseWrite();
    }
 
 }
