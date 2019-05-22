@@ -1,6 +1,3 @@
-/view/
 /viewmodel/
 /client/
-/model/
-/server/
-/DBSConnection/
+/view/

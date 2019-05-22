@@ -32,33 +32,32 @@ public class ViewOfferList implements View
    private Scene scene;
    private MainView view;
    private ViewModelOfferList viewModel;
+   private MainViewViewModel model;
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
+      model = viewModel;
       this.viewModel = viewModel.getViewModelOfferList();
       this.view = view;
       this.scene = scene;
       this.title = title;
 
-      nameColumn.setCellValueFactory(
-            cellData -> cellData.getValue().getName());
+      nameColumn.setCellValueFactory(cellData -> cellData.getValue().getName());
       phoneColumn.setCellValueFactory(
             cellData -> cellData.getValue().getPhoneNumber());
-      emailColumn.setCellValueFactory(
-            cellData -> cellData.getValue().getEmail());
-      messageColumn.setCellValueFactory(
-            cellData -> cellData.getValue().getMessage());
+      emailColumn
+            .setCellValueFactory(cellData -> cellData.getValue().getEmail());
+      messageColumn
+            .setCellValueFactory(cellData -> cellData.getValue().getMessage());
 
-      errorLabel.textProperty().bindBidirectional(this.viewModel.getErrorProperty());
+      errorLabel.textProperty()
+            .bindBidirectional(this.viewModel.getErrorProperty());
 
       offerListTable.setItems(this.viewModel.getOffers());
 
       offerListTable.getSelectionModel().selectedItemProperty().addListener(
             (obs, oldValue, newValue) -> this.viewModel.setSelected(newValue));
-      offerListTable.getSelectionModel().selectedItemProperty()
-            .addListener((obs, oldValue, newValue) -> viewModel
-                  .getViewModelManageOffer().setSelected(newValue));
 
    }
 
@@ -87,16 +86,18 @@ public class ViewOfferList implements View
    @FXML
    private void manageButtonPressed() throws IOException
    {
-     if (this.viewModel.getSelected().getValue() == null)
-     {
-        errorLabel.setText("Please select an offer");
-     }
-     else
-     {
-        getScene().getWindow().hide();
-        view.setWindow("manageoffer");
-        errorLabel.setText("");
-     }
+      if (this.viewModel.getSelected().getValue() == null)
+      {
+         errorLabel.setText("Please select an offer");
+      }
+      else
+      {
+         model.getViewModelManageOffer()
+               .setSelected(viewModel.getSelected().get());
+         getScene().getWindow().hide();
+         view.setWindow("manageoffer");
+         errorLabel.setText("");
+      }
    }
 
 }

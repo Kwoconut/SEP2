@@ -37,12 +37,12 @@ public class ViewModelOfferList implements PropertyChangeListener
    {
       return offers;
    }
-   
+
    public StringProperty getErrorProperty()
    {
       return error;
    }
-   
+
    public ObjectProperty<ViewModelManageOffer> getSelected()
    {
       return selected;
@@ -65,7 +65,8 @@ public class ViewModelOfferList implements PropertyChangeListener
    }
 
    @SuppressWarnings("unchecked")
-   public void executePropertyChange(PropertyChangeEvent evt) throws RemoteException
+   public void executePropertyChange(PropertyChangeEvent evt)
+         throws RemoteException
    {
       if (evt.getPropertyName().equals("OFFERLIST"))
       {
@@ -84,17 +85,15 @@ public class ViewModelOfferList implements PropertyChangeListener
       }
       else if (evt.getPropertyName().equals("MINUSOFFER"))
       {
-         System.out.println("----");
          Offer offer = (Offer) evt.getNewValue();
-         offers.remove(new ViewModelManageOffer(model,offer));
+         offers.remove(new ViewModelManageOffer(model, offer));
       }
 
    }
-   
+
    public void setSelected(ViewModelManageOffer newValue)
    {
-       selected.set(newValue);  
+      selected.set(newValue);
    }
-   
 
 }

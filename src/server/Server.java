@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import client.RIClient;
 import model.Offer;
 import model.Product;
+import model.Sale;
 
 public class Server implements RIServerWrite, PropertyChangeListener
 {
@@ -110,5 +111,26 @@ public class Server implements RIServerWrite, PropertyChangeListener
    public void removeOffer(Offer offer) throws RemoteException
    {
       model.removeOffer(offer);
+   }
+
+   @Override
+   public void getSales(RIClient client) throws RemoteException
+   {
+      // TODO Auto-generated method stub
+      
+   }
+
+   @Override
+   public void sendSale(Sale sale) throws RemoteException
+   {
+      // TODO Auto-generated method stub
+      
+   }
+
+   @Override
+   public void removeSale(Sale sale) throws RemoteException
+   {
+     
+      
    }
 }

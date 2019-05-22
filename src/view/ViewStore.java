@@ -63,18 +63,18 @@ public class ViewStore implements View
       getScene().getWindow().hide();
       view.setWindow("productList");
    }
-   public void onDetailsLabelPressedMetalTile() throws IOException
-   {
-      model.getProduct(Product.TYPE_METAL_TILE);
-      getScene().getWindow().hide();
-      view.setWindow("productList");
-   }
    public void onDetailsLabelPressedPlated() throws IOException
    {
       model.getProduct(Product.TYPE_PLATED_SHEET);
       getScene().getWindow().hide();
       view.setWindow("productList");
       
+   }
+   public void onDetailsLabelPressedMetalTile() throws IOException
+   {
+      model.getProduct(Product.TYPE_METAL_TILE);
+      getScene().getWindow().hide();
+      view.setWindow("productList");
    }
    public void onDetailsLabelPressedRain() throws IOException
    {
@@ -87,6 +87,12 @@ public class ViewStore implements View
    {
       getScene().getWindow().hide();
       view.setWindow("offerlist");
+   }
+   
+   public void onHomeButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("start");
    }
 
    public String getTitle()
