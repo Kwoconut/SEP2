@@ -2,6 +2,7 @@ package model;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface SOfferModel
 {
@@ -13,5 +14,6 @@ public interface SOfferModel
          String message) throws RemoteException;
 
    void addListener(PropertyChangeListener listener);
+   
 
 }

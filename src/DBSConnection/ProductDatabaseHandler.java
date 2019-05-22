@@ -72,4 +72,24 @@ public class ProductDatabaseHandler implements StoreProductPersistence
       });
    }
 
+@Override
+public Product getProductByID(int ID) throws SQLException 
+{
+	ArrayList<Product> products = new ArrayList<Product>();
+	products = loadProducts();
+	Product product =null;
+	for(int i=0;i<products.size();i++)
+	{
+		if(products.get(i).getID()== ID)
+		{
+			product= new Product(products.get(i).getID(),products.get(i).getName(),
+					products.get(i).getPrice(),products.get(i).getColour(),products.get(i).getType());
+			break;
+		}
+	}
+	return product;
+
+
+}
+
 }

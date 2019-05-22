@@ -70,5 +70,36 @@ public class IDGenerator
       }
       return maxi;
    }
+   private static int generateSaleMaxID(ArrayList<Sale> sales)
+   {
+      int maxi = 1;
+      for (Sale sale : sales)
+      {
+         if (sale.getID() > maxi)
+         {
+            maxi = sale.getID();
+         }
+      }
+      return maxi;
+   }
+
+public static int generateSaleID(ArrayList<Sale> sales) {
+	for (int i = 1; i < generateSaleMaxID(sales); i++)
+    {
+       boolean flag = false;
+       for (Sale sale : sales)
+       {
+          if (sale.getID() == i)
+          {
+             flag = true;
+          }
+       }
+       if (!flag)
+       {
+          return i;
+       }
+    }
+    return sales.size() + 1;
+}
 
 }

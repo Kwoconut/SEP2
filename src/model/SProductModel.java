@@ -2,6 +2,7 @@ package model;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface SProductModel
 {
@@ -10,5 +11,6 @@ public interface SProductModel
    void getProductsByType(String type);
    
    void addListener(PropertyChangeListener listener);
+   
 
 }

@@ -12,9 +12,16 @@ public interface SSalesModel
    
    void addSale(MyDate startDate, MyDate endDate, ViewModelProduct product, int amount);
    
-   void removeSale(MyDate startDate, MyDate endDate, ViewModelProduct product, int amount) throws RemoteException;
+   void removeSale(int ID,MyDate startDate, MyDate endDate, ViewModelProduct product, int amount) throws RemoteException;
    
    void addListener(PropertyChangeListener listener);
    
-   ArrayList<Product> getProducts() throws RemoteException;
+   void removeSaleFromServer(Sale sale);
+   
+   void addSaleFromServer(Sale sale);
+   
+   void getSalesFromServer(ArrayList<Sale> sale);
+   
+
+   ArrayList<Product> getProducts();
 }

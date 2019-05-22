@@ -2,19 +2,31 @@ package model;
 
 public class Sale
 {
+   private int ID;
    private MyDate startDate;
    private MyDate endDate;
    private Product product;
    private int amount;
    private boolean isChangedValue;
 
-   public Sale(MyDate startDate, MyDate endDate, Product product, int amount)
+   public Sale(int ID,MyDate startDate, MyDate endDate, Product product, int amount)
    {
+	  this.ID=ID;
       this.startDate = startDate;
       this.endDate = endDate;
       this.product = product;
       this.amount = amount;
       isChangedValue = false;
+   }
+   
+   public Sale(int ID,MyDate startDate, MyDate endDate, Product product, int amount,boolean isChangedValue)
+   {
+	  this.ID=ID;
+      this.startDate = startDate;
+      this.endDate = endDate;
+      this.product = product;
+      this.amount = amount;
+      this.isChangedValue = isChangedValue;
    }
   
    public Product getProduct()
@@ -45,6 +57,21 @@ public class Sale
    {
 	   return isChangedValue;
    }
+   public int getID() 
+   {
+		return ID;
+   }
+   public void setIsChangedValue()
+   {
+	   if (isChangedValue==true)
+			   {
+		   isChangedValue = false;
+			   }
+	   else if (isChangedValue==false)
+	   {
+		   isChangedValue = true;
+	   }
+   }
 
    public boolean equals(Object obj)
    {
@@ -63,5 +90,7 @@ public class Sale
       s+= startDate+""+endDate+""+product;
       return s;
    }
+
+
    
 }

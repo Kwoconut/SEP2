@@ -43,6 +43,7 @@ public class ServerModel
       //sampleDataForCreation();
       loadProducts();
       loadOffers();
+      loadSales();
    }
 
    // add data for first setup
@@ -100,6 +101,15 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
+   }
+   public void loadSales()
+   {
+      try {
+		sales = databaseSaleAccess.loadSales();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
    }
 
    // adding methods
@@ -227,37 +237,68 @@ public class ServerModel
    }
 
 public void updateRemoveSale(Sale sale) {
+	int newPrice = 0;
 	for(int i=0;i<products.size();i++)
 	{
 		if(products.get(i).getID()==sale.getProduct().getID())
 		{
 			int C= sale.getPrice();
 			int B= sale.getAmount();
-			products.get(i).setPrice(C/(100-B)*100);
+			 newPrice = (C/(100-B)*100);
+			products.get(i).setPrice(newPrice);
 			break;
 		}
 	}
-    databaseSaleAccess.updateRemoveSale(sale);
+    try {
+		databaseSaleAccess.updateRemoveSale(newPrice,sale.getProduct().getID());
+		databaseSaleAccess.removeSale(sale);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     support.firePropertyChange("SALEREMOVEUPDATED", null, sale);
  }
 
 public void removeSale(Sale sale) {
 	sales.remove(sale);
-    databaseSaleAccess.removeSale(sale);
+    try {
+		databaseSaleAccess.removeSale(sale);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     support.firePropertyChange("SALEREMOVED", null, sale);
 	
 }
 
 public void updateAddSale(Sale sale) {
+	int newPrice=0;
+	int product_id=0;
 	for(int i=0;i<products.size();i++)
 	{
 		if(products.get(i).getID()==sale.getProduct().getID())
 		{
-			products.get(i).setPrice(sale.getPrice()-sale.getPrice()/sale.getAmount());
+			newPrice = (sale.getPrice()-sale.getPrice())/sale.getAmount();
+			product_id = sale.getProduct().getID();
+			products.get(i).setPrice(newPrice);
 			break;
 		}
 	}
-	databaseSaleAccess.updateAddSale(sale);
+	for(int i=0;i<sales.size();i++)
+	{
+		if(sales.get(i).getID()==sale.getID())
+		{
+			sales.get(i).setIsChangedValue();
+			break;
+		}
+	}
+	try {
+		databaseSaleAccess.updateAddSale(newPrice,product_id);
+		databaseSaleAccess.changedValue(sale);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     support.firePropertyChange("SALEADDUPDATED", null, sale);
 	}
 
@@ -267,18 +308,30 @@ public void ChangedValue(Sale sale)
 {
 	if(sales.get(i).equals(sale))
 	{
-		sales.get(i).getIsChangedValue();
+		sales.get(i).setIsChangedValue();
 	}
 		break;
 	}
-	databaseSaleAccess.changedValue(sale);
+	try {
+		databaseSaleAccess.changedValue(sale);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     support.firePropertyChange("CHANGEDVALUE", null, sale);
 	
 }
 
 public void addSale(Sale sale) {
 	sales.add(sale);
-    databaseSaleAccess.addSale(sale);
+    try {
+    	String startDay = sale.getStartDate().getYear() +"-"+ sale.getStartDate().getMonth()+"-"+sale.getStartDate().getDay();
+        String endDay = sale.getEndDate().getYear()+"-"+sale.getEndDate().getMonth()+"-"+sale.getEndDate().getDay();
+		databaseSaleAccess.addSale(sale,startDay,endDay);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     support.firePropertyChange("SALEADDED", null, sale);
 }
 }
