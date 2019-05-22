@@ -11,63 +11,81 @@ import model.Product;
 import model.SSalesModel;
 import model.Sale;
 
-public class ViewModelSale{
-
-private ObjectProperty<MyDate> startDateProperty;
-private ObjectProperty<MyDate> endDateProperty;
-private ObjectProperty<ViewModelProduct> productProperty;
-private IntegerProperty amountProperty;
-private SSalesModel model;
-
-public ViewModelSale (SSalesModel model , ViewModelProduct product)
+public class ViewModelSale
 {
-   this.model = model;
-   startDateProperty = new SimpleObjectProperty<MyDate>();
-   endDateProperty = new SimpleObjectProperty<MyDate>();
-   amountProperty = new SimpleIntegerProperty();
-   productProperty = new SimpleObjectProperty<ViewModelProduct>(); 
-   
-}
-public ViewModelSale(SSalesModel model, Sale sale)
-{
-   this.model = model;
-   startDateProperty = new SimpleObjectProperty<MyDate>(sale.getStartDate());
-   endDateProperty = new SimpleObjectProperty<MyDate>(sale.getEndDate());
-   productProperty = new SimpleObjectProperty<ViewModelProduct>(new ViewModelProduct(sale.getProduct()));
 
-}
+   private ObjectProperty<MyDate> startDateProperty;
+   private ObjectProperty<MyDate> endDateProperty;
+   private ObjectProperty<ViewModelProduct> productProperty;
+   private IntegerProperty amountProperty;
+   private SSalesModel model;
 
-
-public ObjectProperty<MyDate> getStartDateProperty() {
-   return startDateProperty;
-}
-
-public ObjectProperty<MyDate> getEndDateProperty() {
-   return endDateProperty;
-}
-
-public ObjectProperty<ViewModelProduct> getProductProperty(){
-   return productProperty;
-}
-
-public IntegerProperty getAmountProperty() {
-   return amountProperty;
-}
-
-public void addSale() {
-   model.addSale(startDateProperty.get(), endDateProperty.get(), productProperty.get(), amountProperty.get());
-}
-
-public boolean equals(Object obj)
-{
-   if (!(obj instanceof ViewModelSale))
+   public ViewModelSale(SSalesModel model, ViewModelProduct product)
    {
-      return false;
+      this.model = model;
+      startDateProperty = new SimpleObjectProperty<MyDate>();
+      endDateProperty = new SimpleObjectProperty<MyDate>();
+      amountProperty = new SimpleIntegerProperty();
+      productProperty = new SimpleObjectProperty<ViewModelProduct>();
+
    }
-   ViewModelSale other = (ViewModelSale) obj;
-   return other.getStartDateProperty().get().equals(startDateProperty.get())
-         && other.getEndDateProperty().get().equals(endDateProperty.get())
-         && other.getProductProperty().get().equals(productProperty.get())
-         && other.getAmountProperty().get()==amountProperty.get();
-}
+
+   public ViewModelSale(SSalesModel model, Sale sale)
+   {
+      this.model = model;
+      startDateProperty = new SimpleObjectProperty<MyDate>(sale.getStartDate());
+      endDateProperty = new SimpleObjectProperty<MyDate>(sale.getEndDate());
+      productProperty = new SimpleObjectProperty<ViewModelProduct>(
+            new ViewModelProduct(sale.getProduct()));
+
+   }
+
+   public ObjectProperty<MyDate> getStartDateProperty()
+   {
+      return startDateProperty;
+   }
+
+   public StringProperty getStartDateStringProperty()
+   {
+      return new SimpleStringProperty(startDateProperty.get().toString());
+   }
+
+   public ObjectProperty<MyDate> getEndDateProperty()
+   {
+      return endDateProperty;
+   }
+
+   public StringProperty getEndDateStringProperty()
+   {
+      return new SimpleStringProperty(endDateProperty.get().toString());
+   }
+
+   public ObjectProperty<ViewModelProduct> getProductProperty()
+   {
+      return productProperty;
+   }
+
+   public IntegerProperty getAmountProperty()
+   {
+      return amountProperty;
+   }
+
+   public void addSale()
+   {
+      model.addSale(startDateProperty.get(), endDateProperty.get(),
+            productProperty.get(), amountProperty.get());
+   }
+
+   public boolean equals(Object obj)
+   {
+      if (!(obj instanceof ViewModelSale))
+      {
+         return false;
+      }
+      ViewModelSale other = (ViewModelSale) obj;
+      return other.getStartDateProperty().get().equals(startDateProperty.get())
+            && other.getEndDateProperty().get().equals(endDateProperty.get())
+            && other.getProductProperty().get().equals(productProperty.get())
+            && other.getAmountProperty().get() == amountProperty.get();
+   }
 }

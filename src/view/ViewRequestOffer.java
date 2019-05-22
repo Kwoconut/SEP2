@@ -44,8 +44,7 @@ public class ViewRequestOffer implements View
       nameField.textProperty().bindBidirectional(model.getNameProperty());
       phoneField.textProperty().bindBidirectional(model.getPhoneProperty());
       emailField.textProperty().bindBidirectional(model.getEmailProperty());
-      messageField.textProperty()
-            .bindBidirectional(model.getMessageProperty());
+      messageField.textProperty().bindBidirectional(model.getMessageProperty());
       errorLabel.textProperty().bindBidirectional(model.getErrorProperty());
 
    }
@@ -68,9 +67,8 @@ public class ViewRequestOffer implements View
       }
    }
 
-   public void onCancelButton() throws IOException
+   private void resetFields() throws IOException
    {
-      getScene().getWindow().hide();
       nameField.setText("");
       phoneField.setText("");
       emailField.setText("");
@@ -80,7 +78,33 @@ public class ViewRequestOffer implements View
       emailField.setPromptText("Email");
       messageField.setPromptText("Message");
       errorLabel.setText("");
+   }
+
+   public void onCheckOfferButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      resetFields();
+      view.setWindow("offerlist");
+   }
+
+   public void onHomeButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      resetFields();
       view.setWindow("start");
+   }
+
+   public void onRequestOfferButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      resetFields();
+      view.setWindow("offer");
+   }
+   
+   public void onManageSaleButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("saleslist");
    }
 
    public String getTitle()
