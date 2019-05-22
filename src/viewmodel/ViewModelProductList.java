@@ -2,7 +2,6 @@ package viewmodel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
@@ -13,28 +12,27 @@ import model.SProductModel;
 
 public class ViewModelProductList implements PropertyChangeListener
 {
-   private ObservableList<ViewModelProduct> product;
+   private ObservableList<ViewModelProduct> products;
    private SProductModel model;
-   
-   public ViewModelProductList (SProductModel model) throws RemoteException
+
+   public ViewModelProductList(SProductModel model)
    {
       this.model = model;
       this.model.addListener(this);
-      this.product = FXCollections.observableArrayList();
+      this.products = FXCollections.observableArrayList();
+   }
 
-   }
- 
-   public ObservableList<ViewModelProduct> getProduct()
+   public ObservableList<ViewModelProduct> getProducts()
    {
-      return product;
+      return products;
    }
-   
+
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
       Platform.runLater(() -> executePropertyChange(evt));
    }
-   
+
    @SuppressWarnings("unchecked")
    public void executePropertyChange(PropertyChangeEvent evt)
    {
@@ -42,15 +40,12 @@ public class ViewModelProductList implements PropertyChangeListener
       {
          ArrayList<Product> elements = new ArrayList<Product>();
          elements = (ArrayList<Product>) evt.getNewValue();
-         product.clear();
+         products.clear();
          for (Product element : elements)
          {
-            product.add(new ViewModelProduct(model, element));
+            products.add(new ViewModelProduct(model, element));
          }
       }
-}
-
-
-
+   }
 
 }
