@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import DBSConnection.DBSQuery;
 import DBSConnection.OfferDatabaseHandler;
 import DBSConnection.ProductDatabaseHandler;
+import DBSConnection.SaleDatabaseHandler;
 import DBSConnection.StoreOfferPersistence;
 import DBSConnection.StoreProductPersistence;
+import DBSConnection.StoreSalePersistence;
 import model.Offer;
 import model.Product;
 import model.Sale;
@@ -22,6 +24,7 @@ public class ServerModel
    private ArrayList<Sale> sales;
    private StoreProductPersistence databaseProductAccess;
    private StoreOfferPersistence databaseOfferAccess;
+   private StoreSalePersistence databaseSaleAccess;
    private DBSQuery queryHandler;
 
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -35,6 +38,7 @@ public class ServerModel
             "postgres", "password");
       databaseProductAccess = new ProductDatabaseHandler(queryHandler);
       databaseOfferAccess = new OfferDatabaseHandler(queryHandler);
+      databaseSaleAccess = new SaleDatabaseHandler(querryHandler);
       //clearProducts();
       //sampleDataForCreation();
       loadProducts();
@@ -223,9 +227,19 @@ public class ServerModel
    }
 
 public void updateRemoveSale(Sale sale) {
+	for(int i=0;i<products.size();i++)
+	{
+		if(products.get(i).getID()==sale.getProduct().getID())
+		{
+			int C= sale.getPrice();
+			int B= sale.getAmount();
+			products.get(i).setPrice(C/(100-B)*100);
+			break;
+		}
+	}
     try
     {
-       SaleDatabaseHandler.updateRemoveSale(sale);
+    	databaseSaleAccess.updateRemoveSale(sale);
     }
     catch (SQLException e)
     {
@@ -239,7 +253,7 @@ public void removeSale(Sale sale) {
 	sales.remove(sale);
     try
     {
-       SaleDatabaseHandler.removeSale(sale);
+    	databaseSaleAccess.removeSale(sale);
     }
     catch (SQLException e)
     {
@@ -251,9 +265,17 @@ public void removeSale(Sale sale) {
 }
 
 public void updateAddSale(Sale sale) {
+	for(int i=0;i<products.size();i++)
+	{
+		if(products.get(i).getID()==sale.getProduct().getID())
+		{
+			products.get(i).setPrice(sale.getPrice()-sale.getPrice()/sale.getAmount());
+			break;
+		}
+	}
 	try
     {
-       SaleDatabaseHandler.updateAddSale(sale);
+		databaseSaleAccess.updateAddSale(sale);
     }
     catch (SQLException e)
     {
@@ -261,14 +283,21 @@ public void updateAddSale(Sale sale) {
        e.printStackTrace();
     }
     support.firePropertyChange("SALEADDUPDATED", null, sale);
-	
-}
+	}
 
 public void ChangedValue(Sale sale) 
 {
+	for(int i=0;i<sales.size();i++)
+{
+	if(sales.get(i).equals(sale))
+	{
+		sales.get(i).getIsChangedValue();
+	}
+		break;
+	}
 	try
     {
-       SaleDatabaseHandler.changedValue(sale);
+       databaseSaleAccess.changedValue(sale);
     }
     catch (SQLException e)
     {
@@ -277,5 +306,19 @@ public void ChangedValue(Sale sale)
     }
     support.firePropertyChange("CHANGEDVALUE", null, sale);
 	
+}
+
+public void addSale(Sale sale) {
+	sales.add(sale);
+    try
+    {
+       databaseSaleAccess.addSale(sale);
+    }
+    catch (SQLException e)
+    {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+    }
+    support.firePropertyChange("SALEADDED", null, sale);
 }
 }

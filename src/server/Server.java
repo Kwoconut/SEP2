@@ -159,6 +159,20 @@ public class Server implements RIServerWrite, PropertyChangeListener
     		  }
     	  }
       }
+      if (evt.getPropertyName().equals("SALEADDED"))
+      {
+    	  for (RIClient element : clients)
+    	  {
+    		  try 
+    		  {
+    			  element.addSale((Sale) evt.getNewValue()); 
+    		  }
+    		  catch (RemoteException e)
+    		  {
+    			  e.printStackTrace();
+    		  }
+    	  }
+      }
    }
 
    @Override
@@ -168,23 +182,38 @@ public class Server implements RIServerWrite, PropertyChangeListener
    }
 
    @Override
-   public void getSales(RIClient client) throws RemoteException
+   public void getSales(RIClient sender) throws RemoteException
    {
-      // TODO Auto-generated method stub
-      
+	   sender.getSales(model.getSales());
    }
 
    @Override
    public void sendSale(Sale sale) throws RemoteException
    {
-      // TODO Auto-generated method stub
-      
+      model.addSale(sale);
    }
 
    @Override
    public void removeSale(Sale sale) throws RemoteException
    {
-     
-      
+     model.removeSale(sale);   
    }
+
+@Override
+public void saleRemoveUpdate(Sale sale) {
+	model.updateRemoveSale(sale);
+	
+}
+
+@Override
+public void saleAddUpdate(Sale sale) {
+	model.updateAddSale(sale);
+	
+}
+
+@Override
+public void changeValue(Sale sale) {
+	model.ChangedValue(sale);
+	
+}
 }

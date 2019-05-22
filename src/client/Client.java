@@ -137,23 +137,25 @@ public class Client implements IClient, RIClient, Serializable
    }
 
 @Override
-public void saleRemoveUpdate(Sale newValue) {
-	
-	
-	newValue.getProduct().getID()
+public void saleRemoveUpdate(Sale sale) throws RemoteException 
+{		
+	RIServerWrite server = access.acquireWrite();
+	server.saleRemoveUpdate(sale);
+	access.releaseWrite();
+}
+
+@Override
+public void saleAddUpdate(Sale sale) throws RemoteException{
+	RIServerWrite server = access.acquireWrite();	
+	server.saleAddUpdate(sale);
+	access.releaseWrite();
 	
 }
 
 @Override
-public void saleAddUpdate(Sale newValue) {
-	// TODO Auto-generated method stub
-	
+public void changeValue(Sale sale) throws RemoteException{
+	RIServerWrite server = access.acquireWrite();
+	server.changeValue(sale);
+	access.releaseWrite();
 }
-
-@Override
-public void changeValue(Sale newValue) {
-	// TODO Auto-generated method stub
-	
-}
-
 }

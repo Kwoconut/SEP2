@@ -16,5 +16,11 @@ public interface RIServerWrite extends RIServerRead
    void sendSale(Sale sale) throws RemoteException;
    
    void removeSale(Sale sale) throws RemoteException;
+
+   void saleRemoveUpdate(Sale sale);
+
+   void saleAddUpdate(Sale sale);
+
+   void changeValue(Sale sale);
 }
 	

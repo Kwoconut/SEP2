@@ -1,5 +1,5 @@
 package DBSConnection;
 
-public class SaleDatabaseHandler {
+public class SaleDatabaseHandler implements StoreSalePersistence{
 
 }
