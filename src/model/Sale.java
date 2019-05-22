@@ -6,6 +6,7 @@ public class Sale
    private MyDate endDate;
    private Product product;
    private int amount;
+   private boolean isChangedValue;
 
    public Sale(MyDate startDate, MyDate endDate, Product product, int amount)
    {
@@ -13,6 +14,7 @@ public class Sale
       this.endDate = endDate;
       this.product = product;
       this.amount = amount;
+      isChangedValue = false;
    }
   
    public Product getProduct()
@@ -37,6 +39,11 @@ public class Sale
    
    public int getAmount() {
       return amount;
+   }
+   
+   public boolean getIsChangedValue()
+   {
+	   return isChangedValue;
    }
 
    public boolean equals(Object obj)

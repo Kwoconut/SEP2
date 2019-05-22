@@ -27,7 +27,7 @@ public class TaskScheduler implements Runnable
 	   
 	   private int getHoursUntilTarget() 
 	   {
-	       return hour < 24 ? 24 - hour : 24 - hour + 24;
+	       return 24-hour;
 	   }
 	   private void goThroughSales()
 	   {	   
@@ -35,12 +35,16 @@ public class TaskScheduler implements Runnable
 		   ArrayList<Sale> sales = model.getSales();
 		   for(int i=0;i<sales.size();i++)
 		   {
-			  if(sales.get(i).getEndDate().isAfter(now));
+			  if(sales.get(i).getEndDate().isAfter(now))
 					  {
-						  model.updateSale(sales.get(i));
-						  model.removeSale(sales.get(i));
+						  model.updateRemoveSale(sales.get(i));  //in server update product (including dtb and client)
+						  model.removeSale(sales.get(i));  // remove sale from server/db/clients cuz sale ended
 					  }
-			  if(sales.get(i).getStartDate())
+			  else if(sales.get(i).getIsChangedValue()== false && sales.get(i).getStartDate().isAfter(now))
+			  {
+				  model.updateAddSale(sales.get(i)); // in server update product(including dtb and client)
+				  model.ChangedValue(sales.get(i)); // set the boolean to true
+			  }
 		   }
 	   }
 	@Override
@@ -48,8 +52,7 @@ public class TaskScheduler implements Runnable
 	{
 		while (true)
 	      {
-	    	  TaskScheduler tsk = new TaskScheduler();
-	    	  tsk.goThroughSales();
+			goThroughSales();
 	    	  int time = getHoursUntilTarget();
 	         try
 	         {
