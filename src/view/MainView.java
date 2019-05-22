@@ -31,6 +31,12 @@ public class MainView
 
       view = ViewFactory.getView(id, viewModel, this);
 
+      if (id.equals("productList"))
+      {
+         ViewProductList viewProductList = (ViewProductList) view;
+         viewProductList.refresh();
+      }
+
       primaryStage.setScene(view.getScene());
       primaryStage.setTitle(view.getTitle());
       primaryStage.show();

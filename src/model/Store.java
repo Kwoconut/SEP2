@@ -88,10 +88,10 @@ public class Store implements Serializable, StoreModel
    {
       return offers;
    }
-   
+
    public ArrayList<Sale> getSales()
    {
-	   return sales;
+      return sales;
    }
 
    @Override
@@ -104,7 +104,7 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
-   public void getProductsByType(String type)
+   public ArrayList<Product> getProductsByType(String type)
    {
       ArrayList<Product> elements = new ArrayList<Product>();
       for (Product value : products)
@@ -114,21 +114,36 @@ public class Store implements Serializable, StoreModel
             elements.add(value);
          }
       }
-      support.firePropertyChange("DETAILS", null, elements);
+      support.firePropertyChange("DETAILS", " ", elements);
+      return elements;
    }
 
    @Override
    public void getProductsFromServer(ArrayList<Product> values)
    {
-	   
+
       products = values;
-      ArrayList<Product> firstfiveproducts; 
+      ArrayList<Product> firstfiveproducts;
       firstfiveproducts = new ArrayList<Product>();
-      firstfiveproducts.add(values.stream().filter(product -> product.getType().equals(Product.TYPE_CLICK_SHEET)).findFirst().get());
-      firstfiveproducts.add(values.stream().filter(product -> product.getType().equals(Product.TYPE_METAL_SHEET)).findFirst().get());
-      firstfiveproducts.add(values.stream().filter(product -> product.getType().equals(Product.TYPE_PLATED_SHEET)).findFirst().get());
-      firstfiveproducts.add(values.stream().filter(product -> product.getType().equals(Product.TYPE_METAL_TILE)).findFirst().get());
-      firstfiveproducts.add(values.stream().filter(product -> product.getType().equals(Product.TYPE_RAIN_SYSTEM)).findFirst().get());
+      firstfiveproducts.add(values.stream()
+            .filter(
+                  product -> product.getType().equals(Product.TYPE_CLICK_SHEET))
+            .findFirst().get());
+      firstfiveproducts.add(values.stream()
+            .filter(
+                  product -> product.getType().equals(Product.TYPE_METAL_SHEET))
+            .findFirst().get());
+      firstfiveproducts.add(values.stream().filter(
+            product -> product.getType().equals(Product.TYPE_PLATED_SHEET))
+            .findFirst().get());
+      firstfiveproducts.add(values.stream()
+            .filter(
+                  product -> product.getType().equals(Product.TYPE_METAL_TILE))
+            .findFirst().get());
+      firstfiveproducts.add(values.stream()
+            .filter(
+                  product -> product.getType().equals(Product.TYPE_RAIN_SYSTEM))
+            .findFirst().get());
       support.firePropertyChange("SEND", "", firstfiveproducts);
       support.firePropertyChange("ALLPRODUCTS", "", products);
    }
@@ -182,7 +197,7 @@ public class Store implements Serializable, StoreModel
    {
       support.addPropertyChangeListener(listener);
    }
-   
+
    @Override
    public void requestSales() throws RemoteException
    {
@@ -246,5 +261,5 @@ public class Store implements Serializable, StoreModel
       sales.remove(sale);
       support.firePropertyChange("MINUSSALE", "", sale);
    }
-   
+
 }

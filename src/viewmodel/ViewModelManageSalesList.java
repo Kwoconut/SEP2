@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Product;
+import model.SProductModel;
 import model.SSalesModel;
 
 public class ViewModelManageSalesList
@@ -13,7 +14,7 @@ public class ViewModelManageSalesList
    private ObservableList<ViewModelSale> sales;
    private SSalesModel model;
 
-   public ViewModelManageSalesList(SSalesModel model) throws RemoteException
+   public ViewModelManageSalesList(SSalesModel model,SProductModel model2) throws RemoteException
    {
       this.model = model;
       this.products = FXCollections.observableArrayList();
@@ -21,7 +22,7 @@ public class ViewModelManageSalesList
       ArrayList<Product> elements = this.model.getProducts();
       for (Product element : elements)
       {
-         products.add(new ViewModelProduct(element));
+         products.add(new ViewModelProduct(model2, element));
       }
    }
 

@@ -35,49 +35,6 @@ public class ViewProductList implements View
       this.view = view;
       this.scene = scene;
       this.title = title;
-
-      ObservableList<ViewModelProduct> products = viewModel
-            .getViewModelManageSalesList().getProducts();
-
-      ObservableList<StackPane> stackPane = FXCollections.observableArrayList();
-      ObservableList<Label> names = FXCollections.observableArrayList();
-      ObservableList<Label> prices = FXCollections.observableArrayList();
-
-      GridPane gridPane = new GridPane();
-      gridPane.setPadding(new Insets(20, 20, 20, 31));
-      gridPane.setVgap(20);
-      gridPane.setHgap(70);
-
-      int x = 0;
-      int y = 0;
-
-      for (int i = 0; i < products.size(); i++)
-      {
-         names.add(new Label(products.get(i).getNameProperty().get()));
-         prices.add(new Label(
-               Integer.toString(products.get(i).getPriceProperty().get())));
-         stackPane.add(new StackPane());
-         stackPane.get(i).setPrefWidth(200);
-         stackPane.get(i).setPrefHeight(400);
-         stackPane.get(i).setStyle("-fx-background-color: grey");
-         names.get(i).setFont(Font.font(30));
-         prices.get(i).setFont(Font.font(30));
-         names.get(i).setPadding(new Insets(40, 10, 10, 10));
-         prices.get(i).setPadding(new Insets(10, 10, 40, 10));
-         stackPane.get(i).getChildren().addAll(names.get(i));
-         stackPane.get(i).getChildren().addAll(prices.get(i));
-         StackPane.setAlignment(names.get(i), Pos.TOP_CENTER);
-         StackPane.setAlignment(prices.get(i), Pos.BOTTOM_CENTER);
-         gridPane.setConstraints(stackPane.get(i), x, y);
-         x++;
-         if (x == 4)
-         {
-            y++;
-            x = 0;
-         }
-         gridPane.getChildren().addAll(stackPane);
-         mainPane.setContent(gridPane);
-      }
    }
 
    public Scene getScene()
@@ -88,6 +45,51 @@ public class ViewProductList implements View
    public String getTitle()
    {
       return title;
+   }
+
+   public void refresh()
+   {
+      ObservableList<ViewModelProduct> products = this.viewModel.getProducts();
+
+      ObservableList<StackPane> stackPane = FXCollections.observableArrayList();
+      ObservableList<Label> names = FXCollections.observableArrayList();
+      ObservableList<Label> prices = FXCollections.observableArrayList();
+
+      GridPane gridPane = new GridPane();
+      gridPane.setPadding(new Insets(20, 20, 20, 31));
+      gridPane.setVgap(20);
+      gridPane.setHgap(60);
+
+      int x = 0;
+      int y = 0;
+
+      for (int i = 0; i < products.size(); i++)
+      {
+         names.add(new Label(products.get(i).getNameProperty().get()));
+         prices.add(new Label(
+               Integer.toString(products.get(i).getPriceProperty().get()) + "DKK"));
+         stackPane.add(new StackPane());
+         stackPane.get(i).setPrefWidth(212.8);
+         stackPane.get(i).setPrefHeight(393);
+         stackPane.get(i).setStyle("-fx-background-color: lightgrey");
+         names.get(i).setFont(Font.font(30));
+         prices.get(i).setFont(Font.font(30));
+         names.get(i).setPadding(new Insets(40, 10, 10, 10));
+         prices.get(i).setPadding(new Insets(10, 10, 40, 10));
+         stackPane.get(i).getChildren().addAll(names.get(i));
+         stackPane.get(i).getChildren().addAll(prices.get(i));
+         StackPane.setAlignment(names.get(i), Pos.TOP_CENTER);
+         StackPane.setAlignment(prices.get(i), Pos.BOTTOM_CENTER);
+         GridPane.setConstraints(stackPane.get(i), x, y);
+         x++;
+         if (x == 4)
+         {
+            y++;
+            x = 0;
+         }
+      }
+      gridPane.getChildren().addAll(stackPane);
+      mainPane.setContent(gridPane);
    }
 
    public void onCheckOfferButtonPressed() throws IOException
