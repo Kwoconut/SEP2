@@ -14,11 +14,22 @@
 <?import javafx.scene.text.Font?>
 <?import java.util.ArrayList?>
 
-<VBox prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewStore">
+<VBox prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewStore">
 	<children>
 		<AnchorPane VBox.vgrow="ALWAYS">
 			<children>
-            <Pane opacity="0.1" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: lightgrey;" />
+            <Pane prefHeight="156.0" prefWidth="1200.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="75.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Logo.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="1004.0" layoutY="60.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Check Offers" />
+                  <Button layoutX="307.0" layoutY="60.0" mnemonicParsing="false" onAction="#onHomeButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Home" />
+                  <Button layoutX="448.0" layoutY="60.0" mnemonicParsing="false" onAction="#onRequestOfferButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Request Offer" />
+               </children>
+            </Pane>
 				<GridPane hgap="10.0" layoutX="74.0" layoutY="161.0" prefHeight="393.0" prefWidth="1064.0">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" minWidth="8.0" prefWidth="150.0" />
@@ -33,30 +44,13 @@
 					<children>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="3.0" layoutY="-140.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../Logo.png" />
-                           </image>
-                        </ImageView>
                         <ImageView fitHeight="122.0" fitWidth="195.0" layoutX="5.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../tabla_click-1.png" />
                            </image>
                         </ImageView>
+                        <Button layoutX="66.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedClick" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" />
-                     </GridPane.margin>
-                  </Pane>
-						<Label fx:id="label02" onMouseClicked="#onDetailsLabelPressedClick" text="Details" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-							<font>
-								<Font size="17.0" />
-							</font>
-							<GridPane.margin>
-								<Insets bottom="10.0" />
-							</GridPane.margin>
-						</Label>
 						<Label fx:id="label01" text="Pret" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
 								<Font size="21.0" />
@@ -80,12 +74,8 @@
                               <Image url="@../../tabla_cutata-1.png" />
                            </image>
                         </ImageView>
+                        <Button layoutX="69.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedMetal" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" />
-                     </GridPane.margin>
-                  </Pane>
 						<Label fx:id="label10" alignment="CENTER" text="Denumire" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
@@ -93,14 +83,6 @@
 							<font>
 								<Font size="25.0" />
 							</font>
-						</Label>
-						<Label fx:id="label12" onMouseClicked="#onDetailsLabelPressedMetal" text="Details" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-							<font>
-								<Font size="17.0" />
-							</font>
-							<GridPane.margin>
-								<Insets bottom="10.0" />
-							</GridPane.margin>
 						</Label>
 						<Label fx:id="label11" text="Pret" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
@@ -117,12 +99,8 @@
                               <Image url="@../../MG_7313-LR-fara-suruburi.jpg" />
                            </image>
                         </ImageView>
+                        <Button layoutX="68.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedMetalTile" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" />
-                     </GridPane.margin>
-                  </Pane>
 						<Label fx:id="label30" alignment="CENTER" text="Denumire" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
@@ -130,14 +108,6 @@
 							<font>
 								<Font size="25.0" />
 							</font>
-						</Label>
-						<Label fx:id="label32" onMouseClicked="#onDetailsLabelPressedMetalTile" text="Details" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-							<font>
-								<Font size="17.0" />
-							</font>
-							<GridPane.margin>
-								<Insets bottom="10.0" />
-							</GridPane.margin>
 						</Label>
 						<Label fx:id="label31" text="Pret" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<GridPane.margin>
@@ -154,12 +124,8 @@
                               <Image url="@../../bpblackline-1.png" />
                            </image>
                         </ImageView>
+                        <Button layoutX="65.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedPlated" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" />
-                     </GridPane.margin>
-                  </Pane>
 						<Label fx:id="label20" alignment="CENTER" text="Denumire" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
@@ -167,14 +133,6 @@
 							<font>
 								<Font size="25.0" />
 							</font>
-						</Label>
-						<Label fx:id="label22" onMouseClicked="#onDetailsLabelPressedPlated" text="Details" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-							<font>
-								<Font size="17.0" />
-							</font>
-							<GridPane.margin>
-								<Insets bottom="10.0" />
-							</GridPane.margin>
 						</Label>
 						<Label fx:id="label21" text="Pret" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<font>
@@ -191,12 +149,8 @@
                               <Image url="@../../bg_image_overlay-sisteme-colectare.jpg" />
                            </image>
                         </ImageView>
+                        <Button layoutX="68.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedRain" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
                      </children></Pane>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.35" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: red;" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" />
-                     </GridPane.margin>
-                  </Pane>
 						<Label fx:id="label40" alignment="CENTER" text="Denumire" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="TOP">
 							<GridPane.margin>
 								<Insets top="30.0" />
@@ -204,14 +158,6 @@
 							<font>
 								<Font size="25.0" />
 							</font>
-						</Label>
-						<Label fx:id="label42" onMouseClicked="#onDetailsLabelPressedRain" text="Details" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-							<font>
-								<Font size="17.0" />
-							</font>
-							<GridPane.margin>
-								<Insets bottom="10.0" />
-							</GridPane.margin>
 						</Label>
 						<Label fx:id="label41" text="Pret" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 							<GridPane.margin>
@@ -240,8 +186,6 @@
 						</fx:define>
 					</children>
 				</GridPane>
-            <Button layoutX="979.0" layoutY="49.0" mnemonicParsing="false" onAction="#onRequestOfferButtonPressed" text="Request Offer" />
-            <Button layoutX="870.0" layoutY="49.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" text="Check Offers" />
 			</children>
 		</AnchorPane>
 	</children>
