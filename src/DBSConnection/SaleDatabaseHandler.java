@@ -2,6 +2,8 @@ package DBSConnection;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import model.MyDate;
 import model.Product;
@@ -22,9 +24,16 @@ public class SaleDatabaseHandler implements StoreSalePersistence{
 	            "SELECT sale_id, start_date, end_date, amount, isChangedValue,product_id FROM Sale;",
 	            statement -> {
 	            }, resultSet -> {
-	            	
-	            	String startDate = resultSet.getString("start_date");
-	            	String endDate = resultSet.getString("end_date");
+	            	Date date = resultSet.getDate("start_date");
+	            	Date date1 = resultSet.getDate("end_date");
+	            	Calendar calendar = Calendar.getInstance();
+	            	Calendar calendar1 = Calendar.getInstance();
+	            	calendar.setTime(date);
+	            	calendar1.setTime(date1);
+	            	System.out.println(date);
+	            	System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
+	            	MyDate startDate = new MyDate(calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR));
+	            	MyDate endDate = new MyDate(calendar1.get(Calendar.DAY_OF_MONTH),calendar1.get(Calendar.MONTH),calendar1.get(Calendar.YEAR));	            
 	            	Product product = null;
 	            	for(int i=0;i<products.size();i++)
 	            	{
@@ -34,15 +43,13 @@ public class SaleDatabaseHandler implements StoreSalePersistence{
 	            			break;
 	            		}
 	            	}
-	            	System.out.println("ssdass");
-	            	System.out.println(product);
-	               return new Sale(resultSet.getInt("sale_id"),new MyDate(startDate.charAt(8)+startDate.charAt(9),startDate.charAt(5)+startDate.charAt(6),
-	               +startDate.charAt(0)+startDate.charAt(1)+startDate.charAt(2)+startDate.charAt(3)),
-	            		   new MyDate(endDate.charAt(8)+endDate.charAt(9),endDate.charAt(5)+endDate.charAt(6),
-	    	               +endDate.charAt(0)+endDate.charAt(1)+endDate.charAt(2)+endDate.charAt(3)),
+	               return new Sale(resultSet.getInt("sale_id"),startDate,
+	            		   endDate,
 	                     product,
 	                     resultSet.getInt("amount"),
+	                     
 	                     resultSet.getBoolean("isChangedValue"));
+	               
 	            }));
 	}
 
