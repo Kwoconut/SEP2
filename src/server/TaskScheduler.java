@@ -35,12 +35,16 @@ public class TaskScheduler implements Runnable
 		   ArrayList<Sale> sales = model.getSales();
 		   for(int i=0;i<sales.size();i++)
 		   {
-			  if(sales.get(i).getEndDate().isAfter(now))
+			  if(now.isAfter(sales.get(i).getEndDate()))
 					  {
+				  System.out.println(sales.get(i));
 						  model.updateRemoveSale(sales.get(i));  //in server update product (including dtb and client)
 						  model.removeSale(sales.get(i));  // remove sale from server/db/clients cuz sale ended
 					  }
-			  else if(sales.get(i).getIsChangedValue()== false && sales.get(i).getStartDate().isAfter(now))
+		   }
+		   for(int i=0;i<sales.size();i++)
+		   {
+			  if(sales.get(i).getIsChangedValue()== false && now.isAfter(sales.get(i).getStartDate()))
 			  {
 				  model.updateAddSale(sales.get(i)); // in server update product(including dtb and client)
 				  model.ChangedValue(sales.get(i)); // set the boolean to true

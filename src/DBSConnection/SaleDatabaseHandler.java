@@ -30,10 +30,8 @@ public class SaleDatabaseHandler implements StoreSalePersistence{
 	            	Calendar calendar1 = Calendar.getInstance();
 	            	calendar.setTime(date);
 	            	calendar1.setTime(date1);
-	            	System.out.println(date);
-	            	System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
-	            	MyDate startDate = new MyDate(calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR));
-	            	MyDate endDate = new MyDate(calendar1.get(Calendar.DAY_OF_MONTH),calendar1.get(Calendar.MONTH),calendar1.get(Calendar.YEAR));	            
+	            	MyDate startDate = new MyDate(calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.YEAR));
+	            	MyDate endDate = new MyDate(calendar1.get(Calendar.DAY_OF_MONTH),calendar1.get(Calendar.MONTH)+1,calendar1.get(Calendar.YEAR));	            
 	            	Product product = null;
 	            	for(int i=0;i<products.size();i++)
 	            	{
@@ -73,7 +71,7 @@ public class SaleDatabaseHandler implements StoreSalePersistence{
 		query.executeUpdate(
 	            "UPDATE Sale SET isChangedValue = ? WHERE sale_id = ?",
 	            statement -> {
-	               statement.setBoolean(1, sale.getIsChangedValue());
+	               statement.setBoolean(1, true);
 	               statement.setInt(2, sale.getID());
 	            });
 

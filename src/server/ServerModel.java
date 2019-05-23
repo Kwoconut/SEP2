@@ -308,9 +308,9 @@ public void ChangedValue(Sale sale)
 	if(sales.get(i).equals(sale))
 	{
 		sales.get(i).setIsChangedValue();
-	}
 		break;
-	}
+	}	
+}
 	try {
 		databaseSaleAccess.changedValue(sale);
 	} catch (SQLException e) {
