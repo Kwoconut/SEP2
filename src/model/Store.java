@@ -20,6 +20,7 @@ public class Store implements Serializable, StoreModel
    {
       products = new ArrayList<Product>();
       offers = new ArrayList<Offer>();
+      sales = new ArrayList<Sale>();
    }
 
    public void addProduct(Product product)
@@ -246,7 +247,7 @@ public class Store implements Serializable, StoreModel
    @Override
    public void getSalesFromServer(ArrayList<Sale> sale)
    {
-      this.sales = sale;
+      this.sales = sale;;
       support.firePropertyChange("SALESLIST", "", sale);
 
    }

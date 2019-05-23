@@ -53,11 +53,10 @@ public class ViewModelManageSalesList implements PropertyChangeListener
    @SuppressWarnings("unchecked")
    public void executePropertyChange(PropertyChangeEvent evt)
    {
-      if (evt.getPropertyName().equals("SALELIST"))
+      if (evt.getPropertyName().equals("SALESLIST"))
       {
          ArrayList<Sale> elements = new ArrayList<Sale>();
          elements = (ArrayList<Sale>) evt.getNewValue();
-         sales.clear();
          for (Sale element : elements)
          {
             sales.add(new ViewModelSale(model, element));

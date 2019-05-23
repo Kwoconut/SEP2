@@ -1,6 +1,8 @@
 package model;
 
-public class Sale
+import java.io.Serializable;
+
+public class Sale implements Serializable
 {
    private int ID;
    private MyDate startDate;

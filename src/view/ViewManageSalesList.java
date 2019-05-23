@@ -124,7 +124,6 @@ public class ViewManageSalesList implements View
       salePrice.setCellValueFactory(cellData -> cellData.getValue()
             .getProductProperty().get().getPriceProperty());
 
-
       ObservableList<ViewModelSale> sales = FXCollections.observableArrayList();
       sales = this.viewModel.getSales();
 
@@ -141,7 +140,8 @@ public class ViewManageSalesList implements View
                               return true;
                            }
                            String lowerCaseFilter = newValue.toLowerCase();
-                           if (sale.getProductProperty().getName()
+                           if (sale.getProductProperty().get().getNameProperty()
+                                 .getValue().toLowerCase()
                                  .contains(lowerCaseFilter))
                            {
                               return true;
@@ -154,7 +154,7 @@ public class ViewManageSalesList implements View
          sortedSaleData.comparatorProperty()
                .bind(saleTable.comparatorProperty());
       });
-      
+
       saleTable.setItems(filteredSaleData);
 
    }

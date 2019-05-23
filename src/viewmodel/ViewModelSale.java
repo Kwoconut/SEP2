@@ -39,6 +39,7 @@ public class ViewModelSale
       endDateProperty = new SimpleObjectProperty<MyDate>(sale.getEndDate());
       productProperty = new SimpleObjectProperty<ViewModelProduct>(
             new ViewModelProduct(sale.getProduct()));
+      amountProperty = new SimpleIntegerProperty(sale.getAmount());
       IDProperty = new SimpleIntegerProperty(sale.getID());
 
    }

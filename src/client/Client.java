@@ -28,7 +28,7 @@ public class Client implements IClient, RIClient, Serializable
    {
       this.model = model;
       this.model.setClient(this);
-      access = (ServerAccess) Naming.lookup("rmi://localhost/store");
+      access = (ServerAccess) Naming.lookup("rmi://10.152.202.74:1099/store");
       UnicastRemoteObject.exportObject(this, 0);
       RIServerWrite server = access.acquireWrite();
       server.addClient(this);
