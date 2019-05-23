@@ -18,6 +18,7 @@ public class ViewModelSale
    private ObjectProperty<MyDate> endDateProperty;
    private ObjectProperty<ViewModelProduct> productProperty;
    private IntegerProperty amountProperty;
+   private IntegerProperty IDProperty;
    private SSalesModel model;
 
    public ViewModelSale(SSalesModel model, ViewModelProduct product)
@@ -26,6 +27,7 @@ public class ViewModelSale
       startDateProperty = new SimpleObjectProperty<MyDate>();
       endDateProperty = new SimpleObjectProperty<MyDate>();
       amountProperty = new SimpleIntegerProperty();
+      IDProperty = new SimpleIntegerProperty();
       productProperty = new SimpleObjectProperty<ViewModelProduct>();
 
    }
@@ -37,6 +39,7 @@ public class ViewModelSale
       endDateProperty = new SimpleObjectProperty<MyDate>(sale.getEndDate());
       productProperty = new SimpleObjectProperty<ViewModelProduct>(
             new ViewModelProduct(sale.getProduct()));
+      IDProperty = new SimpleIntegerProperty(sale.getID());
 
    }
 
@@ -58,6 +61,11 @@ public class ViewModelSale
    public StringProperty getEndDateStringProperty()
    {
       return new SimpleStringProperty(endDateProperty.get().toString());
+   }
+
+   public IntegerProperty getIDProperty()
+   {
+      return IDProperty;
    }
 
    public ObjectProperty<ViewModelProduct> getProductProperty()

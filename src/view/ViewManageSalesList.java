@@ -124,7 +124,6 @@ public class ViewManageSalesList implements View
       salePrice.setCellValueFactory(cellData -> cellData.getValue()
             .getProductProperty().get().getPriceProperty());
 
-      saleTable.setItems(this.viewModel.getSales());
 
       ObservableList<ViewModelSale> sales = FXCollections.observableArrayList();
       sales = this.viewModel.getSales();
@@ -155,6 +154,8 @@ public class ViewManageSalesList implements View
          sortedSaleData.comparatorProperty()
                .bind(saleTable.comparatorProperty());
       });
+      
+      saleTable.setItems(filteredSaleData);
 
    }
 

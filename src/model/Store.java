@@ -214,30 +214,33 @@ public class Store implements Serializable, StoreModel
                product.getPriceProperty().get(),
                product.getColourProperty().get(),
                product.getTypeProperty().get());
-         Sale sale = new Sale(IDGenerator.generateSaleID(sales),startDate, endDate, sampleProduct, amount);
-         
-          try {
-        	  sales.add(sale);
-			client.sendSaleToServer(sale);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+         Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
+               endDate, sampleProduct, amount);
+
+         try
+         {
+            client.sendSaleToServer(sale);
+         }
+         catch (RemoteException e)
+         {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+         }
       }
    }
 
    @Override
-   public void removeSale(int ID,MyDate startDate, MyDate endDate,
+   public void removeSale(int ID, MyDate startDate, MyDate endDate,
          ViewModelProduct product, int amount) throws RemoteException
    {
 
       Product sampleProduct = new Product(product.getIdProperty().get(),
             product.getNameProperty().get(), product.getPriceProperty().get(),
             product.getColourProperty().get(), product.getTypeProperty().get());
-      Sale sale = new Sale(ID,startDate, endDate, sampleProduct, amount);
+      Sale sale = new Sale(ID, startDate, endDate, sampleProduct, amount);
       System.out.println(
             "Removing Sale with product " + sale.getProduct().getName());
-       client.removeSaleFromServer(sale);
+      client.removeSaleFromServer(sale);
    }
 
    @Override
