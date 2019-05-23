@@ -20,4 +20,6 @@ public interface StoreSalePersistence {
 
 	void updateAddSale(int newPrice, int product_id)throws SQLException;
 
+	void clearSales() throws SQLException;
+
 }

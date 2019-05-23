@@ -214,7 +214,8 @@ public class Store implements Serializable, StoreModel
                product.getNameProperty().get(),
                product.getPriceProperty().get(),
                product.getColourProperty().get(),
-               product.getTypeProperty().get());
+               product.getTypeProperty().get(),
+               product.getImageIDProperty().get());
          Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
                endDate, sampleProduct, amount);
 
@@ -237,7 +238,8 @@ public class Store implements Serializable, StoreModel
 
       Product sampleProduct = new Product(product.getIdProperty().get(),
             product.getNameProperty().get(), product.getPriceProperty().get(),
-            product.getColourProperty().get(), product.getTypeProperty().get());
+            product.getColourProperty().get(), product.getTypeProperty().get(),
+            product.getImageIDProperty().get());
       Sale sale = new Sale(ID, startDate, endDate, sampleProduct, amount);
       System.out.println(
             "Removing Sale with product " + sale.getProduct().getName());

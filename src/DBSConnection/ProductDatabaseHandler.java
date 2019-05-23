@@ -18,13 +18,15 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    public ArrayList<Product> loadProducts() throws SQLException
    {
       return new ArrayList<Product>(query.map(
-            "SELECT product_id, name, price, color, product_type FROM Product;",
+            "SELECT product_id, name, price, color, product_type, imageID FROM Product;",
             statement -> {
             }, resultSet -> {
                return new Product(resultSet.getInt("product_id"),
-                     resultSet.getString("name"), resultSet.getInt("price"),
+                     resultSet.getString("name"), 
+                     resultSet.getInt("price"),
                      resultSet.getString("color"),
-                     resultSet.getString("product_type"));
+                     resultSet.getString("product_type"),
+                     resultSet.getString("imageID"));
             }));
    }
 
@@ -32,13 +34,14 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    public void addProduct(Product product) throws SQLException
    {
       query.executeUpdate(
-            "INSERT INTO Product (product_id, name, price, color, product_type) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO Product (product_id, name, price, color, product_type, imageID) VALUES (?, ?, ?, ?, ?, ?)",
             statement -> {
                statement.setInt(1, product.getID());
                statement.setString(2, product.getName());
                statement.setInt(3, product.getPrice());
                statement.setString(4, product.getColour());
                statement.setString(5, product.getType());
+               statement.setString(6, product.getImageID());
             });
    }
 
@@ -46,13 +49,14 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    public void updateProduct(Product product) throws SQLException
    {
       query.executeUpdate(
-            "UPDATE Product SET name = ?, price = ?, color = ?, product_type = ? WHERE product_id = ?",
+            "UPDATE Product SET name = ?, price = ?, color = ?, product_type = ?, imageID = ?, WHERE product_id = ?",
             statement -> {
                statement.setString(1, product.getName());
                statement.setInt(2, product.getPrice());
                statement.setString(3, product.getColour());
                statement.setString(4, product.getType());
-               statement.setInt(5, product.getID());
+               statement.setString(5, product.getImageID());
+               statement.setInt(6, product.getID());
             });
    }
 
@@ -83,7 +87,7 @@ public Product getProductByID(int ID) throws SQLException
 		if(products.get(i).getID()== ID)
 		{
 			product= new Product(products.get(i).getID(),products.get(i).getName(),
-					products.get(i).getPrice(),products.get(i).getColour(),products.get(i).getType());
+					products.get(i).getPrice(),products.get(i).getColour(),products.get(i).getType(),products.get(i).getImageID());
 			break;
 		}
 	}

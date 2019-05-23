@@ -108,4 +108,11 @@ public class SaleDatabaseHandler implements StoreSalePersistence{
 	               statement.setInt(2, product_id);
 	            });	
 	}
+	
+	   @Override
+	   public void clearSales() throws SQLException
+	   {
+	      query.executeUpdate("DELETE FROM Sales", statement -> {
+	      });
+	   }
 }

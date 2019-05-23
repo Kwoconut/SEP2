@@ -8,6 +8,7 @@ public class Product implements Serializable
    private String name;
    private String colour;
    private String type;
+   private String imageID;
    private int price;
    public static String TYPE_PLATED_SHEET = "Plated Sheet";
    public static String TYPE_METAL_SHEET = "Metal Sheet";
@@ -16,33 +17,24 @@ public class Product implements Serializable
    public static String TYPE_METAL_TILE = "Metal Tile";
 
    public Product(int ID, String name, int price, String colour,
-         String type)
+         String type, String imageID)
    {
       this.ID = ID;
       this.name = name;
       this.price = price;
       this.colour = colour;
       this.type = type;
-   }
-   
-   public Product(String name, int price, String colour,
-         String type)
-   {
-      this.name = name;
-      this.price = price;
-      this.colour = colour;
-      this.type = type;
-   }
-
-   public Product(String name, int price)
-   {
-      this.name = name;
-      this.price = price;
+      this.imageID = imageID;
    }
    
    public int getID()
    {
       return ID;
+   }
+   
+   public String getImageID()
+   {
+	   return imageID;
    }
 
    public void setID(int iD)
