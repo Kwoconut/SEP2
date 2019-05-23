@@ -10,14 +10,13 @@ import model.Sale;
 public class SaleDatabaseHandler implements StoreSalePersistence{
 	
 	private DBSQuery query;
-	private ProductDatabaseHandler productDatabase;
 
-	public SaleDatabaseHandler(DBSQuery queryHandler) {
+	public SaleDatabaseHandler(DBSQuery queryHandler) throws SQLException {
 		this.query = queryHandler;
 	}
 	
 	@Override
-	public ArrayList<Sale> loadSales() throws SQLException
+	public ArrayList<Sale> loadSales(ArrayList<Product> products) throws SQLException
 	{
 		return new ArrayList<Sale>(query.map(
 	            "SELECT sale_id, start_date, end_date, amount, isChangedValue,product_id FROM Sale;",
@@ -27,7 +26,17 @@ public class SaleDatabaseHandler implements StoreSalePersistence{
 	            	String startDate = resultSet.getString("start_date");
 	            	String endDate = resultSet.getString("end_date");
 	            	int product_id = resultSet.getInt("product_id");
-	            	Product product = productDatabase.getProductByID(product_id);
+	            	Product product = null;
+	            	for(int i=0;i<products.size();i++)
+	            	{
+	            		if(products.get(i).getID()== resultSet.getInt("product_id"))
+	            		{
+	            			product = products.get(i);
+	            			break;
+	            		}
+	            	}
+	            	System.out.println("ssdass");
+	            	System.out.println(product);
 	               return new Sale(resultSet.getInt("sale_id"),new MyDate(startDate.charAt(8)+startDate.charAt(9),startDate.charAt(5)+startDate.charAt(6),
 	               +startDate.charAt(0)+startDate.charAt(1)+startDate.charAt(2)+startDate.charAt(3)),
 	            		   new MyDate(endDate.charAt(8)+endDate.charAt(9),endDate.charAt(5)+endDate.charAt(6),

@@ -37,13 +37,13 @@ public class ServerModel
       queryHandler = new DBSQuery("jdbc:postgresql://localhost:5432/postgres",
             "postgres", "password");
       databaseProductAccess = new ProductDatabaseHandler(queryHandler);
+      loadProducts();
       databaseOfferAccess = new OfferDatabaseHandler(queryHandler);
+      loadOffers();
       databaseSaleAccess = new SaleDatabaseHandler(queryHandler);
+      loadSales();
       // clearProducts();
       // sampleDataForCreation();
-      loadProducts();
-      loadOffers();
-      //loadSales();
    }
 
    // add data for first setup
@@ -106,7 +106,7 @@ public class ServerModel
    public void loadSales()
    {
       try {
-		sales = databaseSaleAccess.loadSales();
+		sales = databaseSaleAccess.loadSales(products);
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
