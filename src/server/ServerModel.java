@@ -293,7 +293,7 @@ public class ServerModel
       {
          if (products.get(i).getID() == sale.getProduct().getID())
          {
-            newPrice = (sale.getPrice() - sale.getPrice()) / sale.getAmount();
+            newPrice = (sale.getPrice() - (sale.getPrice()) / sale.getAmount());
             product_id = sale.getProduct().getID();
             products.get(i).setPrice(newPrice);
             break;
@@ -335,7 +335,6 @@ public class ServerModel
       try
       {
          databaseSaleAccess.changedValue(sale);
-         System.out.println("1111");
       }
       catch (SQLException e)
       {
@@ -343,7 +342,6 @@ public class ServerModel
          e.printStackTrace();
       }
       support.firePropertyChange("CHANGEDVALUE", null, sendSale);
-      System.out.println("2222");
 
    }
 

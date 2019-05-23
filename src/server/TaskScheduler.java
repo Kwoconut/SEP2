@@ -37,7 +37,6 @@ public class TaskScheduler implements Runnable
 		   {
 			  if(now.isAfter(sales.get(i).getEndDate()))
 					  {
-				  System.out.println(sales.get(i));
 						  model.updateRemoveSale(sales.get(i));  //in server update product (including dtb and client)
 						  model.removeSale(sales.get(i));  // remove sale from server/db/clients cuz sale ended
 					  }
