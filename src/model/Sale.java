@@ -65,14 +65,7 @@ public class Sale implements Serializable
    }
    public void setIsChangedValue()
    {
-	   if (isChangedValue==true)
-			   {
-		   isChangedValue = false;
-			   }
-	   else if (isChangedValue==false)
-	   {
-		   isChangedValue = true;
-	   }
+	   isChangedValue = true;
    }
 
    public boolean equals(Object obj)
