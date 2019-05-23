@@ -15,13 +15,6 @@ public interface SSalesModel
    void removeSale(int ID,MyDate startDate, MyDate endDate, ViewModelProduct product, int amount) throws RemoteException;
    
    void addListener(PropertyChangeListener listener);
-   
-   void removeSaleFromServer(Sale sale);
-   
-   void addSaleFromServer(Sale sale);
-   
-   void getSalesFromServer(ArrayList<Sale> sale);
-   
 
    ArrayList<Product> getProducts();
 }
