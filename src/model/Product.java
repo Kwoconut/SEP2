@@ -78,14 +78,16 @@ public class Product implements Serializable
       return name.equals(other.getName())
             && colour.equals(other.getColour())
 
-            && type.equals(other.getType()) && price == other.getPrice();
+            && type.equals(other.getType()) && price == other.getPrice()
+            
+            && imageID.equals(other.getImageID());
    }
 
    public String toString()
    {
       String s = "";
 
-      s += name + "\n" + ID + "\n" + colour + "\n" + type + "\n" + price;
+      s += name + "\n" + ID + "\n" + colour + "\n" + type + "\n" + price + "\n" + imageID;
       return s;
    }
 
