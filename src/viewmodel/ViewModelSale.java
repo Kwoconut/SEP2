@@ -1,7 +1,9 @@
 package viewmodel;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,6 +21,7 @@ public class ViewModelSale
    private ObjectProperty<ViewModelProduct> productProperty;
    private IntegerProperty amountProperty;
    private IntegerProperty IDProperty;
+   private BooleanProperty isAvailable;
    private SSalesModel model;
 
    public ViewModelSale(SSalesModel model, ViewModelProduct product)
@@ -29,6 +32,7 @@ public class ViewModelSale
       amountProperty = new SimpleIntegerProperty();
       IDProperty = new SimpleIntegerProperty();
       productProperty = new SimpleObjectProperty<ViewModelProduct>();
+      isAvailable = new SimpleBooleanProperty();
 
    }
 
@@ -41,6 +45,7 @@ public class ViewModelSale
             new ViewModelProduct(sale.getProduct()));
       amountProperty = new SimpleIntegerProperty(sale.getAmount());
       IDProperty = new SimpleIntegerProperty(sale.getID());
+      isAvailable = new SimpleBooleanProperty(sale.getIsChangedValue());
 
    }
 
@@ -79,6 +84,11 @@ public class ViewModelSale
       return amountProperty;
    }
 
+   public BooleanProperty getBooleanProperty()
+   {
+      return isAvailable;
+   }
+
    public void addSale()
    {
       model.addSale(startDateProperty.get(), endDateProperty.get(),
@@ -95,6 +105,8 @@ public class ViewModelSale
       return other.getStartDateProperty().get().equals(startDateProperty.get())
             && other.getEndDateProperty().get().equals(endDateProperty.get())
             && other.getProductProperty().get().equals(productProperty.get())
-            && other.getAmountProperty().get() == amountProperty.get();
+            && other.getAmountProperty().get() == amountProperty.get()
+            && other.getBooleanProperty().get() == isAvailable.get()
+            && other.getIDProperty().get() == IDProperty.get();
    }
 }

@@ -14,12 +14,12 @@ import viewmodel.ViewModelStore;
 
 public class ViewStore implements View
 {
-   
+
    @FXML
    ArrayList<Label> nameLabelList;
-   
+
    @FXML
-   ArrayList<Label> priceLabelList;   
+   ArrayList<Label> priceLabelList;
 
    private ViewModelStore model;
 
@@ -36,17 +36,17 @@ public class ViewStore implements View
       this.view = view;
       this.scene = scene;
       this.title = title;
-      for (int i = 0 ; i<5;i++)
+      for (int i = 0; i < 5; i++)
       {
          nameLabelList.get(i).textProperty().bind(model.getNameProperty(i));
          priceLabelList.get(i).textProperty().bind(model.getPriceProperty(i));
       }
-         
+
    }
-   
+
    public void onDetailsLabelPressedClick() throws IOException
    {
-      
+
       model.getProduct(Product.TYPE_CLICK_SHEET);
       getScene().getWindow().hide();
       view.setWindow("productList");
@@ -58,48 +58,57 @@ public class ViewStore implements View
       getScene().getWindow().hide();
       view.setWindow("productList");
    }
+
    public void onDetailsLabelPressedPlated() throws IOException
    {
       model.getProduct(Product.TYPE_PLATED_SHEET);
       getScene().getWindow().hide();
       view.setWindow("productList");
-      
+
    }
+
    public void onDetailsLabelPressedMetalTile() throws IOException
    {
       model.getProduct(Product.TYPE_METAL_TILE);
       getScene().getWindow().hide();
       view.setWindow("productList");
    }
+
    public void onDetailsLabelPressedRain() throws IOException
    {
       model.getProduct(Product.TYPE_RAIN_SYSTEM);
       getScene().getWindow().hide();
       view.setWindow("productList");
    }
-   
+
    public void onCheckOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
       view.setWindow("offerlist");
    }
-   
+
    public void onHomeButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
       view.setWindow("start");
    }
-   
+
    public void onRequestOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
       view.setWindow("offer");
    }
-   
+
    public void onManageSaleButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
       view.setWindow("saleslist");
+   }
+
+   public void onCheckSalesButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("sales");
    }
 
    public String getTitle()
@@ -108,7 +117,7 @@ public class ViewStore implements View
    }
 
    public Scene getScene()
-   {        
+   {
       return scene;
    }
 

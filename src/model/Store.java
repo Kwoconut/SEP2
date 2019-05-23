@@ -249,7 +249,8 @@ public class Store implements Serializable, StoreModel
    @Override
    public void getSalesFromServer(ArrayList<Sale> sale)
    {
-      this.sales = sale;;
+      this.sales = sale;
+      System.out.println(sale.get(0).getIsChangedValue());
       support.firePropertyChange("SALESLIST", "", sale);
 
    }

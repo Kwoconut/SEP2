@@ -27,8 +27,9 @@
                   </ImageView>
                   <Button layoutX="1004.0" layoutY="60.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Check Offers" />
                   <Button layoutX="307.0" layoutY="60.0" mnemonicParsing="false" onAction="#onHomeButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Home" />
-                  <Button layoutX="448.0" layoutY="60.0" mnemonicParsing="false" onAction="#onRequestOfferButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Request Offer" />
+                  <Button layoutX="590.0" layoutY="60.0" mnemonicParsing="false" onAction="#onCheckSalesButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Check Sales" />
                   <Button layoutX="862.0" layoutY="60.0" mnemonicParsing="false" onAction="#onManageSaleButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Manage Sales" />
+                  <Button layoutX="448.0" layoutY="60.0" mnemonicParsing="false" onAction="#onRequestOfferButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Request Offer" />
                </children>
             </Pane>
 				<GridPane hgap="10.0" layoutX="74.0" layoutY="161.0" prefHeight="393.0" prefWidth="1064.0">
