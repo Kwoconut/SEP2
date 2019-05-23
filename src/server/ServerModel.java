@@ -303,21 +303,25 @@ public void updateAddSale(Sale sale) {
 
 public void ChangedValue(Sale sale) 
 {
+	Sale sendSale = null;
 	for(int i=0;i<sales.size();i++)
 {
 	if(sales.get(i).equals(sale))
 	{
 		sales.get(i).setIsChangedValue();
+		sendSale = sales.get(i);
 		break;
 	}	
 }
 	try {
 		databaseSaleAccess.changedValue(sale);
+		System.out.println("1111");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    support.firePropertyChange("CHANGEDVALUE", null, sale);
+    support.firePropertyChange("CHANGEDVALUE", null, sendSale);
+    System.out.println("2222");
 	
 }
 
