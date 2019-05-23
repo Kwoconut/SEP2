@@ -26,8 +26,8 @@ public class MainViewViewModel
       viewModelRequestOffer = new ViewModelRequestOffer(model);
       viewModelOfferList = new ViewModelOfferList(model);
       viewModelManageOffer = new ViewModelManageOffer(model);
-      viewModelManageSalesList = new ViewModelManageSalesList(model, model);
       viewModelSaleList = new ViewModelSaleList(model);
+      viewModelManageSalesList = new ViewModelManageSalesList(model, model);
    }
 
    public ViewModelProductList getViewModelProductList()

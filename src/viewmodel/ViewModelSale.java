@@ -1,9 +1,11 @@
 package viewmodel;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -22,6 +24,7 @@ public class ViewModelSale
    private IntegerProperty amountProperty;
    private IntegerProperty IDProperty;
    private BooleanProperty isAvailable;
+   private DoubleProperty initialPrice;
    private SSalesModel model;
 
    public ViewModelSale(SSalesModel model, ViewModelProduct product)
@@ -33,6 +36,7 @@ public class ViewModelSale
       IDProperty = new SimpleIntegerProperty();
       productProperty = new SimpleObjectProperty<ViewModelProduct>();
       isAvailable = new SimpleBooleanProperty();
+      initialPrice = new SimpleDoubleProperty();
 
    }
 
@@ -46,7 +50,13 @@ public class ViewModelSale
       amountProperty = new SimpleIntegerProperty(sale.getAmount());
       IDProperty = new SimpleIntegerProperty(sale.getID());
       isAvailable = new SimpleBooleanProperty(sale.getIsChangedValue());
+      initialPrice = new SimpleDoubleProperty(sale.getInitialPrice());
 
+   }
+
+   public DoubleProperty getInitialPriceProperty()
+   {
+      return initialPrice;
    }
 
    public ObjectProperty<MyDate> getStartDateProperty()

@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Sale implements Serializable
 {
+   /**
+    * 
+    */
+   private static final long serialVersionUID = 2322971685758964438L;
    private int ID;
    private MyDate startDate;
    private MyDate endDate;
@@ -11,26 +15,28 @@ public class Sale implements Serializable
    private int amount;
    private boolean isChangedValue;
 
-   public Sale(int ID,MyDate startDate, MyDate endDate, Product product, int amount)
+   public Sale(int ID, MyDate startDate, MyDate endDate, Product product,
+         int amount)
    {
-	  this.ID=ID;
+      this.ID = ID;
       this.startDate = startDate;
       this.endDate = endDate;
       this.product = product;
       this.amount = amount;
       isChangedValue = false;
    }
-   
-   public Sale(int ID,MyDate startDate, MyDate endDate, Product product, int amount,boolean isChangedValue)
+
+   public Sale(int ID, MyDate startDate, MyDate endDate, Product product,
+         int amount, boolean isChangedValue)
    {
-	  this.ID=ID;
+      this.ID = ID;
       this.startDate = startDate;
       this.endDate = endDate;
       this.product = product;
       this.amount = amount;
       this.isChangedValue = isChangedValue;
    }
-  
+
    public Product getProduct()
    {
       return product;
@@ -50,22 +56,30 @@ public class Sale implements Serializable
    {
       return product.getPrice();
    }
-   
-   public int getAmount() {
+
+   public int getAmount()
+   {
       return amount;
    }
-   
+
    public boolean getIsChangedValue()
    {
-	   return isChangedValue;
+      return isChangedValue;
    }
-   public int getID() 
+
+   public int getID()
    {
-		return ID;
+      return ID;
    }
+
    public void setIsChangedValue()
    {
-	   isChangedValue = true;
+      isChangedValue = true;
+   }
+
+   public double getInitialPrice()
+   {
+      return (double) product.getPrice() / (100 - amount) * 100;
    }
 
    public boolean equals(Object obj)
@@ -75,17 +89,16 @@ public class Sale implements Serializable
          return false;
       }
       Sale other = (Sale) obj;
-      
+
       return product.equals(other.product) && startDate.equals(other.startDate)
             && endDate.equals(other.endDate);
    }
-   
-   public String toString() {
+
+   public String toString()
+   {
       String s = "";
-      s+= startDate+""+endDate+""+product;
+      s += startDate + "" + endDate + "" + product;
       return s;
    }
 
-
-   
 }

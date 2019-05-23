@@ -72,8 +72,8 @@ public class ViewProductList implements View
          stackPane.get(i).setPrefWidth(212.8);
          stackPane.get(i).setPrefHeight(393);
          stackPane.get(i).setStyle("-fx-background-color: lightgrey");
-         names.get(i).setFont(Font.font(30));
-         prices.get(i).setFont(Font.font(30));
+         names.get(i).setFont(Font.font(20));
+         prices.get(i).setFont(Font.font(20));
          names.get(i).setPadding(new Insets(40, 10, 10, 10));
          prices.get(i).setPadding(new Insets(10, 10, 40, 10));
          stackPane.get(i).getChildren().addAll(names.get(i));
@@ -114,6 +114,12 @@ public class ViewProductList implements View
    {
       getScene().getWindow().hide();
       view.setWindow("saleslist");
+   }
+   
+   public void onCheckSalesButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("sales");
    }
 
 }

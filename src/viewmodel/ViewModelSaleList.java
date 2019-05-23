@@ -2,6 +2,7 @@ package viewmodel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
@@ -17,7 +18,7 @@ public class ViewModelSaleList implements PropertyChangeListener
    private ObservableList<ViewModelSale> sales;
    private SSalesModel model;
 
-   public ViewModelSaleList(SSalesModel model)
+   public ViewModelSaleList(SSalesModel model) throws RemoteException
    {
       this.model = model;
       this.sales = FXCollections.observableArrayList();
@@ -32,7 +33,7 @@ public class ViewModelSaleList implements PropertyChangeListener
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
-      Platform.runLater(() -> executePropertyChange(evt));
+      Platform.runLater(() ->executePropertyChange(evt));
    }
 
    @SuppressWarnings("unchecked")
@@ -42,23 +43,15 @@ public class ViewModelSaleList implements PropertyChangeListener
       {
          ArrayList<Sale> elements = new ArrayList<Sale>();
          elements = (ArrayList<Sale>) evt.getNewValue();
-         sales.clear();
          for (Sale element : elements)
          {
-            if (element.getIsChangedValue() == true)
-            {
-               sales.add(new ViewModelSale(model, element));
-               System.out.println("--------");
-            }
+            sales.add(new ViewModelSale(model, element));
          }
       }
       else if (evt.getPropertyName().equals("NEWSALE"))
       {
          Sale element = (Sale) evt.getNewValue();
-         if (element.getIsChangedValue() == true)
-         {
-            sales.add(new ViewModelSale(model, element));
-         }
+         sales.add(new ViewModelSale(model, element));
       }
       else if (evt.getPropertyName().equals("MINUSSALE"))
       {

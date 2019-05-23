@@ -106,6 +106,12 @@ public class ViewRequestOffer implements View
       getScene().getWindow().hide();
       view.setWindow("saleslist");
    }
+   
+   public void onCheckSalesButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("sales");
+   }
 
    public String getTitle()
    {

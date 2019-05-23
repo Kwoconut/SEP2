@@ -31,6 +31,7 @@
             <Button layoutX="307.0" layoutY="60.0" mnemonicParsing="false" onAction="#onHomeButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Home" />
             <Button layoutX="448.0" layoutY="60.0" mnemonicParsing="false" onAction="#onRequestOfferButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Request Offer" />
             <Button layoutX="865.0" layoutY="60.0" mnemonicParsing="false" onAction="#onManageSaleButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Manage Sale" />
+            <Button layoutX="589.0" layoutY="60.0" mnemonicParsing="false" onAction="#onCheckSalesButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Check Sales" />
          </children>
       </Pane>
       <Button layoutX="531.0" layoutY="615.0" mnemonicParsing="false" onAction="#onSubmitButton" prefHeight="45.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Submit" />

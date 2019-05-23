@@ -192,6 +192,12 @@ public class ViewManageSalesList implements View
       getScene().getWindow().hide();
       view.setWindow("saleslist");
    }
+   
+   public void onCheckSalesButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("sales");
+   }
 
    public void onCreateSaleButtonPressed()
    {

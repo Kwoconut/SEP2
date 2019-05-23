@@ -36,6 +36,11 @@ public class MainView
          ViewProductList viewProductList = (ViewProductList) view;
          viewProductList.refresh();
       }
+      else if (id.equals("sales"))
+      {
+         ViewSalesList viewSalesList = (ViewSalesList) view;
+         viewSalesList.refresh();
+      }
 
       primaryStage.setScene(view.getScene());
       primaryStage.setTitle(view.getTitle());

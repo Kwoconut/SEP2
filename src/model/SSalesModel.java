@@ -17,4 +17,6 @@ public interface SSalesModel
    void addListener(PropertyChangeListener listener);
 
    ArrayList<Product> getProducts();
+   
+   ArrayList<Sale> getSales();
 }

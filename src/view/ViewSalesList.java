@@ -50,6 +50,7 @@ public class ViewSalesList implements View
    public void refresh()
    {
       ObservableList<ViewModelSale> sales = this.viewModel.getSales();
+      System.out.println(sales);
 
       ObservableList<StackPane> stackPane = FXCollections.observableArrayList();
       ObservableList<Label> names = FXCollections.observableArrayList();
@@ -68,7 +69,7 @@ public class ViewSalesList implements View
       {
          names.add(new Label(sales.get(i).getProductProperty().get()
                .getNameProperty().get()));
-         prices.add(new Label(Integer.toString(
+         prices.add(new Label(Double.toString(sales.get(i).getInitialPriceProperty().get()) + "DKK - " + Integer.toString(
                sales.get(i).getProductProperty().get().getPriceProperty().get())
                + "DKK"));
          salesLabel
@@ -78,9 +79,9 @@ public class ViewSalesList implements View
          stackPane.get(i).setPrefWidth(212.8);
          stackPane.get(i).setPrefHeight(393);
          stackPane.get(i).setStyle("-fx-background-color: lightgrey");
-         names.get(i).setFont(Font.font(30));
-         prices.get(i).setFont(Font.font(30));
-         salesLabel.get(i).setFont(Font.font(20));
+         names.get(i).setFont(Font.font(20));
+         prices.get(i).setFont(Font.font(20));
+         salesLabel.get(i).setFont(Font.font(15));
          names.get(i).setPadding(new Insets(40, 10, 10, 10));
          prices.get(i).setPadding(new Insets(10, 10, 40, 10));
          prices.get(i).setPadding(new Insets(10, 10, 20, 10));
@@ -124,5 +125,11 @@ public class ViewSalesList implements View
    {
       getScene().getWindow().hide();
       view.setWindow("saleslist");
+   }
+   
+   public void onCheckSalesButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      view.setWindow("sales");
    }
 }
