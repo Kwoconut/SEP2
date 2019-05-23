@@ -25,7 +25,6 @@ public class SaleDatabaseHandler implements StoreSalePersistence{
 	            	
 	            	String startDate = resultSet.getString("start_date");
 	            	String endDate = resultSet.getString("end_date");
-	            	int product_id = resultSet.getInt("product_id");
 	            	Product product = null;
 	            	for(int i=0;i<products.size();i++)
 	            	{
