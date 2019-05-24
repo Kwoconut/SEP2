@@ -102,4 +102,36 @@ public static int generateSaleID(ArrayList<Sale> sales) {
     return sales.size() + 1;
 }
 
+private static int generateReviewMaxID(ArrayList<Review> reviews)
+{
+   int maxi = 1;
+   for (Review review : reviews)
+   {
+      if (review.getID() > maxi)
+      {
+         maxi = review.getID();
+      }
+   }
+   return maxi;
+}
+
+public static int generateReviewID(ArrayList<Review> reviews) {
+	for (int i = 1; i < generateReviewMaxID(reviews); i++)
+ {
+    boolean flag = false;
+    for (Review review : reviews)
+    {
+       if (review.getID() == i)
+       {
+          flag = true;
+       }
+    }
+    if (!flag)
+    {
+       return i;
+    }
+ }
+ return reviews.size() + 1;
+}
+
 }

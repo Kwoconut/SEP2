@@ -3,6 +3,7 @@ package server;
 import java.rmi.RemoteException;
 import client.RIClient;
 import model.Offer;
+import model.Review;
 import model.Sale;
 
 public interface RIServerWrite extends RIServerRead
@@ -22,5 +23,9 @@ public interface RIServerWrite extends RIServerRead
    void saleAddUpdate(Sale sale) throws RemoteException;
 
    void changeValue(Sale sale) throws RemoteException;
+   
+   void sendReview(Review review) throws RemoteException;
+   
+   void removeReview(Review review) throws RemoteException;
 }
 	

@@ -110,7 +110,7 @@ public class SaleDatabaseHandler implements StoreSalePersistence{
 	   @Override
 	   public void clearSales() throws SQLException
 	   {
-	      query.executeUpdate("DELETE FROM Sales", statement -> {
+	      query.executeUpdate("DELETE FROM Sale", statement -> {
 	      });
 	   }
 }
