@@ -3,12 +3,14 @@ package view;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 import model.MyDate;
 import viewmodel.MainViewViewModel;
@@ -61,26 +63,37 @@ public class ViewCreateSale implements View
       this.view = view;
       this.scene = scene;
       this.title = title;
+
+   }
+   
+   public void refresh()
+   {
       productIDLabel.textProperty().bind(this.viewModel.getProductProperty()
             .get().getIdProperty().asString());
+
       productNameLabel.textProperty()
             .bind(this.viewModel.getProductProperty().get().getNameProperty());
+
       productTypeLabel.textProperty()
             .bind(this.viewModel.getProductProperty().get().getTypeProperty());
+
       productColorLabel.textProperty().bind(
             this.viewModel.getProductProperty().get().getColourProperty());
+
       productPriceLabel.textProperty().bind(this.viewModel.getProductProperty()
             .get().getPriceProperty().asString());
-      errorLabel.textProperty().bind(this.viewModel.getError1());
-      errorField.textProperty().bind(this.viewModel.getError2());
+
       priceField.textProperty().bindBidirectional(
             this.viewModel.getAmountProperty(), new NumberStringConverter());
+
       priceReductionLabel.textProperty()
             .bind(this.viewModel.getPriceAfterReductionProperty().asString());
+
+      errorLabel.textProperty().bind(this.viewModel.getError1());
+
       priceField.setOnKeyReleased(event -> {
          this.viewModel.updatePriceAfterReduction();
       });
-
    }
 
    @Override
@@ -98,6 +111,9 @@ public class ViewCreateSale implements View
    public void onClosedButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
+      priceField.setText("0");
+      startDatePicker.setValue(null);
+      endDatePicker.setValue(null);
       view.setWindow("saleslist");
    }
 
@@ -116,7 +132,9 @@ public class ViewCreateSale implements View
       if (errorLabel.getText().equals(""))
       {
          getScene().getWindow().hide();
-         priceField.setText("");
+         priceField.setText("0");
+         startDatePicker.setValue(null);
+         endDatePicker.setValue(null);
          view.setWindow("saleslist");
       }
    }

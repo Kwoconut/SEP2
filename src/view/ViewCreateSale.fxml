@@ -30,7 +30,7 @@
       <Label fx:id="errorField" layoutX="212.0" layoutY="361.0" prefHeight="21.0" prefWidth="187.0" />
       <Label layoutX="256.0" layoutY="289.0" text="Price reduction" />
       <Label layoutX="239.0" layoutY="396.0" text="Price after reduction" />
-      <Label fx:id="priceReductionLabel" layoutX="212.0" layoutY="429.0" prefHeight="21.0" prefWidth="187.0" />
+      <Label fx:id="priceReductionLabel" layoutX="399.0" layoutY="393.0" prefHeight="22.0" prefWidth="108.0" />
       <Button layoutX="415.0" layoutY="601.0" mnemonicParsing="false" onAction="#onClosedButtonPressed" prefHeight="58.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Close" />
       <Button layoutX="605.0" layoutY="601.0" mnemonicParsing="false" onAction="#onSubmitButtonPressed" prefHeight="58.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Submit" />
    </children>

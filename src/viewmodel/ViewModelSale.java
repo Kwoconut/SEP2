@@ -2,6 +2,7 @@ package viewmodel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Random;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -30,7 +31,6 @@ public class ViewModelSale implements PropertyChangeListener
    private DoubleProperty initialPrice;
    private SSalesModel model;
    private StringProperty errorProperty1;
-   private StringProperty errorProperty2;
    private DoubleProperty priceAfterReduction;
 
    public ViewModelSale(SSalesModel model)
@@ -44,7 +44,6 @@ public class ViewModelSale implements PropertyChangeListener
       isAvailable = new SimpleBooleanProperty();
       initialPrice = new SimpleDoubleProperty();
       errorProperty1 = new SimpleStringProperty("");
-      errorProperty2 = new SimpleStringProperty("");
       priceAfterReduction = new SimpleDoubleProperty();
       this.model.addListener(this);
 
@@ -62,14 +61,14 @@ public class ViewModelSale implements PropertyChangeListener
       isAvailable = new SimpleBooleanProperty(sale.getIsChangedValue());
       initialPrice = new SimpleDoubleProperty(sale.getInitialPrice());
       errorProperty1 = new SimpleStringProperty("");
-      errorProperty2 = new SimpleStringProperty("");
       priceAfterReduction = new SimpleDoubleProperty();
       this.model.addListener(this);
    }
 
    public void setSelectedProduct(ViewModelProduct product)
    {
-      productProperty = new SimpleObjectProperty<ViewModelProduct>(product);
+      productProperty.set(product);
+      System.out.println(productProperty.get().getNameProperty().get());
    }
 
    public DoubleProperty getInitialPriceProperty()
@@ -127,10 +126,6 @@ public class ViewModelSale implements PropertyChangeListener
       return errorProperty1;
    }
 
-   public StringProperty getError2()
-   {
-      return errorProperty2;
-   }
 
    public void updatePriceAfterReduction()
    {

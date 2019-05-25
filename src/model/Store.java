@@ -223,8 +223,7 @@ public class Store implements Serializable, StoreModel
                product.getNameProperty().get(),
                product.getPriceProperty().get(),
                product.getColourProperty().get(),
-               product.getTypeProperty().get(),
-               product.getImageIDProperty().get());
+               product.getTypeProperty().get(), "");
          Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
                endDate, sampleProduct, amount);
 

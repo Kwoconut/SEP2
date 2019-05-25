@@ -14,6 +14,7 @@ import model.Product;
 import model.SProductModel;
 import model.SSalesModel;
 import model.Sale;
+import model.StoreModel;
 
 public class ViewModelManageSalesList implements PropertyChangeListener
 {
@@ -23,7 +24,7 @@ public class ViewModelManageSalesList implements PropertyChangeListener
    private ObjectProperty<ViewModelProduct> selectedProduct;
    private SSalesModel model;
 
-   public ViewModelManageSalesList(SSalesModel model, SProductModel model2)
+   public ViewModelManageSalesList(SSalesModel model, StoreModel model2)
          throws RemoteException
    {
       this.model = model;

@@ -1,7 +1,5 @@
 package viewmodel;
 
-import java.util.Optional;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -87,10 +85,5 @@ public class ViewModelProduct
             && other.getColourProperty().get().equals(colourProperty.get())
             && other.getTypeProperty().get().equals(typeProperty.get())
             && other.getPriceProperty().get() == priceProperty.get();
-   }
-
-   public StringProperty getImageIDProperty()
-   {
-      return new SimpleStringProperty("");
    }
 }

@@ -120,6 +120,9 @@ public class ViewManageSalesList implements View
 
       productTable.setItems(filteredProductData);
 
+      productTable.getSelectionModel().selectedItemProperty().addListener((obs,
+            oldValue, newValue) -> this.viewModel.setSelectedProduct(newValue));
+
       saleProduct.setCellValueFactory(cellData -> cellData.getValue()
             .getProductProperty().get().getNameProperty());
       startDate.setCellValueFactory(
@@ -211,9 +214,9 @@ public class ViewManageSalesList implements View
 
    public void onCreateSaleButtonPressed() throws IOException
    {
+      model.getViewModelSale()
+            .setSelectedProduct(viewModel.getSelectedProduct().get());
       getScene().getWindow().hide();
-      model.getViewModelSale().setSelectedProduct(
-            productTable.getSelectionModel().getSelectedItem());
       view.setWindow("createsale");
    }
 
