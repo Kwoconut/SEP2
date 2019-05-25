@@ -15,12 +15,14 @@ public class Store implements Serializable, StoreModel
    private Client client;
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
    private ArrayList<Sale> sales;
+   private ArrayList<Review> reviews;
 
    public Store()
    {
       products = new ArrayList<Product>();
       offers = new ArrayList<Offer>();
       sales = new ArrayList<Sale>();
+      reviews = new ArrayList<Review>();
    }
 
    public void addProduct(Product product)
@@ -66,7 +68,6 @@ public class Store implements Serializable, StoreModel
             try
             {
                support.firePropertyChange("valid", null, " ");
-               offers.add(offer);
                client.sendOfferToServer(offer);
             }
             catch (RemoteException e)
@@ -93,6 +94,11 @@ public class Store implements Serializable, StoreModel
    public ArrayList<Sale> getSales()
    {
       return sales;
+   }
+   
+   public ArrayList<Review> getReviews()
+   {
+	   return reviews;
    }
 
    @Override
@@ -161,6 +167,7 @@ public class Store implements Serializable, StoreModel
    {
       offers.add(offer);
       support.firePropertyChange("NEWOFFER", "", offer);
+      System.out.println(offers);
    }
 
    @Override
@@ -222,6 +229,7 @@ public class Store implements Serializable, StoreModel
          try
          {
             client.sendSaleToServer(sale);
+            
          }
          catch (RemoteException e)
          {
@@ -250,7 +258,6 @@ public class Store implements Serializable, StoreModel
    public void getSalesFromServer(ArrayList<Sale> sale)
    {
       this.sales = sale;
-      System.out.println(sale.get(0).getIsChangedValue());
       support.firePropertyChange("SALESLIST", "", sale);
 
    }
@@ -268,5 +275,52 @@ public class Store implements Serializable, StoreModel
       sales.remove(sale);
       support.firePropertyChange("MINUSSALE", "", sale);
    }
+   
+
+@Override
+public void requestReviews() throws RemoteException {
+	client.requestReviews();
+	
+}
+
+@Override
+public void addReview(Review review) {
+	try
+    {
+	     client.sendReviewToServer(review);
+    }
+    catch (RemoteException e)
+    {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+    }	
+}
+
+@Override
+public void removeReview(Review review) throws RemoteException {
+	client.removeReviewFromServer(review);
+	
+}
+
+@Override
+public void getReviewsFromServer(ArrayList<Review> reviews) {
+    this.reviews = reviews;
+    support.firePropertyChange("REVIEWSLIST", "", reviews);
+	
+}
+
+@Override
+public void addReviewFromServer(Review review) {
+	reviews.add(review);
+    support.firePropertyChange("NEWREVIEW", "", review);
+	
+}
+
+@Override
+public void removeReviewFromServer(Review review) {
+	reviews.remove(review);
+    support.firePropertyChange("MINUSREVIEW", "", review);
+	
+}
 
 }

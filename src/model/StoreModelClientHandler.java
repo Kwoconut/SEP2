@@ -21,4 +21,10 @@ public interface StoreModelClientHandler
    void addSaleFromServer(Sale sale);
    
    void removeSaleFromServer (Sale sale);
+   
+   void getReviewsFromServer(ArrayList<Review> reviews);
+   
+   void addReviewFromServer(Review review);
+   
+   void removeReviewFromServer(Review review);
 }

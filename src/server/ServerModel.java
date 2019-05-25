@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import DBSConnection.DBSQuery;
 import DBSConnection.OfferDatabaseHandler;
 import DBSConnection.ProductDatabaseHandler;
+import DBSConnection.ReviewDatabaseHandler;
 import DBSConnection.SaleDatabaseHandler;
 import DBSConnection.StoreOfferPersistence;
 import DBSConnection.StoreProductPersistence;
+import DBSConnection.StoreReviewPersistence;
 import DBSConnection.StoreSalePersistence;
 import model.Offer;
 import model.Product;
+import model.Review;
 import model.Sale;
 
 public class ServerModel
@@ -22,9 +25,11 @@ public class ServerModel
    private ArrayList<Product> products;
    private ArrayList<Offer> offers;
    private ArrayList<Sale> sales;
+   private ArrayList<Review> reviews;
    private StoreProductPersistence databaseProductAccess;
    private StoreOfferPersistence databaseOfferAccess;
    private StoreSalePersistence databaseSaleAccess;
+   private StoreReviewPersistence databaseReviewAccess;
    private DBSQuery queryHandler;
 
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -34,6 +39,7 @@ public class ServerModel
       products = new ArrayList<Product>();
       offers = new ArrayList<Offer>();
       sales = new ArrayList<Sale>();
+      reviews = new ArrayList<Review>();
       queryHandler = new DBSQuery("jdbc:postgresql://localhost:5432/postgres",
             "postgres", "password");
       databaseProductAccess = new ProductDatabaseHandler(queryHandler);
@@ -42,6 +48,8 @@ public class ServerModel
       loadOffers();
       databaseSaleAccess = new SaleDatabaseHandler(queryHandler);
       loadSales();
+      databaseReviewAccess = new ReviewDatabaseHandler(queryHandler);
+      loadReviews();
       // clearProducts();
       // sampleDataForCreation();
    }
@@ -115,6 +123,18 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
+   }
+   
+   public void loadReviews()
+   {
+	   try
+	   {
+		   reviews = databaseReviewAccess.loadReviews(products);
+	   }
+	   catch (SQLException e)
+	   {
+		   e.printStackTrace();
+	   }
    }
 
    // adding methods
@@ -364,6 +384,52 @@ public class ServerModel
          e.printStackTrace();
       }
       support.firePropertyChange("SALEADDED", null, sale);
+   }
+   
+   public void addReview(Review review)
+   {
+	   reviews.add(review);
+	   try
+	   {
+		   databaseReviewAccess.addReview(review);
+	   }
+	   catch (SQLException e)
+	   {
+		   e.printStackTrace();
+	   }
+	   support.firePropertyChange("REVIEWADDED", null, review);
+   }
+   
+   public void removeReview(Review review)
+   {
+	   reviews.remove(review);
+	   try
+	   {
+		   databaseReviewAccess.removeReveiew(review);
+	   }
+	   catch(SQLException e)
+	   {
+		   e.printStackTrace();
+	   }
+	   support.firePropertyChange("REVIEWREMOVED", null, review);
+   }
+   
+   public void clearReviews()
+   {
+	   try
+	      {
+	         databaseReviewAccess.clearReviews();
+	      }
+	      catch (SQLException e)
+	      {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+   }
+   
+   public ArrayList<Review> getReviews()
+   {
+	 return reviews;  
    }
 }
    

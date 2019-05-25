@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import client.RIClient;
 import model.Offer;
 import model.Product;
+import model.Review;
 import model.Sale;
 
 public class Server implements RIServerWrite, PropertyChangeListener
@@ -173,6 +174,34 @@ public class Server implements RIServerWrite, PropertyChangeListener
     		  }
     	  }
       }
+      if (evt.getPropertyName().equals("REVIEWADDED"))
+      {
+    	  for (RIClient element : clients)
+    	  {
+    		  try 
+    		  {
+    			  element.addReview((Review) evt.getNewValue()); 
+    		  }
+    		  catch (RemoteException e)
+    		  {
+    			  e.printStackTrace();
+    		  }
+    	  }
+      }
+      if (evt.getPropertyName().equals("REVIEWREMOVED"))
+      {
+    	  for (RIClient element : clients)
+    	  {
+    		  try 
+    		  {
+    			  element.removeReview((Review) evt.getNewValue()); 
+    		  }
+    		  catch (RemoteException e)
+    		  {
+    			  e.printStackTrace();
+    		  }
+    	  }
+      }
    }
 
    @Override
@@ -212,5 +241,23 @@ public void saleAddUpdate(Sale sale) throws RemoteException{
 @Override
 public void changeValue(Sale sale) throws RemoteException{
 	model.ChangedValue(sale);
+}
+
+@Override
+public void getReviews(RIClient sender) throws RemoteException {
+	sender.getReviews(model.getReviews());
+	
+}
+
+@Override
+public void sendReview(Review review) throws RemoteException {
+	model.addReview(review);
+	
+}
+
+@Override
+public void removeReview(Review review) throws RemoteException {
+	model.removeReview(review);
+	
 }
 }

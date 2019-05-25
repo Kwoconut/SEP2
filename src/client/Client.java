@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import model.Offer;
 import model.Product;
+import model.Review;
 import model.Sale;
 import model.StoreModelClientHandler;
 import server.RIServerRead;
@@ -157,5 +158,46 @@ public void changeValue(Sale sale) throws RemoteException{
 	RIServerWrite server = access.acquireWrite();
 	server.changeValue(sale);
 	access.releaseWrite();
+}
+
+@Override
+public void getReviews(ArrayList<Review> reviews) throws RemoteException {
+	model.getReviewsFromServer(reviews);
+	
+}
+
+@Override
+public void addReview(Review review) throws RemoteException {
+	model.addReviewFromServer(review);
+	
+}
+
+@Override
+public void removeReview(Review review) throws RemoteException {
+	model.removeReviewFromServer(review);
+	
+}
+
+@Override
+public void requestReviews() throws RemoteException {
+    RIServerRead server = access.acquireRead();
+    server.getReviews(this);
+    access.releaseRead();
+}
+
+@Override
+public void sendReviewToServer(Review review) throws RemoteException {
+	  RIServerWrite server = access.acquireWrite();
+    server.sendReview(review); 
+    access.releaseWrite();
+	
+}
+
+@Override
+public void removeReviewFromServer(Review review) throws RemoteException {
+    RIServerWrite server = access.acquireWrite();
+    server.removeReview(review);
+    access.releaseWrite();
+	
 }
 }
