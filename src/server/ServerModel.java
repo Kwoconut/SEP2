@@ -430,7 +430,28 @@ public class ServerModel
    }
 
 public void editSale(Sale sale) {
-	// TODO Auto-generated method stub
+	for (int i = 0; i < sales.size(); i++)
+    {
+       if (sales.get(i).getID() == sale.getID())
+       {
+          sales.set(i, sale);
+          break;
+       }
+    }
+	// tre de implementat functionalitatea la butonu edit sale , de gindit cum il facem
+   // try
+   // {
+     //  databaseSaleAccess.updateRemoveSale((int) sale.getInitialPrice(),
+     //        sale.getProduct().getID());
+     //  databaseSaleAccess.removeSale(sale);
+    	System.out.println("In servermodel de implementat functionalitatea");
+   // }
+  //  catch (SQLException e)
+   // {
+       // TODO Auto-generated catch block
+    //   e.printStackTrace();
+   // }
+   // support.firePropertyChange("SALEEDITED", null, sale);
 	
 }
 }
