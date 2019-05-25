@@ -6,7 +6,9 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import client.Client;
+import javafx.beans.property.ObjectProperty;
 import viewmodel.ViewModelProduct;
+import viewmodel.ViewModelSale;
 
 public class Store implements Serializable, StoreModel
 {
@@ -95,10 +97,10 @@ public class Store implements Serializable, StoreModel
    {
       return sales;
    }
-   
+
    public ArrayList<Review> getReviews()
    {
-	   return reviews;
+      return reviews;
    }
 
    @Override
@@ -229,7 +231,7 @@ public class Store implements Serializable, StoreModel
          try
          {
             client.sendSaleToServer(sale);
-            
+
          }
          catch (RemoteException e)
          {
@@ -240,18 +242,20 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
-   public void removeSale(int ID, MyDate startDate, MyDate endDate,
-         ViewModelProduct product, int amount) throws RemoteException
+   public void removeSale(ObjectProperty<ViewModelSale> sale)
+         throws RemoteException
    {
+      Product sampleProduct = products.stream()
+            .filter(product -> product.getID() == sale.get()
+                  .getProductProperty().get().getIdProperty().get())
+            .findFirst().get();
 
-      Product sampleProduct = new Product(product.getIdProperty().get(),
-            product.getNameProperty().get(), product.getPriceProperty().get(),
-            product.getColourProperty().get(), product.getTypeProperty().get(),
-            product.getImageIDProperty().get());
-      Sale sale = new Sale(ID, startDate, endDate, sampleProduct, amount);
-      System.out.println(
-            "Removing Sale with product " + sale.getProduct().getName());
-      client.removeSaleFromServer(sale);
+      Sale sampleSale = new Sale(sale.get().getIDProperty().get(),
+            sale.get().getStartDateProperty().get(),
+            sale.get().getEndDateProperty().get(), sampleProduct,
+            sale.get().getAmountProperty().get());
+
+      client.removeSaleFromServer(sampleSale);
    }
 
    @Override
@@ -275,52 +279,57 @@ public class Store implements Serializable, StoreModel
       sales.remove(sale);
       support.firePropertyChange("MINUSSALE", "", sale);
    }
-   
 
-@Override
-public void requestReviews() throws RemoteException {
-	client.requestReviews();
-	
-}
+   @Override
+   public void requestReviews() throws RemoteException
+   {
+      client.requestReviews();
 
-@Override
-public void addReview(Review review) {
-	try
-    {
-	     client.sendReviewToServer(review);
-    }
-    catch (RemoteException e)
-    {
-       // TODO Auto-generated catch block
-       e.printStackTrace();
-    }	
-}
+   }
 
-@Override
-public void removeReview(Review review) throws RemoteException {
-	client.removeReviewFromServer(review);
-	
-}
+   @Override
+   public void addReview(Review review)
+   {
+      try
+      {
+         client.sendReviewToServer(review);
+      }
+      catch (RemoteException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+   }
 
-@Override
-public void getReviewsFromServer(ArrayList<Review> reviews) {
-    this.reviews = reviews;
-    support.firePropertyChange("REVIEWSLIST", "", reviews);
-	
-}
+   @Override
+   public void removeReview(Review review) throws RemoteException
+   {
+      client.removeReviewFromServer(review);
 
-@Override
-public void addReviewFromServer(Review review) {
-	reviews.add(review);
-    support.firePropertyChange("NEWREVIEW", "", review);
-	
-}
+   }
 
-@Override
-public void removeReviewFromServer(Review review) {
-	reviews.remove(review);
-    support.firePropertyChange("MINUSREVIEW", "", review);
-	
-}
+   @Override
+   public void getReviewsFromServer(ArrayList<Review> reviews)
+   {
+      this.reviews = reviews;
+      support.firePropertyChange("REVIEWSLIST", "", reviews);
+
+   }
+
+   @Override
+   public void addReviewFromServer(Review review)
+   {
+      reviews.add(review);
+      support.firePropertyChange("NEWREVIEW", "", review);
+
+   }
+
+   @Override
+   public void removeReviewFromServer(Review review)
+   {
+      reviews.remove(review);
+      support.firePropertyChange("MINUSREVIEW", "", review);
+
+   }
 
 }
