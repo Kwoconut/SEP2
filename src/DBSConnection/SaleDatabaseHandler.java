@@ -62,13 +62,13 @@ public class SaleDatabaseHandler implements StoreSalePersistence
    {
       Calendar cal = Calendar.getInstance();
       cal.set(Calendar.YEAR, sale.getStartDate().getYear());
-      cal.set(Calendar.MONTH, sale.getStartDate().getMonth());
+      cal.set(Calendar.MONTH, sale.getStartDate().getMonth() - 1);
       cal.set(Calendar.DAY_OF_MONTH, sale.getStartDate().getDay());
 
       java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
 
       cal.set(Calendar.YEAR, sale.getEndDate().getYear());
-      cal.set(Calendar.MONTH, sale.getEndDate().getMonth());
+      cal.set(Calendar.MONTH, sale.getEndDate().getMonth() - 1);
       cal.set(Calendar.DAY_OF_MONTH, sale.getEndDate().getDay());
 
       java.sql.Date date2 = new java.sql.Date(cal.getTimeInMillis());
@@ -101,6 +101,7 @@ public class SaleDatabaseHandler implements StoreSalePersistence
    @Override
    public void updateAddSale(int newPrice, int product_id) throws SQLException
    {
+
       query.executeUpdate("UPDATE Product SET price = ? WHERE product_id = ?",
             statement -> {
                statement.setInt(1, newPrice);
