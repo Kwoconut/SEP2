@@ -137,4 +137,10 @@ public class Sale implements Serializable
       return s;
    }
 
+   public void setChangedValue(boolean value)
+   {
+      this.isChangedValue = value;
+
+   }
+
 }

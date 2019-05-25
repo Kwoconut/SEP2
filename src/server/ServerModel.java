@@ -14,6 +14,7 @@ import DBSConnection.StoreOfferPersistence;
 import DBSConnection.StoreProductPersistence;
 import DBSConnection.StoreReviewPersistence;
 import DBSConnection.StoreSalePersistence;
+import model.MyDate;
 import model.Offer;
 import model.Product;
 import model.Review;
@@ -286,10 +287,13 @@ public class ServerModel
 
    public void removeSale(Sale sale)
    {
+      sale.getProduct().setPrice((int) sale.getInitialPrice());
       sales.remove(sale);
       try
       {
          databaseSaleAccess.removeSale(sale);
+         databaseSaleAccess.updateRemoveSale(sale.getProduct().getPrice(),
+               sale.getProduct().getID());
       }
       catch (SQLException e)
       {
@@ -322,7 +326,7 @@ public class ServerModel
       }
       try
       {
-         databaseSaleAccess.updateAddSale(newPrice, sale.getID());
+         databaseSaleAccess.updateAddSale(newPrice, sale.getProduct().getID());
          databaseSaleAccess.changedValue(sale);
       }
       catch (SQLException e)
@@ -360,17 +364,18 @@ public class ServerModel
 
    public void addSale(Sale sale)
    {
+      MyDate now = new MyDate();
+      if (sale.getIsChangedValue() == false && now.equals(sale.getStartDate()))
+      {
+         sale.setChangedValue(!sale.getIsChangedValue());
+         sale.getProduct().setPrice((int) sale.getPriceAfterSaleApplied());
+      }
       sales.add(sale);
       try
       {
-//         String startDay = sale.getStartDate().getYear() + "-"
-//               + sale.getStartDate().getMonth() + "-"
-//               + sale.getStartDate().getDay();
-//         String endDay = sale.getEndDate().getYear() + "-"
-//               + sale.getEndDate().getMonth() + "-"
-//               + sale.getEndDate().getDay();
-//         databaseSaleAccess.addSale(sale, startDay, endDay);
          databaseSaleAccess.addSale(sale);
+         databaseSaleAccess.updateAddSale((int) sale.getProduct().getPrice(),
+               sale.getProduct().getID());
       }
       catch (SQLException e)
       {
