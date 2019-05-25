@@ -306,27 +306,25 @@ public class ServerModel
 
    public void updateAddSale(Sale sale)
    {
-      int newPrice = 0;
-      for (int i = 0; i < products.size(); i++)
-      {
-         if (products.get(i).getID() == sale.getProduct().getID())
-         {
-            newPrice = (int) sale.getPriceAfterSaleApplied();
-            products.get(i).setPrice(newPrice);
-            break;
-         }
-      }
-      for (int i = 0; i < sales.size(); i++)
-      {
-         if (sales.get(i).getID() == sale.getID())
-         {
-            sales.get(i).setIsChangedValue();
-            break;
-         }
-      }
+      
+      products.parallelStream()
+            .filter(product -> product.getID() == sale.getID()).findFirst()
+            .get().setPrice(((int) sale.getPriceAfterSaleApplied()));
+      sales.parallelStream()
+            .filter(sampleSale -> sampleSale.getID() == sale.getID())
+            .findFirst().get().setIsChangedValue();
+
+/*
+ * for (int i = 0; i < products.size(); i++) { if (products.get(i).getID() ==
+ * sale.getProduct().getID()) { newPrice = (int)
+ * sale.getPriceAfterSaleApplied(); products.get(i).setPrice(newPrice); break; }
+ * } for (int i = 0; i < sales.size(); i++) { if (sales.get(i).getID() ==
+ * sale.getID()) { sales.get(i).setIsChangedValue(); break; } }
+ */
       try
       {
-         databaseSaleAccess.updateAddSale(newPrice, sale.getProduct().getID());
+         databaseSaleAccess.updateAddSale((int) sale.getPriceAfterSaleApplied(),
+               sale.getProduct().getID());
          databaseSaleAccess.changedValue(sale);
       }
       catch (SQLException e)

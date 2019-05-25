@@ -142,6 +142,7 @@ public void saleRemoveUpdate(Sale sale) throws RemoteException
 {		
 	RIServerWrite server = access.acquireWrite();
 	server.saleRemoveUpdate(sale);
+	access.releaseWrite();
 
 }
 

@@ -65,7 +65,7 @@ public class ViewCreateSale implements View
       this.title = title;
 
    }
-   
+
    public void refresh()
    {
       productIDLabel.textProperty().bind(this.viewModel.getProductProperty()
@@ -89,7 +89,7 @@ public class ViewCreateSale implements View
       priceReductionLabel.textProperty()
             .bind(this.viewModel.getPriceAfterReductionProperty().asString());
 
-      errorLabel.textProperty().bind(this.viewModel.getError1());
+      errorLabel.textProperty().bindBidirectional(this.viewModel.getError1());
 
       priceField.setOnKeyReleased(event -> {
          this.viewModel.updatePriceAfterReduction();
@@ -119,23 +119,31 @@ public class ViewCreateSale implements View
 
    public void onSubmitButtonPressed() throws IOException
    {
-      LocalDate localDate = startDatePicker.getValue();
-      LocalDate localDate2 = endDatePicker.getValue();
-      this.viewModel.getStartDateProperty()
-            .set(new MyDate(localDate.getDayOfMonth(),
-                  localDate.getMonthValue(), localDate.getYear()));
-      this.viewModel.getEndDateProperty()
-            .set(new MyDate(localDate2.getDayOfMonth(),
-                  localDate2.getMonthValue(), localDate2.getYear()));
-      this.viewModel.addSale();
-
-      if (errorLabel.getText().equals(""))
+      if (startDatePicker.getValue() == null
+            || endDatePicker.getValue() == null)
       {
-         getScene().getWindow().hide();
-         priceField.setText("0");
-         startDatePicker.setValue(null);
-         endDatePicker.setValue(null);
-         view.setWindow("saleslist");
+         errorLabel.setText("Please complete the dates");
+      }
+      else
+      {
+         LocalDate localDate = startDatePicker.getValue();
+         LocalDate localDate2 = endDatePicker.getValue();
+         this.viewModel.getStartDateProperty()
+               .set(new MyDate(localDate.getDayOfMonth(),
+                     localDate.getMonthValue(), localDate.getYear()));
+         this.viewModel.getEndDateProperty()
+               .set(new MyDate(localDate2.getDayOfMonth(),
+                     localDate2.getMonthValue(), localDate2.getYear()));
+         this.viewModel.addSale();
+
+         if (errorLabel.getText().equals(""))
+         {
+            getScene().getWindow().hide();
+            priceField.setText("0");
+            startDatePicker.setValue(null);
+            endDatePicker.setValue(null);
+            view.setWindow("saleslist");
+         }
       }
    }
 
