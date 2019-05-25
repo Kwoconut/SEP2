@@ -287,10 +287,13 @@ public class ServerModel
 
    public void removeSale(Sale sale)
    {
+      sale.getProduct().setPrice((int) sale.getInitialPrice());
       sales.remove(sale);
       try
       {
          databaseSaleAccess.removeSale(sale);
+         databaseSaleAccess.updateRemoveSale(sale.getProduct().getPrice(),
+               sale.getProduct().getID());
       }
       catch (SQLException e)
       {
@@ -361,14 +364,13 @@ public class ServerModel
 
    public void addSale(Sale sale)
    {
-      sales.add(sale);
       MyDate now = new MyDate();
       if (sale.getIsChangedValue() == false && now.equals(sale.getStartDate()))
       {
          sale.setChangedValue(!sale.getIsChangedValue());
          sale.getProduct().setPrice((int) sale.getPriceAfterSaleApplied());
       }
-
+      sales.add(sale);
       try
       {
          databaseSaleAccess.addSale(sale);
