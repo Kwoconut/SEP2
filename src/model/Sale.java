@@ -103,6 +103,11 @@ public class Sale implements Serializable
 
    }
 
+   public double getPriceAfterSaleApplied()
+   {
+      return (double) getPrice() - (getAmount() * getPrice()) / 100;
+   }
+
    public double getInitialPrice()
    {
       return (double) product.getPrice() / (100 - amount) * 100;

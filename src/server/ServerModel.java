@@ -1,4 +1,3 @@
-
 package server;
 
 import java.beans.PropertyChangeListener;
@@ -124,17 +123,17 @@ public class ServerModel
          e.printStackTrace();
       }
    }
-   
+
    public void loadReviews()
    {
-	   try
-	   {
-		   reviews = databaseReviewAccess.loadReviews(products);
-	   }
-	   catch (SQLException e)
-	   {
-		   e.printStackTrace();
-	   }
+      try
+      {
+         reviews = databaseReviewAccess.loadReviews(products);
+      }
+      catch (SQLException e)
+      {
+         e.printStackTrace();
+      }
    }
 
    // adding methods
@@ -263,21 +262,17 @@ public class ServerModel
 
    public void updateRemoveSale(Sale sale)
    {
-      int newPrice = 0;
       for (int i = 0; i < products.size(); i++)
       {
          if (products.get(i).getID() == sale.getProduct().getID())
          {
-            int C = sale.getPrice();
-            int B = sale.getAmount();
-            newPrice = (C / (100 - B) * 100);
-            products.get(i).setPrice(newPrice);
+            products.get(i).setPrice((int) sale.getInitialPrice());
             break;
          }
       }
       try
       {
-         databaseSaleAccess.updateRemoveSale(newPrice,
+         databaseSaleAccess.updateRemoveSale((int) sale.getInitialPrice(),
                sale.getProduct().getID());
          databaseSaleAccess.removeSale(sale);
       }
@@ -308,13 +303,11 @@ public class ServerModel
    public void updateAddSale(Sale sale)
    {
       int newPrice = 0;
-      int product_id = 0;
       for (int i = 0; i < products.size(); i++)
       {
          if (products.get(i).getID() == sale.getProduct().getID())
          {
-            newPrice = (sale.getPrice() - (sale.getPrice()) / sale.getAmount());
-            product_id = sale.getProduct().getID();
+            newPrice = (int) sale.getPriceAfterSaleApplied();
             products.get(i).setPrice(newPrice);
             break;
          }
@@ -329,7 +322,7 @@ public class ServerModel
       }
       try
       {
-         databaseSaleAccess.updateAddSale(newPrice, product_id);
+         databaseSaleAccess.updateAddSale(newPrice, sale.getID());
          databaseSaleAccess.changedValue(sale);
       }
       catch (SQLException e)
@@ -370,13 +363,14 @@ public class ServerModel
       sales.add(sale);
       try
       {
-         String startDay = sale.getStartDate().getYear() + "-"
-               + sale.getStartDate().getMonth() + "-"
-               + sale.getStartDate().getDay();
-         String endDay = sale.getEndDate().getYear() + "-"
-               + sale.getEndDate().getMonth() + "-"
-               + sale.getEndDate().getDay();
-         databaseSaleAccess.addSale(sale, startDay, endDay);
+//         String startDay = sale.getStartDate().getYear() + "-"
+//               + sale.getStartDate().getMonth() + "-"
+//               + sale.getStartDate().getDay();
+//         String endDay = sale.getEndDate().getYear() + "-"
+//               + sale.getEndDate().getMonth() + "-"
+//               + sale.getEndDate().getDay();
+//         databaseSaleAccess.addSale(sale, startDay, endDay);
+         databaseSaleAccess.addSale(sale);
       }
       catch (SQLException e)
       {
@@ -385,51 +379,50 @@ public class ServerModel
       }
       support.firePropertyChange("SALEADDED", null, sale);
    }
-   
+
    public void addReview(Review review)
    {
-	   reviews.add(review);
-	   try
-	   {
-		   databaseReviewAccess.addReview(review);
-	   }
-	   catch (SQLException e)
-	   {
-		   e.printStackTrace();
-	   }
-	   support.firePropertyChange("REVIEWADDED", null, review);
+      reviews.add(review);
+      try
+      {
+         databaseReviewAccess.addReview(review);
+      }
+      catch (SQLException e)
+      {
+         e.printStackTrace();
+      }
+      support.firePropertyChange("REVIEWADDED", null, review);
    }
-   
+
    public void removeReview(Review review)
    {
-	   reviews.remove(review);
-	   try
-	   {
-		   databaseReviewAccess.removeReveiew(review);
-	   }
-	   catch(SQLException e)
-	   {
-		   e.printStackTrace();
-	   }
-	   support.firePropertyChange("REVIEWREMOVED", null, review);
+      reviews.remove(review);
+      try
+      {
+         databaseReviewAccess.removeReveiew(review);
+      }
+      catch (SQLException e)
+      {
+         e.printStackTrace();
+      }
+      support.firePropertyChange("REVIEWREMOVED", null, review);
    }
-   
+
    public void clearReviews()
    {
-	   try
-	      {
-	         databaseReviewAccess.clearReviews();
-	      }
-	      catch (SQLException e)
-	      {
-	         // TODO Auto-generated catch block
-	         e.printStackTrace();
-	      }
+      try
+      {
+         databaseReviewAccess.clearReviews();
+      }
+      catch (SQLException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
    }
-   
+
    public ArrayList<Review> getReviews()
    {
-	 return reviews;  
+      return reviews;
    }
 }
-   
