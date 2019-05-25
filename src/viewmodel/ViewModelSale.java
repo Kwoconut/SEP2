@@ -43,8 +43,8 @@ public class ViewModelSale implements PropertyChangeListener
       productProperty = new SimpleObjectProperty<ViewModelProduct>();
       isAvailable = new SimpleBooleanProperty();
       initialPrice = new SimpleDoubleProperty();
-      errorProperty1 = new SimpleStringProperty();
-      errorProperty2 = new SimpleStringProperty();
+      errorProperty1 = new SimpleStringProperty("");
+      errorProperty2 = new SimpleStringProperty("");
       priceAfterReduction = new SimpleDoubleProperty();
       this.model.addListener(this);
 
@@ -61,8 +61,8 @@ public class ViewModelSale implements PropertyChangeListener
       IDProperty = new SimpleIntegerProperty(sale.getID());
       isAvailable = new SimpleBooleanProperty(sale.getIsChangedValue());
       initialPrice = new SimpleDoubleProperty(sale.getInitialPrice());
-      errorProperty1 = new SimpleStringProperty();
-      errorProperty2 = new SimpleStringProperty();
+      errorProperty1 = new SimpleStringProperty("");
+      errorProperty2 = new SimpleStringProperty("");
       priceAfterReduction = new SimpleDoubleProperty();
       this.model.addListener(this);
    }
@@ -171,7 +171,7 @@ public class ViewModelSale implements PropertyChangeListener
       }
       else if (evt.getPropertyName().equals("VALIDDATE"))
       {
-         errorProperty1.set((String) evt.getNewValue());
+         errorProperty1.set("");
       }
 
    }

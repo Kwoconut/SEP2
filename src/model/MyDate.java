@@ -1,11 +1,12 @@
 package model;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class MyDate implements Serializable
 {
-   
+
    private static final long serialVersionUID = 4717014713554281360L;
    private int day;
    private int month;
@@ -205,14 +206,14 @@ public class MyDate implements Serializable
    {
       int d1 = year * 360 + month * 30 + day;
       int d2 = other.year * 360 + other.month * 30 + other.day;
-      return d1 < d2;
+      return d1 <= d2;
    }
 
    public boolean isAfter(MyDate other)
    {
       int d1 = year * 360 + month * 30 + day;
       int d2 = other.year * 360 + other.month * 30 + other.day;
-      return d1 > d2;
+      return d1 >= d2;
    }
 
    public String starsignElement()
