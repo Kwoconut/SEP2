@@ -102,6 +102,18 @@ public class ViewModelManageSalesList implements PropertyChangeListener
          Sale element = (Sale) evt.getNewValue();
          sales.remove(new ViewModelSale(model, element));
       }
+      else if (evt.getPropertyName().equals("EDITSALE"))
+      {
+         Sale element = (Sale) evt.getNewValue();
+         for(int i=0;i<sales.size();i++)
+         {
+        	 if(sales.get(i).getIDProperty().getValue() == element.getID())
+        	 {
+        		 sales.set(i, new ViewModelSale(model,element));
+        		 break;
+        	 }
+         }
 
    }
+}
 }
