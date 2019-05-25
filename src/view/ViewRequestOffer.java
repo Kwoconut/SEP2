@@ -55,14 +55,7 @@ public class ViewRequestOffer implements View
       if (errorLabel.getText().equals(""))
       {
          getScene().getWindow().hide();
-         nameField.setText("");
-         phoneField.setText("");
-         emailField.setText("");
-         messageField.setText("");
-         nameField.setPromptText("Name");
-         phoneField.setPromptText("Phone");
-         emailField.setPromptText("Email");
-         messageField.setPromptText("Message");
+         resetFields();
          view.setWindow("start");
       }
    }

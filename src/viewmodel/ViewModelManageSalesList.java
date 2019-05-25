@@ -6,6 +6,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Product;
@@ -17,6 +19,8 @@ public class ViewModelManageSalesList implements PropertyChangeListener
 {
    private ObservableList<ViewModelProduct> products;
    private ObservableList<ViewModelSale> sales;
+   private ObjectProperty<ViewModelSale> selectedSale;
+   private ObjectProperty<ViewModelProduct> selectedProduct;
    private SSalesModel model;
 
    public ViewModelManageSalesList(SSalesModel model, SProductModel model2)
@@ -42,6 +46,31 @@ public class ViewModelManageSalesList implements PropertyChangeListener
    public ObservableList<ViewModelProduct> getProducts()
    {
       return products;
+   }
+
+   public void setSelectedSale(ViewModelSale sale)
+   {
+      selectedSale = new SimpleObjectProperty<ViewModelSale>(sale);
+   }
+
+   public void setSelectedProduct(ViewModelProduct product)
+   {
+      selectedProduct = new SimpleObjectProperty<ViewModelProduct>(product);
+   }
+
+   public ObjectProperty<ViewModelSale> getSelectedSale()
+   {
+      return selectedSale;
+   }
+
+   public ObjectProperty<ViewModelProduct> getSelectedProduct()
+   {
+      return selectedProduct;
+   }
+
+   public void removeSale() throws RemoteException
+   {
+      model.removeSale(selectedSale);
    }
 
    @Override

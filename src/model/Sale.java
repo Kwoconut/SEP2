@@ -77,6 +77,32 @@ public class Sale implements Serializable
       isChangedValue = true;
    }
 
+   public boolean validDate()
+   {
+      if (startDate.isAfter(MyDate.now()) || endDate.isBefore(startDate)
+            || startDate == null || endDate == null)
+      {
+         return false;
+      }
+      else
+      {
+         return true;
+      }
+   }
+
+   public boolean validPrice()
+   {
+      if (amount <= 0 || amount >= 100)
+      {
+         return false;
+      }
+      else
+      {
+         return true;
+      }
+
+   }
+
    public double getInitialPrice()
    {
       return (double) product.getPrice() / (100 - amount) * 100;

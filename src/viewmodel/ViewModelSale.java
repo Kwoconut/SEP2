@@ -1,5 +1,8 @@
 package viewmodel;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -15,7 +18,7 @@ import model.Product;
 import model.SSalesModel;
 import model.Sale;
 
-public class ViewModelSale
+public class ViewModelSale implements PropertyChangeListener
 {
 
    private ObjectProperty<MyDate> startDateProperty;
@@ -26,8 +29,11 @@ public class ViewModelSale
    private BooleanProperty isAvailable;
    private DoubleProperty initialPrice;
    private SSalesModel model;
+   private StringProperty errorProperty1;
+   private StringProperty errorProperty2;
+   private DoubleProperty priceAfterReduction;
 
-   public ViewModelSale(SSalesModel model, ViewModelProduct product)
+   public ViewModelSale(SSalesModel model)
    {
       this.model = model;
       startDateProperty = new SimpleObjectProperty<MyDate>();
@@ -37,6 +43,10 @@ public class ViewModelSale
       productProperty = new SimpleObjectProperty<ViewModelProduct>();
       isAvailable = new SimpleBooleanProperty();
       initialPrice = new SimpleDoubleProperty();
+      errorProperty1 = new SimpleStringProperty();
+      errorProperty2 = new SimpleStringProperty();
+      priceAfterReduction = new SimpleDoubleProperty();
+      this.model.addListener(this);
 
    }
 
@@ -51,12 +61,29 @@ public class ViewModelSale
       IDProperty = new SimpleIntegerProperty(sale.getID());
       isAvailable = new SimpleBooleanProperty(sale.getIsChangedValue());
       initialPrice = new SimpleDoubleProperty(sale.getInitialPrice());
+      errorProperty1 = new SimpleStringProperty();
+      errorProperty2 = new SimpleStringProperty();
+      priceAfterReduction = new SimpleDoubleProperty();
+      this.model.addListener(this);
+   }
 
+   public void setSelectedProduct(ViewModelProduct product)
+   {
+      productProperty = new SimpleObjectProperty<ViewModelProduct>(product);
    }
 
    public DoubleProperty getInitialPriceProperty()
    {
       return initialPrice;
+   }
+
+   public DoubleProperty getPriceAfterReductionProperty()
+   {
+      return new SimpleDoubleProperty(
+            (double) productProperty.get().getPriceProperty().get()
+                  - (amountProperty.get()
+                        * productProperty.get().getPriceProperty().get()
+                        / 100));
    }
 
    public ObjectProperty<MyDate> getStartDateProperty()
@@ -99,10 +126,25 @@ public class ViewModelSale
       return isAvailable;
    }
 
+   public StringProperty getError1()
+   {
+      return errorProperty1;
+   }
+
+   public StringProperty getError2()
+   {
+      return errorProperty2;
+   }
+
    public void addSale()
    {
       model.addSale(startDateProperty.get(), endDateProperty.get(),
             productProperty.get(), amountProperty.get());
+   }
+
+   public void editSale()
+   {
+
    }
 
    public boolean equals(Object obj)
@@ -118,5 +160,19 @@ public class ViewModelSale
             && other.getAmountProperty().get() == amountProperty.get()
             && other.getBooleanProperty().get() == isAvailable.get()
             && other.getIDProperty().get() == IDProperty.get();
+   }
+
+   @Override
+   public void propertyChange(PropertyChangeEvent evt)
+   {
+      if (evt.getPropertyName().equals("INVALIDDATE"))
+      {
+         errorProperty1.set((String) evt.getNewValue());
+      }
+      else if (evt.getPropertyName().equals("VALIDDATE"))
+      {
+         errorProperty1.set((String) evt.getNewValue());
+      }
+
    }
 }

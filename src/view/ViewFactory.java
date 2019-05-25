@@ -79,8 +79,8 @@ public class ViewFactory
             case "saleslist":
             {
                FXMLLoader loader = new FXMLLoader();
-               loader.setLocation(
-                     mainView.getClass().getResource("ViewManageSalesList.fxml"));
+               loader.setLocation(mainView.getClass()
+                     .getResource("ViewManageSalesList.fxml"));
                Parent root = loader.load();
                Scene scene = new Scene(root, 1200, 700);
                view = loader.getController();
@@ -96,7 +96,21 @@ public class ViewFactory
                Scene scene = new Scene(root, 1200, 700);
                view = loader.getController();
                view.init(viewModel, mainView, scene, "Salelist");
+               break;
             }
+
+            case "createsale":
+            {
+               FXMLLoader loader = new FXMLLoader();
+               loader.setLocation(
+                     mainView.getClass().getResource("ViewCreateSale.fxml"));
+               Parent root = loader.load();
+               Scene scene = new Scene(root, 1200, 700);
+               view = loader.getController();
+               view.init(viewModel, mainView, scene, "Create Sale");
+               break;
+            }
+
          }
          views.put(getType, view);
       }

@@ -366,3 +366,4 @@ public class ServerModel
       support.firePropertyChange("SALEADDED", null, sale);
    }
 }
+   

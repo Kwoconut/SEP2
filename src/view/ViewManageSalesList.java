@@ -1,6 +1,8 @@
 package view;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
@@ -9,9 +11,12 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import model.MyDate;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelManageSalesList;
@@ -55,11 +60,13 @@ public class ViewManageSalesList implements View
    private Scene scene;
    private MainView view;
    private ViewModelManageSalesList viewModel;
+   private MainViewViewModel model;
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
       this.viewModel = viewModel.getViewModelManageSalesList();
+      this.model = viewModel;
       this.view = view;
       this.scene = scene;
       this.title = title;
@@ -157,6 +164,9 @@ public class ViewManageSalesList implements View
 
       saleTable.setItems(filteredSaleData);
 
+      saleTable.getSelectionModel().selectedItemProperty().addListener((obs,
+            oldValue, newValue) -> this.viewModel.setSelectedSale(newValue));
+
    }
 
    public Scene getScene()
@@ -192,16 +202,19 @@ public class ViewManageSalesList implements View
       getScene().getWindow().hide();
       view.setWindow("saleslist");
    }
-   
+
    public void onCheckSalesButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
       view.setWindow("sales");
    }
 
-   public void onCreateSaleButtonPressed()
+   public void onCreateSaleButtonPressed() throws IOException
    {
-
+      getScene().getWindow().hide();
+      model.getViewModelSale().setSelectedProduct(
+            productTable.getSelectionModel().getSelectedItem());
+      view.setWindow("createsale");
    }
 
    public void onEditSaleButtonPressed()
@@ -209,8 +222,16 @@ public class ViewManageSalesList implements View
 
    }
 
-   public void onCancelSaleButtonPressed()
+   public void onCancelSaleButtonPressed() throws RemoteException
    {
+      Alert alert = new Alert(AlertType.CONFIRMATION);
+      alert.setTitle("Confirmation");
+      alert.setHeaderText("Removing sale ?");
+      Optional<ButtonType> result = alert.showAndWait();
+      if ((result.isPresent()) && (result.get() == ButtonType.OK))
+      {
+         this.viewModel.removeSale();
+      }
 
    }
 

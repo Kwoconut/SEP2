@@ -17,8 +17,8 @@ public class ViewModelProduct
    private StringProperty colourProperty;
    private IntegerProperty priceProperty;
    private SProductModel model;
-   
-   public ViewModelProduct (SProductModel model)
+
+   public ViewModelProduct(SProductModel model)
    {
       this.model = model;
       idProperty = new SimpleIntegerProperty();
@@ -26,9 +26,10 @@ public class ViewModelProduct
       typeProperty = new SimpleStringProperty("");
       colourProperty = new SimpleStringProperty("");
       priceProperty = new SimpleIntegerProperty();
-      
+
    }
-   public ViewModelProduct (SProductModel model, Product product)
+
+   public ViewModelProduct(SProductModel model, Product product)
    {
       this.model = model;
       idProperty = new SimpleIntegerProperty(product.getID());
@@ -36,39 +37,44 @@ public class ViewModelProduct
       typeProperty = new SimpleStringProperty(product.getType());
       colourProperty = new SimpleStringProperty(product.getColour());
       priceProperty = new SimpleIntegerProperty(product.getPrice());
-      
+
    }
-   
-   public ViewModelProduct (Product product)
+
+   public ViewModelProduct(Product product)
    {
       idProperty = new SimpleIntegerProperty(product.getID());
       nameProperty = new SimpleStringProperty(product.getName());
       typeProperty = new SimpleStringProperty(product.getType());
       colourProperty = new SimpleStringProperty(product.getColour());
       priceProperty = new SimpleIntegerProperty(product.getPrice());
-      
+
    }
-   
-   public IntegerProperty getIdProperty() {
+
+   public IntegerProperty getIdProperty()
+   {
       return idProperty;
    }
-   
-   public StringProperty getNameProperty() {
+
+   public StringProperty getNameProperty()
+   {
       return nameProperty;
    }
-   
-   public StringProperty getTypeProperty() {
+
+   public StringProperty getTypeProperty()
+   {
       return typeProperty;
    }
-   
-   public StringProperty getColourProperty() {
+
+   public StringProperty getColourProperty()
+   {
       return colourProperty;
    }
-   
-   public IntegerProperty getPriceProperty() {
+
+   public IntegerProperty getPriceProperty()
+   {
       return priceProperty;
    }
-   
+
    public boolean equals(Object obj)
    {
       if (!(obj instanceof ViewModelProduct))
@@ -77,13 +83,14 @@ public class ViewModelProduct
       }
       ViewModelProduct other = (ViewModelProduct) obj;
       return other.getNameProperty().get().equals(nameProperty.get())
-            && other.getIdProperty().get()==idProperty.get()
+            && other.getIdProperty().get() == idProperty.get()
             && other.getColourProperty().get().equals(colourProperty.get())
             && other.getTypeProperty().get().equals(typeProperty.get())
-            && other.getPriceProperty().get()==priceProperty.get();
+            && other.getPriceProperty().get() == priceProperty.get();
    }
-public StringProperty getImageIDProperty() {
-	// TODO Auto-generated method stub
-	return null;
-}
+
+   public StringProperty getImageIDProperty()
+   {
+      return new SimpleStringProperty("");
+   }
 }

@@ -1,7 +1,4 @@
-/DBSConnection/
-/client/
+/view/
+/viewmodel/
 /model/
 /server/
-/testing/
-/viewmodel/
-/view/
