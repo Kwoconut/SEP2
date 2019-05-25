@@ -113,6 +113,11 @@ public class Sale implements Serializable
       return (double) product.getPrice() / (100 - amount) * 100;
    }
 
+   public static double getReducedPrice(int price, int amount)
+   {
+      return (double) price - (amount * price) / 100;
+   }
+
    public boolean equals(Object obj)
    {
       if (!(obj instanceof Sale))

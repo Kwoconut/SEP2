@@ -77,6 +77,9 @@ public class ViewCreateSale implements View
             this.viewModel.getAmountProperty(), new NumberStringConverter());
       priceReductionLabel.textProperty()
             .bind(this.viewModel.getPriceAfterReductionProperty().asString());
+      priceField.setOnKeyReleased(event -> {
+         this.viewModel.updatePriceAfterReduction();
+      });
 
    }
 

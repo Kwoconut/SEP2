@@ -79,11 +79,7 @@ public class ViewModelSale implements PropertyChangeListener
 
    public DoubleProperty getPriceAfterReductionProperty()
    {
-      return new SimpleDoubleProperty(
-            (double) productProperty.get().getPriceProperty().get()
-                  - (amountProperty.get()
-                        * productProperty.get().getPriceProperty().get()
-                        / 100));
+      return priceAfterReduction;
    }
 
    public ObjectProperty<MyDate> getStartDateProperty()
@@ -134,6 +130,14 @@ public class ViewModelSale implements PropertyChangeListener
    public StringProperty getError2()
    {
       return errorProperty2;
+   }
+
+   public void updatePriceAfterReduction()
+   {
+
+      priceAfterReduction.set(
+            Sale.getReducedPrice(productProperty.get().getPriceProperty().get(),
+                  amountProperty.get()));
    }
 
    public void addSale()
