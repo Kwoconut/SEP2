@@ -120,39 +120,13 @@ public class Server implements RIServerWrite, PropertyChangeListener
     		  }
     	  }
       }
-      if (evt.getPropertyName().equals("SALEREMOVEUPDATED"))
+      if (evt.getPropertyName().equals("SALEEDITED"))
       {
     	  for (RIClient element : clients)
     	  {
     		  try 
     		  {
-    			  element.saleRemoveUpdate((Sale) evt.getNewValue()); 
-    		  }
-    		  catch (RemoteException e)
-    		  {
-    			  e.printStackTrace();
-    		  }
-    	  }
-      }if (evt.getPropertyName().equals("SALEADDUPDATED"))
-      {
-    	  for (RIClient element : clients)
-    	  {
-    		  try 
-    		  {
-    			  element.saleAddUpdate((Sale) evt.getNewValue()); 
-    		  }
-    		  catch (RemoteException e)
-    		  {
-    			  e.printStackTrace();
-    		  }
-    	  }
-      }if (evt.getPropertyName().equals("CHANGEDVALUE"))
-      {
-    	  for (RIClient element : clients)
-    	  {
-    		  try 
-    		  {
-    			  element.changeValue((Sale) evt.getNewValue()); 
+    			  element.editSale((Sale) evt.getNewValue()); 
     		  }
     		  catch (RemoteException e)
     		  {
@@ -227,21 +201,12 @@ public class Server implements RIServerWrite, PropertyChangeListener
    {
      model.removeSale(sale);   
    }
-
-@Override
-public void saleRemoveUpdate(Sale sale) throws RemoteException{
-	model.updateRemoveSale(sale);	
-}
-
-@Override
-public void saleAddUpdate(Sale sale) throws RemoteException{
-	model.updateAddSale(sale);	
-}
-
-@Override
-public void changeValue(Sale sale) throws RemoteException{
-	model.ChangedValue(sale);
-}
+   
+   @Override
+   public void editSale(Sale sale) throws RemoteException{
+	   model.editSale(sale);
+	   
+   }
 
 @Override
 public void getReviews(RIClient sender) throws RemoteException {
@@ -260,4 +225,5 @@ public void removeReview(Review review) throws RemoteException {
 	model.removeReview(review);
 	
 }
+
 }

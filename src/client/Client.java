@@ -138,27 +138,12 @@ public class Client implements IClient, RIClient, Serializable
    }
 
 @Override
-public void saleRemoveUpdate(Sale sale) throws RemoteException 
+public void editSaleFromServer(Sale sale) throws RemoteException 
 {		
 	RIServerWrite server = access.acquireWrite();
-	server.saleRemoveUpdate(sale);
+	server.editSale(sale);
 	access.releaseWrite();
 
-}
-
-@Override
-public void saleAddUpdate(Sale sale) throws RemoteException{
-	RIServerWrite server = access.acquireWrite();	
-	server.saleAddUpdate(sale);
-	access.releaseWrite();
-	
-}
-
-@Override
-public void changeValue(Sale sale) throws RemoteException{
-	RIServerWrite server = access.acquireWrite();
-	server.changeValue(sale);
-	access.releaseWrite();
 }
 
 @Override
@@ -199,6 +184,12 @@ public void removeReviewFromServer(Review review) throws RemoteException {
     RIServerWrite server = access.acquireWrite();
     server.removeReview(review);
     access.releaseWrite();
+	
+}
+
+@Override
+public void editSale(Sale sale) throws RemoteException {
+	model.editSaleFromServer(sale);
 	
 }
 }

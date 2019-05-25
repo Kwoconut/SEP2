@@ -278,6 +278,19 @@ public class Store implements Serializable, StoreModel
       sales.remove(sale);
       support.firePropertyChange("MINUSSALE", "", sale);
    }
+   @Override 
+   public void editSaleFromServer(Sale sale)
+   {
+	   for(int i=0;i<sales.size();i++)
+   {
+  	 if(sales.get(i).getID() == sale.getID())
+  	 {
+  		 sales.set(i, sale);
+  		 break;
+  	 }
+   }
+	   support.firePropertyChange("EDITSALE", "", sale);
+   }
 
    @Override
    public void requestReviews() throws RemoteException

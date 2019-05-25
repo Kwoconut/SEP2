@@ -282,7 +282,7 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      support.firePropertyChange("SALEREMOVEUPDATED", null, sale);
+      support.firePropertyChange("SALEEDITED", null, sale);
    }
 
    public void removeSale(Sale sale)
@@ -332,7 +332,7 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      support.firePropertyChange("SALEADDUPDATED", null, sale);
+      support.firePropertyChange("SALEEDITED", null, sale);
    }
 
    public void ChangedValue(Sale sale)
@@ -356,7 +356,7 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      support.firePropertyChange("CHANGEDVALUE", null, sendSale);
+      support.firePropertyChange("SALEEDITED", null, sendSale);
 
    }
 
@@ -428,4 +428,9 @@ public class ServerModel
    {
       return reviews;
    }
+
+public void editSale(Sale sale) {
+	// TODO Auto-generated method stub
+	
+}
 }
