@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import client.Client;
+import client.IClient;
 import javafx.beans.property.ObjectProperty;
 import viewmodel.ViewModelProduct;
 import viewmodel.ViewModelSale;
@@ -14,7 +15,7 @@ public class Store implements Serializable, StoreModel
 {
    private ArrayList<Product> products;
    private ArrayList<Offer> offers;
-   private Client client;
+   private IClient client;
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
    private ArrayList<Sale> sales;
    private ArrayList<Review> reviews;
@@ -197,11 +198,6 @@ public class Store implements Serializable, StoreModel
       this.client = client;
    }
 
-   public Client getClient()
-   {
-      return client;
-   }
-
    @Override
    public void addListener(PropertyChangeListener listener)
    {
@@ -216,9 +212,9 @@ public class Store implements Serializable, StoreModel
 
    @Override
    public void addSale(MyDate startDate, MyDate endDate,
-         ViewModelProduct product, int amount)
+         ViewModelProduct product, int amount) throws RemoteException
    {
-      {
+      
          Product sampleProduct = new Product(product.getIdProperty().get(),
                product.getNameProperty().get(),
                product.getPriceProperty().get(),
@@ -226,27 +222,34 @@ public class Store implements Serializable, StoreModel
                product.getTypeProperty().get(), "");
          Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
                endDate, sampleProduct, amount);
-
+         
+         int ok = 0;
+         
          if (sale.validDate())
          {
-
-            try
+            for (Sale element : sales)
+            {
+               if (element.overridesOtherSales(sale))
+               {
+                  ok=1;
+                  break;
+               }
+            }
+            if (ok == 1)
+            {
+               support.firePropertyChange("INVALIDDATE", "", "Invalid date");
+            }
+            else
             {
                support.firePropertyChange("VALIDDATE", null, "");
                client.sendSaleToServer(sale);
-
-            }
-            catch (RemoteException e)
-            {
-               // TODO Auto-generated catch block
-               e.printStackTrace();
             }
          }
          else
          {
             support.firePropertyChange("INVALIDDATE", "", "Invalid date");
          }
-      }
+      
    }
 
    @Override
@@ -285,9 +288,10 @@ public class Store implements Serializable, StoreModel
          products.stream()
                .filter(product -> product.getID() == sale.getProduct().getID())
                .findFirst().get().setPrice(sale.getProduct().getPrice());
-         support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "", products.stream()
-               .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get());
+         support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "",
+               products.stream().filter(
+                     product -> product.getID() == sale.getProduct().getID())
+                     .findFirst().get());
       }
       support.firePropertyChange("NEWSALE", "", sale);
    }
@@ -302,9 +306,10 @@ public class Store implements Serializable, StoreModel
          products.stream()
                .filter(product -> product.getID() == sale.getProduct().getID())
                .findFirst().get().setPrice(sale.getInitialPrice());
-         support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "", products.stream()
-               .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get());
+         support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "",
+               products.stream().filter(
+                     product -> product.getID() == sale.getProduct().getID())
+                     .findFirst().get());
       }
       support.firePropertyChange("MINUSSALE", "", sale);
    }

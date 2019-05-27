@@ -87,31 +87,33 @@ public class Sale implements Serializable
       }
    }
 
-   public boolean validPrice()
+   public boolean overridesOtherSales(Sale sale)
    {
-      if (amount <= 0 || amount >= 100)
-      {
-         return false;
-      }
-      else
+      if ((this.startDate.isBetween(sale.getStartDate(), sale.getEndDate())
+            && this.product.equals(sale.getProduct()))
+            || (this.endDate.isBetween(startDate, endDate)
+                  && this.product.equals(sale.getProduct())))
       {
          return true;
       }
-
+      else
+      {
+         return false;
+      }
    }
 
    public double getPriceAfterSaleApplied()
    {
       return getPrice() - (getAmount() * getPrice()) / 100;
-     
+
    }
 
    public double getInitialPrice()
    {
       return product.getPrice() / (100 - amount) * 100;
    }
-   
-   public static double getPriceBeforeSaleApplies(double price,int amount)
+
+   public static double getPriceBeforeSaleApplies(double price, int amount)
    {
       return price / (100 - amount) * 100;
    }

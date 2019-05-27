@@ -13,7 +13,7 @@ public interface SSalesModel
    void requestSales() throws RemoteException;
 
    void addSale(MyDate startDate, MyDate endDate, ViewModelProduct product,
-         int amount);
+         int amount) throws RemoteException;
 
    void removeSale(ObjectProperty<ViewModelSale> selectedSale) throws RemoteException;
 

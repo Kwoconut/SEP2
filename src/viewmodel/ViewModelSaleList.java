@@ -45,32 +45,29 @@ public class ViewModelSaleList implements PropertyChangeListener
          elements = (ArrayList<Sale>) evt.getNewValue();
          for (Sale element : elements)
          {
+            if (element.getIsChangedValue())
+            {
             sales.add(new ViewModelSale(model, element));
+            }
          }
       }
       else if (evt.getPropertyName().equals("NEWSALE"))
       {
          Sale element = (Sale) evt.getNewValue();
+         if (element.getIsChangedValue())
+         {
          sales.add(new ViewModelSale(model, element));
+         }
       }
       else if (evt.getPropertyName().equals("MINUSSALE"))
       {
          Sale element = (Sale) evt.getNewValue();
-         sales.remove(new ViewModelSale(model, element));
-      }
-      else if (evt.getPropertyName().equals("EDITSALE"))
-      {
-         Sale element = (Sale) evt.getNewValue();
-         for (int i = 0; i < sales.size(); i++)
+         if (element.getIsChangedValue())
          {
-            if (sales.get(i).getIDProperty().getValue() == element.getID())
-            {
-               sales.set(i, new ViewModelSale(model, element));
-               break;
-            }
+         sales.remove(new ViewModelSale(model, element));
          }
-
       }
+
 
    }
 }

@@ -2,6 +2,7 @@ package viewmodel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.rmi.RemoteException;
 import java.util.Random;
 
 import javafx.beans.property.BooleanProperty;
@@ -143,7 +144,7 @@ public class ViewModelSale implements PropertyChangeListener
                   amountProperty.get()));
    }
 
-   public void addSale()
+   public void addSale() throws RemoteException
    {
       model.addSale(startDateProperty.get(), endDateProperty.get(),
             productProperty.get(), amountProperty.get());
