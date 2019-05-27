@@ -10,13 +10,17 @@ public interface StoreProductPersistence
    ArrayList<Product> loadProducts() throws SQLException;
 
    void addProduct(Product product) throws SQLException;
-   
+
    void updateProduct(Product product) throws SQLException;
 
    void removeProduct(Product product) throws SQLException;
 
    void clearProducts() throws SQLException;
-   
-   Product getProductByID(int ID) throws SQLException;
+
+   void updateProductAddSale(double newPrice, int product_id)
+         throws SQLException;
+
+   void updateProductRemoveSale(double price, int product_id)
+         throws SQLException;
 
 }

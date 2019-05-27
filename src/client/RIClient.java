@@ -25,7 +25,7 @@ public interface RIClient extends Remote
    
    void removeSale(Sale sale) throws RemoteException;
 
-   void editSale(Sale sale) throws RemoteException;
+   void updateSale(Sale sale) throws RemoteException;
    
    void getReviews(ArrayList<Review> reviews) throws RemoteException;
    

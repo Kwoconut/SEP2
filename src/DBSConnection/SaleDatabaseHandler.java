@@ -74,7 +74,7 @@ public class SaleDatabaseHandler implements StoreSalePersistence
       java.sql.Date date2 = new java.sql.Date(cal.getTimeInMillis());
 
       query.executeUpdate(
-            "INSERT INTO Sale (sale_id, start_date, end_date, amount, isChangedValue,product_id) VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO Sale (sale_id, start_date, end_date, amount, isChangedValue,product_id) VALUES (?, ?, ?, ?, ?, ?);",
             statement -> {
                statement.setInt(1, sale.getID());
                statement.setDate(2, date);
@@ -90,22 +90,10 @@ public class SaleDatabaseHandler implements StoreSalePersistence
    public void changedValue(Sale sale) throws SQLException
    {
       query.executeUpdate(
-            "UPDATE Sale SET isChangedValue = ? WHERE sale_id = ?",
+            "UPDATE Sale SET isChangedValue = ? WHERE sale_id = ?;",
             statement -> {
                statement.setBoolean(1, true);
                statement.setInt(2, sale.getID());
-            });
-
-   }
-
-   @Override
-   public void updateAddSale(double newPrice, int product_id) throws SQLException
-   {
-
-      query.executeUpdate("UPDATE Product SET price = ? WHERE product_id = ?",
-            statement -> {
-               statement.setDouble(1, newPrice);
-               statement.setInt(2, product_id);
             });
 
    }
@@ -116,17 +104,6 @@ public class SaleDatabaseHandler implements StoreSalePersistence
       query.executeUpdate("DELETE FROM Sale WHERE sale_id = ?", statement -> {
          statement.setInt(1, sale.getID());
       });
-   }
-
-   @Override
-   public void updateRemoveSale(double price, int product_id) throws SQLException
-   {
-
-      query.executeUpdate("UPDATE Product SET price = ? WHERE product_id = ?",
-            statement -> {
-               statement.setDouble(1, price);
-               statement.setInt(2, product_id);
-            });
    }
 
    @Override

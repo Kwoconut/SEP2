@@ -22,8 +22,7 @@ public class ProductDatabaseHandler implements StoreProductPersistence
             statement -> {
             }, resultSet -> {
                return new Product(resultSet.getInt("product_id"),
-                     resultSet.getString("name"), 
-                     resultSet.getInt("price"),
+                     resultSet.getString("name"), resultSet.getInt("price"),
                      resultSet.getString("color"),
                      resultSet.getString("product_type"),
                      resultSet.getString("imageID"));
@@ -34,7 +33,7 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    public void addProduct(Product product) throws SQLException
    {
       query.executeUpdate(
-            "INSERT INTO Product (product_id, name, price, color, product_type, imageID) VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO Product (product_id, name, price, color, product_type, imageID) VALUES (?, ?, ?, ?, ?, ?);",
             statement -> {
                statement.setInt(1, product.getID());
                statement.setString(2, product.getName());
@@ -49,7 +48,7 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    public void updateProduct(Product product) throws SQLException
    {
       query.executeUpdate(
-            "UPDATE Product SET name = ?, price = ?, color = ?, product_type = ?, imageID = ?, WHERE product_id = ?",
+            "UPDATE Product SET name = ?, price = ?, color = ?, product_type = ?, imageID = ?, WHERE product_id = ?;",
             statement -> {
                statement.setString(1, product.getName());
                statement.setDouble(2, product.getPrice());
@@ -63,7 +62,7 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    @Override
    public void removeProduct(Product product) throws SQLException
    {
-      query.executeUpdate("DELETE FROM Product WHERE product_id = ?",
+      query.executeUpdate("DELETE FROM Product WHERE product_id = ?;",
             statement -> {
                statement.setInt(1, product.getID());
             });
@@ -72,28 +71,30 @@ public class ProductDatabaseHandler implements StoreProductPersistence
    @Override
    public void clearProducts() throws SQLException
    {
-      query.executeUpdate("DELETE FROM Product", statement -> {
+      query.executeUpdate("DELETE FROM Product;", statement -> {
       });
    }
 
-@Override
-public Product getProductByID(int ID) throws SQLException 
-{
-	ArrayList<Product> products = new ArrayList<Product>();
-	products = loadProducts();
-	Product product =null;
-	for(int i=0;i<products.size();i++)
-	{
-		if(products.get(i).getID()== ID)
-		{
-			product= new Product(products.get(i).getID(),products.get(i).getName(),
-					products.get(i).getPrice(),products.get(i).getColour(),products.get(i).getType(),products.get(i).getImageID());
-			break;
-		}
-	}
-	return product;
+   @Override
+   public void updateProductAddSale(double newPrice, int product_id)
+         throws SQLException
+   {
+      query.executeUpdate("UPDATE Product SET price = ? WHERE product_id = ?;",
+            statement -> {
+               statement.setDouble(1, newPrice);
+               statement.setInt(2, product_id);
+            });
+   }
 
+   @Override
+   public void updateProductRemoveSale(double price, int product_id)
+         throws SQLException
+   {
 
-}
-
+      query.executeUpdate("UPDATE Product SET price = ? WHERE product_id = ?",
+            statement -> {
+               statement.setDouble(1, price);
+               statement.setInt(2, product_id);
+            });
+   }
 }

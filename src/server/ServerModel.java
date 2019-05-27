@@ -85,6 +85,11 @@ public class ServerModel
       return sales;
    }
 
+   public ArrayList<Review> getReviews()
+   {
+      return reviews;
+   }
+
    // loading methods
    public void loadProducts()
    {
@@ -168,6 +173,43 @@ public class ServerModel
       support.firePropertyChange("OFFERADDED", null, offer);
    }
 
+   public void addSale(Sale sale)
+   {
+      try
+      {
+         if (sale.getIsChangedValue() == false
+               && MyDate.now().equals(sale.getStartDate()))
+         {
+            sale.setChangedValue(!sale.getIsChangedValue());
+            sale.getProduct().setPrice(sale.getPriceAfterSaleApplied());
+            databaseProductAccess.updateProductAddSale(sale.getProduct().getPrice(),
+                  sale.getProduct().getID());
+         }
+         sales.add(sale);
+         databaseSaleAccess.addSale(sale);
+      }
+      catch (SQLException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      support.firePropertyChange("SALEADDED", null, sale);
+   }
+
+   public void addReview(Review review)
+   {
+      reviews.add(review);
+      try
+      {
+         databaseReviewAccess.addReview(review);
+      }
+      catch (SQLException e)
+      {
+         e.printStackTrace();
+      }
+      support.firePropertyChange("REVIEWADDED", null, review);
+   }
+
    // update methods
    public void updateProduct(Product product)
    {
@@ -197,6 +239,47 @@ public class ServerModel
       support.firePropertyChange("OFFERUPDATED", null, offer);
    }
 
+   public void updateRemoveSale(Sale sale)
+   {
+      products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get().setPrice(sale.getInitialPrice());
+
+      try
+      {
+         databaseProductAccess.updateProductRemoveSale(sale.getInitialPrice(),
+               sale.getProduct().getID());
+         databaseSaleAccess.removeSale(sale);
+      }
+      catch (SQLException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      support.firePropertyChange("SALEREMOVED", null, sale);
+   }
+
+   public void updateAddSale(Sale sale)
+   {
+      products.parallelStream()
+            .filter(product -> product.getID() == sale.getID()).findFirst()
+            .get().setPrice((sale.getPriceAfterSaleApplied()));
+      sales.parallelStream()
+            .filter(sampleSale -> sampleSale.getID() == sale.getID())
+            .findFirst().get().setIsChangedValue();
+      try
+      {
+         databaseProductAccess.updateProductAddSale(sale.getPriceAfterSaleApplied(),
+               sale.getProduct().getID());
+         databaseSaleAccess.changedValue(sale);
+      }
+      catch (SQLException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      support.firePropertyChange("SALEEDITED", null, sale);
+   }
    // remove methods
 
    public void removeProduct(Product product)
@@ -229,6 +312,44 @@ public class ServerModel
       support.firePropertyChange("OFFERREMOVED", null, offer);
    }
 
+   public void removeSale(Sale sale)
+   {
+      sales.remove(sale);
+      try
+      {
+         if (sale.getIsChangedValue())
+         {
+            products.stream()
+                  .filter(
+                        product -> product.getID() == sale.getProduct().getID())
+                  .findFirst().get().setPrice(sale.getInitialPrice());
+            databaseProductAccess.updateProductRemoveSale(sale.getProduct().getPrice(),
+                  sale.getProduct().getID());
+         }
+         databaseSaleAccess.removeSale(sale);
+      }
+      catch (SQLException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      support.firePropertyChange("SALEREMOVED", null, sale);
+   }
+
+   public void removeReview(Review review)
+   {
+      reviews.remove(review);
+      try
+      {
+         databaseReviewAccess.removeReveiew(review);
+      }
+      catch (SQLException e)
+      {
+         e.printStackTrace();
+      }
+      support.firePropertyChange("REVIEWREMOVED", null, review);
+   }
+
    // clear methods
    public void clearProducts()
    {
@@ -256,80 +377,22 @@ public class ServerModel
       }
    }
 
+   public void clearReviews()
+   {
+      try
+      {
+         databaseReviewAccess.clearReviews();
+      }
+      catch (SQLException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+   }
+
    public void addPropertyChangeListener(PropertyChangeListener listener)
    {
       support.addPropertyChangeListener(listener);
-   }
-
-   public void updateRemoveSale(Sale sale)
-   {
-      products.stream()
-            .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get().setPrice(sale.getInitialPrice());
-
-      try
-      {
-         databaseSaleAccess.updateRemoveSale(sale.getInitialPrice(),
-               sale.getProduct().getID());
-         databaseSaleAccess.removeSale(sale);
-      }
-      catch (SQLException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      support.firePropertyChange("SALEREMOVED", null, sale);
-   }
-
-   public void removeSale(Sale sale)
-   {
-
-      sales.remove(sale);
-
-      try
-      {
-         if (sale.getIsChangedValue())
-         {
-            products.stream()
-                  .filter(
-                        product -> product.getID() == sale.getProduct().getID())
-                  .findFirst().get().setPrice(sale.getInitialPrice());
-            databaseSaleAccess.updateRemoveSale(sale.getProduct().getPrice(),
-                  sale.getProduct().getID());
-         }
-         databaseSaleAccess.removeSale(sale);
-      }
-      catch (SQLException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      support.firePropertyChange("SALEREMOVED", null, sale);
-
-   }
-
-   public void updateAddSale(Sale sale)
-   {
-
-      products.parallelStream()
-            .filter(product -> product.getID() == sale.getID()).findFirst()
-            .get().setPrice((sale.getPriceAfterSaleApplied()));
-      sales.parallelStream()
-            .filter(sampleSale -> sampleSale.getID() == sale.getID())
-            .findFirst().get().setIsChangedValue();
-
-      try
-      {
-         databaseSaleAccess.updateAddSale(sale.getPriceAfterSaleApplied(),
-               sale.getProduct().getID());
-         databaseSaleAccess.changedValue(sale);
-      }
-      catch (SQLException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      support.firePropertyChange("SALEEDITED", null, sale);
    }
 
    public void changedValue(Sale sale)
@@ -356,78 +419,8 @@ public class ServerModel
       support.firePropertyChange("SALEEDITED", null, sendSale);
 
    }
-
-   public void addSale(Sale sale)
-   {
-
-      try
-      {
-         if (sale.getIsChangedValue() == false
-               && MyDate.now().equals(sale.getStartDate()))
-         {
-            sale.setChangedValue(!sale.getIsChangedValue());
-            sale.getProduct().setPrice(sale.getPriceAfterSaleApplied());
-            databaseSaleAccess.updateAddSale(sale.getProduct().getPrice(),
-                  sale.getProduct().getID());
-         }
-         sales.add(sale);
-         databaseSaleAccess.addSale(sale);
-      }
-      catch (SQLException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      support.firePropertyChange("SALEADDED", null, sale);
-   }
-
-   public void addReview(Review review)
-   {
-      reviews.add(review);
-      try
-      {
-         databaseReviewAccess.addReview(review);
-      }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
-      support.firePropertyChange("REVIEWADDED", null, review);
-   }
-
-   public void removeReview(Review review)
-   {
-      reviews.remove(review);
-      try
-      {
-         databaseReviewAccess.removeReveiew(review);
-      }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
-      support.firePropertyChange("REVIEWREMOVED", null, review);
-   }
-
-   public void clearReviews()
-   {
-      try
-      {
-         databaseReviewAccess.clearReviews();
-      }
-      catch (SQLException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-   }
-
-   public ArrayList<Review> getReviews()
-   {
-      return reviews;
-   }
-
-   public void editSale(Sale sale)
+   
+   public void updateSale(Sale sale)
    {
       for (int i = 0; i < sales.size(); i++)
       {
@@ -452,6 +445,5 @@ public class ServerModel
       // e.printStackTrace();
       // }
       // support.firePropertyChange("SALEEDITED", null, sale);
-
    }
 }

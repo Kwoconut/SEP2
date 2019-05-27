@@ -126,7 +126,7 @@ public class Server implements RIServerWrite, PropertyChangeListener
          {
             try
             {
-               element.editSale((Sale) evt.getNewValue());
+               element.updateSale((Sale) evt.getNewValue());
             }
             catch (RemoteException e)
             {
@@ -203,9 +203,9 @@ public class Server implements RIServerWrite, PropertyChangeListener
    }
 
    @Override
-   public void editSale(Sale sale) throws RemoteException
+   public void updateSale(Sale sale) throws RemoteException
    {
-      model.editSale(sale);
+      model.updateSale(sale);
 
    }
 
