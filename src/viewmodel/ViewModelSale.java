@@ -126,7 +126,6 @@ public class ViewModelSale implements PropertyChangeListener
       return errorProperty1;
    }
 
-
    public void updatePriceAfterReduction()
    {
 

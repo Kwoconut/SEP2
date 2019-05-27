@@ -263,14 +263,10 @@ public class ServerModel
 
    public void updateRemoveSale(Sale sale)
    {
-      for (int i = 0; i < products.size(); i++)
-      {
-         if (products.get(i).getID() == sale.getProduct().getID())
-         {
-            products.get(i).setPrice((int) sale.getInitialPrice());
-            break;
-         }
-      }
+      products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get().setPrice((int) sale.getInitialPrice());
+
       try
       {
          databaseSaleAccess.updateRemoveSale((int) sale.getInitialPrice(),
@@ -287,8 +283,12 @@ public class ServerModel
 
    public void removeSale(Sale sale)
    {
-      sale.getProduct().setPrice((int) sale.getInitialPrice());
+
       sales.remove(sale);
+
+      products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get().setPrice((int) sale.getInitialPrice());
       try
       {
          databaseSaleAccess.removeSale(sale);
@@ -306,7 +306,7 @@ public class ServerModel
 
    public void updateAddSale(Sale sale)
    {
-      
+
       products.parallelStream()
             .filter(product -> product.getID() == sale.getID()).findFirst()
             .get().setPrice(((int) sale.getPriceAfterSaleApplied()));
@@ -429,29 +429,31 @@ public class ServerModel
       return reviews;
    }
 
-public void editSale(Sale sale) {
-	for (int i = 0; i < sales.size(); i++)
-    {
-       if (sales.get(i).getID() == sale.getID())
-       {
-          sales.set(i, sale);
-          break;
-       }
-    }
-	// tre de implementat functionalitatea la butonu edit sale , de gindit cum il facem
-   // try
-   // {
-     //  databaseSaleAccess.updateRemoveSale((int) sale.getInitialPrice(),
-     //        sale.getProduct().getID());
-     //  databaseSaleAccess.removeSale(sale);
-    	System.out.println("In servermodel de implementat functionalitatea");
-   // }
-  //  catch (SQLException e)
-   // {
-       // TODO Auto-generated catch block
-    //   e.printStackTrace();
-   // }
-   // support.firePropertyChange("SALEEDITED", null, sale);
-	
-}
+   public void editSale(Sale sale)
+   {
+      for (int i = 0; i < sales.size(); i++)
+      {
+         if (sales.get(i).getID() == sale.getID())
+         {
+            sales.set(i, sale);
+            break;
+         }
+      }
+      // tre de implementat functionalitatea la butonu edit sale , de gindit cum
+      // il facem
+      // try
+      // {
+      // databaseSaleAccess.updateRemoveSale((int) sale.getInitialPrice(),
+      // sale.getProduct().getID());
+      // databaseSaleAccess.removeSale(sale);
+      System.out.println("In servermodel de implementat functionalitatea");
+      // }
+      // catch (SQLException e)
+      // {
+      // TODO Auto-generated catch block
+      // e.printStackTrace();
+      // }
+      // support.firePropertyChange("SALEEDITED", null, sale);
+
+   }
 }

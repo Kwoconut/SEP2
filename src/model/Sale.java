@@ -125,15 +125,17 @@ public class Sale implements Serializable
          return false;
       }
       Sale other = (Sale) obj;
-
-      return product.equals(other.product) && startDate.equals(other.startDate)
-            && endDate.equals(other.endDate);
+      return ID == other.getID() && startDate.equals(other.getStartDate())
+            && endDate.equals(other.getEndDate())
+            && product.equals(other.getProduct()) && amount == other.getAmount()
+            && isChangedValue == other.getIsChangedValue();
    }
 
    public String toString()
    {
       String s = "";
-      s += startDate + "" + endDate + "" + product;
+      s += startDate + "" + endDate + "" + product + "" + amount + ""
+            + isChangedValue;
       return s;
    }
 

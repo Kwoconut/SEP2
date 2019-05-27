@@ -252,7 +252,8 @@ public class Store implements Serializable, StoreModel
       Sale sampleSale = new Sale(sale.get().getIDProperty().get(),
             sale.get().getStartDateProperty().get(),
             sale.get().getEndDateProperty().get(), sampleProduct,
-            sale.get().getAmountProperty().get());
+            sale.get().getAmountProperty().get(),
+            sale.get().getBooleanProperty().get());
 
       client.removeSaleFromServer(sampleSale);
    }
@@ -269,6 +270,9 @@ public class Store implements Serializable, StoreModel
    public void addSaleFromServer(Sale sale)
    {
       sales.add(sale);
+      products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get().setPrice(sale.getProduct().getPrice());
       support.firePropertyChange("NEWSALE", "", sale);
    }
 
@@ -276,20 +280,24 @@ public class Store implements Serializable, StoreModel
    public void removeSaleFromServer(Sale sale)
    {
       sales.remove(sale);
+      products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get().setPrice(sale.getProduct().getPrice());
       support.firePropertyChange("MINUSSALE", "", sale);
    }
-   @Override 
+
+   @Override
    public void editSaleFromServer(Sale sale)
    {
-	   for(int i=0;i<sales.size();i++)
-   {
-  	 if(sales.get(i).getID() == sale.getID())
-  	 {
-  		 sales.set(i, sale);
-  		 break;
-  	 }
-   }
-	   support.firePropertyChange("EDITSALE", "", sale);
+      for (int i = 0; i < sales.size(); i++)
+      {
+         if (sales.get(i).getID() == sale.getID())
+         {
+            sales.set(i, sale);
+            break;
+         }
+      }
+      support.firePropertyChange("EDITSALE", "", sale);
    }
 
    @Override

@@ -108,73 +108,73 @@ public class Server implements RIServerWrite, PropertyChangeListener
       }
       if (evt.getPropertyName().equals("SALEREMOVED"))
       {
-    	  for (RIClient element : clients)
-    	  {
-    		  try 
-    		  {
-    			  element.removeSale((Sale) evt.getNewValue()); 
-    		  }
-    		  catch (RemoteException e)
-    		  {
-    			  e.printStackTrace();
-    		  }
-    	  }
+         for (RIClient element : clients)
+         {
+            try
+            {
+               element.removeSale((Sale) evt.getNewValue());
+            }
+            catch (RemoteException e)
+            {
+               e.printStackTrace();
+            }
+         }
       }
       if (evt.getPropertyName().equals("SALEEDITED"))
       {
-    	  for (RIClient element : clients)
-    	  {
-    		  try 
-    		  {
-    			  element.editSale((Sale) evt.getNewValue()); 
-    		  }
-    		  catch (RemoteException e)
-    		  {
-    			  e.printStackTrace();
-    		  }
-    	  }
+         for (RIClient element : clients)
+         {
+            try
+            {
+               element.editSale((Sale) evt.getNewValue());
+            }
+            catch (RemoteException e)
+            {
+               e.printStackTrace();
+            }
+         }
       }
       if (evt.getPropertyName().equals("SALEADDED"))
       {
-    	  for (RIClient element : clients)
-    	  {
-    		  try 
-    		  {
-    			  element.addSale((Sale) evt.getNewValue()); 
-    		  }
-    		  catch (RemoteException e)
-    		  {
-    			  e.printStackTrace();
-    		  }
-    	  }
+         for (RIClient element : clients)
+         {
+            try
+            {
+               element.addSale((Sale) evt.getNewValue());
+            }
+            catch (RemoteException e)
+            {
+               e.printStackTrace();
+            }
+         }
       }
       if (evt.getPropertyName().equals("REVIEWADDED"))
       {
-    	  for (RIClient element : clients)
-    	  {
-    		  try 
-    		  {
-    			  element.addReview((Review) evt.getNewValue()); 
-    		  }
-    		  catch (RemoteException e)
-    		  {
-    			  e.printStackTrace();
-    		  }
-    	  }
+         for (RIClient element : clients)
+         {
+            try
+            {
+               element.addReview((Review) evt.getNewValue());
+            }
+            catch (RemoteException e)
+            {
+               e.printStackTrace();
+            }
+         }
       }
       if (evt.getPropertyName().equals("REVIEWREMOVED"))
       {
-    	  for (RIClient element : clients)
-    	  {
-    		  try 
-    		  {
-    			  element.removeReview((Review) evt.getNewValue()); 
-    		  }
-    		  catch (RemoteException e)
-    		  {
-    			  e.printStackTrace();
-    		  }
-    	  }
+         for (RIClient element : clients)
+         {
+            try
+            {
+               element.removeReview((Review) evt.getNewValue());
+            }
+            catch (RemoteException e)
+            {
+               e.printStackTrace();
+            }
+         }
       }
    }
 
@@ -187,7 +187,7 @@ public class Server implements RIServerWrite, PropertyChangeListener
    @Override
    public void getSales(RIClient sender) throws RemoteException
    {
-	   sender.getSales(model.getSales());
+      sender.getSales(model.getSales());
    }
 
    @Override
@@ -199,31 +199,35 @@ public class Server implements RIServerWrite, PropertyChangeListener
    @Override
    public void removeSale(Sale sale) throws RemoteException
    {
-     model.removeSale(sale);   
+      model.removeSale(sale);
    }
-   
+
    @Override
-   public void editSale(Sale sale) throws RemoteException{
-	   model.editSale(sale);
-	   
+   public void editSale(Sale sale) throws RemoteException
+   {
+      model.editSale(sale);
+
    }
 
-@Override
-public void getReviews(RIClient sender) throws RemoteException {
-	sender.getReviews(model.getReviews());
-	
-}
+   @Override
+   public void getReviews(RIClient sender) throws RemoteException
+   {
+      sender.getReviews(model.getReviews());
 
-@Override
-public void sendReview(Review review) throws RemoteException {
-	model.addReview(review);
-	
-}
+   }
 
-@Override
-public void removeReview(Review review) throws RemoteException {
-	model.removeReview(review);
-	
-}
+   @Override
+   public void sendReview(Review review) throws RemoteException
+   {
+      model.addReview(review);
+
+   }
+
+   @Override
+   public void removeReview(Review review) throws RemoteException
+   {
+      model.removeReview(review);
+
+   }
 
 }

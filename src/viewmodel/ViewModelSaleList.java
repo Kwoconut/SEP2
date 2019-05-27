@@ -33,7 +33,7 @@ public class ViewModelSaleList implements PropertyChangeListener
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
-      Platform.runLater(() ->executePropertyChange(evt));
+      Platform.runLater(() -> executePropertyChange(evt));
    }
 
    @SuppressWarnings("unchecked")
@@ -61,13 +61,13 @@ public class ViewModelSaleList implements PropertyChangeListener
       else if (evt.getPropertyName().equals("EDITSALE"))
       {
          Sale element = (Sale) evt.getNewValue();
-         for(int i=0;i<sales.size();i++)
+         for (int i = 0; i < sales.size(); i++)
          {
-        	 if(sales.get(i).getIDProperty().getValue() == element.getID())
-        	 {
-        		 sales.set(i, new ViewModelSale(model,element));
-        		 break;
-        	 }
+            if (sales.get(i).getIDProperty().getValue() == element.getID())
+            {
+               sales.set(i, new ViewModelSale(model, element));
+               break;
+            }
          }
 
       }
