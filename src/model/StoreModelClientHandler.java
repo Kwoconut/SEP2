@@ -1,5 +1,6 @@
 package model;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import client.Client;
@@ -29,5 +30,7 @@ public interface StoreModelClientHandler
    void addReviewFromServer(Review review);
    
    void removeReviewFromServer(Review review);
+   
+   void addAvailableSaleFromServer(Sale sale);
 
 }

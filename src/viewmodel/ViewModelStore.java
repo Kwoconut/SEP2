@@ -12,6 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Product;
 import model.SProductModel;
+import model.Sale;
 import model.StoreModel;
 
 public class ViewModelStore implements PropertyChangeListener
@@ -33,15 +34,12 @@ public class ViewModelStore implements PropertyChangeListener
    @SuppressWarnings("unchecked")
    public void updateProducts(PropertyChangeEvent evt)
    {
-      Platform.runLater(() -> {
-         ArrayList<Product> products = ((ArrayList<Product>) evt.getNewValue());
-         for (int i = 0; i < 5; i++)
-         {
-            names[i].set(products.get(i).getName());
-            prices[i].set(products.get(i).getPrice() + "DKK");
-         }
-
-      });
+      ArrayList<Product> products = ((ArrayList<Product>) evt.getNewValue());
+      for (int i = 0; i < 5; i++)
+      {
+         names[i].set(products.get(i).getName());
+         prices[i].set(products.get(i).getPrice() + "DKK");
+      }
    }
 
    public void getProduct(String type)
@@ -72,18 +70,35 @@ public class ViewModelStore implements PropertyChangeListener
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
+      Platform.runLater(() -> executePropertyChange(evt));
+   }
+
+   public void executePropertyChange(PropertyChangeEvent evt)
+   {
       if (evt.getPropertyName().equals("SEND"))
       {
          updateProducts(evt);
       }
       if (evt.getPropertyName().equals("SALEPRODUCTPRICEUPDATE"))
       {
+
+         Sale sale = (Sale) evt.getNewValue();
          for (int i = 0; i < names.length; i++)
          {
-            Product product = (Product) evt.getNewValue();
-            if (names[i].get().equals(product.getName()))
+            if (names[i].get().equals(sale.getProduct().getName()))
             {
-               prices[i].set(product.getPrice() + "DKK");
+               prices[i].set(sale.getPriceAfterSaleApplied() + "DKK");
+            }
+         }
+      }
+      if (evt.getPropertyName().equals("SALEPRODUCTPRICEREVERT"))
+      {
+         Sale sale = (Sale) evt.getNewValue();
+         for (int i = 0; i < names.length;i++)
+         {
+            if (names[i].get().equals(sale.getProduct().getName()))
+            {
+               prices[i].set(sale.getInitialPrice() + "DKK");
             }
          }
       }

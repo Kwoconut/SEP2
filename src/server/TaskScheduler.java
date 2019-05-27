@@ -6,7 +6,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
-
 import model.MyDate;
 import model.Sale;
 import model.Store;
@@ -36,7 +35,7 @@ public class TaskScheduler implements Runnable
       ArrayList<Sale> sales = model.getSales();
       for (int i = 0; i < sales.size(); i++)
       {
-         if (now.isAfter(sales.get(i).getEndDate()))
+         if (now.equals(sales.get(i).getEndDate()))
          {
             model.updateRemoveSale(sales.get(i)); // in server update product
                                                   // (including dtb and client)
@@ -44,15 +43,16 @@ public class TaskScheduler implements Runnable
                                             // server/db/clients cuz sale ended
          }
       }
+      System.out.println("--------------");
       for (int i = 0; i < sales.size(); i++)
       {
          if (sales.get(i).getIsChangedValue() == false
-               && now.isAfter(sales.get(i).getStartDate()))
+               && now.equals((sales.get(i).getStartDate())))
          {
-            model.updateAddSale(sales.get(i)); // in server update
-                                               // product(including dtb and
-                                               // client)
-            model.changedValue(sales.get(i)); // set the boolean to true
+            model.setSaleAvailable(sales.get(i));
+            System.out.println("--------------");// in server update
+                                                  // product(including dtb and
+                                                  // client)
          }
       }
    }
@@ -66,7 +66,7 @@ public class TaskScheduler implements Runnable
          int time = getHoursUntilTarget();
          try
          {
-            Thread.sleep(time * 1000 * 60 * 60);
+            Thread.sleep(1000 * 60);
          }
          catch (InterruptedException e)
          {

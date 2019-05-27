@@ -105,15 +105,31 @@ public class ViewModelManageSalesList implements PropertyChangeListener
       else if (evt.getPropertyName().equals("EDITSALE"))
       {
          Sale element = (Sale) evt.getNewValue();
-         for(int i=0;i<sales.size();i++)
+         for (int i = 0; i < sales.size(); i++)
          {
-        	 if(sales.get(i).getIDProperty().getValue() == element.getID())
-        	 {
-        		 sales.set(i, new ViewModelSale(model,element));
-        		 break;
-        	 }
+            if (sales.get(i).getIDProperty().getValue() == element.getID())
+            {
+               sales.set(i, new ViewModelSale(model, element));
+               break;
+            }
          }
+      }
+      else if (evt.getPropertyName().equals("SALEPRODUCTPRICEUPDATE"))
+      {
+         Sale sale = (Sale) evt.getNewValue();
+         sales.parallelStream().filter(
+               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
+               .findFirst().get().getProductProperty().get().getPriceProperty()
+               .set(sale.getPriceAfterSaleApplied());
+         sales.parallelStream().filter(
+               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
+               .findFirst().get().getInitialPriceProperty()
+               .set(sale.getPrice());
+         sales.parallelStream().filter(
+               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
+               .findFirst().get().getBooleanProperty().set(true);
+         
+      }
 
    }
-}
 }

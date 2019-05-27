@@ -214,42 +214,42 @@ public class Store implements Serializable, StoreModel
    public void addSale(MyDate startDate, MyDate endDate,
          ViewModelProduct product, int amount) throws RemoteException
    {
-      
-         Product sampleProduct = new Product(product.getIdProperty().get(),
-               product.getNameProperty().get(),
-               product.getPriceProperty().get(),
-               product.getColourProperty().get(),
-               product.getTypeProperty().get(), "");
-         Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
-               endDate, sampleProduct, amount);
-         
-         int ok = 0;
-         
-         if (sale.validDate())
+
+      Product sampleProduct = new Product(product.getIdProperty().get(),
+            product.getNameProperty().get(), product.getPriceProperty().get(),
+            product.getColourProperty().get(), product.getTypeProperty().get(),
+            "");
+      Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
+            endDate, sampleProduct, amount);
+
+      int ok = 0;
+
+      if (sale.validDate())
+      {
+         for (Sale element : sales)
          {
-            for (Sale element : sales)
+            if (element.overridesOtherSales(sale))
             {
-               if (element.overridesOtherSales(sale))
-               {
-                  ok=1;
-                  break;
-               }
+               ok = 1;
+               break;
             }
-            if (ok == 1)
-            {
-               support.firePropertyChange("INVALIDDATE", "", "There is a sale on the specified dates");
-            }
-            else
-            {
-               support.firePropertyChange("VALIDDATE", null, "");
-               client.sendSaleToServer(sale);
-            }
+         }
+         if (ok == 1)
+         {
+            support.firePropertyChange("INVALIDDATE", "",
+                  "There is a sale on the specified dates");
          }
          else
          {
-            support.firePropertyChange("INVALIDDATE", "", "Invalid date");
+            support.firePropertyChange("VALIDDATE", null, "");
+            client.sendSaleToServer(sale);
          }
-      
+      }
+      else
+      {
+         support.firePropertyChange("INVALIDDATE", "", "Invalid date");
+      }
+
    }
 
    @Override
@@ -274,8 +274,15 @@ public class Store implements Serializable, StoreModel
    public void getSalesFromServer(ArrayList<Sale> sales)
    {
       this.sales = sales;
-
       support.firePropertyChange("SALESLIST", "", sales);
+
+      for (Sale element : sales)
+      {
+         if (element.getIsChangedValue())
+         {
+            support.firePropertyChange("SALEAVAILABLE", "", element);
+         }
+      }
 
    }
 
@@ -283,16 +290,6 @@ public class Store implements Serializable, StoreModel
    public void addSaleFromServer(Sale sale)
    {
       sales.add(sale);
-      if (sale.getIsChangedValue())
-      {
-         products.stream()
-               .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get().setPrice(sale.getProduct().getPrice());
-         support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "",
-               products.stream().filter(
-                     product -> product.getID() == sale.getProduct().getID())
-                     .findFirst().get());
-      }
       support.firePropertyChange("NEWSALE", "", sale);
    }
 
@@ -301,16 +298,16 @@ public class Store implements Serializable, StoreModel
    {
       sales.remove(sale);
 
-      if (sale.getIsChangedValue())
+      if (sale.getIsChangedValue() == true)
       {
          products.stream()
                .filter(product -> product.getID() == sale.getProduct().getID())
                .findFirst().get().setPrice(sale.getInitialPrice());
-         support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "",
-               products.stream().filter(
-                     product -> product.getID() == sale.getProduct().getID())
-                     .findFirst().get());
       }
+      
+      
+
+      support.firePropertyChange("SALEPRODUCTPRICEREVERT", "", sale);
       support.firePropertyChange("MINUSSALE", "", sale);
    }
 
@@ -325,8 +322,18 @@ public class Store implements Serializable, StoreModel
             break;
          }
       }
+   }
 
-      support.firePropertyChange("EDITSALE", "", sale);
+   @Override
+   public void addAvailableSaleFromServer(Sale sale)
+   {
+      products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get().setPrice(sale.getPriceAfterSaleApplied());
+
+      support.firePropertyChange("SALEAVAILABLE", "", sale);
+      support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "",
+            sale);
    }
 
    @Override

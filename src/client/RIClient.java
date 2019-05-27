@@ -32,5 +32,7 @@ public interface RIClient extends Remote
    void addReview(Review review) throws RemoteException;
    
    void removeReview(Review review) throws RemoteException;
+   
+   void addAvailableSale(Sale sale) throws RemoteException;
 
 }

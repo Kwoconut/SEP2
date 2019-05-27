@@ -36,38 +36,32 @@ public class ViewModelSaleList implements PropertyChangeListener
       Platform.runLater(() -> executePropertyChange(evt));
    }
 
-   @SuppressWarnings("unchecked")
    public void executePropertyChange(PropertyChangeEvent evt)
    {
-      if (evt.getPropertyName().equals("SALESLIST"))
-      {
-         ArrayList<Sale> elements = new ArrayList<Sale>();
-         elements = (ArrayList<Sale>) evt.getNewValue();
-         for (Sale element : elements)
-         {
-            if (element.getIsChangedValue())
-            {
-            sales.add(new ViewModelSale(model, element));
-            }
-         }
-      }
-      else if (evt.getPropertyName().equals("NEWSALE"))
+      if (evt.getPropertyName().equals("SALEAVAILABLE"))
       {
          Sale element = (Sale) evt.getNewValue();
          if (element.getIsChangedValue())
          {
-         sales.add(new ViewModelSale(model, element));
+            sales.add(new ViewModelSale(model, element));
          }
+      }
+      else if (evt.getPropertyName().equals("SALEPRODUCTPRICEUPDATE"))
+      {
+         Sale sale = (Sale) evt.getNewValue();
+         sales.stream().filter(
+               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
+               .findFirst().get().getProductProperty().get().getPriceProperty()
+               .set(sale.getPriceAfterSaleApplied());
+         sales.stream().filter(
+               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
+               .findFirst().get().getInitialPriceProperty()
+               .set(sale.getPrice());
       }
       else if (evt.getPropertyName().equals("MINUSSALE"))
       {
-         Sale element = (Sale) evt.getNewValue();
-         if (element.getIsChangedValue())
-         {
-         sales.remove(new ViewModelSale(model, element));
-         }
+         sales.remove(new ViewModelSale(model, (Sale) evt.getNewValue()));
       }
-
 
    }
 }

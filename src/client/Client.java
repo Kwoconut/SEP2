@@ -199,4 +199,10 @@ public class Client implements IClient, RIClient, Serializable
       model.editSaleFromServer(sale);
 
    }
+   
+   @Override
+   public void addAvailableSale(Sale sale) throws RemoteException
+   {
+      model.addAvailableSaleFromServer(sale);
+   }
 }
