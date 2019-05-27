@@ -1,6 +1,8 @@
 package viewmodel;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -13,7 +15,7 @@ public class ViewModelProduct
    private StringProperty nameProperty;
    private StringProperty typeProperty;
    private StringProperty colourProperty;
-   private IntegerProperty priceProperty;
+   private DoubleProperty priceProperty;
    private SProductModel model;
 
    public ViewModelProduct(SProductModel model)
@@ -23,7 +25,7 @@ public class ViewModelProduct
       nameProperty = new SimpleStringProperty("");
       typeProperty = new SimpleStringProperty("");
       colourProperty = new SimpleStringProperty("");
-      priceProperty = new SimpleIntegerProperty();
+      priceProperty = new SimpleDoubleProperty();
 
    }
 
@@ -34,7 +36,7 @@ public class ViewModelProduct
       nameProperty = new SimpleStringProperty(product.getName());
       typeProperty = new SimpleStringProperty(product.getType());
       colourProperty = new SimpleStringProperty(product.getColour());
-      priceProperty = new SimpleIntegerProperty(product.getPrice());
+      priceProperty = new SimpleDoubleProperty(product.getPrice());
 
    }
 
@@ -44,7 +46,7 @@ public class ViewModelProduct
       nameProperty = new SimpleStringProperty(product.getName());
       typeProperty = new SimpleStringProperty(product.getType());
       colourProperty = new SimpleStringProperty(product.getColour());
-      priceProperty = new SimpleIntegerProperty(product.getPrice());
+      priceProperty = new SimpleDoubleProperty(product.getPrice());
 
    }
 
@@ -68,7 +70,7 @@ public class ViewModelProduct
       return colourProperty;
    }
 
-   public IntegerProperty getPriceProperty()
+   public DoubleProperty getPriceProperty()
    {
       return priceProperty;
    }

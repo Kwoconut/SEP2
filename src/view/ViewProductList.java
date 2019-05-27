@@ -67,7 +67,7 @@ public class ViewProductList implements View
       {
          names.add(new Label(products.get(i).getNameProperty().get()));
          prices.add(new Label(
-               Integer.toString(products.get(i).getPriceProperty().get()) + "DKK"));
+               Double.toString(products.get(i).getPriceProperty().get()) + "DKK"));
          stackPane.add(new StackPane());
          stackPane.get(i).setPrefWidth(212.8);
          stackPane.get(i).setPrefHeight(393);

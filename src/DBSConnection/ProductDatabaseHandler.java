@@ -38,7 +38,7 @@ public class ProductDatabaseHandler implements StoreProductPersistence
             statement -> {
                statement.setInt(1, product.getID());
                statement.setString(2, product.getName());
-               statement.setInt(3, product.getPrice());
+               statement.setDouble(3, product.getPrice());
                statement.setString(4, product.getColour());
                statement.setString(5, product.getType());
                statement.setString(6, product.getImageID());
@@ -52,7 +52,7 @@ public class ProductDatabaseHandler implements StoreProductPersistence
             "UPDATE Product SET name = ?, price = ?, color = ?, product_type = ?, imageID = ?, WHERE product_id = ?",
             statement -> {
                statement.setString(1, product.getName());
-               statement.setInt(2, product.getPrice());
+               statement.setDouble(2, product.getPrice());
                statement.setString(3, product.getColour());
                statement.setString(4, product.getType());
                statement.setString(5, product.getImageID());

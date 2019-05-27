@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 public class Sale implements Serializable
 {
-   /**
-    * 
-    */
+
    private static final long serialVersionUID = 2322971685758964438L;
    private int ID;
    private MyDate startDate;
@@ -52,7 +50,7 @@ public class Sale implements Serializable
       return endDate;
    }
 
-   public int getPrice()
+   public double getPrice()
    {
       return product.getPrice();
    }
@@ -104,17 +102,23 @@ public class Sale implements Serializable
 
    public double getPriceAfterSaleApplied()
    {
-      return (double) getPrice() - (getAmount() * getPrice()) / 100;
+      return getPrice() - (getAmount() * getPrice()) / 100;
+     
    }
 
    public double getInitialPrice()
    {
-      return (double) product.getPrice() / (100 - amount) * 100;
+      return product.getPrice() / (100 - amount) * 100;
+   }
+   
+   public static double getPriceBeforeSaleApplies(double price,int amount)
+   {
+      return price / (100 - amount) * 100;
    }
 
-   public static double getReducedPrice(int price, int amount)
+   public static double getReducedPrice(double price, int amount)
    {
-      return (double) price - (amount * price) / 100;
+      return price - (amount * price) / 100;
    }
 
    public boolean equals(Object obj)

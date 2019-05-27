@@ -78,7 +78,16 @@ public class ViewModelSale implements PropertyChangeListener
 
    public DoubleProperty getPriceAfterReductionProperty()
    {
-      return priceAfterReduction;
+      if (isAvailable.get())
+      {
+         priceAfterReduction
+               .set(productProperty.get().getPriceProperty().get());
+         return priceAfterReduction;
+      }
+      else
+      {
+         return priceAfterReduction;
+      }
    }
 
    public ObjectProperty<MyDate> getStartDateProperty()

@@ -99,12 +99,12 @@ public class SaleDatabaseHandler implements StoreSalePersistence
    }
 
    @Override
-   public void updateAddSale(int newPrice, int product_id) throws SQLException
+   public void updateAddSale(double newPrice, int product_id) throws SQLException
    {
 
       query.executeUpdate("UPDATE Product SET price = ? WHERE product_id = ?",
             statement -> {
-               statement.setInt(1, newPrice);
+               statement.setDouble(1, newPrice);
                statement.setInt(2, product_id);
             });
 
@@ -119,12 +119,12 @@ public class SaleDatabaseHandler implements StoreSalePersistence
    }
 
    @Override
-   public void updateRemoveSale(int price, int product_id) throws SQLException
+   public void updateRemoveSale(double price, int product_id) throws SQLException
    {
 
       query.executeUpdate("UPDATE Product SET price = ? WHERE product_id = ?",
             statement -> {
-               statement.setInt(1, price);
+               statement.setDouble(1, price);
                statement.setInt(2, product_id);
             });
    }

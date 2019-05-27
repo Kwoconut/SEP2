@@ -69,7 +69,7 @@ public class ViewSalesList implements View
       {
          names.add(new Label(sales.get(i).getProductProperty().get()
                .getNameProperty().get()));
-         prices.add(new Label(Double.toString(sales.get(i).getInitialPriceProperty().get()) + "DKK - " + Integer.toString(
+         prices.add(new Label(Double.toString(sales.get(i).getInitialPriceProperty().get()) + "DKK - " + Double.toString(
                sales.get(i).getProductProperty().get().getPriceProperty().get())
                + "DKK"));
          salesLabel

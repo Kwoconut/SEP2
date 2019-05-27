@@ -6,6 +6,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Product;
@@ -55,7 +57,7 @@ public class ViewModelStore implements PropertyChangeListener
    public StringProperty getPriceProperty(int i)
    {
       return prices[i];
-      
+
    }
 
    private void reinitializeArrays()
@@ -73,6 +75,17 @@ public class ViewModelStore implements PropertyChangeListener
       if (evt.getPropertyName().equals("SEND"))
       {
          updateProducts(evt);
+      }
+      if (evt.getPropertyName().equals("SALEPRODUCTPRICEUPDATE"))
+      {
+         for (int i = 0; i < names.length; i++)
+         {
+            Product product = (Product) evt.getNewValue();
+            if (names[i].get().equals(product.getName()))
+            {
+               prices[i].set(product.getPrice() + "DKK");
+            }
+         }
       }
    }
 }

@@ -268,10 +268,11 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
-   public void getSalesFromServer(ArrayList<Sale> sale)
+   public void getSalesFromServer(ArrayList<Sale> sales)
    {
-      this.sales = sale;
-      support.firePropertyChange("SALESLIST", "", sale);
+      this.sales = sales;
+
+      support.firePropertyChange("SALESLIST", "", sales);
 
    }
 
@@ -284,6 +285,9 @@ public class Store implements Serializable, StoreModel
          products.stream()
                .filter(product -> product.getID() == sale.getProduct().getID())
                .findFirst().get().setPrice(sale.getProduct().getPrice());
+         support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "", products.stream()
+               .filter(product -> product.getID() == sale.getProduct().getID())
+               .findFirst().get());
       }
       support.firePropertyChange("NEWSALE", "", sale);
    }
@@ -292,11 +296,15 @@ public class Store implements Serializable, StoreModel
    public void removeSaleFromServer(Sale sale)
    {
       sales.remove(sale);
+
       if (sale.getIsChangedValue())
       {
          products.stream()
                .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get().setPrice((int) sale.getInitialPrice());
+               .findFirst().get().setPrice(sale.getInitialPrice());
+         support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "", products.stream()
+               .filter(product -> product.getID() == sale.getProduct().getID())
+               .findFirst().get());
       }
       support.firePropertyChange("MINUSSALE", "", sale);
    }
@@ -315,11 +323,11 @@ public class Store implements Serializable, StoreModel
 
       if (sale.getIsChangedValue())
       {
-         sale.getProduct().setPrice((int) sale.getPriceAfterSaleApplied());
+         sale.getProduct().setPrice(sale.getPriceAfterSaleApplied());
       }
       else
       {
-         sale.getProduct().setPrice((int) sale.getInitialPrice());
+         sale.getProduct().setPrice(sale.getInitialPrice());
       }
 
       support.firePropertyChange("EDITSALE", "", sale);

@@ -265,11 +265,11 @@ public class ServerModel
    {
       products.stream()
             .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get().setPrice((int) sale.getInitialPrice());
+            .findFirst().get().setPrice(sale.getInitialPrice());
 
       try
       {
-         databaseSaleAccess.updateRemoveSale((int) sale.getInitialPrice(),
+         databaseSaleAccess.updateRemoveSale(sale.getInitialPrice(),
                sale.getProduct().getID());
          databaseSaleAccess.removeSale(sale);
       }
@@ -293,7 +293,7 @@ public class ServerModel
             products.stream()
                   .filter(
                         product -> product.getID() == sale.getProduct().getID())
-                  .findFirst().get().setPrice((int) sale.getInitialPrice());
+                  .findFirst().get().setPrice(sale.getInitialPrice());
             databaseSaleAccess.updateRemoveSale(sale.getProduct().getPrice(),
                   sale.getProduct().getID());
          }
@@ -313,14 +313,14 @@ public class ServerModel
 
       products.parallelStream()
             .filter(product -> product.getID() == sale.getID()).findFirst()
-            .get().setPrice(((int) sale.getPriceAfterSaleApplied()));
+            .get().setPrice((sale.getPriceAfterSaleApplied()));
       sales.parallelStream()
             .filter(sampleSale -> sampleSale.getID() == sale.getID())
             .findFirst().get().setIsChangedValue();
 
       try
       {
-         databaseSaleAccess.updateAddSale((int) sale.getPriceAfterSaleApplied(),
+         databaseSaleAccess.updateAddSale(sale.getPriceAfterSaleApplied(),
                sale.getProduct().getID());
          databaseSaleAccess.changedValue(sale);
       }
@@ -359,15 +359,15 @@ public class ServerModel
 
    public void addSale(Sale sale)
    {
-      MyDate now = new MyDate();
+
       try
       {
          if (sale.getIsChangedValue() == false
-               && now.equals(sale.getStartDate()))
+               && MyDate.now().equals(sale.getStartDate()))
          {
             sale.setChangedValue(!sale.getIsChangedValue());
-            sale.getProduct().setPrice((int) sale.getPriceAfterSaleApplied());
-            databaseSaleAccess.updateAddSale((int) sale.getProduct().getPrice(),
+            sale.getProduct().setPrice(sale.getPriceAfterSaleApplied());
+            databaseSaleAccess.updateAddSale(sale.getProduct().getPrice(),
                   sale.getProduct().getID());
          }
          sales.add(sale);
@@ -441,7 +441,7 @@ public class ServerModel
       // il facem
       // try
       // {
-      // databaseSaleAccess.updateRemoveSale((int) sale.getInitialPrice(),
+      // databaseSaleAccess.updateRemoveSale( sale.getInitialPrice(),
       // sale.getProduct().getID());
       // databaseSaleAccess.removeSale(sale);
       System.out.println("In servermodel de implementat functionalitatea");
