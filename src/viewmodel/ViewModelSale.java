@@ -61,14 +61,14 @@ public class ViewModelSale implements PropertyChangeListener
       isAvailable = new SimpleBooleanProperty(sale.getIsChangedValue());
       initialPrice = new SimpleDoubleProperty(sale.getInitialPrice());
       errorProperty1 = new SimpleStringProperty("");
-      priceAfterReduction = new SimpleDoubleProperty();
+      priceAfterReduction = new SimpleDoubleProperty(
+            sale.getPriceAfterSaleApplied());
       this.model.addListener(this);
    }
 
    public void setSelectedProduct(ViewModelProduct product)
    {
       productProperty.set(product);
-      System.out.println(productProperty.get().getNameProperty().get());
    }
 
    public DoubleProperty getInitialPriceProperty()

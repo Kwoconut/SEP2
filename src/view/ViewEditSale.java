@@ -16,40 +16,46 @@ import model.MyDate;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelSale;
 
-public class ViewCreateSale implements View
+public class ViewEditSale implements View
 {
 
    @FXML
-   Label productIDLabel;
+   Label productLabel;
+   
    @FXML
-   Label productNameLabel;
+   Label startDateLabel;
+   
    @FXML
-   Label productTypeLabel;
-   @FXML
-   Label productColorLabel;
-   @FXML
-   Label productPriceLabel;
-   @FXML
-   ImageView productImage;
-   @FXML
-   DatePicker startDatePicker;
-   @FXML
-   DatePicker endDatePicker;
-   @FXML
-   Label errorLabel;
-   @FXML
-   TextField priceField;
-   @FXML
-   Label errorField;
+   Label endDateLabel;
+   
    @FXML
    Label priceReductionLabel;
-
+   
+   @FXML
+   DatePicker startDatePicker;
+   
+   @FXML
+   DatePicker endDatePicker;
+   
+   @FXML
+   TextField priceReductionField;
+   
+   @FXML
+   Label priceAfterReductionLabel;
+   
+   @FXML
+   Label currentPriceLabel;
+   
+   @FXML
+   Label errorLabel;
+   
+   
    private ViewModelSale viewModel;
    private MainView view;
    private Scene scene;
    private String title;
 
-   public ViewCreateSale()
+   public ViewEditSale()
    {
 
    }
@@ -63,38 +69,23 @@ public class ViewCreateSale implements View
       this.view = view;
       this.scene = scene;
       this.title = title;
+      
+      productLabel.textProperty().bind(this.viewModel.getProductProperty().get().getNameProperty());
+      
+      startDateLabel.textProperty().bind(this.viewModel.getStartDateStringProperty());
+      
+      endDateLabel.textProperty().bind(this.viewModel.getEndDateStringProperty());
+      
+      priceReductionLabel.textProperty().bind(this.viewModel.getAmountProperty().asString());
+      
+      currentPriceLabel.textProperty().bind(this.viewModel.getProductProperty().get().getPriceProperty().asString());
+      
+      errorLabel.textProperty().bind(this.viewModel.getError1());
+      
+      priceAfterReductionLabel.textProperty().bind(this.viewModel.getPriceAfterReductionProperty().asString());
 
    }
 
-   public void refresh()
-   {
-      productIDLabel.textProperty().bind(this.viewModel.getProductProperty()
-            .get().getIdProperty().asString());
-
-      productNameLabel.textProperty()
-            .bind(this.viewModel.getProductProperty().get().getNameProperty());
-
-      productTypeLabel.textProperty()
-            .bind(this.viewModel.getProductProperty().get().getTypeProperty());
-
-      productColorLabel.textProperty().bind(
-            this.viewModel.getProductProperty().get().getColourProperty());
-
-      productPriceLabel.textProperty().bind(this.viewModel.getProductProperty()
-            .get().getPriceProperty().asString());
-
-      priceField.textProperty().bindBidirectional(
-            this.viewModel.getAmountProperty(), new NumberStringConverter());
-
-      priceReductionLabel.textProperty()
-            .bind(this.viewModel.getPriceAfterReductionProperty().asString());
-
-      errorLabel.textProperty().bindBidirectional(this.viewModel.getError1());
-
-      priceField.setOnKeyReleased(event -> {
-         this.viewModel.updatePriceAfterReduction();
-      });
-   }
 
    @Override
    public Scene getScene()
@@ -108,9 +99,13 @@ public class ViewCreateSale implements View
       return title;
    }
 
-   public void onClosedButtonPressed() throws IOException
+   public void onCloseButtonPressed() throws IOException
    {
-      refreshFields();
+      getScene().getWindow().hide();
+      priceReductionField.setText("0");
+      errorLabel.setText("");
+      startDatePicker.setValue(null);
+      endDatePicker.setValue(null);
       view.setWindow("saleslist");
    }
 
@@ -131,23 +126,17 @@ public class ViewCreateSale implements View
          this.viewModel.getEndDateProperty()
                .set(new MyDate(localDate2.getDayOfMonth(),
                      localDate2.getMonthValue(), localDate2.getYear()));
-         this.viewModel.addSale();
+         this.viewModel.editSale();
 
          if (errorLabel.getText().equals(""))
          {
-            refreshFields();
+            getScene().getWindow().hide();
+            priceReductionField.setText("0");
+            startDatePicker.setValue(null);
+            endDatePicker.setValue(null);
             view.setWindow("saleslist");
          }
       }
-   }
-
-   private void refreshFields()
-   {
-      getScene().getWindow().hide();
-      priceField.setText("0");
-      errorLabel.setText("");
-      startDatePicker.setValue(null);
-      endDatePicker.setValue(null);
    }
 
 }

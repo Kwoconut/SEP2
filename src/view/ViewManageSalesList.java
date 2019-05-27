@@ -132,7 +132,7 @@ public class ViewManageSalesList implements View
       priceReduction.setCellValueFactory(
             cellData -> cellData.getValue().getAmountProperty());
       salePrice.setCellValueFactory(cellData -> cellData.getValue()
-            .getProductProperty().get().getPriceProperty());
+            .getPriceAfterReductionProperty());
 
       ObservableList<ViewModelSale> sales = FXCollections.observableArrayList();
       sales = this.viewModel.getSales();

@@ -79,8 +79,7 @@ public class Sale implements Serializable
 
    public boolean validDate()
    {
-      if (startDate.isAfter(MyDate.now()) || endDate.isBefore(startDate)
-            || startDate == null || endDate == null)
+      if (startDate.isBefore(MyDate.now()) || endDate.isBefore(startDate))
       {
          return false;
       }

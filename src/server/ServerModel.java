@@ -278,7 +278,7 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      support.firePropertyChange("SALEEDITED", null, sale);
+      support.firePropertyChange("SALEREMOVED", null, sale);
    }
 
    public void removeSale(Sale sale)
@@ -286,14 +286,18 @@ public class ServerModel
 
       sales.remove(sale);
 
-      products.stream()
-            .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get().setPrice((int) sale.getInitialPrice());
       try
       {
+         if (sale.getIsChangedValue())
+         {
+            products.stream()
+                  .filter(
+                        product -> product.getID() == sale.getProduct().getID())
+                  .findFirst().get().setPrice((int) sale.getInitialPrice());
+            databaseSaleAccess.updateRemoveSale(sale.getProduct().getPrice(),
+                  sale.getProduct().getID());
+         }
          databaseSaleAccess.removeSale(sale);
-         databaseSaleAccess.updateRemoveSale(sale.getProduct().getPrice(),
-               sale.getProduct().getID());
       }
       catch (SQLException e)
       {
@@ -332,10 +336,10 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      support.firePropertyChange("SALEEDITED", null, sale);
+      support.firePropertyChange("SALEADDED", null, sale);
    }
 
-   public void ChangedValue(Sale sale)
+   public void changedValue(Sale sale)
    {
       Sale sendSale = null;
       for (int i = 0; i < sales.size(); i++)
@@ -363,17 +367,18 @@ public class ServerModel
    public void addSale(Sale sale)
    {
       MyDate now = new MyDate();
-      if (sale.getIsChangedValue() == false && now.equals(sale.getStartDate()))
-      {
-         sale.setChangedValue(!sale.getIsChangedValue());
-         sale.getProduct().setPrice((int) sale.getPriceAfterSaleApplied());
-      }
-      sales.add(sale);
       try
       {
+         if (sale.getIsChangedValue() == false
+               && now.equals(sale.getStartDate()))
+         {
+            sale.setChangedValue(!sale.getIsChangedValue());
+            sale.getProduct().setPrice((int) sale.getPriceAfterSaleApplied());
+            databaseSaleAccess.updateAddSale((int) sale.getProduct().getPrice(),
+                  sale.getProduct().getID());
+         }
+         sales.add(sale);
          databaseSaleAccess.addSale(sale);
-         databaseSaleAccess.updateAddSale((int) sale.getProduct().getPrice(),
-               sale.getProduct().getID());
       }
       catch (SQLException e)
       {

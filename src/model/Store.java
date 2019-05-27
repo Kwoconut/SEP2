@@ -227,15 +227,24 @@ public class Store implements Serializable, StoreModel
          Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
                endDate, sampleProduct, amount);
 
-         try
+         if (sale.validDate())
          {
-            client.sendSaleToServer(sale);
 
+            try
+            {
+               support.firePropertyChange("VALIDDATE", null, "");
+               client.sendSaleToServer(sale);
+
+            }
+            catch (RemoteException e)
+            {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+            }
          }
-         catch (RemoteException e)
+         else
          {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            support.firePropertyChange("INVALIDDATE", "", "Invalid date");
          }
       }
    }
@@ -270,9 +279,12 @@ public class Store implements Serializable, StoreModel
    public void addSaleFromServer(Sale sale)
    {
       sales.add(sale);
-      products.stream()
-            .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get().setPrice(sale.getProduct().getPrice());
+      if (sale.getIsChangedValue())
+      {
+         products.stream()
+               .filter(product -> product.getID() == sale.getProduct().getID())
+               .findFirst().get().setPrice(sale.getProduct().getPrice());
+      }
       support.firePropertyChange("NEWSALE", "", sale);
    }
 
@@ -280,9 +292,12 @@ public class Store implements Serializable, StoreModel
    public void removeSaleFromServer(Sale sale)
    {
       sales.remove(sale);
-      products.stream()
-            .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get().setPrice(sale.getProduct().getPrice());
+      if (sale.getIsChangedValue())
+      {
+         products.stream()
+               .filter(product -> product.getID() == sale.getProduct().getID())
+               .findFirst().get().setPrice((int) sale.getInitialPrice());
+      }
       support.firePropertyChange("MINUSSALE", "", sale);
    }
 

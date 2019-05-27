@@ -7,32 +7,31 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewEditSale">
    <children>
       <Label layoutX="73.0" layoutY="36.0" prefHeight="21.0" prefWidth="133.0" text="Product Name" textAlignment="CENTER" underline="true" />
       <Label layoutX="242.0" layoutY="36.0" prefHeight="21.0" prefWidth="150.0" text="Start Date" textAlignment="CENTER" underline="true" />
       <Label layoutX="424.0" layoutY="36.0" prefHeight="21.0" prefWidth="150.0" text="End Date" textAlignment="CENTER" underline="true" />
       <Label layoutX="605.0" layoutY="36.0" text="Price reduction(in %)" textAlignment="CENTER" underline="true" />
-      <Label layoutX="73.0" layoutY="72.0" prefHeight="21.0" prefWidth="133.0" />
-      <Label layoutX="242.0" layoutY="72.0" prefHeight="21.0" prefWidth="150.0" />
-      <Label layoutX="424.0" layoutY="62.0" prefHeight="21.0" prefWidth="150.0" underline="true" />
-      <Label layoutX="602.0" layoutY="72.0" prefHeight="21.0" prefWidth="137.0" underline="true" />
+      <Label fx:id="productLabel" layoutX="73.0" layoutY="72.0" prefHeight="21.0" prefWidth="133.0" />
+      <Label fx:id="startDateLabel" layoutX="242.0" layoutY="72.0" prefHeight="21.0" prefWidth="150.0" />
+      <Label fx:id="endDateLabel" layoutX="424.0" layoutY="62.0" prefHeight="21.0" prefWidth="150.0" underline="true" />
+      <Label fx:id="priceReductionLabel" layoutX="602.0" layoutY="72.0" prefHeight="21.0" prefWidth="137.0" underline="true" />
       <Label layoutX="923.0" layoutY="36.0" text="Product Image" textAlignment="CENTER" underline="true" />
       <ImageView fitHeight="200.0" fitWidth="300.0" layoutX="822.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
-      <DatePicker layoutX="73.0" layoutY="190.0" style="-fx-faint-focus-color: transparent; -fx-focus-color: #DC7A77;" />
-      <DatePicker layoutX="348.0" layoutY="190.0" style="-fx-faint-focus-color: transparent; -fx-focus-color: #DC7A77;" />
+      <DatePicker fx:id="startDatePicker" layoutX="73.0" layoutY="190.0" style="-fx-faint-focus-color: transparent; -fx-focus-color: #DC7A77;" />
+      <DatePicker fx:id="endDatePicker" layoutX="348.0" layoutY="190.0" style="-fx-faint-focus-color: transparent; -fx-focus-color: #DC7A77;" />
       <Label layoutX="121.0" layoutY="162.0" text="Start Date for Sale" />
       <Label layoutX="399.0" layoutY="162.0" text="End Date for Sale" />
-      <Label layoutX="73.0" layoutY="233.0" prefHeight="21.0" prefWidth="218.0" />
-      <Label layoutX="348.0" layoutY="244.0" prefHeight="21.0" prefWidth="218.0" />
-      <TextField layoutX="212.0" layoutY="319.0" promptText="Price reduction(in %)" style="-fx-faint-focus-color: transparent; -fx-focus-color: #DC7A77;" />
+      <Label fx:id="errorLabel" layoutX="196.0" layoutY="237.0" prefHeight="21.0" prefWidth="218.0" />
+      <TextField fx:id="priceReductionField" layoutX="265.0" layoutY="307.0" prefHeight="26.0" prefWidth="51.0" promptText="\%" style="-fx-faint-focus-color: transparent; -fx-focus-color: #DC7A77;" />
       <Label layoutX="212.0" layoutY="361.0" prefHeight="21.0" prefWidth="187.0" />
-      <Label layoutX="256.0" layoutY="289.0" text="Price reduction" />
-      <Label layoutX="239.0" layoutY="396.0" text="Price after reduction" />
-      <Label layoutX="212.0" layoutY="429.0" prefHeight="21.0" prefWidth="187.0" />
-      <Button layoutX="415.0" layoutY="601.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Close" />
-      <Button layoutX="605.0" layoutY="601.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Edit" />
+      <Label layoutX="245.0" layoutY="285.0" text="Price reduction" />
+      <Label layoutX="201.0" layoutY="396.0" text="Price after reduction:" />
+      <Label fx:id="priceAfterReductionLabel" layoutX="353.0" layoutY="393.0" prefHeight="21.0" prefWidth="187.0" text="0" />
+      <Button layoutX="415.0" layoutY="601.0" mnemonicParsing="false" onAction="#onCloseButtonPressed" prefHeight="58.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Close" />
+      <Button layoutX="605.0" layoutY="601.0" mnemonicParsing="false" onAction="#onEditButtonPressed" prefHeight="58.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Edit" />
       <Label layoutX="929.0" layoutY="300.0" text="Current price" underline="true" />
-      <Label layoutX="904.0" layoutY="340.0" prefHeight="21.0" prefWidth="137.0" />
+      <Label fx:id="currentPriceLabel" layoutX="904.0" layoutY="340.0" prefHeight="21.0" prefWidth="137.0" />
    </children>
 </AnchorPane>

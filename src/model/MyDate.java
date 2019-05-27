@@ -23,6 +23,7 @@ public class MyDate implements Serializable
 
    public MyDate()
    {
+      
       Calendar now = GregorianCalendar.getInstance();
       this.day = now.get(Calendar.DAY_OF_MONTH);
       this.month = now.get(Calendar.MONTH) + 1;
@@ -206,14 +207,14 @@ public class MyDate implements Serializable
    {
       int d1 = year * 360 + month * 30 + day;
       int d2 = other.year * 360 + other.month * 30 + other.day;
-      return d1 <= d2;
+      return d1 < d2;
    }
 
    public boolean isAfter(MyDate other)
    {
       int d1 = year * 360 + month * 30 + day;
       int d2 = other.year * 360 + other.month * 30 + other.day;
-      return d1 >= d2;
+      return d1 > d2;
    }
 
    public String starsignElement()
