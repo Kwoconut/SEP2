@@ -17,7 +17,6 @@ import server.RIServerRead;
 import server.RIServerWrite;
 import server.ServerAccess;
 
-
 public class Client implements IClient, RIClient, Serializable
 {
 
@@ -25,7 +24,8 @@ public class Client implements IClient, RIClient, Serializable
    private StoreModelClientHandler model;
    private ServerAccess access;
 
-   public Client(StoreModelClientHandler model) throws RemoteException, NotBoundException, MalformedURLException
+   public Client(StoreModelClientHandler model)
+         throws RemoteException, NotBoundException, MalformedURLException
    {
       this.model = model;
       this.model.setClient(this);
@@ -41,35 +41,35 @@ public class Client implements IClient, RIClient, Serializable
    {
       model.getProductsFromServer(products);
    }
-   
+
    @Override
    public void getOffers(ArrayList<Offer> offers) throws RemoteException
    {
-	   model.getOffersFromServer(offers);
+      model.getOffersFromServer(offers);
    }
 
    @Override
    public void requestProducts() throws RemoteException
    {
-	   RIServerRead server = access.acquireRead();
+      RIServerRead server = access.acquireRead();
       server.getProducts(this);
       access.releaseRead();
    }
-   
+
    @Override
    public void requestOffers() throws RemoteException
    {
-	  RIServerRead server = access.acquireRead();
+      RIServerRead server = access.acquireRead();
       server.getOffers(this);
       access.releaseRead();
- 
+
    }
 
    @Override
    public void sendOfferToServer(Offer offer) throws RemoteException
    {
-	  RIServerWrite server = access.acquireWrite();
-      server.sendOffer(offer); 
+      RIServerWrite server = access.acquireWrite();
+      server.sendOffer(offer);
       access.releaseWrite();
    }
 
@@ -78,39 +78,39 @@ public class Client implements IClient, RIClient, Serializable
    {
       model.addOfferFromServer(offer);
    }
-   
+
    @Override
-   public void removeOffer(Offer offer) throws RemoteException 
+   public void removeOffer(Offer offer) throws RemoteException
    {
-	  model.removeOfferFromServer(offer);
+      model.removeOfferFromServer(offer);
    }
 
    @Override
-   public void removeOfferFromServer(Offer offer) throws RemoteException 
+   public void removeOfferFromServer(Offer offer) throws RemoteException
    {
-	  RIServerWrite server = access.acquireWrite();
-	  server.removeOffer(offer);
-	  access.releaseWrite();
+      RIServerWrite server = access.acquireWrite();
+      server.removeOffer(offer);
+      access.releaseWrite();
    }
 
    @Override
    public void getSales(ArrayList<Sale> sale) throws RemoteException
    {
       model.getSalesFromServer(sale);
-      
+
    }
 
    @Override
    public void addSale(Sale sale) throws RemoteException
    {
       model.addSaleFromServer(sale);
-      
+
    }
 
    @Override
    public void removeSale(Sale sale) throws RemoteException
    {
-      model.removeSaleFromServer(sale);    
+      model.removeSaleFromServer(sale);
    }
 
    @Override
@@ -125,7 +125,7 @@ public class Client implements IClient, RIClient, Serializable
    public void sendSaleToServer(Sale sale) throws RemoteException
    {
       RIServerWrite server = access.acquireWrite();
-      server.sendSale(sale); 
+      server.sendSale(sale);
       access.releaseWrite();
    }
 
@@ -137,59 +137,66 @@ public class Client implements IClient, RIClient, Serializable
       access.releaseWrite();
    }
 
-@Override
-public void editSaleFromServer(Sale sale) throws RemoteException 
-{		
-	RIServerWrite server = access.acquireWrite();
-	server.editSale(sale);
-	access.releaseWrite();
+   @Override
+   public void editSaleFromServer(Sale sale) throws RemoteException
+   {
+      RIServerWrite server = access.acquireWrite();
+      server.editSale(sale);
+      access.releaseWrite();
 
-}
+   }
 
-@Override
-public void getReviews(ArrayList<Review> reviews) throws RemoteException {
-	model.getReviewsFromServer(reviews);
-	
-}
+   @Override
+   public void getReviews(ArrayList<Review> reviews) throws RemoteException
+   {
+      model.getReviewsFromServer(reviews);
 
-@Override
-public void addReview(Review review) throws RemoteException {
-	model.addReviewFromServer(review);
-	
-}
+   }
 
-@Override
-public void removeReview(Review review) throws RemoteException {
-	model.removeReviewFromServer(review);
-	
-}
+   @Override
+   public void addReview(Review review) throws RemoteException
+   {
+      model.addReviewFromServer(review);
 
-@Override
-public void requestReviews() throws RemoteException {
-    RIServerRead server = access.acquireRead();
-    server.getReviews(this);
-    access.releaseRead();
-}
+   }
 
-@Override
-public void sendReviewToServer(Review review) throws RemoteException {
-	  RIServerWrite server = access.acquireWrite();
-    server.sendReview(review); 
-    access.releaseWrite();
-	
-}
+   @Override
+   public void removeReview(Review review) throws RemoteException
+   {
+      model.removeReviewFromServer(review);
 
-@Override
-public void removeReviewFromServer(Review review) throws RemoteException {
-    RIServerWrite server = access.acquireWrite();
-    server.removeReview(review);
-    access.releaseWrite();
-	
-}
+   }
 
-@Override
-public void editSale(Sale sale) throws RemoteException {
-	model.editSaleFromServer(sale);
-	
-}
+   @Override
+   public void requestReviews() throws RemoteException
+   {
+      RIServerRead server = access.acquireRead();
+      server.getReviews(this);
+      access.releaseRead();
+   }
+
+   @Override
+   public void sendReviewToServer(Review review) throws RemoteException
+   {
+      RIServerWrite server = access.acquireWrite();
+      server.sendReview(review);
+      access.releaseWrite();
+
+   }
+
+   @Override
+   public void removeReviewFromServer(Review review) throws RemoteException
+   {
+      RIServerWrite server = access.acquireWrite();
+      server.removeReview(review);
+      access.releaseWrite();
+
+   }
+
+   @Override
+   public void editSale(Sale sale) throws RemoteException
+   {
+      model.editSaleFromServer(sale);
+
+   }
 }

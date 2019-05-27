@@ -318,13 +318,6 @@ public class ServerModel
             .filter(sampleSale -> sampleSale.getID() == sale.getID())
             .findFirst().get().setIsChangedValue();
 
-/*
- * for (int i = 0; i < products.size(); i++) { if (products.get(i).getID() ==
- * sale.getProduct().getID()) { newPrice = (int)
- * sale.getPriceAfterSaleApplied(); products.get(i).setPrice(newPrice); break; }
- * } for (int i = 0; i < sales.size(); i++) { if (sales.get(i).getID() ==
- * sale.getID()) { sales.get(i).setIsChangedValue(); break; } }
- */
       try
       {
          databaseSaleAccess.updateAddSale((int) sale.getPriceAfterSaleApplied(),
@@ -336,7 +329,7 @@ public class ServerModel
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      support.firePropertyChange("SALEADDED", null, sale);
+      support.firePropertyChange("SALEEDITED", null, sale);
    }
 
    public void changedValue(Sale sale)

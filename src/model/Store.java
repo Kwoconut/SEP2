@@ -312,6 +312,16 @@ public class Store implements Serializable, StoreModel
             break;
          }
       }
+
+      if (sale.getIsChangedValue())
+      {
+         sale.getProduct().setPrice((int) sale.getPriceAfterSaleApplied());
+      }
+      else
+      {
+         sale.getProduct().setPrice((int) sale.getInitialPrice());
+      }
+
       support.firePropertyChange("EDITSALE", "", sale);
    }
 

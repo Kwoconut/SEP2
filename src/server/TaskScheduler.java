@@ -46,7 +46,7 @@ public class TaskScheduler implements Runnable
 			  if(sales.get(i).getIsChangedValue()== false && now.isAfter(sales.get(i).getStartDate()))
 			  {
 				  model.updateAddSale(sales.get(i)); // in server update product(including dtb and client)
-				  model.ChangedValue(sales.get(i)); // set the boolean to true
+				  model.changedValue(sales.get(i)); // set the boolean to true
 			  }
 		   }
 	   }
