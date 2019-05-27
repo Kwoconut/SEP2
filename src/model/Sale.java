@@ -89,12 +89,15 @@ public class Sale implements Serializable
 
    public boolean overridesOtherSales(Sale sale)
    {
-      if ((this.startDate.isBetween(sale.getStartDate(), sale.getEndDate())
-            && this.product.equals(sale.getProduct()))
-            || (this.endDate.isBetween(startDate, endDate)
-                  && this.product.equals(sale.getProduct())))
+      if (this.product.equals(sale.getProduct()))
       {
-         return true;
+         if (this.startDate.isBetween(sale.getStartDate(), sale.getEndDate())
+               || this.endDate.isBetween(sale.getStartDate(),
+                     sale.getEndDate()))
+         {
+            return true;
+         }
+         return false;
       }
       else
       {

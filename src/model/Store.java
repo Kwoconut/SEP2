@@ -237,7 +237,7 @@ public class Store implements Serializable, StoreModel
             }
             if (ok == 1)
             {
-               support.firePropertyChange("INVALIDDATE", "", "Invalid date");
+               support.firePropertyChange("INVALIDDATE", "", "There is a sale on the specified dates");
             }
             else
             {
@@ -324,15 +324,6 @@ public class Store implements Serializable, StoreModel
             sales.set(i, sale);
             break;
          }
-      }
-
-      if (sale.getIsChangedValue())
-      {
-         sale.getProduct().setPrice(sale.getPriceAfterSaleApplied());
-      }
-      else
-      {
-         sale.getProduct().setPrice(sale.getInitialPrice());
       }
 
       support.firePropertyChange("EDITSALE", "", sale);
