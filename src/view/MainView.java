@@ -23,7 +23,7 @@ public class MainView
    public void start(Stage primaryStage) throws IOException
    {
       this.primaryStage = primaryStage;
-      setWindow("start");
+      setWindow("login");
    }
 
    public void setWindow(String id) throws IOException

@@ -2,9 +2,14 @@ package model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Scanner;
+
 import client.Client;
 import client.IClient;
 import javafx.beans.property.ObjectProperty;
@@ -263,10 +268,9 @@ public class Store implements Serializable, StoreModel
             sale.get().getEndDateProperty().get(), sampleProduct,
             sale.get().getAmountProperty().get(),
             sale.get().getBooleanProperty().get());
-      
-      
+
       if (sampleSale.getIsChangedValue())
-      {         
+      {
          sampleSale.getProduct().setPrice(sampleSale.getInitialPrice());
       }
 
@@ -298,7 +302,8 @@ public class Store implements Serializable, StoreModel
 
    @Override
    public void removeSaleFromServer(Sale sale)
-   {  System.out.println(sale.getPrice());
+   {
+      System.out.println(sale.getPrice());
       System.out.println(sales.get(0).getPrice());
       sales.remove(sale);
 
@@ -319,7 +324,7 @@ public class Store implements Serializable, StoreModel
       products.stream()
             .filter(product -> product.getID() == sale.getProduct().getID())
             .findFirst().get().setPrice(sale.getPriceAfterSaleApplied());
-      
+
       support.firePropertyChange("SALEAVAILABLE", "", sale);
       support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "", sale);
    }
@@ -374,6 +379,79 @@ public class Store implements Serializable, StoreModel
       reviews.remove(review);
       support.firePropertyChange("MINUSREVIEW", "", review);
 
+   }
+
+   @Override
+   public double getAverage(int productID)
+   {
+      double average = reviews.stream()
+            .filter(review -> review.getProduct().getID() == productID)
+            .mapToDouble(review -> review.getRating()).average().getAsDouble();
+      Product product = products.stream()
+            .filter(sampleProduct -> sampleProduct.getID() == productID)
+            .findFirst().get();
+      support.firePropertyChange("AVERAGERATING", product, average);
+      return average;
+   }
+
+   @Override
+   public ArrayList<String> getReviewCommentsByProductID(int productID)
+   {
+      List<String> commentsList = reviews.stream()
+            .filter(review -> review.getProduct().getID() == productID)
+            .map(review -> review.getMessage()).collect(Collectors.toList());
+
+      ArrayList<String> comments = new ArrayList<String>(commentsList);
+      support.firePropertyChange("COMMENTS", "", comments);
+      return comments;
+   }
+   public void validateLogin(String username, String password)
+   {
+      ArrayList<String> usernames = requestUsernamesFromServer();
+      ArrayList<String> passwords = requestPasswordsFromServer();
+      if (username == null || username.isEmpty())
+      {
+         support.firePropertyChange("INVALIDLOGIN", "No credentials inputed",
+               username);
+      }
+      else if (password == null || password.length() < 6)
+      {
+         support.firePropertyChange("INVALIDLOGIN",
+               "Password must contain at least 6 letters", username);
+      }
+      else if (usernames.stream().filter(user -> user.equals(username))
+            .findFirst().isPresent())
+      {
+         for (int i = 0; i < usernames.size(); i++)
+         {
+            if (usernames.get(i).equals(username)
+                  && passwords.get(i).equals(password))
+            {
+               support.firePropertyChange("VALIDLOGIN", "administrator", "");
+            }
+         }
+      }
+      else
+      {
+         support.firePropertyChange("INVALIDLOGIN", "Invalid username or password",
+               username);
+      }
+   }
+
+   private ArrayList<String> requestUsernamesFromServer()
+   {
+      ArrayList<String> names = new ArrayList<String>();
+      names.add("Angel");
+      names.add("Fabian");
+      return names;
+   }
+
+   private ArrayList<String> requestPasswordsFromServer()
+   {
+      ArrayList<String> pass = new ArrayList<String>();
+      pass.add("123456");
+      pass.add("696969");
+      return pass;
    }
 
 }

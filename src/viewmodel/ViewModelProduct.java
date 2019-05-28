@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Product;
 import model.SProductModel;
+import model.SReviewModel;
 
 public class ViewModelProduct
 {
