@@ -130,6 +130,18 @@ public class ViewModelManageSalesList implements PropertyChangeListener
                .findFirst().get().getBooleanProperty().set(true);
 
       }
+      else if (evt.getPropertyName().equals("SALEPRODUCTPRICEREVERT"))
+      {
+         Sale sale = (Sale) evt.getNewValue();
+         sales.stream().filter(
+               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
+               .findFirst().get().getProductProperty().get().getPriceProperty()
+               .set(sale.getPrice());
+         sales.stream().filter(
+               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
+               .findFirst().get().getInitialPriceProperty()
+               .set(sale.getPrice());
+      }
 
    }
 }

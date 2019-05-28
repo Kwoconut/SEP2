@@ -19,6 +19,9 @@ public class ViewStore implements View
    ArrayList<Label> nameLabelList;
 
    @FXML
+   Label newSaleLabel;
+
+   @FXML
    ArrayList<Label> priceLabelList;
 
    private ViewModelStore model;
@@ -41,6 +44,7 @@ public class ViewStore implements View
          nameLabelList.get(i).textProperty().bind(model.getNameProperty(i));
          priceLabelList.get(i).textProperty().bind(model.getPriceProperty(i));
       }
+      newSaleLabel.textProperty().bind(model.getNotificationProperty());
 
    }
 

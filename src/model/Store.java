@@ -5,6 +5,9 @@ import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import client.Client;
 import client.IClient;
 import javafx.beans.property.ObjectProperty;
@@ -109,7 +112,6 @@ public class Store implements Serializable, StoreModel
          String message) throws RemoteException
    {
       Offer offer = new Offer(id, name, phone, email, message);
-      System.out.println("Removing offer with id " + offer.getID());
       client.removeOfferFromServer(offer);
    }
 
@@ -170,7 +172,6 @@ public class Store implements Serializable, StoreModel
    {
       offers.add(offer);
       support.firePropertyChange("NEWOFFER", "", offer);
-      System.out.println(offers);
    }
 
    @Override
@@ -222,10 +223,9 @@ public class Store implements Serializable, StoreModel
       Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
             endDate, sampleProduct, amount);
 
-      int ok = 0;
-
       if (sale.validDate())
       {
+         int ok = 0;
          for (Sale element : sales)
          {
             if (element.overridesOtherSales(sale))
@@ -267,6 +267,11 @@ public class Store implements Serializable, StoreModel
             sale.get().getAmountProperty().get(),
             sale.get().getBooleanProperty().get());
 
+      if (sampleSale.getIsChangedValue())
+      {
+         sampleSale.getProduct().setPrice(sampleSale.getInitialPrice());
+      }
+
       client.removeSaleFromServer(sampleSale);
    }
 
@@ -296,16 +301,16 @@ public class Store implements Serializable, StoreModel
    @Override
    public void removeSaleFromServer(Sale sale)
    {
+      System.out.println(sale.getPrice());
+      System.out.println(sales.get(0).getPrice());
       sales.remove(sale);
 
       if (sale.getIsChangedValue() == true)
       {
          products.stream()
                .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get().setPrice(sale.getInitialPrice());
+               .findFirst().get().setPrice(sale.getPrice());
       }
-      
-      
 
       support.firePropertyChange("SALEPRODUCTPRICEREVERT", "", sale);
       support.firePropertyChange("MINUSSALE", "", sale);
@@ -319,8 +324,7 @@ public class Store implements Serializable, StoreModel
             .findFirst().get().setPrice(sale.getPriceAfterSaleApplied());
 
       support.firePropertyChange("SALEAVAILABLE", "", sale);
-      support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "",
-            sale);
+      support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "", sale);
    }
 
    @Override
@@ -373,6 +377,24 @@ public class Store implements Serializable, StoreModel
       reviews.remove(review);
       support.firePropertyChange("MINUSREVIEW", "", review);
 
+   }
+
+   @Override
+   public double getAverage(int productID)
+   {
+      return reviews.stream()
+            .filter(review -> review.getProduct().getID() == productID)
+            .mapToDouble(review -> review.getRating()).average().getAsDouble();
+   }
+
+   @Override
+   public ArrayList<String> getReviewCommentsByProductID(int productID)
+   {
+      List<String> comments = reviews.stream()
+            .filter(review -> review.getProduct().getID() == productID)
+            .map(review -> review.getMessage()).collect(Collectors.toList());
+
+      return new ArrayList<String>(comments);
    }
 
 }

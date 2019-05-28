@@ -20,12 +20,14 @@ public class ViewModelStore implements PropertyChangeListener
    private SProductModel model;
    private StringProperty[] names;
    private StringProperty[] prices;
+   private StringProperty notificationProperty;
 
    public ViewModelStore(SProductModel model) throws RemoteException
    {
       this.model = model;
       names = new StringProperty[5];
       prices = new StringProperty[5];
+      notificationProperty = new SimpleStringProperty();
       reinitializeArrays();
       this.model.addListener(this);
       this.model.requestProducts();
@@ -56,6 +58,11 @@ public class ViewModelStore implements PropertyChangeListener
    {
       return prices[i];
 
+   }
+
+   public StringProperty getNotificationProperty()
+   {
+      return notificationProperty;
    }
 
    private void reinitializeArrays()
@@ -90,17 +97,20 @@ public class ViewModelStore implements PropertyChangeListener
                prices[i].set(sale.getPriceAfterSaleApplied() + "DKK");
             }
          }
+         notificationProperty.set(sale.getProduct().getName()
+               + " is on sale! You can check by clicking Check Sales!");
       }
       if (evt.getPropertyName().equals("SALEPRODUCTPRICEREVERT"))
       {
          Sale sale = (Sale) evt.getNewValue();
-         for (int i = 0; i < names.length;i++)
+         for (int i = 0; i < names.length; i++)
          {
             if (names[i].get().equals(sale.getProduct().getName()))
             {
-               prices[i].set(sale.getInitialPrice() + "DKK");
+               prices[i].set(sale.getPrice() + "DKK");
             }
          }
+         notificationProperty.set("");
       }
    }
 }
