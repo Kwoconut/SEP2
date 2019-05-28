@@ -319,7 +319,7 @@ public class Store implements Serializable, StoreModel
       products.stream()
             .filter(product -> product.getID() == sale.getProduct().getID())
             .findFirst().get().setPrice(sale.getPriceAfterSaleApplied());
-
+      
       support.firePropertyChange("SALEAVAILABLE", "", sale);
       support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "", sale);
    }
