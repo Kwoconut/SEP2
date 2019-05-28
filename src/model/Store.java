@@ -2,11 +2,16 @@ package model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.List;
 import java.util.stream.Collectors;
+=======
+import java.util.Scanner;
+>>>>>>> parent of 6517bc7... Revert "login"
 
 import client.Client;
 import client.IClient;
@@ -380,6 +385,7 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
+<<<<<<< HEAD
    public double getAverage(int productID)
    {
       return reviews.stream()
@@ -395,6 +401,55 @@ public class Store implements Serializable, StoreModel
             .map(review -> review.getMessage()).collect(Collectors.toList());
 
       return new ArrayList<String>(comments);
+=======
+   public void validateLogin(String username, String password)
+   {
+      ArrayList<String> usernames = requestUsernamesFromServer();
+      ArrayList<String> passwords = requestPasswordsFromServer();
+      if (username == null || username.isEmpty())
+      {
+         support.firePropertyChange("INVALIDLOGIN", "No credentials inputed",
+               username);
+      }
+      else if (password == null || password.length() < 6)
+      {
+         support.firePropertyChange("INVALIDLOGIN",
+               "Password must contain at least 6 letters", username);
+      }
+      else if (usernames.stream().filter(user -> user.equals(username))
+            .findFirst().isPresent())
+      {
+         for (int i = 0; i < usernames.size(); i++)
+         {
+            if (usernames.get(i).equals(username)
+                  && passwords.get(i).equals(password))
+            {
+               support.firePropertyChange("VALIDLOGIN", "administrator", "");
+            }
+         }
+      }
+      else
+      {
+         support.firePropertyChange("INVALIDLOGIN", "Invalid username or password",
+               username);
+      }
+   }
+
+   private ArrayList<String> requestUsernamesFromServer()
+   {
+      ArrayList<String> names = new ArrayList<String>();
+      names.add("Angel");
+      names.add("Fabian");
+      return names;
+   }
+
+   private ArrayList<String> requestPasswordsFromServer()
+   {
+      ArrayList<String> pass = new ArrayList<String>();
+      pass.add("123456");
+      pass.add("696969");
+      return pass;
+>>>>>>> parent of 6517bc7... Revert "login"
    }
 
 }
