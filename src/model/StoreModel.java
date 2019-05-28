@@ -1,7 +1,12 @@
 package model;
 
-public interface StoreModel extends SProductModel, SOfferModel,
-      StoreModelClientHandler, SSalesModel, SReviewModel
+import java.beans.PropertyChangeListener;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
+import client.Client;
+
+public interface StoreModel extends SProductModel, SOfferModel, StoreModelClientHandler, SSalesModel, SReviewModel
 {
-    void validateLogin(String user, String password);
+
 }
