@@ -1,5 +1,7 @@
 package view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +11,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -54,6 +58,7 @@ public class ViewProductList implements View
       ObservableList<StackPane> stackPane = FXCollections.observableArrayList();
       ObservableList<Label> names = FXCollections.observableArrayList();
       ObservableList<Label> prices = FXCollections.observableArrayList();
+      ObservableList<ImageView> image = FXCollections.observableArrayList();
 
       GridPane gridPane = new GridPane();
       gridPane.setPadding(new Insets(20, 20, 20, 31));
@@ -67,7 +72,11 @@ public class ViewProductList implements View
       {
          names.add(new Label(products.get(i).getNameProperty().get()));
          prices.add(new Label(
-               Double.toString(products.get(i).getPriceProperty().get()) + "DKK"));
+               Double.toString(products.get(i).getPriceProperty().get())
+                     + "DKK"));
+         image.add(new ImageView(new Image(
+               "images/" + products.get(i).getImageProperty().get())));
+
          stackPane.add(new StackPane());
          stackPane.get(i).setPrefWidth(212.8);
          stackPane.get(i).setPrefHeight(393);
@@ -76,8 +85,11 @@ public class ViewProductList implements View
          prices.get(i).setFont(Font.font(20));
          names.get(i).setPadding(new Insets(40, 10, 10, 10));
          prices.get(i).setPadding(new Insets(10, 10, 40, 10));
+         image.get(i).setFitHeight(150);
+         image.get(i).setFitWidth(200);
          stackPane.get(i).getChildren().addAll(names.get(i));
          stackPane.get(i).getChildren().addAll(prices.get(i));
+         stackPane.get(i).getChildren().addAll(image.get(i));
          StackPane.setAlignment(names.get(i), Pos.TOP_CENTER);
          StackPane.setAlignment(prices.get(i), Pos.BOTTOM_CENTER);
          GridPane.setConstraints(stackPane.get(i), x, y);
@@ -115,7 +127,7 @@ public class ViewProductList implements View
       getScene().getWindow().hide();
       view.setWindow("saleslist");
    }
-   
+
    public void onCheckSalesButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
