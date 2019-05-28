@@ -120,20 +120,6 @@ public class Server implements RIServerWrite, PropertyChangeListener
             }
          }
       }
-      if (evt.getPropertyName().equals("SALEEDITED"))
-      {
-         for (RIClient element : clients)
-         {
-            try
-            {
-               element.updateSale((Sale) evt.getNewValue());
-            }
-            catch (RemoteException e)
-            {
-               e.printStackTrace();
-            }
-         }
-      }
       if (evt.getPropertyName().equals("SALEAVAILABLE"))
       {
          for (RIClient element : clients)

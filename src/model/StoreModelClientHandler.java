@@ -23,8 +23,6 @@ public interface StoreModelClientHandler
    
    void removeSaleFromServer (Sale sale);
    
-   void editSaleFromServer(Sale sale);
-   
    void getReviewsFromServer(ArrayList<Review> reviews);
    
    void addReviewFromServer(Review review);

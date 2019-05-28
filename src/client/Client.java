@@ -183,13 +183,6 @@ public class Client implements IClient, RIClient, Serializable
       access.releaseWrite();
 
    }
-
-   @Override
-   public void updateSale(Sale sale) throws RemoteException
-   {
-      model.editSaleFromServer(sale);
-
-   }
    
    @Override
    public void addAvailableSale(Sale sale) throws RemoteException
