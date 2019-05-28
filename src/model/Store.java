@@ -109,7 +109,6 @@ public class Store implements Serializable, StoreModel
          String message) throws RemoteException
    {
       Offer offer = new Offer(id, name, phone, email, message);
-      System.out.println("Removing offer with id " + offer.getID());
       client.removeOfferFromServer(offer);
    }
 
@@ -170,7 +169,6 @@ public class Store implements Serializable, StoreModel
    {
       offers.add(offer);
       support.firePropertyChange("NEWOFFER", "", offer);
-      System.out.println(offers);
    }
 
    @Override
@@ -222,10 +220,10 @@ public class Store implements Serializable, StoreModel
       Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
             endDate, sampleProduct, amount);
 
-      int ok = 0;
 
       if (sale.validDate())
       {
+         int ok = 0;
          for (Sale element : sales)
          {
             if (element.overridesOtherSales(sale))
@@ -307,7 +305,6 @@ public class Store implements Serializable, StoreModel
                .findFirst().get().setPrice(sale.getPrice());
       }
 
-      System.out.println(sale.getPrice());
 
       support.firePropertyChange("SALEPRODUCTPRICEREVERT", "", sale);
       support.firePropertyChange("MINUSSALE", "", sale);
