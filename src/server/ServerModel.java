@@ -239,24 +239,6 @@ public class ServerModel
       support.firePropertyChange("OFFERUPDATED", null, offer);
    }
 
-   public void removeUnavailableSale(Sale sale)
-   {
-      products.stream()
-            .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get().setPrice(sale.getInitialPrice());
-      sales.remove(sale);
-
-      try
-      {
-         databaseSaleAccess.removeSale(sale);
-      }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
-      support.firePropertyChange("SALEREMOVED", null, sale);
-   }
-
    public void setSaleAvailable(Sale sale)
    {
       products.parallelStream()
@@ -312,7 +294,7 @@ public class ServerModel
       {
          products.stream()
                .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get().setPrice(sale.getInitialPrice());
+               .findFirst().get().setPrice(sale.getPrice());
       }
       try
       {

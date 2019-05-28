@@ -267,6 +267,8 @@ public class Store implements Serializable, StoreModel
             sale.get().getAmountProperty().get(),
             sale.get().getBooleanProperty().get());
 
+      sampleSale.getProduct().setPrice(sampleSale.getInitialPrice());
+
       client.removeSaleFromServer(sampleSale);
    }
 
@@ -302,10 +304,10 @@ public class Store implements Serializable, StoreModel
       {
          products.stream()
                .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get().setPrice(sale.getInitialPrice());
+               .findFirst().get().setPrice(sale.getPrice());
       }
-      
-      
+
+      System.out.println(sale.getPrice());
 
       support.firePropertyChange("SALEPRODUCTPRICEREVERT", "", sale);
       support.firePropertyChange("MINUSSALE", "", sale);
@@ -319,8 +321,7 @@ public class Store implements Serializable, StoreModel
             .findFirst().get().setPrice(sale.getPriceAfterSaleApplied());
 
       support.firePropertyChange("SALEAVAILABLE", "", sale);
-      support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "",
-            sale);
+      support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "", sale);
    }
 
    @Override

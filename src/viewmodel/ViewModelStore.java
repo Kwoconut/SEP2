@@ -98,7 +98,7 @@ public class ViewModelStore implements PropertyChangeListener
          {
             if (names[i].get().equals(sale.getProduct().getName()))
             {
-               prices[i].set(sale.getInitialPrice() + "DKK");
+               prices[i].set(sale.getPrice() + "DKK");
             }
          }
       }

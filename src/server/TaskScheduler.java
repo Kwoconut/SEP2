@@ -31,7 +31,7 @@ public class TaskScheduler implements Runnable
       {
          if (now.equals(sales.get(i).getEndDate()))
          {
-            model.removeUnavailableSale(sales.get(i));
+            model.removeSale(sales.get(i));
          }
       }
 
@@ -54,7 +54,7 @@ public class TaskScheduler implements Runnable
          int time = getHoursUntilTarget();
          try
          {
-            Thread.sleep(time * 1000 * 60 * 60);
+            Thread.sleep(1000 * 60);
          }
          catch (InterruptedException e)
          {
