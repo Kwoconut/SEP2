@@ -74,27 +74,4 @@ public class ProductDatabaseHandler implements StoreProductPersistence
       query.executeUpdate("DELETE FROM Product;", statement -> {
       });
    }
-
-   @Override
-   public void updateProductAddSale(double newPrice, int product_id)
-         throws SQLException
-   {
-      query.executeUpdate("UPDATE Product SET price = ? WHERE product_id = ?;",
-            statement -> {
-               statement.setDouble(1, newPrice);
-               statement.setInt(2, product_id);
-            });
-   }
-
-   @Override
-   public void updateProductRemoveSale(double price, int product_id)
-         throws SQLException
-   {
-
-      query.executeUpdate("UPDATE Product SET price = ? WHERE product_id = ?",
-            statement -> {
-               statement.setDouble(1, price);
-               statement.setInt(2, product_id);
-            });
-   }
 }

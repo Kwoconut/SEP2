@@ -99,7 +99,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
    }
@@ -112,7 +111,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
    }
@@ -125,7 +123,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
    }
@@ -152,7 +149,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       support.firePropertyChange("PRODUCTADDED", null, product);
@@ -167,7 +163,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       support.firePropertyChange("OFFERADDED", null, offer);
@@ -175,30 +170,28 @@ public class ServerModel
 
    public void addSale(Sale sale)
    {
+
+      if (sale.getIsChangedValue() == false
+            && MyDate.now().equals(sale.getStartDate()))
+      {
+         products.parallelStream()
+               .filter(product -> product.getID() == sale.getID()).findFirst()
+               .get().setPrice((sale.getPriceAfterSaleApplied()));
+         sale.setIsChangedValue();
+      }
+      sales.add(sale);
+
       try
       {
-
-         if (sale.getIsChangedValue() == false
-               && MyDate.now().equals(sale.getStartDate()))
-         {
-            products.parallelStream()
-                  .filter(product -> product.getID() == sale.getID())
-                  .findFirst().get()
-                  .setPrice((sale.getPriceAfterSaleApplied()));
-            sale.setIsChangedValue();
-            databaseProductAccess.updateProductAddSale(
-                  sale.getProduct().getPrice(), sale.getProduct().getID());
-         }
-
-         sales.add(sale);
          databaseSaleAccess.addSale(sale);
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
+
       support.firePropertyChange("SALEADDED", null, sale);
+
       if (sale.getIsChangedValue())
       {
          support.firePropertyChange("SALEAVAILABLE", null, sale);
@@ -228,7 +221,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       support.firePropertyChange("PRODUCTUPDATED", null, product);
@@ -242,7 +234,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       support.firePropertyChange("OFFERUPDATED", null, offer);
@@ -257,13 +248,10 @@ public class ServerModel
 
       try
       {
-         databaseProductAccess.updateProductRemoveSale(sale.getInitialPrice(),
-               sale.getProduct().getID());
          databaseSaleAccess.removeSale(sale);
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       support.firePropertyChange("SALEREMOVED", null, sale);
@@ -279,19 +267,16 @@ public class ServerModel
             .findFirst().get().setIsChangedValue();
       try
       {
-         databaseProductAccess.updateProductAddSale(
-               sale.getPriceAfterSaleApplied(), sale.getProduct().getID());
          databaseSaleAccess.changedValue(sale);
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       support.firePropertyChange("SALEAVAILABLE", null, sale);
    }
+   
    // remove methods
-
    public void removeProduct(Product product)
    {
       products.remove(product);
@@ -301,7 +286,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       support.firePropertyChange("PRODUCTREMOVED", null, product);
@@ -316,7 +300,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       support.firePropertyChange("OFFERREMOVED", null, offer);
@@ -337,7 +320,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       support.firePropertyChange("SALEREMOVED", null, sale);
@@ -366,7 +348,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
    }
@@ -379,7 +360,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
    }
@@ -392,7 +372,6 @@ public class ServerModel
       }
       catch (SQLException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
    }

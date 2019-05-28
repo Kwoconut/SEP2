@@ -16,11 +16,4 @@ public interface StoreProductPersistence
    void removeProduct(Product product) throws SQLException;
 
    void clearProducts() throws SQLException;
-
-   void updateProductAddSale(double newPrice, int product_id)
-         throws SQLException;
-
-   void updateProductRemoveSale(double price, int product_id)
-         throws SQLException;
-
 }
