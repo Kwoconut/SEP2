@@ -177,14 +177,16 @@ public class ServerModel
    {
       try
       {
-/*
- * if (sale.getIsChangedValue() == false &&
- * MyDate.now().equals(sale.getStartDate())) {
- * sale.setChangedValue(!sale.getIsChangedValue());
- * sale.getProduct().setPrice(sale.getPriceAfterSaleApplied());
- * databaseProductAccess.updateProductAddSale(sale.getProduct().getPrice(),
- * sale.getProduct().getID()); }
- */
+
+         if (sale.getIsChangedValue() == false
+               && MyDate.now().equals(sale.getStartDate()))
+         {
+            sale.setChangedValue(!sale.getIsChangedValue());
+            sale.getProduct().setPrice(sale.getPriceAfterSaleApplied());
+            databaseProductAccess.updateProductAddSale(
+                  sale.getProduct().getPrice(), sale.getProduct().getID());
+         }
+
          sales.add(sale);
          databaseSaleAccess.addSale(sale);
       }
@@ -239,7 +241,7 @@ public class ServerModel
       support.firePropertyChange("OFFERUPDATED", null, offer);
    }
 
-   public void updateRemoveSale(Sale sale)
+   public void removeUnavailableSale(Sale sale)
    {
       products.stream()
             .filter(product -> product.getID() == sale.getProduct().getID())
@@ -315,6 +317,12 @@ public class ServerModel
    public void removeSale(Sale sale)
    {
       sales.remove(sale);
+      if (sale.getIsChangedValue())
+      {
+         products.stream()
+               .filter(product -> product.getID() == sale.getProduct().getID())
+               .findFirst().get().setPrice(sale.getInitialPrice());
+      }
       try
       {
          databaseSaleAccess.removeSale(sale);

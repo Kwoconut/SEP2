@@ -37,20 +37,20 @@ public class TaskScheduler implements Runnable
       {
          if (now.equals(sales.get(i).getEndDate()))
          {
-            model.updateRemoveSale(sales.get(i)); // in server update product
-                                                  // (including dtb and client)
-            model.removeSale(sales.get(i)); // remove sale from
-                                            // server/db/clients cuz sale ended
+            model.removeUnavailableSale(sales.get(i)); // in server update product
+                                                       // (including dtb and client)
+                                                       // remove sale from
+                                                       // server/db/clients cuz sale ended
          }
       }
-      System.out.println("--------------");
+
       for (int i = 0; i < sales.size(); i++)
       {
          if (sales.get(i).getIsChangedValue() == false
                && now.equals((sales.get(i).getStartDate())))
          {
             model.setSaleAvailable(sales.get(i));
-            System.out.println("--------------");// in server update
+                                                  // in server update
                                                   // product(including dtb and
                                                   // client)
          }
