@@ -94,8 +94,11 @@ public class Sale implements Serializable
       if (this.product.equals(sale.getProduct()))
       {
          if (this.startDate.isBetween(sale.getStartDate(), sale.getEndDate())
-               || this.endDate.isBetween(sale.getStartDate(),
-                     sale.getEndDate()))
+               || this.endDate.isBetween(sale.getStartDate(), sale.getEndDate())
+               || this.startDate.equals(sale.getStartDate())
+               || this.endDate.equals(sale.getStartDate())
+               || this.startDate.equals(sale.getEndDate())
+               || this.endDate.equals(sale.getEndDate()))
          {
             return true;
          }
@@ -109,23 +112,25 @@ public class Sale implements Serializable
 
    public double getPriceAfterSaleApplied()
    {
-      return Double.valueOf(df.format(getPrice() - (getAmount() * getPrice()) / 100)) ;
+      return Double
+            .valueOf(df.format(getPrice() - (getAmount() * getPrice()) / 100));
 
-   }  
+   }
 
    public double getInitialPrice()
    {
-      return  Double.valueOf(df.format(product.getPrice() / (100 - amount) * 100));
+      return Double
+            .valueOf(df.format(product.getPrice() / (100 - amount) * 100));
    }
 
    public static double getPriceBeforeSaleApplies(double price, int amount)
    {
-      return  Double.valueOf(df.format(price / (100 - amount) * 100));
+      return Double.valueOf(df.format(price / (100 - amount) * 100));
    }
 
    public static double getReducedPrice(double price, int amount)
    {
-      return  Double.valueOf(df.format(price - (amount * price) / 100));
+      return Double.valueOf(df.format(price - (amount * price) / 100));
    }
 
    public boolean equals(Object obj)

@@ -72,7 +72,6 @@
                               </TableView>
                               <TextField fx:id="saleTextField" layoutX="776.0" layoutY="23.0" prefHeight="26.0" prefWidth="218.0" promptText="Search" style="-fx-faint-focus-color: transparent; -fx-focus-color: #DC7A77;" />
                               <Button layoutX="750.0" layoutY="400.0" mnemonicParsing="false" onAction="#onCancelSaleButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Cancel Sale" />
-                              <Button layoutX="890.0" layoutY="400.0" mnemonicParsing="false" onAction="#onEditSaleButtonPressed" prefHeight="36.0" prefWidth="130.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Edit Sale" />
                            </children>
                         </AnchorPane>
                      </content>

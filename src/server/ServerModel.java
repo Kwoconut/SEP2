@@ -181,8 +181,11 @@ public class ServerModel
          if (sale.getIsChangedValue() == false
                && MyDate.now().equals(sale.getStartDate()))
          {
-            sale.setChangedValue(!sale.getIsChangedValue());
-            sale.getProduct().setPrice(sale.getPriceAfterSaleApplied());
+            products.parallelStream()
+                  .filter(product -> product.getID() == sale.getID())
+                  .findFirst().get()
+                  .setPrice((sale.getPriceAfterSaleApplied()));
+            sale.setIsChangedValue();
             databaseProductAccess.updateProductAddSale(
                   sale.getProduct().getPrice(), sale.getProduct().getID());
          }
@@ -196,6 +199,10 @@ public class ServerModel
          e.printStackTrace();
       }
       support.firePropertyChange("SALEADDED", null, sale);
+      if (sale.getIsChangedValue())
+      {
+      support.firePropertyChange("SALEAVAILABLE", null, sale);
+      }
    }
 
    public void addReview(Review review)

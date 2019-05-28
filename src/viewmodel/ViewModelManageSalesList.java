@@ -128,7 +128,7 @@ public class ViewModelManageSalesList implements PropertyChangeListener
          sales.parallelStream().filter(
                sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
                .findFirst().get().getBooleanProperty().set(true);
-         
+
       }
 
    }

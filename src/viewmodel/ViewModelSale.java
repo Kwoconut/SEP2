@@ -150,11 +150,6 @@ public class ViewModelSale implements PropertyChangeListener
             productProperty.get(), amountProperty.get());
    }
 
-   public void editSale()
-   {
-
-   }
-
    public boolean equals(Object obj)
    {
       if (!(obj instanceof ViewModelSale))

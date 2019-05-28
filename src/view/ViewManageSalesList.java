@@ -220,11 +220,6 @@ public class ViewManageSalesList implements View
       view.setWindow("createsale");
    }
 
-   public void onEditSaleButtonPressed()
-   {
-
-   }
-
    public void onCancelSaleButtonPressed() throws RemoteException
    {
       Alert alert = new Alert(AlertType.CONFIRMATION);
