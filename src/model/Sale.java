@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class Sale implements Serializable
 {
@@ -12,6 +13,7 @@ public class Sale implements Serializable
    private Product product;
    private int amount;
    private boolean isChangedValue;
+   private static DecimalFormat df = new DecimalFormat("#.##");
 
    public Sale(int ID, MyDate startDate, MyDate endDate, Product product,
          int amount)
@@ -52,7 +54,7 @@ public class Sale implements Serializable
 
    public double getPrice()
    {
-      return product.getPrice();
+      return Double.valueOf(df.format(product.getPrice()));
    }
 
    public int getAmount()
@@ -107,23 +109,23 @@ public class Sale implements Serializable
 
    public double getPriceAfterSaleApplied()
    {
-      return getPrice() - (getAmount() * getPrice()) / 100;
+      return Double.valueOf(df.format(getPrice() - (getAmount() * getPrice()) / 100)) ;
 
-   }
+   }  
 
    public double getInitialPrice()
    {
-      return product.getPrice() / (100 - amount) * 100;
+      return  Double.valueOf(df.format(product.getPrice() / (100 - amount) * 100));
    }
 
    public static double getPriceBeforeSaleApplies(double price, int amount)
    {
-      return price / (100 - amount) * 100;
+      return  Double.valueOf(df.format(price / (100 - amount) * 100));
    }
 
    public static double getReducedPrice(double price, int amount)
    {
-      return price - (amount * price) / 100;
+      return  Double.valueOf(df.format(price - (amount * price) / 100));
    }
 
    public boolean equals(Object obj)
