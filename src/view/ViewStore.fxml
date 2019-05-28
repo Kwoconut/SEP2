@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import java.util.ArrayList?>
 
 <VBox prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewStore">
 	<children>
@@ -188,6 +187,11 @@
 						</fx:define>
 					</children>
 				</GridPane>
+            <Label fx:id="newSaleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="180.0" layoutY="614.0" prefHeight="50.0" prefWidth="850.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
 			</children>
 		</AnchorPane>
 	</children>

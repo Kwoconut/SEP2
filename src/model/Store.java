@@ -220,7 +220,6 @@ public class Store implements Serializable, StoreModel
       Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
             endDate, sampleProduct, amount);
 
-
       if (sale.validDate())
       {
          int ok = 0;
@@ -264,8 +263,12 @@ public class Store implements Serializable, StoreModel
             sale.get().getEndDateProperty().get(), sampleProduct,
             sale.get().getAmountProperty().get(),
             sale.get().getBooleanProperty().get());
-
-      sampleSale.getProduct().setPrice(sampleSale.getInitialPrice());
+      
+      
+      if (sampleSale.getIsChangedValue())
+      {         
+         sampleSale.getProduct().setPrice(sampleSale.getInitialPrice());
+      }
 
       client.removeSaleFromServer(sampleSale);
    }
@@ -295,7 +298,8 @@ public class Store implements Serializable, StoreModel
 
    @Override
    public void removeSaleFromServer(Sale sale)
-   {
+   {  System.out.println(sale.getPrice());
+      System.out.println(sales.get(0).getPrice());
       sales.remove(sale);
 
       if (sale.getIsChangedValue() == true)
@@ -304,7 +308,6 @@ public class Store implements Serializable, StoreModel
                .filter(product -> product.getID() == sale.getProduct().getID())
                .findFirst().get().setPrice(sale.getPrice());
       }
-
 
       support.firePropertyChange("SALEPRODUCTPRICEREVERT", "", sale);
       support.firePropertyChange("MINUSSALE", "", sale);

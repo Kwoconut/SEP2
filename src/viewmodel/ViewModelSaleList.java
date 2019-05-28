@@ -57,7 +57,7 @@ public class ViewModelSaleList implements PropertyChangeListener
                sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
                .findFirst().get().getInitialPriceProperty()
                .set(sale.getPrice());
-         
+
          System.out.println(sales.get(0).getInitialPriceProperty().get());
          System.out.println("----------");
       }
@@ -68,14 +68,19 @@ public class ViewModelSaleList implements PropertyChangeListener
       if (evt.getPropertyName().equals("SALEPRODUCTPRICEREVERT"))
       {
          Sale sale = (Sale) evt.getNewValue();
-         sales.stream().filter(
-               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
-               .findFirst().get().getProductProperty().get().getPriceProperty()
-               .set(sale.getPrice());
-         sales.stream().filter(
-               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
-               .findFirst().get().getInitialPriceProperty()
-               .set(sale.getPrice());
+         if (sale.getIsChangedValue())
+         {
+            sales.stream()
+                  .filter(sampleSale -> sampleSale.getIDProperty().get() == sale
+                        .getID())
+                  .findFirst().get().getProductProperty().get()
+                  .getPriceProperty().set(sale.getPrice());
+            sales.stream()
+                  .filter(sampleSale -> sampleSale.getIDProperty().get() == sale
+                        .getID())
+                  .findFirst().get().getInitialPriceProperty()
+                  .set(sale.getPrice());
+         }
       }
 
    }
