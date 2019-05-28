@@ -201,7 +201,7 @@ public class ServerModel
       support.firePropertyChange("SALEADDED", null, sale);
       if (sale.getIsChangedValue())
       {
-      support.firePropertyChange("SALEAVAILABLE", null, sale);
+         support.firePropertyChange("SALEAVAILABLE", null, sale);
       }
    }
 
@@ -253,6 +253,7 @@ public class ServerModel
       products.stream()
             .filter(product -> product.getID() == sale.getProduct().getID())
             .findFirst().get().setPrice(sale.getInitialPrice());
+      sales.remove(sale);
 
       try
       {
