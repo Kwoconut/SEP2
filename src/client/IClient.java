@@ -23,8 +23,6 @@ public interface IClient
    
    void removeSaleFromServer(Sale sale) throws RemoteException;
    
-   void updateSaleFromServer(Sale sale) throws RemoteException;
-   
    void requestReviews() throws RemoteException;
    
    void sendReviewToServer(Review review) throws RemoteException;

@@ -217,13 +217,6 @@ public class Server implements RIServerWrite, PropertyChangeListener
    }
 
    @Override
-   public void updateSale(Sale sale) throws RemoteException
-   {
-      model.updateSale(sale);
-
-   }
-
-   @Override
    public void getReviews(RIClient sender) throws RemoteException
    {
       sender.getReviews(model.getReviews());

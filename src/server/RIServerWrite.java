@@ -22,5 +22,4 @@ public interface RIServerWrite extends RIServerRead
 
    void removeReview(Review review) throws RemoteException;
 
-   void updateSale(Sale sale) throws RemoteException;
 }

@@ -393,40 +393,4 @@ public class ServerModel
    {
       support.addPropertyChangeListener(listener);
    }
-
-/*
- * public void changedValue(Sale sale) { Sale sendSale = null; for (int i = 0; i
- * < sales.size(); i++) { if (sales.get(i).equals(sale)) {
- * sales.get(i).setIsChangedValue(); sendSale = sales.get(i); break; } } try {
- * databaseSaleAccess.changedValue(sale); } catch (SQLException e) { // TODO
- * Auto-generated catch block e.printStackTrace(); }
- * support.firePropertyChange("SALEEDITED", null, sendSale); }
- */
-
-   public void updateSale(Sale sale)
-   {
-      for (int i = 0; i < sales.size(); i++)
-      {
-         if (sales.get(i).getID() == sale.getID())
-         {
-            sales.set(i, sale);
-            break;
-         }
-      }
-      // tre de implementat functionalitatea la butonu edit sale , de gindit cum
-      // il facem
-      // try
-      // {
-      // databaseSaleAccess.updateRemoveSale( sale.getInitialPrice(),
-      // sale.getProduct().getID());
-      // databaseSaleAccess.removeSale(sale);
-      System.out.println("In servermodel de implementat functionalitatea");
-      // }
-      // catch (SQLException e)
-      // {
-      // TODO Auto-generated catch block
-      // e.printStackTrace();
-      // }
-      // support.firePropertyChange("SALEEDITED", null, sale);
-   }
 }

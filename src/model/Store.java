@@ -312,19 +312,6 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
-   public void editSaleFromServer(Sale sale)
-   {
-      for (int i = 0; i < sales.size(); i++)
-      {
-         if (sales.get(i).getID() == sale.getID())
-         {
-            sales.set(i, sale);
-            break;
-         }
-      }
-   }
-
-   @Override
    public void addAvailableSaleFromServer(Sale sale)
    {
       products.stream()
