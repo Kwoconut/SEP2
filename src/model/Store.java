@@ -6,12 +6,9 @@ import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
 import java.util.stream.Collectors;
-=======
 import java.util.Scanner;
->>>>>>> parent of 6517bc7... Revert "login"
 
 import client.Client;
 import client.IClient;
@@ -385,23 +382,29 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
-<<<<<<< HEAD
    public double getAverage(int productID)
    {
-      return reviews.stream()
+      double average = reviews.stream()
             .filter(review -> review.getProduct().getID() == productID)
             .mapToDouble(review -> review.getRating()).average().getAsDouble();
+      Product product = products.stream()
+            .filter(sampleProduct -> sampleProduct.getID() == productID)
+            .findFirst().get();
+      support.firePropertyChange("AVERAGERATING", product, average);
+      return average;
    }
 
    @Override
    public ArrayList<String> getReviewCommentsByProductID(int productID)
    {
-      List<String> comments = reviews.stream()
+      List<String> commentsList = reviews.stream()
             .filter(review -> review.getProduct().getID() == productID)
             .map(review -> review.getMessage()).collect(Collectors.toList());
 
-      return new ArrayList<String>(comments);
-=======
+      ArrayList<String> comments = new ArrayList<String>(commentsList);
+      support.firePropertyChange("COMMENTS", "", comments);
+      return comments;
+   }
    public void validateLogin(String username, String password)
    {
       ArrayList<String> usernames = requestUsernamesFromServer();
@@ -449,7 +452,6 @@ public class Store implements Serializable, StoreModel
       pass.add("123456");
       pass.add("696969");
       return pass;
->>>>>>> parent of 6517bc7... Revert "login"
    }
 
 }
