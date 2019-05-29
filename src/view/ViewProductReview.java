@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -135,6 +136,11 @@ public class ViewProductReview implements View
    {
       getScene().getWindow().hide();
       view.setWindow("sales");
+   }
+   
+   public void onLeaveReviewButtonPressed() throws RemoteException
+   {
+	   viewModel.onLeaveReviewButtonPressed();
    }
 
 }

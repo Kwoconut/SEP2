@@ -9,10 +9,10 @@ public interface SReviewModel
 
    void requestReviews() throws RemoteException;
 
-   void addReview(Review review);
-
    void removeReview(Review review) throws RemoteException;
    
    void addListener(PropertyChangeListener listener);
+
+   void addReview(double rating, String message, int productID) throws RemoteException;
 
 }

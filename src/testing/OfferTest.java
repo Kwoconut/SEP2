@@ -83,7 +83,7 @@ public class OfferTest
             "I want to buy some roof.");
       Offer offer3 = new Offer(1, "Ja", "+45748563857", "jack.jackson@gmail.com",
             "I want to buy some roof.");
-      assertEquals(true,offer.equals(offer));
+      assertEquals(true,offer2.equals(offer));
       assertEquals(false,offer.equals(offer3));
    }
    

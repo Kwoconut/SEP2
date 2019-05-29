@@ -27,7 +27,7 @@
                <font>
                   <Font name="System Bold" size="19.0" />
                </font></Label>
-            <Button layoutX="52.0" layoutY="432.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="243.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Leave a review for this product" />
+            <Button layoutX="52.0" layoutY="432.0" mnemonicParsing="false" onAction="#onLeaveReviewButtonPressed" prefHeight="64.0" prefWidth="243.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Leave a review for this product" />
             <Text layoutX="388.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average review for this product" />
             <StackPane fx:id="imagePane" layoutX="52.0" layoutY="54.0" prefHeight="347.0" prefWidth="243.0" />
          </children>

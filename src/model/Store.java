@@ -213,6 +213,28 @@ public class Store implements Serializable, StoreModel
    {
       client.requestSales();
    }
+   @Override
+   public void addReview(double rating, String message,int productID) throws RemoteException
+   {
+	   Product sampleProduct = null;
+	   for(int i=0;i<products.size();i++)
+	   {
+		   if(products.get(i).getID()== productID)
+		   {
+			   sampleProduct = products.get(i);
+			   break;
+		   }	   
+	   }  
+	   Review sampleReview = new Review(IDGenerator.generateReviewID(reviews),rating,message,sampleProduct);
+	   try
+	   {
+		   client.sendReviewToServer(sampleReview);
+	   }
+	   catch (RemoteException e)
+	   {
+		   e.printStackTrace();
+	   }
+   }
 
    @Override
    public void addSale(MyDate startDate, MyDate endDate,
@@ -337,18 +359,6 @@ public class Store implements Serializable, StoreModel
 
    }
 
-   @Override
-   public void addReview(Review review)
-   {
-      try
-      {
-         client.sendReviewToServer(review);
-      }
-      catch (RemoteException e)
-      {
-         e.printStackTrace();
-      }
-   }
 
    @Override
    public void removeReview(Review review) throws RemoteException
@@ -369,6 +379,8 @@ public class Store implements Serializable, StoreModel
    public void addReviewFromServer(Review review)
    {
       reviews.add(review);
+      getAverage(review.getProduct().getID());
+      getReviewCommentsByProductID(review.getProduct().getID());
       support.firePropertyChange("NEWREVIEW", "", review);
 
    }
