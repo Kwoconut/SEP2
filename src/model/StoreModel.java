@@ -1,7 +1,7 @@
 package model;
 
 public interface StoreModel extends SProductModel, SOfferModel,
-      StoreModelClientHandler, SSalesModel, SReviewModel
+      StoreModelClientHandler, SSalesModel, SReviewModel, SLoginModel
 {
-    void validateLogin(String user, String password);
+
 }
