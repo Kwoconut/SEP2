@@ -32,8 +32,7 @@ public class ViewModelProductList implements PropertyChangeListener
    {
       int x = 0;
       int y = 0;
-      System.out.println(index1);
-      System.out.println(index2);
+      
       for (int i = 0; i < products.size(); i++)
       {
          if (index1 == x & index2 == y)

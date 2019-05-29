@@ -87,6 +87,14 @@ public class ViewModelProductReview implements PropertyChangeListener
       return productPrice;
    }
 
+   public void leaveReview(double rating, String message) throws RemoteException
+   {
+
+      model.addReview(rating, message, productID.getValue());
+      model.getAverage(productID.get());
+      model.getReviewCommentsByProductID(productID.get());
+   }
+
    @SuppressWarnings("unchecked")
    @Override
    public void propertyChange(PropertyChangeEvent evt)
@@ -108,10 +116,4 @@ public class ViewModelProductReview implements PropertyChangeListener
       }
    }
 
-public void leaveReview(double rating,String message) throws RemoteException {
-	
-	  model.addReview(rating,message,productID.getValue());
-	  model.getAverage(productID.get());
-	  model.getReviewCommentsByProductID(productID.get());
-}
 }

@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.collections.FXCollections;
@@ -41,6 +42,9 @@ public class ViewProductReview implements View
 
    @FXML
    StackPane imagePane;
+   
+   @FXML
+   ArrayList<StackPane> starList;
 
    private ViewModelProductReview viewModel;
    private MainView view;
@@ -78,6 +82,58 @@ public class ViewProductReview implements View
 
       imagePane.getChildren().add(productImage);
 
+      if (this.viewModel.getAverageReviewProperty().get() == 0)
+      {
+         for (int i = 0; i < 5; i++)
+         {
+            starList.get(i).getChildren().clear();
+            ImageView imageView = new ImageView(new Image("images/empty.png"));
+            imageView.setFitHeight(28);
+            imageView.setFitWidth(28);
+            starList.get(i).getChildren().add(imageView);
+         }
+      }
+      else
+      {
+
+         for (int i = 1; i <= 5; i++)
+         {
+            if (i <= this.viewModel.getAverageReviewProperty().get())
+            {
+               starList.get(i - 1).getChildren().clear();
+               ImageView imageView = new ImageView(
+                     new Image("images/full.png"));
+               imageView.setFitHeight(28);
+               imageView.setFitWidth(28);
+               starList.get(i - 1).getChildren().add(imageView);
+            }
+            else if (i
+                  - 1 == (int) this.viewModel.getAverageReviewProperty().get()
+                  && this.viewModel.getAverageReviewProperty()
+                        .get() > (int) this.viewModel.getAverageReviewProperty()
+                              .get())
+            {
+               starList.get(i - 1).getChildren().clear();
+               ImageView imageView = new ImageView(
+                     new Image("images/half.png"));
+               imageView.setFitHeight(28);
+               imageView.setFitWidth(28);
+               starList.get(i - 1).getChildren().add(imageView);
+            }
+            else if (i > this.viewModel.getAverageReviewProperty().get())
+            {
+               starList.get(i - 1).getChildren().clear();
+               ImageView imageView = new ImageView(
+                     new Image("images/empty.png"));
+               imageView.setFitHeight(28);
+               imageView.setFitWidth(28);
+               starList.get(i - 1).getChildren().add(imageView);
+            }
+
+         }
+
+      }
+      
       GridPane gridPane = new GridPane();
       gridPane.setPadding(new Insets(20, 20, 20, 31));
       gridPane.setVgap(20);
