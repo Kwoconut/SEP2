@@ -7,11 +7,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-<<<<<<< HEAD
 import java.util.Scanner;
-
-=======
->>>>>>> parent of 9e44eff... Revert "Login with database connection"
 import client.Client;
 import client.IClient;
 import javafx.beans.property.ObjectProperty;
@@ -403,17 +399,11 @@ public class Store implements Serializable, StoreModel
       List<String> commentsList = reviews.stream()
             .filter(review -> review.getProduct().getID() == productID)
             .map(review -> review.getMessage()).collect(Collectors.toList());
-
-<<<<<<< HEAD
       ArrayList<String> comments = new ArrayList<String>(commentsList);
       support.firePropertyChange("COMMENTS", "", comments);
       return comments;
    }
-=======
-      return new ArrayList<String>(comments);
-   }
 
->>>>>>> parent of 9e44eff... Revert "Login with database connection"
    public void validateLogin(String username, String password)
    {
       if (username == null || username.isEmpty())
@@ -466,14 +456,7 @@ public class Store implements Serializable, StoreModel
    @Override
    public void requestPasswords() throws RemoteException
    {
-<<<<<<< HEAD
-      ArrayList<String> pass = new ArrayList<String>();
-      pass.add("123456");
-      pass.add("696969");
-      return pass;
-=======
       client.requestPasswords();
->>>>>>> parent of 9e44eff... Revert "Login with database connection"
    }
 
 }
