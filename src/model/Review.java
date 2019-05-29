@@ -1,6 +1,8 @@
 package model;
 
-public class Review
+import java.io.Serializable;
+
+public class Review implements Serializable
 {
    private double rating;
    private String message;

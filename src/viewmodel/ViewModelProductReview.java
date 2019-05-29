@@ -2,6 +2,7 @@ package viewmodel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javafx.beans.property.DoubleProperty;
@@ -25,18 +26,22 @@ public class ViewModelProductReview implements PropertyChangeListener
    private IntegerProperty productID;
    private StringProperty productName;
    private StringProperty productType;
-   private DoubleProperty productPrice;
+   private StringProperty productPrice;
+   private StringProperty imageProperty;
    private SReviewModel model;
 
-   public ViewModelProductReview(SReviewModel model)
+   public ViewModelProductReview(SReviewModel model) throws RemoteException
    {
       this.model = model;
       productReviewComments = FXCollections.observableArrayList();
       this.productID = new SimpleIntegerProperty();
       this.productName = new SimpleStringProperty();
       this.productType = new SimpleStringProperty();
-      this.productPrice = new SimpleDoubleProperty();
+      this.productPrice = new SimpleStringProperty();
       this.averageReview = new SimpleDoubleProperty();
+      this.imageProperty = new SimpleStringProperty();
+      this.model.requestReviews();
+      this.model.addListener(this);
    }
 
    public ObservableList<String> getProductReviewComments()
@@ -47,6 +52,11 @@ public class ViewModelProductReview implements PropertyChangeListener
    public DoubleProperty getAverageReviewProperty()
    {
       return averageReview;
+   }
+
+   public StringProperty getImageProperty()
+   {
+      return imageProperty;
    }
 
    public IntegerProperty getProductIDProperty()
@@ -64,7 +74,7 @@ public class ViewModelProductReview implements PropertyChangeListener
       return productType;
    }
 
-   public DoubleProperty productPrice()
+   public StringProperty productPrice()
    {
       return productPrice;
    }
@@ -80,10 +90,12 @@ public class ViewModelProductReview implements PropertyChangeListener
          productID.set(product.getID());
          productName.set(product.getName());
          productType.set(product.getType());
-         productPrice.set(product.getPrice());
+         productPrice.set(Double.toString(product.getPrice()) + "DKK");
+         imageProperty.set(product.getImageID());
       }
       else if (evt.getPropertyName().equals("COMMENTS"))
       {
+         productReviewComments.clear();
          productReviewComments.addAll((ArrayList<String>) evt.getNewValue());
       }
    }

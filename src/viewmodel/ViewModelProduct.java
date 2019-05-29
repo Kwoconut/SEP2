@@ -52,7 +52,7 @@ public class ViewModelProduct
       colourProperty = new SimpleStringProperty(product.getColour());
       priceProperty = new SimpleDoubleProperty(product.getPrice());
       imageProperty = new SimpleStringProperty(product.getImageID());
-      
+
    }
 
    public IntegerProperty getIdProperty()
@@ -79,7 +79,7 @@ public class ViewModelProduct
    {
       return priceProperty;
    }
-   
+
    public StringProperty getImageProperty()
    {
       return imageProperty;

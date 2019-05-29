@@ -28,10 +28,33 @@ public class ViewModelProductList implements PropertyChangeListener
       return products;
    }
 
+   public void getProductByID(int index1, int index2)
+   {
+      int x = 0;
+      int y = 0;
+      System.out.println(index1);
+      System.out.println(index2);
+      for (int i = 0; i < products.size(); i++)
+      {
+         if (index1 == x & index2 == y)
+         {
+            this.model.getAverage(products.get(i).getIdProperty().get());
+            this.model.getReviewCommentsByProductID(
+                  products.get(i).getIdProperty().get());
+         }
+         x++;
+         if (x == 4)
+         {
+            y++;
+            x = 0;
+         }
+      }
+   }
+
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
-         executePropertyChange(evt);  
+      executePropertyChange(evt);
    }
 
    @SuppressWarnings("unchecked")

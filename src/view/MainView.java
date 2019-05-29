@@ -46,6 +46,11 @@ public class MainView
          ViewCreateSale viewCreateSale = (ViewCreateSale) view;
          viewCreateSale.refresh();
       }
+      else if (id.equals("review"))
+      {
+         ViewProductReview viewProductReview = (ViewProductReview) view;
+         viewProductReview.refresh();
+      }
 
       primaryStage.setScene(view.getScene());
       primaryStage.setTitle(view.getTitle());

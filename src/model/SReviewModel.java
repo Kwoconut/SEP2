@@ -1,5 +1,6 @@
 package model;
 
+import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -11,9 +12,7 @@ public interface SReviewModel
    void addReview(Review review);
 
    void removeReview(Review review) throws RemoteException;
-
-   double getAverage(int productID);
-
-   ArrayList<String> getReviewCommentsByProductID(int productID);
+   
+   void addListener(PropertyChangeListener listener);
 
 }

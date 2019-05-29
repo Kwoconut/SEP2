@@ -5,14 +5,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -32,10 +35,10 @@ public class ViewProductList implements View
    private ViewModelProductList viewModel;
 
    @SuppressWarnings("static-access")
-   public void init(MainViewViewModel viewModel, MainView view, Scene scene,
+   public void init(MainViewViewModel vm, MainView view, Scene scene,
          String title)
    {
-      this.viewModel = viewModel.getViewModelProductList();
+      this.viewModel = vm.getViewModelProductList();
       this.view = view;
       this.scene = scene;
       this.title = title;
@@ -101,7 +104,38 @@ public class ViewProductList implements View
          }
       }
       gridPane.getChildren().addAll(stackPane);
+
+      gridPane.addEventFilter(MouseEvent.MOUSE_PRESSED,
+            new EventHandler<MouseEvent>()
+            {
+               public void handle(MouseEvent e)
+               {
+
+                  for (Node node : gridPane.getChildren())
+                  {
+                     if (node.getBoundsInParent().contains(e.getSceneX(),
+                           e.getSceneY()))
+                     {
+                        getScene().getWindow().hide();
+                        viewModel.getProductByID(GridPane.getColumnIndex(node),
+                              GridPane.getRowIndex(node));
+                        try
+                        {
+                           view.setWindow("review");
+                        }
+                        catch (IOException e1)
+                        {
+                           // TODO Auto-generated catch block
+                           e1.printStackTrace();
+                        }
+                     }
+
+                  }
+               }
+            });
+
       mainPane.setContent(gridPane);
+
    }
 
    public void onCheckOfferButtonPressed() throws IOException

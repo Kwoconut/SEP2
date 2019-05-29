@@ -97,7 +97,6 @@ public class Client implements IClient, RIClient, Serializable
    public void getSales(ArrayList<Sale> sale) throws RemoteException
    {
       model.getSalesFromServer(sale);
-
    }
 
    @Override
@@ -189,4 +188,34 @@ public class Client implements IClient, RIClient, Serializable
    {
       model.addAvailableSaleFromServer(sale);
    }
+
+   @Override
+   public void getUsernames(ArrayList<String> usernames) throws RemoteException
+   {
+      model.getUsernamesFromServer(usernames);
+   }
+
+   @Override
+   public void getPasswords(ArrayList<String> passwords) throws RemoteException
+   {
+      model.getPasswordsFromServer(passwords);
+   }
+
+   @Override
+   public void requestUsernames() throws RemoteException
+   {
+      RIServerRead server = access.acquireRead();
+      server.getUsernames(this);
+      access.releaseRead();  
+   }
+
+   @Override
+   public void requestPasswords() throws RemoteException
+   {
+      RIServerRead server = access.acquireRead();
+      server.getPasswords(this);
+      access.releaseRead();  
+   }
+   
+   
 }

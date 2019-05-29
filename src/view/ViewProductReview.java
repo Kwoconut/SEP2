@@ -10,15 +10,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelProductReview;
 
 public class ViewProductReview implements View
 {
-
-   @FXML
-   Label productID;
 
    @FXML
    Label productName;
@@ -27,13 +27,13 @@ public class ViewProductReview implements View
    Label productPrice;
 
    @FXML
-   Label productType;
-
-   @FXML
    Label averageRating;
 
    @FXML
    ScrollPane commentPane;
+   
+   @FXML
+   StackPane imagePane;
 
    private ViewModelProductReview viewModel;
    private MainView view;
@@ -49,12 +49,9 @@ public class ViewProductReview implements View
       this.scene = scene;
       this.title = title;
 
-      productID.textProperty()
-            .bind(this.viewModel.getProductIDProperty().asString());
       productName.textProperty().bind(this.viewModel.productNameProperty());
       productPrice.textProperty()
-            .bind(this.viewModel.productPrice().asString());
-      productType.textProperty().bind(this.viewModel.productTypeProperty());
+            .bindBidirectional(this.viewModel.productPrice());
       averageRating.textProperty()
             .bind(this.viewModel.getAverageReviewProperty().asString());
 
@@ -65,6 +62,16 @@ public class ViewProductReview implements View
       ObservableList<String> comments = this.viewModel
             .getProductReviewComments();
       ObservableList<TextArea> textBox = FXCollections.observableArrayList();
+      
+      
+
+      imagePane.getChildren().clear();
+      ImageView productImage = new ImageView(
+            new Image("images/" + this.viewModel.getImageProperty().get()));
+      productImage.setFitWidth(250);
+      productImage.setFitHeight(350);
+      
+      imagePane.getChildren().add(productImage);
 
       GridPane gridPane = new GridPane();
       gridPane.setPadding(new Insets(20, 20, 20, 31));
@@ -76,8 +83,10 @@ public class ViewProductReview implements View
          if (!(comments.get(i).equals("")))
          {
             textBox.add(new TextArea(comments.get(i)));
-            textBox.get(i).setPrefWidth(400);
+            textBox.get(i).setPrefWidth(520);
             textBox.get(i).setPrefHeight(200);
+            textBox.get(i).setEditable(false);
+            textBox.get(i).setStyle("-fx-opacity: 100;");
             GridPane.setConstraints(textBox.get(i), 0, i);
          }
       }

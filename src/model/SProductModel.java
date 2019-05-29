@@ -13,5 +13,9 @@ public interface SProductModel
    void addListener(PropertyChangeListener listener);
    
    ArrayList<Product> getProducts();
+   
+   double getAverage(int productID);
+
+   ArrayList<String> getReviewCommentsByProductID(int productID);
 
 }

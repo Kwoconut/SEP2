@@ -14,4 +14,8 @@ public interface RIServerRead extends Remote
    void getSales(RIClient client) throws RemoteException;
    
    void getReviews(RIClient client) throws RemoteException;
+   
+   void getUsernames(RIClient client) throws RemoteException;
+   
+   void getPasswords(RIClient client) throws RemoteException;
 }
