@@ -29,9 +29,5 @@ public interface StoreModelClientHandler
    void removeReviewFromServer(Review review);
 
    void addAvailableSaleFromServer(Sale sale);
-   
-   void getUsernamesFromServer(ArrayList<String> usernames);
-   
-   void getPasswordsFromServer(ArrayList<String> passwords);
 
 }

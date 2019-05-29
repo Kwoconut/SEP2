@@ -32,9 +32,5 @@ public interface RIClient extends Remote
    void removeReview(Review review) throws RemoteException;
    
    void addAvailableSale(Sale sale) throws RemoteException;
-   
-   void getUsernames(ArrayList<String> usernames) throws RemoteException;
-   
-   void getPasswords(ArrayList<String> usernames) throws RemoteException;
 
 }

@@ -65,6 +65,7 @@ public class Server implements RIServerWrite, PropertyChangeListener
    public void getOffers(RIClient sender) throws RemoteException
    {
       sender.getOffers(model.getOffers());
+
    }
 
    @Override
@@ -219,18 +220,7 @@ public class Server implements RIServerWrite, PropertyChangeListener
    public void removeReview(Review review) throws RemoteException
    {
       model.removeReview(review);
-   }
 
-   @Override
-   public void getUsernames(RIClient client) throws RemoteException
-   {
-      client.getUsernames(model.getUsernames());
-   }
-
-   @Override
-   public void getPasswords(RIClient client) throws RemoteException
-   {
-      client.getPasswords(model.getPasswords());
    }
 
 }

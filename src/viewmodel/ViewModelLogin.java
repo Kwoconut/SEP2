@@ -2,7 +2,6 @@ package viewmodel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.rmi.RemoteException;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -46,10 +45,8 @@ public class ViewModelLogin implements PropertyChangeListener
       return loginProperty;
    }
 
-   public void validateLogin() throws RemoteException
+   public void validateLogin()
    {
-      model.requestUsernames();
-      model.requestPasswords();
       model.validateLogin(usernameProperty.get(), passwordProperty.get());
    }
 

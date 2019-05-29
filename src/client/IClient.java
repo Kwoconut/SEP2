@@ -28,9 +28,5 @@ public interface IClient
    void sendReviewToServer(Review review) throws RemoteException;
    
    void removeReviewFromServer(Review review) throws RemoteException;
-   
-   void requestUsernames() throws RemoteException;
-   
-   void requestPasswords() throws RemoteException;
 
 }

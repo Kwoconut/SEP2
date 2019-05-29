@@ -5,13 +5,11 @@ import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import DBSConnection.AccountDatabaseHandler;
 import DBSConnection.DBSQuery;
 import DBSConnection.OfferDatabaseHandler;
 import DBSConnection.ProductDatabaseHandler;
 import DBSConnection.ReviewDatabaseHandler;
 import DBSConnection.SaleDatabaseHandler;
-import DBSConnection.StoreAccountPersistence;
 import DBSConnection.StoreOfferPersistence;
 import DBSConnection.StoreProductPersistence;
 import DBSConnection.StoreReviewPersistence;
@@ -28,13 +26,10 @@ public class ServerModel
    private ArrayList<Offer> offers;
    private ArrayList<Sale> sales;
    private ArrayList<Review> reviews;
-   private ArrayList<String> usernames;
-   private ArrayList<String> password;
    private StoreProductPersistence databaseProductAccess;
    private StoreOfferPersistence databaseOfferAccess;
    private StoreSalePersistence databaseSaleAccess;
    private StoreReviewPersistence databaseReviewAccess;
-   private StoreAccountPersistence databaseAccountAccess;
    private DBSQuery queryHandler;
 
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -45,8 +40,6 @@ public class ServerModel
       offers = new ArrayList<Offer>();
       sales = new ArrayList<Sale>();
       reviews = new ArrayList<Review>();
-      usernames = new ArrayList<String>();
-      password = new ArrayList<String>();
       queryHandler = new DBSQuery("jdbc:postgresql://localhost:5432/postgres",
             "postgres", "password");
       databaseProductAccess = new ProductDatabaseHandler(queryHandler);
@@ -57,8 +50,6 @@ public class ServerModel
       loadSales();
       databaseReviewAccess = new ReviewDatabaseHandler(queryHandler);
       loadReviews();
-      databaseAccountAccess = new AccountDatabaseHandler(queryHandler);
-      loadUsernamesandPasswords();
       // clearProducts();
       // sampleDataForCreation();
    }
@@ -97,16 +88,6 @@ public class ServerModel
    public ArrayList<Review> getReviews()
    {
       return reviews;
-   }
-
-   public ArrayList<String> getUsernames()
-   {
-      return usernames;
-   }
-
-   public ArrayList<String> getPasswords()
-   {
-      return password;
    }
 
    // loading methods
@@ -151,19 +132,6 @@ public class ServerModel
       try
       {
          reviews = databaseReviewAccess.loadReviews(products);
-      }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
-   }
-
-   public void loadUsernamesandPasswords()
-   {
-      try
-      {
-         usernames = databaseAccountAccess.loadUsernames();
-         password = databaseAccountAccess.loadPasswords();
       }
       catch (SQLException e)
       {
@@ -289,7 +257,7 @@ public class ServerModel
       }
       support.firePropertyChange("SALEAVAILABLE", null, sale);
    }
-
+   
    // remove methods
    public void removeProduct(Product product)
    {
