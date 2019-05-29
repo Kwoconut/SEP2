@@ -2,17 +2,11 @@ package model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
 import java.util.stream.Collectors;
-=======
-import java.util.Scanner;
->>>>>>> parent of 6517bc7... Revert "login"
-
 import client.Client;
 import client.IClient;
 import javafx.beans.property.ObjectProperty;
@@ -27,6 +21,8 @@ public class Store implements Serializable, StoreModel
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
    private ArrayList<Sale> sales;
    private ArrayList<Review> reviews;
+   private ArrayList<String> usernames;
+   private ArrayList<String> passwords;
 
    public Store()
    {
@@ -34,6 +30,8 @@ public class Store implements Serializable, StoreModel
       offers = new ArrayList<Offer>();
       sales = new ArrayList<Sale>();
       reviews = new ArrayList<Review>();
+      usernames = new ArrayList<String>();
+      passwords = new ArrayList<String>();
    }
 
    public void addProduct(Product product)
@@ -83,7 +81,6 @@ public class Store implements Serializable, StoreModel
             }
             catch (RemoteException e)
             {
-               // TODO Auto-generated catch block
                e.printStackTrace();
             }
 
@@ -138,7 +135,6 @@ public class Store implements Serializable, StoreModel
    @Override
    public void getProductsFromServer(ArrayList<Product> values)
    {
-
       products = values;
       ArrayList<Product> firstfiveproducts;
       firstfiveproducts = new ArrayList<Product>();
@@ -348,7 +344,6 @@ public class Store implements Serializable, StoreModel
       }
       catch (RemoteException e)
       {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
    }
@@ -385,7 +380,6 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
-<<<<<<< HEAD
    public double getAverage(int productID)
    {
       return reviews.stream()
@@ -401,11 +395,10 @@ public class Store implements Serializable, StoreModel
             .map(review -> review.getMessage()).collect(Collectors.toList());
 
       return new ArrayList<String>(comments);
-=======
+   }
+
    public void validateLogin(String username, String password)
    {
-      ArrayList<String> usernames = requestUsernamesFromServer();
-      ArrayList<String> passwords = requestPasswordsFromServer();
       if (username == null || username.isEmpty())
       {
          support.firePropertyChange("INVALIDLOGIN", "No credentials inputed",
@@ -430,26 +423,33 @@ public class Store implements Serializable, StoreModel
       }
       else
       {
-         support.firePropertyChange("INVALIDLOGIN", "Invalid username or password",
-               username);
+         support.firePropertyChange("INVALIDLOGIN",
+               "Invalid username or password", username);
       }
    }
 
-   private ArrayList<String> requestUsernamesFromServer()
+   @Override
+   public void getUsernamesFromServer(ArrayList<String> usernames)
    {
-      ArrayList<String> names = new ArrayList<String>();
-      names.add("Angel");
-      names.add("Fabian");
-      return names;
+      this.usernames = usernames;
    }
 
-   private ArrayList<String> requestPasswordsFromServer()
+   @Override
+   public void getPasswordsFromServer(ArrayList<String> passwords)
    {
-      ArrayList<String> pass = new ArrayList<String>();
-      pass.add("123456");
-      pass.add("696969");
-      return pass;
->>>>>>> parent of 6517bc7... Revert "login"
+      this.passwords = passwords;
+   }
+
+   @Override
+   public void requestUsernames() throws RemoteException
+   {
+      client.requestUsernames();
+   }
+
+   @Override
+   public void requestPasswords() throws RemoteException
+   {
+      client.requestPasswords();
    }
 
 }

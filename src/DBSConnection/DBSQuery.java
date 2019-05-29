@@ -91,23 +91,6 @@ public class DBSQuery
          connection.close();
       }
    }
-//
-//   public <T> T apply(String sql, SQLConsumer consumer, SQLFactory<T> factory)
-//         throws SQLException
-//   {
-//      return executeQuery(sql, statement -> {
-//         consumer.accept(statement);
-//         ResultSet resultSet = statement.executeQuery();
-//         if (resultSet.next())
-//         {
-//            return factory.get(resultSet);
-//         }
-//         else
-//         {
-//            return null;
-//         }
-//      });
-//   }
 
    public <T> List<T> map(String sql, SQLConsumer consumer,
          SQLFactory<T> factory) throws SQLException
