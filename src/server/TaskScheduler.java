@@ -29,7 +29,7 @@ public class TaskScheduler implements Runnable
       ArrayList<Sale> sales = model.getSales();
       for (int i = 0; i < sales.size(); i++)
       {
-         if (now.equals(sales.get(i).getEndDate()))
+         if (now.isAfter(sales.get(i).getEndDate()))
          {
             model.removeSale(sales.get(i));
          }
@@ -38,7 +38,7 @@ public class TaskScheduler implements Runnable
       for (int i = 0; i < sales.size(); i++)
       {
          if (sales.get(i).getIsChangedValue() == false
-               && now.equals((sales.get(i).getStartDate())))
+               && now.isBefore((sales.get(i).getStartDate())))
          {
             model.setSaleAvailable(sales.get(i));
          }
@@ -54,11 +54,10 @@ public class TaskScheduler implements Runnable
          int time = getHoursUntilTarget();
          try
          {
-            Thread.sleep(1000 * 60);
+            Thread.sleep(time * 1000 * 60 * 60);
          }
          catch (InterruptedException e)
          {
-            // TODO Auto-generated catch block
             e.printStackTrace();
          }
 

@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Product;
 import model.SProductModel;
+import model.SReviewModel;
 
 public class ViewModelProduct
 {
@@ -16,6 +17,7 @@ public class ViewModelProduct
    private StringProperty typeProperty;
    private StringProperty colourProperty;
    private DoubleProperty priceProperty;
+   private StringProperty imageProperty;
    private SProductModel model;
 
    public ViewModelProduct(SProductModel model)
@@ -26,6 +28,7 @@ public class ViewModelProduct
       typeProperty = new SimpleStringProperty("");
       colourProperty = new SimpleStringProperty("");
       priceProperty = new SimpleDoubleProperty();
+      imageProperty = new SimpleStringProperty("");
 
    }
 
@@ -37,6 +40,7 @@ public class ViewModelProduct
       typeProperty = new SimpleStringProperty(product.getType());
       colourProperty = new SimpleStringProperty(product.getColour());
       priceProperty = new SimpleDoubleProperty(product.getPrice());
+      imageProperty = new SimpleStringProperty(product.getImageID());
 
    }
 
@@ -47,7 +51,8 @@ public class ViewModelProduct
       typeProperty = new SimpleStringProperty(product.getType());
       colourProperty = new SimpleStringProperty(product.getColour());
       priceProperty = new SimpleDoubleProperty(product.getPrice());
-
+      imageProperty = new SimpleStringProperty(product.getImageID());
+      
    }
 
    public IntegerProperty getIdProperty()
@@ -73,6 +78,11 @@ public class ViewModelProduct
    public DoubleProperty getPriceProperty()
    {
       return priceProperty;
+   }
+   
+   public StringProperty getImageProperty()
+   {
+      return imageProperty;
    }
 
    public boolean equals(Object obj)

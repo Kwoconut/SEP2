@@ -17,6 +17,7 @@ public class MainViewViewModel
    private ViewModelSaleList viewModelSaleList;
    private ViewModelSale viewModelSale;
    private ViewModelLogin viewModelLogin;
+   private ViewModelProductReview viewModelProductReview;
    private StoreModel model;
 
    public MainViewViewModel(StoreModel model) throws RemoteException
@@ -32,6 +33,12 @@ public class MainViewViewModel
       viewModelManageSalesList = new ViewModelManageSalesList(model, model);
       viewModelSale = new ViewModelSale(model);
       viewModelLogin = new ViewModelLogin(model);
+      viewModelProductReview = new ViewModelProductReview(model);
+   }
+
+   public ViewModelProductReview getViewModelProductReview()
+   {
+      return viewModelProductReview;
    }
 
    public ViewModelSale getViewModelSale()
