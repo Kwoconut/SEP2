@@ -32,7 +32,7 @@ public class ViewProductReview implements View
 
    @FXML
    ScrollPane commentPane;
-   
+
    @FXML
    StackPane imagePane;
 
@@ -63,15 +63,13 @@ public class ViewProductReview implements View
       ObservableList<String> comments = this.viewModel
             .getProductReviewComments();
       ObservableList<TextArea> textBox = FXCollections.observableArrayList();
-      
-      
 
       imagePane.getChildren().clear();
       ImageView productImage = new ImageView(
             new Image("images/" + this.viewModel.getImageProperty().get()));
       productImage.setFitWidth(250);
       productImage.setFitHeight(350);
-      
+
       imagePane.getChildren().add(productImage);
 
       GridPane gridPane = new GridPane();
@@ -137,10 +135,11 @@ public class ViewProductReview implements View
       getScene().getWindow().hide();
       view.setWindow("sales");
    }
-   
+
    public void onLeaveReviewButtonPressed() throws RemoteException
    {
-	   viewModel.onLeaveReviewButtonPressed();
+      viewModel.onLeaveReviewButtonPressed();
+      refresh();
    }
 
 }

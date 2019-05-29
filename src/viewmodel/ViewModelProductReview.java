@@ -173,6 +173,8 @@ public void onLeaveReviewButtonPressed() throws RemoteException {
 	  if (result.isPresent())
 	  {
 		  model.addReview(rating,result.get(),productID.getValue());
+		  model.getAverage(productID.get());
+		  model.getReviewCommentsByProductID(productID.get());
 	  }
   }	
 }

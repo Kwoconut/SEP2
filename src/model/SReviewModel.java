@@ -13,6 +13,10 @@ public interface SReviewModel
    
    void addListener(PropertyChangeListener listener);
 
-   void addReview(double rating, String message, int productID) throws RemoteException;
+   void addReview(double rating, String message, int productID);
+   
+   double getAverage(int productID);
+
+   ArrayList<String> getReviewCommentsByProductID(int productID);
 
 }

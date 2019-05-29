@@ -214,7 +214,7 @@ public class Store implements Serializable, StoreModel
       client.requestSales();
    }
    @Override
-   public void addReview(double rating, String message,int productID) throws RemoteException
+   public void addReview(double rating, String message,int productID)
    {
 	   Product sampleProduct = null;
 	   for(int i=0;i<products.size();i++)
@@ -379,8 +379,8 @@ public class Store implements Serializable, StoreModel
    public void addReviewFromServer(Review review)
    {
       reviews.add(review);
-//      getAverage(review.getProduct().getID());
-   //   getReviewCommentsByProductID(review.getProduct().getID());
+//    getAverage(review.getProduct().getID());
+//    getReviewCommentsByProductID(review.getProduct().getID());
       support.firePropertyChange("NEWREVIEW", "", review);
 
    }
