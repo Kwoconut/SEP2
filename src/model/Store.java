@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.Scanner;
 import client.Client;
@@ -380,30 +381,6 @@ public class Store implements Serializable, StoreModel
 
    }
 
-   @Override
-   public double getAverage(int productID)
-   {
-      double average = reviews.stream()
-            .filter(review -> review.getProduct().getID() == productID)
-            .mapToDouble(review -> review.getRating()).average().getAsDouble();
-      Product product = products.stream()
-            .filter(sampleProduct -> sampleProduct.getID() == productID)
-            .findFirst().get();
-      support.firePropertyChange("AVERAGERATING", product, average);
-      return average;
-   }
-
-   @Override
-   public ArrayList<String> getReviewCommentsByProductID(int productID)
-   {
-      List<String> commentsList = reviews.stream()
-            .filter(review -> review.getProduct().getID() == productID)
-            .map(review -> review.getMessage()).collect(Collectors.toList());
-      ArrayList<String> comments = new ArrayList<String>(commentsList);
-      support.firePropertyChange("COMMENTS", "", comments);
-      return comments;
-   }
-
    public void validateLogin(String username, String password)
    {
       if (username == null || username.isEmpty())
@@ -457,6 +434,48 @@ public class Store implements Serializable, StoreModel
    public void requestPasswords() throws RemoteException
    {
       client.requestPasswords();
+   }
+
+   @Override
+   public double getAverage(int productID)
+   {
+      double average = 0;
+      try
+      {
+         average = reviews.stream()
+               .filter(review -> review.getProduct().getID() == productID)
+               .mapToDouble(review -> review.getRating()).average()
+               .getAsDouble();
+      }
+      catch (NoSuchElementException e)
+      {
+         average = 0;
+      }
+      Product product = products.stream()
+            .filter(sampleProduct -> sampleProduct.getID() == productID)
+            .findFirst().get();
+      support.firePropertyChange("AVERAGERATING", product, average);
+      return average;
+   }
+
+   @Override
+   public ArrayList<String> getReviewCommentsByProductID(int productID)
+   {
+      List<String> commentsList = new ArrayList<String>();
+
+      try
+      {
+         commentsList = reviews.stream()
+               .filter(review -> review.getProduct().getID() == productID)
+               .map(review -> review.getMessage()).collect(Collectors.toList());
+      }
+      catch (NoSuchElementException e)
+      {
+         commentsList = new ArrayList<String>();
+      }
+
+      support.firePropertyChange("COMMENTS", "", commentsList);
+      return (ArrayList<String>) commentsList;
    }
 
 }
