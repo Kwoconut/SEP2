@@ -379,8 +379,8 @@ public class Store implements Serializable, StoreModel
    public void addReviewFromServer(Review review)
    {
       reviews.add(review);
-      getAverage(review.getProduct().getID());
-      getReviewCommentsByProductID(review.getProduct().getID());
+//      getAverage(review.getProduct().getID());
+   //   getReviewCommentsByProductID(review.getProduct().getID());
       support.firePropertyChange("NEWREVIEW", "", review);
 
    }
