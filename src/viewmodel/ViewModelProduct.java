@@ -8,7 +8,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Product;
 import model.SProductModel;
-import model.SReviewModel;
 
 public class ViewModelProduct
 {
@@ -44,7 +43,7 @@ public class ViewModelProduct
 
    }
 
-   public ViewModelProduct(Product product)
+    public ViewModelProduct(Product product)
    {
       idProperty = new SimpleIntegerProperty(product.getID());
       nameProperty = new SimpleStringProperty(product.getName());

@@ -1,12 +1,7 @@
 package view;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
-
 import viewmodel.MainViewViewModel;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainView
@@ -40,11 +35,6 @@ public class MainView
       {
          ViewSalesList viewSalesList = (ViewSalesList) view;
          viewSalesList.refresh();
-      }
-      else if (id.equals("createsale"))
-      {
-         ViewCreateSale viewCreateSale = (ViewCreateSale) view;
-         viewCreateSale.refresh();
       }
       else if (id.equals("review"))
       {

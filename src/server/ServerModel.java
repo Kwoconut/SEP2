@@ -207,10 +207,17 @@ public class ServerModel
             && MyDate.now().equals(sale.getStartDate()))
       {
          products.parallelStream()
-               .filter(product -> product.getID() == sale.getID()).findFirst()
-               .get().setPrice((sale.getPriceAfterSaleApplied()));
+               .filter(product -> product.getID() == sale.getProduct().getID())
+               .findFirst().get().setPrice((sale.getPriceAfterSaleApplied()));
          sale.setIsChangedValue();
       }
+
+      sale.setProduct(products.parallelStream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get());
+
+      System.out.println(sale.getPrice());
+
       sales.add(sale);
 
       try
@@ -279,6 +286,9 @@ public class ServerModel
       sales.parallelStream()
             .filter(sampleSale -> sampleSale.getID() == sale.getID())
             .findFirst().get().setIsChangedValue();
+      sale.setProduct(products.parallelStream()
+            .filter(product -> product.getID() == sale.getID()).findFirst()
+            .get());
       try
       {
          databaseSaleAccess.changedValue(sale);
@@ -321,13 +331,25 @@ public class ServerModel
 
    public void removeSale(Sale sale)
    {
-      sales.remove(sale);
+
       if (sale.getIsChangedValue())
+      {
+         products.stream()
+               .filter(product -> product.getID() == sale.getProduct().getID())
+               .findFirst().get().setPrice(sale.getInitialPrice());
+      }
+      else
       {
          products.stream()
                .filter(product -> product.getID() == sale.getProduct().getID())
                .findFirst().get().setPrice(sale.getPrice());
       }
+
+      sale.setProduct(products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get());
+
+      sales.remove(sale);
       try
       {
          databaseSaleAccess.removeSale(sale);

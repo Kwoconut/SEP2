@@ -1,21 +1,12 @@
 package viewmodel;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
-
-import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Offer;
 import model.SOfferModel;
-import model.StoreModel;
 
 public class ViewModelManageOffer
 {
@@ -26,7 +17,6 @@ public class ViewModelManageOffer
    private StringProperty email;
    private StringProperty phoneNumber;
    private StringProperty message;
-   private BooleanProperty available;
 
    public ViewModelManageOffer(SOfferModel model) throws RemoteException
    {

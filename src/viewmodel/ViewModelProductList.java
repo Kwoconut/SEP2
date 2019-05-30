@@ -4,7 +4,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Product;
@@ -32,7 +31,7 @@ public class ViewModelProductList implements PropertyChangeListener
    {
       int x = 0;
       int y = 0;
-      
+
       for (int i = 0; i < products.size(); i++)
       {
          if (index1 == x & index2 == y)

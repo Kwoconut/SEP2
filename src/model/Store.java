@@ -8,12 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
-import java.util.Scanner;
 import client.Client;
 import client.IClient;
-import javafx.beans.property.ObjectProperty;
-import viewmodel.ViewModelProduct;
-import viewmodel.ViewModelSale;
 
 public class Store implements Serializable, StoreModel
 {
@@ -213,91 +209,79 @@ public class Store implements Serializable, StoreModel
    {
       client.requestSales();
    }
+
    @Override
-   public void addReview(double rating, String message,int productID)
+   public void addReview(double rating, String message, int productID)
    {
-	   Product sampleProduct = null;
-	   for(int i=0;i<products.size();i++)
-	   {
-		   if(products.get(i).getID()== productID)
-		   {
-			   sampleProduct = products.get(i);
-			   break;
-		   }	   
-	   }  
-	   Review sampleReview = new Review(IDGenerator.generateReviewID(reviews),rating,message,sampleProduct);
-	   try
-	   {
-		   client.sendReviewToServer(sampleReview);
-	   }
-	   catch (RemoteException e)
-	   {
-		   e.printStackTrace();
-	   }
+      Product sampleProduct = null;
+      for (int i = 0; i < products.size(); i++)
+      {
+         if (products.get(i).getID() == productID)
+         {
+            sampleProduct = products.get(i);
+            break;
+         }
+      }
+      Review sampleReview = new Review(IDGenerator.generateReviewID(reviews),
+            rating, message, sampleProduct);
+      try
+      {
+         client.sendReviewToServer(sampleReview);
+      }
+      catch (RemoteException e)
+      {
+         e.printStackTrace();
+      }
    }
 
    @Override
-   public void addSale(MyDate startDate, MyDate endDate,
-         ViewModelProduct product, int amount) throws RemoteException
+   public void addSale(MyDate startDate, MyDate endDate, Product product,
+         int amount) throws RemoteException
    {
-
-      Product sampleProduct = new Product(product.getIdProperty().get(),
-            product.getNameProperty().get(), product.getPriceProperty().get(),
-            product.getColourProperty().get(), product.getTypeProperty().get(),
-            "");
       Sale sale = new Sale(IDGenerator.generateSaleID(sales), startDate,
-            endDate, sampleProduct, amount);
+            endDate, product, amount);
+      if (isValidSale(sale))
+      {
+         support.firePropertyChange("VALIDSALE", null, "");
+         client.sendSaleToServer(sale);
+      }
+      else
+      {
+         support.firePropertyChange("INVALIDSALE", null, "");
+      }
 
+   }
+
+   private boolean isValidSale(Sale sale)
+   {
       if (sale.validDate())
       {
-         int ok = 0;
+         int ok = 1;
          for (Sale element : sales)
          {
-            if (element.overridesOtherSales(sale))
+            if (sale.overridesOtherSalesWithSameProduct(element))
             {
-               ok = 1;
+               ok = 0;
                break;
             }
          }
          if (ok == 1)
          {
-            support.firePropertyChange("INVALIDDATE", "",
-                  "There is a sale on the specified dates");
+            return true;
          }
          else
          {
-            support.firePropertyChange("VALIDDATE", null, "");
-            client.sendSaleToServer(sale);
+            return false;
          }
-      }
-      else
-      {
-         support.firePropertyChange("INVALIDDATE", "", "Invalid date");
-      }
 
+      }
+      return false;
    }
 
    @Override
-   public void removeSale(ObjectProperty<ViewModelSale> sale)
-         throws RemoteException
+   public void removeSale(Sale sale) throws RemoteException
    {
-      Product sampleProduct = products.stream()
-            .filter(product -> product.getID() == sale.get()
-                  .getProductProperty().get().getIdProperty().get())
-            .findFirst().get();
-
-      Sale sampleSale = new Sale(sale.get().getIDProperty().get(),
-            sale.get().getStartDateProperty().get(),
-            sale.get().getEndDateProperty().get(), sampleProduct,
-            sale.get().getAmountProperty().get(),
-            sale.get().getBooleanProperty().get());
-
-      if (sampleSale.getIsChangedValue())
-      {
-         sampleSale.getProduct().setPrice(sampleSale.getInitialPrice());
-      }
-
-      client.removeSaleFromServer(sampleSale);
+      client.removeSaleFromServer(sale);
    }
 
    @Override
@@ -308,8 +292,13 @@ public class Store implements Serializable, StoreModel
 
       for (Sale element : sales)
       {
+         element.setProduct(products.stream()
+               .filter(
+                     product -> product.getID() == element.getProduct().getID())
+               .findFirst().get());
          if (element.getIsChangedValue())
          {
+            element.getProduct().setPrice(element.getPriceAfterSaleApplied());
             support.firePropertyChange("SALEAVAILABLE", "", element);
          }
       }
@@ -319,6 +308,9 @@ public class Store implements Serializable, StoreModel
    @Override
    public void addSaleFromServer(Sale sale)
    {
+      sale.setProduct(products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get());
       sales.add(sale);
       support.firePropertyChange("NEWSALE", "", sale);
    }
@@ -326,27 +318,35 @@ public class Store implements Serializable, StoreModel
    @Override
    public void removeSaleFromServer(Sale sale)
    {
-      System.out.println(sale.getPrice());
-      System.out.println(sales.get(0).getPrice());
+
+      products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get().setPrice(sale.getPrice());
+
+      sale.setProduct(products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get());
+
       sales.remove(sale);
 
-      if (sale.getIsChangedValue() == true)
+      if (sale.getIsChangedValue())
       {
-         products.stream()
-               .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get().setPrice(sale.getPrice());
-      }
-
       support.firePropertyChange("SALEPRODUCTPRICEREVERT", "", sale);
+      }
       support.firePropertyChange("MINUSSALE", "", sale);
    }
 
    @Override
    public void addAvailableSaleFromServer(Sale sale)
    {
+
+      System.out.println(sale.getPrice());
       products.stream()
             .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get().setPrice(sale.getPriceAfterSaleApplied());
+            .findFirst().get().setPrice(sale.getPrice());
+      sale.setProduct(products.stream()
+            .filter(product -> product.getID() == sale.getProduct().getID())
+            .findFirst().get());
 
       support.firePropertyChange("SALEAVAILABLE", "", sale);
       support.firePropertyChange("SALEPRODUCTPRICEUPDATE", "", sale);
@@ -358,7 +358,6 @@ public class Store implements Serializable, StoreModel
       client.requestReviews();
 
    }
-
 
    @Override
    public void removeReview(Review review) throws RemoteException
@@ -379,8 +378,6 @@ public class Store implements Serializable, StoreModel
    public void addReviewFromServer(Review review)
    {
       reviews.add(review);
-//    getAverage(review.getProduct().getID());
-//    getReviewCommentsByProductID(review.getProduct().getID());
       support.firePropertyChange("NEWREVIEW", "", review);
 
    }

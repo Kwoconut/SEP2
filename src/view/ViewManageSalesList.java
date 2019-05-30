@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Optional;
 import java.util.function.Predicate;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,7 +16,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import model.MyDate;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelManageSalesList;
 import viewmodel.ViewModelProduct;
@@ -123,16 +121,16 @@ public class ViewManageSalesList implements View
       productTable.getSelectionModel().selectedItemProperty().addListener((obs,
             oldValue, newValue) -> this.viewModel.setSelectedProduct(newValue));
 
-      saleProduct.setCellValueFactory(cellData -> cellData.getValue()
-            .getProductProperty().get().getNameProperty());
+      saleProduct.setCellValueFactory(
+            cellData -> cellData.getValue().getProductNameProperty());
       startDate.setCellValueFactory(
-            cellData -> cellData.getValue().getStartDateStringProperty());
+            cellData -> cellData.getValue().getStartDateProperty().asString());
       endDate.setCellValueFactory(
-            cellData -> cellData.getValue().getEndDateStringProperty());
+            cellData -> cellData.getValue().getEndDateProperty().asString());
       priceReduction.setCellValueFactory(
             cellData -> cellData.getValue().getAmountProperty());
-      salePrice.setCellValueFactory(cellData -> cellData.getValue()
-            .getPriceAfterReductionProperty());
+      salePrice.setCellValueFactory(
+            cellData -> cellData.getValue().getPriceAfterReductionProperty());
 
       ObservableList<ViewModelSale> sales = FXCollections.observableArrayList();
       sales = this.viewModel.getSales();
@@ -150,9 +148,8 @@ public class ViewManageSalesList implements View
                               return true;
                            }
                            String lowerCaseFilter = newValue.toLowerCase();
-                           if (sale.getProductProperty().get().getNameProperty()
-                                 .getValue().toLowerCase()
-                                 .contains(lowerCaseFilter))
+                           if (sale.getProductNameProperty().getValue()
+                                 .toLowerCase().contains(lowerCaseFilter))
                            {
                               return true;
                            }

@@ -2,15 +2,12 @@ package view;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 import model.MyDate;
 import viewmodel.MainViewViewModel;
@@ -63,25 +60,19 @@ public class ViewCreateSale implements View
       this.view = view;
       this.scene = scene;
       this.title = title;
-
-   }
-
-   public void refresh()
-   {
-      productIDLabel.textProperty().bind(this.viewModel.getProductProperty()
-            .get().getIdProperty().asString());
+      
+      productIDLabel.textProperty().bind(this.viewModel.getProductIDProperty().asString());
 
       productNameLabel.textProperty()
-            .bind(this.viewModel.getProductProperty().get().getNameProperty());
+            .bind(this.viewModel.getProductNameProperty());
 
       productTypeLabel.textProperty()
-            .bind(this.viewModel.getProductProperty().get().getTypeProperty());
+            .bind(this.viewModel.getProductTypeProperty());
 
       productColorLabel.textProperty().bind(
-            this.viewModel.getProductProperty().get().getColourProperty());
+            this.viewModel.getProductColorProperty());
 
-      productPriceLabel.textProperty().bind(this.viewModel.getProductProperty()
-            .get().getPriceProperty().asString());
+      productPriceLabel.textProperty().bind(this.viewModel.getProductPriceProperty().asString());
 
       priceField.textProperty().bindBidirectional(
             this.viewModel.getAmountProperty(), new NumberStringConverter());
@@ -94,6 +85,7 @@ public class ViewCreateSale implements View
       priceField.setOnKeyReleased(event -> {
          this.viewModel.updatePriceAfterReduction();
       });
+
    }
 
    @Override

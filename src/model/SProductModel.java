@@ -10,12 +10,10 @@ public interface SProductModel
    
    ArrayList<Product> getProductsByType(String type);
    
-   void addListener(PropertyChangeListener listener);
-   
-   ArrayList<Product> getProducts();
-   
    double getAverage(int productID);
-
+   
    ArrayList<String> getReviewCommentsByProductID(int productID);
+   
+   void addListener(PropertyChangeListener listener);
 
 }

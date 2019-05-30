@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 
 public class Review implements Serializable
 {
@@ -20,8 +19,7 @@ public class Review implements Serializable
 
    public double getRating()
    {
-      DecimalFormat df = new DecimalFormat("#.#");
-      return Double.valueOf(df.format(rating));
+      return rating;
    }
 
    public String getMessage()

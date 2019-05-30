@@ -1,8 +1,6 @@
 package view;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
-
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -11,7 +9,6 @@ import javafx.scene.control.TableView;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelManageOffer;
 import viewmodel.ViewModelOfferList;
-import viewmodel.ViewModelRequestOffer;
 
 public class ViewOfferList implements View
 {

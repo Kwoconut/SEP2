@@ -4,16 +4,12 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Product;
 import model.SProductModel;
 import model.Sale;
-import model.StoreModel;
 
 public class ViewModelStore implements PropertyChangeListener
 {
@@ -30,8 +26,7 @@ public class ViewModelStore implements PropertyChangeListener
       notificationProperty = new SimpleStringProperty();
       reinitializeArrays();
       this.model.addListener(this);
-      this.model.requestProducts();
-   }
+      this.model.requestProducts();   }
 
    @SuppressWarnings("unchecked")
    public void updateProducts(PropertyChangeEvent evt)
@@ -94,7 +89,7 @@ public class ViewModelStore implements PropertyChangeListener
          {
             if (names[i].get().equals(sale.getProduct().getName()))
             {
-               prices[i].set(sale.getPriceAfterSaleApplied() + "DKK");
+               prices[i].set(sale.getPrice() + "DKK");
             }
          }
          notificationProperty.set(sale.getProduct().getName()

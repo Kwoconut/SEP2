@@ -69,19 +69,18 @@ public class ViewSalesList implements View
 
       for (int i = 0; i < sales.size(); i++)
       {
-         names.add(new Label(sales.get(i).getProductProperty().get()
-               .getNameProperty().get()));
+         names.add(new Label(sales.get(i).getProductNameProperty().get()));
          prices.add(new Label(
                Double.toString(sales.get(i).getInitialPriceProperty().get())
                      + "DKK - " + Double.toString(sales.get(i)
-                           .getProductProperty().get().getPriceProperty().get())
+                           .getProductPriceProperty().get())
                      + "DKK"));
-         salesLabel
-               .add(new Label(sales.get(i).getStartDateStringProperty().get()
-                     + " - " + sales.get(i).getEndDateStringProperty().get()));
+         salesLabel.add(new Label(
+               sales.get(i).getStartDateProperty().get().toString() + " - "
+                     + sales.get(i).getEndDateProperty().get().toString()));
 
          image.add(new ImageView(new Image("images/" + sales.get(i)
-               .getProductProperty().get().getImageProperty().get())));
+               .getProductImageProperty().get())));
 
          stackPane.add(new StackPane());
          stackPane.get(i).setPrefWidth(212.8);

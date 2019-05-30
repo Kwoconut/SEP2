@@ -36,6 +36,11 @@ public class Sale implements Serializable
       this.amount = amount;
       this.isChangedValue = isChangedValue;
    }
+   
+   public void setProduct(Product product)
+   {
+      this.product = product;
+   }
 
    public Product getProduct()
    {
@@ -89,7 +94,7 @@ public class Sale implements Serializable
       }
    }
 
-   public boolean overridesOtherSales(Sale sale)
+   public boolean overridesOtherSalesWithSameProduct(Sale sale)
    {
       if (this.product.equals(sale.getProduct()))
       {

@@ -11,7 +11,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Product;
-import model.SProductModel;
 import model.SSalesModel;
 import model.Sale;
 import model.StoreModel;
@@ -71,7 +70,21 @@ public class ViewModelManageSalesList implements PropertyChangeListener
 
    public void removeSale() throws RemoteException
    {
-      model.removeSale(selectedSale);
+      Product product = new Product(
+            selectedSale.get().getProductIDProperty().get(),
+            selectedSale.get().getProductNameProperty().get(),
+            selectedSale.get().getProductPriceProperty().get(),
+            selectedSale.get().getProductColorProperty().get(),
+            selectedSale.get().getProductTypeProperty().get(),
+            selectedSale.get().getProductImageProperty().get());
+
+      Sale sale = new Sale(selectedSale.get().getSaleIDProperty().get(),
+            selectedSale.get().getStartDateProperty().get(),
+            selectedSale.get().getEndDateProperty().get(), product,
+            selectedSale.get().getAmountProperty().get(),
+            selectedSale.get().getIsAvailableProperty().get());
+
+      model.removeSale(sale);
    }
 
    @Override
@@ -102,46 +115,5 @@ public class ViewModelManageSalesList implements PropertyChangeListener
          Sale element = (Sale) evt.getNewValue();
          sales.remove(new ViewModelSale(model, element));
       }
-      else if (evt.getPropertyName().equals("EDITSALE"))
-      {
-         Sale element = (Sale) evt.getNewValue();
-         for (int i = 0; i < sales.size(); i++)
-         {
-            if (sales.get(i).getIDProperty().getValue() == element.getID())
-            {
-               sales.set(i, new ViewModelSale(model, element));
-               break;
-            }
-         }
-      }
-      else if (evt.getPropertyName().equals("SALEPRODUCTPRICEUPDATE"))
-      {
-         Sale sale = (Sale) evt.getNewValue();
-         sales.parallelStream().filter(
-               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
-               .findFirst().get().getProductProperty().get().getPriceProperty()
-               .set(sale.getPriceAfterSaleApplied());
-         sales.parallelStream().filter(
-               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
-               .findFirst().get().getInitialPriceProperty()
-               .set(sale.getPrice());
-         sales.parallelStream().filter(
-               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
-               .findFirst().get().getBooleanProperty().set(true);
-
-      }
-      else if (evt.getPropertyName().equals("SALEPRODUCTPRICEREVERT"))
-      {
-         Sale sale = (Sale) evt.getNewValue();
-         sales.stream().filter(
-               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
-               .findFirst().get().getProductProperty().get().getPriceProperty()
-               .set(sale.getPrice());
-         sales.stream().filter(
-               sampleSale -> sampleSale.getIDProperty().get() == sale.getID())
-               .findFirst().get().getInitialPriceProperty()
-               .set(sale.getPrice());
-      }
-
    }
 }
