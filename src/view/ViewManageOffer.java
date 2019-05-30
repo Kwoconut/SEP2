@@ -11,61 +11,72 @@ import javafx.scene.control.Alert.AlertType;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelManageOffer;
 
-public class ViewManageOffer implements View{
-	
-	 @FXML
-	    Label nameField;
-	 @FXML
-	    Label phoneNumberField; 
-	 @FXML
-	    Label emailField;
-	 @FXML
-	    Label messageField;
-	 
-	private String title;
-	private Scene scene;
-	private MainView view;
-	private ViewModelManageOffer viewModel;
+public class ViewManageOffer extends View
+{
 
-	public void init(MainViewViewModel viewModel, MainView view, Scene scene, String title)
+   @FXML
+   Label nameField;
+   @FXML
+   Label phoneNumberField;
+   @FXML
+   Label emailField;
+   @FXML
+   Label messageField;
 
-	{
+   private String title;
+   private Scene scene;
+   private ViewModelManageOffer viewModel;
 
-		this.viewModel = viewModel.getViewModelManageOffer();
-		this.view = view;
-		this.scene = scene;
-		this.title = title;
-		nameField.textProperty().bind(this.viewModel.getName());
-		phoneNumberField.textProperty().bind(this.viewModel.getPhoneNumber());
-		emailField.textProperty().bind(this.viewModel.getEmail());
-		messageField.textProperty().bind(this.viewModel.getMessage());
-	}
+   public ViewManageOffer()
+   {
 
-	public Scene getScene() {
-		return scene;
-	}
+   }
 
-	public String getTitle() {
-		return title;
-	}
+   public void init(MainViewViewModel viewModel, MainView view, Scene scene,
+         String title)
 
-	@FXML
-	private void closeButtonPressed() throws IOException {
-		getScene().getWindow().hide();
-		view.setWindow("offerlist");
-	}
-	
-	@FXML
-	private void deleteButtonPressed() throws IOException {
-		Alert alert = new Alert(AlertType.CONFIRMATION, "Remove Offer " + nameField.getText() + " ?", ButtonType.YES, ButtonType.CANCEL);
-	      alert.showAndWait();
-	      if (alert.getResult() == ButtonType.YES) 
-	      {
-	      viewModel.removeOffer();
-	 		getScene().getWindow().hide();
-			view.setWindow("offerlist");
-	      }
-	}
-	
+   {
+
+      this.viewModel = viewModel.getViewModelManageOffer();
+      super.setMainView(view);
+      this.scene = scene;
+      this.title = title;
+      nameField.textProperty().bind(this.viewModel.getName());
+      phoneNumberField.textProperty().bind(this.viewModel.getPhoneNumber());
+      emailField.textProperty().bind(this.viewModel.getEmail());
+      messageField.textProperty().bind(this.viewModel.getMessage());
+   }
+
+   public Scene getScene()
+   {
+      return scene;
+   }
+
+   public String getTitle()
+   {
+      return title;
+   }
+
+   @FXML
+   private void closeButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      super.getMainView().setWindow("offerlist");
+   }
+
+   @FXML
+   private void deleteButtonPressed() throws IOException
+   {
+      Alert alert = new Alert(AlertType.CONFIRMATION,
+            "Remove Offer " + nameField.getText() + " ?", ButtonType.YES,
+            ButtonType.CANCEL);
+      alert.showAndWait();
+      if (alert.getResult() == ButtonType.YES)
+      {
+         viewModel.removeOffer();
+         getScene().getWindow().hide();
+         super.getMainView().setWindow("offerlist");
+      }
+   }
 
 }

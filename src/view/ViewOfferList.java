@@ -10,7 +10,7 @@ import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelManageOffer;
 import viewmodel.ViewModelOfferList;
 
-public class ViewOfferList implements View
+public class ViewOfferList extends View
 {
    @FXML
    private TableView<ViewModelManageOffer> offerListTable;
@@ -27,16 +27,20 @@ public class ViewOfferList implements View
 
    private String title;
    private Scene scene;
-   private MainView view;
    private ViewModelOfferList viewModel;
    private MainViewViewModel model;
+   
+   public ViewOfferList()
+   {
+      
+   }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
       model = viewModel;
       this.viewModel = viewModel.getViewModelOfferList();
-      this.view = view;
+      super.setMainView(view);
       this.scene = scene;
       this.title = title;
 
@@ -77,37 +81,37 @@ public class ViewOfferList implements View
    public void nextWindow() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("start");
+      super.getMainView().setWindow("start");
    }
 
    public void onCheckOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offerlist");
+      super.getMainView().setWindow("offerlist");
    }
 
    public void onHomeButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("start");
+      super.getMainView().setWindow("start");
    }
 
    public void onRequestOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offer");
+      super.getMainView().setWindow("offer");
    }
 
    public void onManageSaleButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("saleslist");
+      super.getMainView().setWindow("saleslist");
    }
-   
+
    public void onCheckSalesButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("sales");
+      super.getMainView().setWindow("sales");
    }
 
    @FXML
@@ -122,7 +126,7 @@ public class ViewOfferList implements View
          model.getViewModelManageOffer()
                .setSelected(viewModel.getSelected().get());
          getScene().getWindow().hide();
-         view.setWindow("manageoffer");
+         super.getMainView().setWindow("manageoffer");
          errorLabel.setText("");
       }
    }

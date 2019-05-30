@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelLogin;
 
-public class ViewLogin implements View
+public class ViewLogin extends View
 {
 
    @FXML
@@ -24,17 +24,20 @@ public class ViewLogin implements View
 
    private ViewModelLogin model;
 
-   private MainView view;
-
    private Scene scene;
 
    private String title;
+
+   public ViewLogin()
+   {
+
+   }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
       this.model = viewModel.getViewModelLogin();
-      this.view = view;
+      super.setMainView(view);
       this.scene = scene;
       this.title = title;
       usernameField.textProperty()
@@ -69,7 +72,7 @@ public class ViewLogin implements View
    {
       getScene().getWindow().hide();
       resetFields();
-      view.setWindow("start");
+      super.getMainView().setWindow("start");
    }
 
    public void onSignInButtonPressed() throws IOException
@@ -80,7 +83,7 @@ public class ViewLogin implements View
       {
          getScene().getWindow().hide();
          resetFields();
-         view.setWindow("start");
+         super.getMainView().setWindow("start");
       }
    }
 

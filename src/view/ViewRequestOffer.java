@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelRequestOffer;
 
-public class ViewRequestOffer implements View
+public class ViewRequestOffer extends View
 {
    @FXML
    TextField nameField;
@@ -28,17 +28,20 @@ public class ViewRequestOffer implements View
 
    private ViewModelRequestOffer model;
 
-   private MainView view;
-
    private Scene scene;
 
    private String title;
+   
+   public ViewRequestOffer()
+   {
+      
+   }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
       this.model = viewModel.getViewModelRequestOffer();
-      this.view = view;
+      super.setMainView(view);
       this.scene = scene;
       this.title = title;
       nameField.textProperty().bindBidirectional(model.getNameProperty());
@@ -56,7 +59,7 @@ public class ViewRequestOffer implements View
       {
          getScene().getWindow().hide();
          resetFields();
-         view.setWindow("start");
+         super.getMainView().setWindow("start");
       }
    }
 
@@ -77,33 +80,33 @@ public class ViewRequestOffer implements View
    {
       getScene().getWindow().hide();
       resetFields();
-      view.setWindow("offerlist");
+      super.getMainView().setWindow("offerlist");
    }
 
    public void onHomeButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
       resetFields();
-      view.setWindow("start");
+      super.getMainView().setWindow("start");
    }
 
    public void onRequestOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
       resetFields();
-      view.setWindow("offer");
+      super.getMainView().setWindow("offer");
    }
    
    public void onManageSaleButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("saleslist");
+      super.getMainView().setWindow("saleslist");
    }
    
    public void onCheckSalesButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("sales");
+      super.getMainView().setWindow("sales");
    }
 
    public String getTitle()

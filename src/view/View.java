@@ -3,12 +3,24 @@ package view;
 import javafx.scene.Scene;
 import viewmodel.MainViewViewModel;
 
-public interface View
+public abstract class View
 {
-   void init(MainViewViewModel viewModel, MainView view, Scene scene,
+   private MainView view;
+   
+   public void setMainView(MainView view)
+   {
+      this.view = view;
+   }
+   
+   public MainView getMainView()
+   {
+      return view;
+   }
+   
+   abstract void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title);
 
-   Scene getScene();
+   abstract Scene getScene();
 
-   String getTitle();
+   abstract String getTitle();
 }

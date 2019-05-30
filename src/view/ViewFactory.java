@@ -137,6 +137,28 @@ public class ViewFactory
          }
          views.put(getType, view);
       }
+      
+      if (getType.equals("productList"))
+      {
+         ViewProductList viewProductList = (ViewProductList) view;
+         viewProductList.refresh();
+      }
+      else if (getType.equals("sales"))
+      {
+         ViewSalesList viewSalesList = (ViewSalesList) view;
+         viewSalesList.refresh();
+      }
+      else if (getType.equals("review"))
+      {
+         ViewProductReview viewProductReview = (ViewProductReview) view;
+         viewProductReview.refresh();
+      }
+      else if (getType.equals("createsale"))
+      {
+        ViewCreateSale viewCreateSale = (ViewCreateSale) view;
+        viewCreateSale.refresh();
+      }
+      
       return view;
 
    }

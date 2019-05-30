@@ -15,7 +15,7 @@ import model.MyDate;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelSale;
 
-public class ViewCreateSale implements View
+public class ViewCreateSale extends View
 {
 
    @FXML
@@ -44,7 +44,6 @@ public class ViewCreateSale implements View
    Label priceReductionLabel;
 
    private ViewModelSale viewModel;
-   private MainView view;
    private Scene scene;
    private String title;
 
@@ -58,7 +57,7 @@ public class ViewCreateSale implements View
          String title)
    {
       this.viewModel = viewModel.getViewModelSale();
-      this.view = view;
+      super.setMainView(view);
       this.scene = scene;
       this.title = title;
       
@@ -114,7 +113,7 @@ public class ViewCreateSale implements View
    public void onClosedButtonPressed() throws IOException
    {
       refreshFields();
-      view.setWindow("saleslist");
+      super.getMainView().setWindow("saleslist");
    }
 
    public void onSubmitButtonPressed() throws IOException
@@ -139,7 +138,7 @@ public class ViewCreateSale implements View
          if (errorLabel.getText().equals(""))
          {
             refreshFields();
-            view.setWindow("saleslist");
+            super.getMainView().setWindow("saleslist");
          }
       }
    }

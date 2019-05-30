@@ -26,27 +26,6 @@ public class MainView
 
       view = ViewFactory.getView(id, viewModel, this);
 
-      if (id.equals("productList"))
-      {
-         ViewProductList viewProductList = (ViewProductList) view;
-         viewProductList.refresh();
-      }
-      else if (id.equals("sales"))
-      {
-         ViewSalesList viewSalesList = (ViewSalesList) view;
-         viewSalesList.refresh();
-      }
-      else if (id.equals("review"))
-      {
-         ViewProductReview viewProductReview = (ViewProductReview) view;
-         viewProductReview.refresh();
-      }
-      else if (id.equals("createsale"))
-      {
-    	  ViewCreateSale viewCreateSale = (ViewCreateSale) view;
-    	  viewCreateSale.refresh();
-      }
-
       primaryStage.setScene(view.getScene());
       primaryStage.setTitle(view.getTitle());
       primaryStage.show();

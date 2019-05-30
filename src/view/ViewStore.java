@@ -10,7 +10,7 @@ import model.Product;
 import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelStore;
 
-public class ViewStore implements View
+public class ViewStore extends View
 {
 
    @FXML
@@ -24,8 +24,6 @@ public class ViewStore implements View
 
    private ViewModelStore model;
 
-   private MainView view;
-
    private Scene scene;
 
    private String title;
@@ -34,7 +32,7 @@ public class ViewStore implements View
          String title)
    {
       this.model = viewModel.getViewModelStore();
-      this.view = view;
+      super.setMainView(view);
       this.scene = scene;
       this.title = title;
       for (int i = 0; i < 5; i++)
@@ -51,21 +49,21 @@ public class ViewStore implements View
 
       model.getProduct(Product.TYPE_CLICK_SHEET);
       getScene().getWindow().hide();
-      view.setWindow("productList");
+      super.getMainView().setWindow("productList");
    }
 
    public void onDetailsLabelPressedMetal() throws IOException
    {
       model.getProduct(Product.TYPE_METAL_SHEET);
       getScene().getWindow().hide();
-      view.setWindow("productList");
+      super.getMainView().setWindow("productList");
    }
 
    public void onDetailsLabelPressedPlated() throws IOException
    {
       model.getProduct(Product.TYPE_PLATED_SHEET);
       getScene().getWindow().hide();
-      view.setWindow("productList");
+      super.getMainView().setWindow("productList");
 
    }
 
@@ -73,44 +71,44 @@ public class ViewStore implements View
    {
       model.getProduct(Product.TYPE_METAL_TILE);
       getScene().getWindow().hide();
-      view.setWindow("productList");
+      super.getMainView().setWindow("productList");
    }
 
    public void onDetailsLabelPressedRain() throws IOException
    {
       model.getProduct(Product.TYPE_RAIN_SYSTEM);
       getScene().getWindow().hide();
-      view.setWindow("productList");
+      super.getMainView().setWindow("productList");
    }
 
    public void onCheckOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offerlist");
+      super.getMainView().setWindow("offerlist");
    }
 
    public void onHomeButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("start");
+      super.getMainView().setWindow("start");
    }
 
    public void onRequestOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offer");
+      super.getMainView().setWindow("offer");
    }
 
    public void onManageSaleButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("saleslist");
+      super.getMainView().setWindow("saleslist");
    }
 
    public void onCheckSalesButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("sales");
+      super.getMainView().setWindow("sales");
    }
 
    public String getTitle()

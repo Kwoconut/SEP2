@@ -18,7 +18,7 @@ import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelSale;
 import viewmodel.ViewModelSaleList;
 
-public class ViewSalesList implements View
+public class ViewSalesList extends View
 {
 
    @FXML
@@ -26,15 +26,19 @@ public class ViewSalesList implements View
 
    private String title;
    private Scene scene;
-   private MainView view;
    private ViewModelSaleList viewModel;
+   
+   public ViewSalesList()
+   {
+      
+   }
 
    @SuppressWarnings("static-access")
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
       this.viewModel = viewModel.getViewModelSaleList();
-      this.view = view;
+      super.setMainView(view);
       this.scene = scene;
       this.title = title;
    }
@@ -116,30 +120,30 @@ public class ViewSalesList implements View
    public void onCheckOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offerlist");
+      super.getMainView().setWindow("offerlist");
    }
 
    public void onHomeButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("start");
+      super.getMainView().setWindow("start");
    }
 
    public void onRequestOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offer");
+      super.getMainView().setWindow("offer");
    }
 
    public void onManageSaleButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("saleslist");
+      super.getMainView().setWindow("saleslist");
    }
 
    public void onCheckSalesButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("sales");
+      super.getMainView().setWindow("sales");
    }
 }

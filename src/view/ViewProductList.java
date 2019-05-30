@@ -21,7 +21,7 @@ import viewmodel.MainViewViewModel;
 import viewmodel.ViewModelProduct;
 import viewmodel.ViewModelProductList;
 
-public class ViewProductList implements View
+public class ViewProductList extends View
 {
 
    @FXML
@@ -29,15 +29,19 @@ public class ViewProductList implements View
 
    private String title;
    private Scene scene;
-   private MainView view;
    private ViewModelProductList viewModel;
+
+   public ViewProductList()
+   {
+
+   }
 
    @SuppressWarnings("static-access")
    public void init(MainViewViewModel vm, MainView view, Scene scene,
          String title)
    {
       this.viewModel = vm.getViewModelProductList();
-      this.view = view;
+      super.setMainView(view);
       this.scene = scene;
       this.title = title;
    }
@@ -108,7 +112,6 @@ public class ViewProductList implements View
             {
                public void handle(MouseEvent e)
                {
-
                   for (Node node : gridPane.getChildren())
                   {
                      if (node.getBoundsInParent().contains(e.getSceneX(),
@@ -119,7 +122,7 @@ public class ViewProductList implements View
                               GridPane.getRowIndex(node));
                         try
                         {
-                           view.setWindow("review");
+                           onSelectItemPressed();
                         }
                         catch (IOException e1)
                         {
@@ -139,31 +142,37 @@ public class ViewProductList implements View
    public void onCheckOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offerlist");
+      super.getMainView().setWindow("offerlist");
    }
 
    public void onHomeButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("start");
+      super.getMainView().setWindow("start");
    }
 
    public void onRequestOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offer");
+      super.getMainView().setWindow("offer");
    }
 
    public void onManageSaleButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("saleslist");
+      super.getMainView().setWindow("saleslist");
    }
 
    public void onCheckSalesButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("sales");
+      super.getMainView().setWindow("sales");
+   }
+   
+   public void onSelectItemPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      super.getMainView().setWindow("review");
    }
 
 }

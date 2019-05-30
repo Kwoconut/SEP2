@@ -21,7 +21,7 @@ import viewmodel.ViewModelManageSalesList;
 import viewmodel.ViewModelProduct;
 import viewmodel.ViewModelSale;
 
-public class ViewManageSalesList implements View
+public class ViewManageSalesList extends View
 {
 
    @FXML
@@ -56,16 +56,20 @@ public class ViewManageSalesList implements View
 
    private String title;
    private Scene scene;
-   private MainView view;
    private ViewModelManageSalesList viewModel;
    private MainViewViewModel model;
+   
+   public ViewManageSalesList()
+   {
+      
+   }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
       this.viewModel = viewModel.getViewModelManageSalesList();
       this.model = viewModel;
-      this.view = view;
+      super.setMainView(view);
       this.scene = scene;
       this.title = title;
 
@@ -182,31 +186,31 @@ public class ViewManageSalesList implements View
    public void onCheckOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offerlist");
+      super.getMainView().setWindow("offerlist");
    }
 
    public void onHomeButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("start");
+      super.getMainView().setWindow("start");
    }
 
    public void onRequestOfferButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("offer");
+      super.getMainView().setWindow("offer");
    }
 
    public void onManageSaleButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("saleslist");
+      super.getMainView().setWindow("saleslist");
    }
 
    public void onCheckSalesButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
-      view.setWindow("sales");
+      super.getMainView().setWindow("sales");
    }
 
    public void onCreateSaleButtonPressed() throws IOException
@@ -214,7 +218,7 @@ public class ViewManageSalesList implements View
       model.getViewModelSale()
             .setSelectedProduct(viewModel.getSelectedProduct().get());
       getScene().getWindow().hide();
-      view.setWindow("createsale");
+      super.getMainView().setWindow("createsale");
    }
 
    public void onCancelSaleButtonPressed() throws RemoteException
