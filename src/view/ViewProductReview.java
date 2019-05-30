@@ -268,5 +268,4 @@ public void createReview(double rating) throws RemoteException
 		  refresh();
 	  }
 }	
-
 }

@@ -7,7 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.util.converter.NumberStringConverter;
 import model.MyDate;
 import viewmodel.MainViewViewModel;
@@ -27,7 +29,7 @@ public class ViewCreateSale implements View
    @FXML
    Label productPriceLabel;
    @FXML
-   ImageView productImage;
+   StackPane imagePane;
    @FXML
    DatePicker startDatePicker;
    @FXML
@@ -55,7 +57,6 @@ public class ViewCreateSale implements View
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
-
       this.viewModel = viewModel.getViewModelSale();
       this.view = view;
       this.scene = scene;
@@ -83,9 +84,19 @@ public class ViewCreateSale implements View
       errorLabel.textProperty().bindBidirectional(this.viewModel.getError1());
 
       priceField.setOnKeyReleased(event -> {
-         this.viewModel.updatePriceAfterReduction();
+         this.viewModel.updatePriceAfterReduction();       
       });
 
+   }
+   
+   public void refresh()
+   {
+	   imagePane.getChildren().clear();
+	   ImageView productImage = new ImageView(
+               new Image("images/" + this.viewModel.getProductImageProperty().get()));
+         productImage.setFitWidth(250);
+         productImage.setFitHeight(350);
+         imagePane.getChildren().add(productImage); 
    }
 
    @Override
@@ -135,6 +146,7 @@ public class ViewCreateSale implements View
 
    private void refreshFields()
    {
+	   
       getScene().getWindow().hide();
       priceField.setText("0");
       errorLabel.setText("");
