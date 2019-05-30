@@ -201,6 +201,11 @@ public class ViewProductReview extends View
       getScene().getWindow().hide();
       super.getMainView().setWindow("sales");
    }
+   public void onInfoButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      super.getMainView().setWindow("info");
+   }
 
    public void onLeaveReviewButtonPressed() throws RemoteException
    {

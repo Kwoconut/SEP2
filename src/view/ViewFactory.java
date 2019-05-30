@@ -134,6 +134,17 @@ public class ViewFactory
                break;
             }
 
+            case "info":
+            {
+               FXMLLoader loader = new FXMLLoader();
+               loader.setLocation(
+                     mainView.getClass().getResource("ViewInfo.fxml"));
+               Parent root = loader.load();
+               Scene scene = new Scene(root, 1200, 700);
+               view = loader.getController();
+               view.init(viewModel, mainView, scene, "Info");
+               break;
+            }
          }
          views.put(getType, view);
       }

@@ -107,6 +107,11 @@ public class ViewOfferList extends View
       getScene().getWindow().hide();
       super.getMainView().setWindow("saleslist");
    }
+   public void onInfoButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      super.getMainView().setWindow("info");
+   }
 
    public void onCheckSalesButtonPressed() throws IOException
    {

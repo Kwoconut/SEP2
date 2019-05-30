@@ -220,6 +220,11 @@ public class ViewManageSalesList extends View
       getScene().getWindow().hide();
       super.getMainView().setWindow("createsale");
    }
+   public void onInfoButtonPressed() throws IOException
+   {
+      getScene().getWindow().hide();
+      super.getMainView().setWindow("info");
+   }
 
    public void onCancelSaleButtonPressed() throws RemoteException
    {
