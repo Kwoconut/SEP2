@@ -38,7 +38,7 @@ public class TaskScheduler implements Runnable
       for (int i = 0; i < sales.size(); i++)
       {
          if (sales.get(i).getIsChangedValue() == false
-               && now.isBefore((sales.get(i).getStartDate())))
+               && now.equals(((sales.get(i).getStartDate()))))
          {
             model.setSaleAvailable(sales.get(i));
          }

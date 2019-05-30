@@ -350,6 +350,7 @@ public class ServerModel
             .findFirst().get());
 
       sales.remove(sale);
+      System.out.println(sales);
       try
       {
          databaseSaleAccess.removeSale(sale);
