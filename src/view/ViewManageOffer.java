@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import viewmodel.MainViewViewModel;
@@ -67,9 +68,15 @@ public class ViewManageOffer extends View
    @FXML
    private void deleteButtonPressed() throws IOException
    {
-      Alert alert = new Alert(AlertType.CONFIRMATION,
-            "Remove Offer " + nameField.getText() + " ?", ButtonType.YES,
+      Alert alert = new Alert(AlertType.CONFIRMATION ,
+            "Remove " + nameField.getText() + "'s "+"offer ?" , ButtonType.YES,
             ButtonType.CANCEL);
+    		  alert.setTitle("Confirmation");
+    		  alert.setHeaderText("Offer removal ");
+      DialogPane dialogPane = alert.getDialogPane();
+      dialogPane.getStylesheets()
+            .add(getClass().getResource("/view/beautify.css").toExternalForm());
+      dialogPane.getStyleClass().add("beautify");
       alert.showAndWait();
       if (alert.getResult() == ButtonType.YES)
       {

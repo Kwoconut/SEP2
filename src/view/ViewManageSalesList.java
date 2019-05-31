@@ -230,7 +230,8 @@ public class ViewManageSalesList extends View
    {
       Alert alert = new Alert(AlertType.CONFIRMATION);
       alert.setTitle("Confirmation");
-      alert.setHeaderText("Removing sale ?");
+      alert.setContentText("Remove sale ?");
+      alert.setHeaderText(viewModel.getSelectedSale().getValue().getProductNameProperty().getValue());
       Optional<ButtonType> result = alert.showAndWait();
       if ((result.isPresent()) && (result.get() == ButtonType.OK))
       {
