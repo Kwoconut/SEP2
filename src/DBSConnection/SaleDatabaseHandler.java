@@ -8,6 +8,7 @@ import java.util.Date;
 import model.MyDate;
 import model.Product;
 import model.Sale;
+import model.UpcomingSale;
 
 public class SaleDatabaseHandler implements StoreSalePersistence
 {
@@ -24,7 +25,7 @@ public class SaleDatabaseHandler implements StoreSalePersistence
          throws SQLException
    {
       return new ArrayList<Sale>(query.map(
-            "SELECT sale_id, start_date, end_date, amount, isChangedValue,product_id FROM Sale;",
+            "SELECT sale_id, start_date, end_date, amount, product_id FROM Sale;",
             statement -> {
             }, resultSet -> {
                Date date = resultSet.getDate("start_date");
@@ -49,11 +50,10 @@ public class SaleDatabaseHandler implements StoreSalePersistence
                      break;
                   }
                }
-               return new Sale(resultSet.getInt("sale_id"), startDate, endDate,
-                     product, resultSet.getInt("amount"),
-
-                     resultSet.getBoolean("isChangedValue"));
-
+               Sale sale = new Sale(resultSet.getInt("sale_id"), startDate,
+                     endDate, product, resultSet.getInt("amount"));
+               sale.setState(new UpcomingSale());
+               return sale;
             }));
    }
 
@@ -74,26 +74,13 @@ public class SaleDatabaseHandler implements StoreSalePersistence
       java.sql.Date date2 = new java.sql.Date(cal.getTimeInMillis());
 
       query.executeUpdate(
-            "INSERT INTO Sale (sale_id, start_date, end_date, amount, isChangedValue,product_id) VALUES (?, ?, ?, ?, ?, ?);",
+            "INSERT INTO Sale (sale_id, start_date, end_date, amount, product_id) VALUES (?, ?, ?, ?, ?);",
             statement -> {
                statement.setInt(1, sale.getID());
                statement.setDate(2, date);
                statement.setDate(3, date2);
                statement.setInt(4, sale.getAmount());
-               statement.setBoolean(5, sale.getIsChangedValue());
-               statement.setInt(6, sale.getProduct().getID());
-            });
-
-   }
-
-   @Override
-   public void changedValue(Sale sale) throws SQLException
-   {
-      query.executeUpdate(
-            "UPDATE Sale SET isChangedValue = ? WHERE sale_id = ?;",
-            statement -> {
-               statement.setBoolean(1, true);
-               statement.setInt(2, sale.getID());
+               statement.setInt(5, sale.getProduct().getID());
             });
 
    }

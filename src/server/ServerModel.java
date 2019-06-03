@@ -17,7 +17,6 @@ import DBSConnection.StoreProductPersistence;
 import DBSConnection.StoreReviewPersistence;
 import DBSConnection.StoreSalePersistence;
 import model.AvailableSale;
-import model.FinishedSale;
 import model.MyDate;
 import model.Offer;
 import model.Product;
@@ -35,7 +34,7 @@ public class ServerModel
    private ArrayList<String> password;
    private StoreProductPersistence databaseProductAccess;
    private StoreOfferPersistence databaseOfferAccess;
-   // private StoreSalePersistence databaseSaleAccess;
+   private StoreSalePersistence databaseSaleAccess;
    private StoreReviewPersistence databaseReviewAccess;
    private StoreAccountPersistence databaseAccountAccess;
    private DBSQuery queryHandler;
@@ -56,8 +55,8 @@ public class ServerModel
       loadProducts();
       databaseOfferAccess = new OfferDatabaseHandler(queryHandler);
       loadOffers();
-      // databaseSaleAccess = new SaleDatabaseHandler(queryHandler);
-      // loadSales();
+      databaseSaleAccess = new SaleDatabaseHandler(queryHandler);
+      loadSales();
       databaseReviewAccess = new ReviewDatabaseHandler(queryHandler);
       loadReviews();
       databaseAccountAccess = new AccountDatabaseHandler(queryHandler);
@@ -137,11 +136,17 @@ public class ServerModel
       }
    }
 
-/*
- * public void loadSales() { try { sales =
- * databaseSaleAccess.loadSales(products); } catch (SQLException e) {
- * e.printStackTrace(); } }
- */
+   public void loadSales()
+   {
+      try
+      {
+         sales = databaseSaleAccess.loadSales(products);
+      }
+      catch (SQLException e)
+      {
+         e.printStackTrace();
+      }
+   }
 
    public void loadReviews()
    {
@@ -211,10 +216,14 @@ public class ServerModel
 
       sales.add(sale);
 
-/*
- * try { databaseSaleAccess.addSale(sale); } catch (SQLException e) {
- * e.printStackTrace(); }
- */
+      try
+      {
+         databaseSaleAccess.addSale(sale);
+      }
+      catch (SQLException e)
+      {
+         e.printStackTrace();
+      }
 
       support.firePropertyChange("SALEADDED", null, sale);
 
@@ -272,12 +281,6 @@ public class ServerModel
          if (element.getID() == sale.getID())
          {
             element.setNextState();
-
-            /*
-             * try { databaseSaleAccess.changedValue(sale); } catch
-             * (SQLException e) { e.printStackTrace(); }
-             */
-
             support.firePropertyChange("SALEAVAILABLE", null, element);
             break;
          }
@@ -326,12 +329,14 @@ public class ServerModel
             {
                element.setNextState();
             }
-
-
-/*
- * try { databaseSaleAccess.removeSale(sale); } catch (SQLException e) {
- * e.printStackTrace(); }
- */
+            try
+            {
+               databaseSaleAccess.removeSale(sale);
+            }
+            catch (SQLException e)
+            {
+               e.printStackTrace();
+            }
 
             support.firePropertyChange("SALEREMOVED", null, element);
             sales.remove(element);
