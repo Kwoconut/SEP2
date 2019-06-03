@@ -83,6 +83,7 @@ public class ServerModel
    // getters for ArrayLists
    public ArrayList<Product> getProducts()
    {
+      loadProducts();
       return products;
    }
 
