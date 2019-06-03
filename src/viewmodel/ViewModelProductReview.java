@@ -29,7 +29,7 @@ public class ViewModelProductReview implements PropertyChangeListener
    public ViewModelProductReview(SReviewModel model) throws RemoteException
    {
       this.model = model;
-      productReviewComments = FXCollections.observableArrayList();
+      this.productReviewComments = FXCollections.observableArrayList();
       this.productID = new SimpleIntegerProperty();
       this.productName = new SimpleStringProperty();
       this.productType = new SimpleStringProperty();
@@ -73,6 +73,16 @@ public class ViewModelProductReview implements PropertyChangeListener
    public StringProperty productPrice()
    {
       return productPrice;
+   }
+
+   public void deleteComment(int id) throws RemoteException
+   {
+      model.removeReviewComment(productReviewComments.get(id), productID.get());
+   }
+
+   public void refreshComments()
+   {
+      model.getReviewCommentsByProductID(productID.get());
    }
 
    public void leaveReview(double rating, String message) throws RemoteException

@@ -1,11 +1,7 @@
-/ClientSetUp.class
-/ClientStart.class
-/DBSConnection/
-/Test.class
-/client/
-/images/
-/model/
-/server/
-/testing/
-/view/
 /viewmodel/
+/view/
+/model/
+/client/
+/server/
+/images/
+/DBSConnection/

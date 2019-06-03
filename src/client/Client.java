@@ -151,9 +151,9 @@ public class Client implements IClient, RIClient, Serializable
    }
 
    @Override
-   public void removeReview(Review review) throws RemoteException
+   public void removeReviewComment(Review review) throws RemoteException
    {
-      model.removeReviewFromServer(review);
+      model.removeReviewCommentFromServer(review);
 
    }
 
@@ -175,10 +175,10 @@ public class Client implements IClient, RIClient, Serializable
    }
 
    @Override
-   public void removeReviewFromServer(Review review) throws RemoteException
+   public void removeReviewCommentFromServer(Review review) throws RemoteException
    {
       RIServerWrite server = access.acquireWrite();
-      server.removeReview(review);
+      server.removeReviewComment(review);
       access.releaseWrite();
 
    }

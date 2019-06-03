@@ -9,7 +9,7 @@ public interface SReviewModel
 
    void requestReviews() throws RemoteException;
 
-   void removeReview(Review review) throws RemoteException;
+   void removeReviewComment(String text,int productID) throws RemoteException;
 
    void addReview(double rating, String message, int productID);
    

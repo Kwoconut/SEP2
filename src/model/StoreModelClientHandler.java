@@ -26,7 +26,7 @@ public interface StoreModelClientHandler
 
    void addReviewFromServer(Review review);
 
-   void removeReviewFromServer(Review review);
+   void removeReviewCommentFromServer(Review review);
 
    void addAvailableSaleFromServer(Sale sale);
    

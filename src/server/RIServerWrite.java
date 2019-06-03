@@ -20,6 +20,6 @@ public interface RIServerWrite extends RIServerRead
 
    void sendReview(Review review) throws RemoteException;
 
-   void removeReview(Review review) throws RemoteException;
+   void removeReviewComment(Review review) throws RemoteException;
 
 }

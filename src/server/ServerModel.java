@@ -346,18 +346,20 @@ public class ServerModel
       }
    }
 
-   public void removeReview(Review review)
+   public void removeReviewComment(Review review)
    {
-      reviews.remove(review);
+      reviews.stream().filter(sampleReview -> sampleReview.getID() == review.getID()).findFirst().get().removeMessage();
+      review.removeMessage();
       try
       {
-         databaseReviewAccess.removeReveiew(review);
+         databaseReviewAccess.updateReview(review);
       }
       catch (SQLException e)
       {
+         // TODO Auto-generated catch block
          e.printStackTrace();
       }
-      support.firePropertyChange("REVIEWREMOVED", null, review);
+      support.firePropertyChange("COMMENTREMOVED", null, review);
    }
 
    // clear methods

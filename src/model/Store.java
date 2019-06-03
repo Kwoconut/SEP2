@@ -326,14 +326,13 @@ public class Store implements Serializable, StoreModel
                element.setNextState();
             }
 
-
             if (element.getState() instanceof FinishedSale)
             {
                support.firePropertyChange("SALEPRODUCTPRICEREVERT", "",
                      element);
             }
             support.firePropertyChange("MINUSSALE", "", element);
-            
+
             sales.remove(element);
             break;
          }
@@ -362,34 +361,39 @@ public class Store implements Serializable, StoreModel
    }
 
    @Override
-   public void removeReview(Review review) throws RemoteException
+   public void removeReviewComment(String text, int productID)
+         throws RemoteException
    {
-      client.removeReviewFromServer(review);
-
+      
+      for (Review element : reviews)
+      {
+         if (element.getMessage().equals(text)
+               && element.getProduct().getID() == productID)
+         {
+            client.removeReviewCommentFromServer(element);
+            break;
+         }
+      }
    }
 
    @Override
    public void getReviewsFromServer(ArrayList<Review> reviews)
    {
       this.reviews = reviews;
-      support.firePropertyChange("REVIEWSLIST", "", reviews);
-
    }
 
    @Override
    public void addReviewFromServer(Review review)
    {
       reviews.add(review);
-      support.firePropertyChange("NEWREVIEW", "", review);
-
    }
 
    @Override
-   public void removeReviewFromServer(Review review)
+   public void removeReviewCommentFromServer(Review review)
    {
-      reviews.remove(review);
-      support.firePropertyChange("MINUSREVIEW", "", review);
-
+      reviews.stream()
+            .filter(sampleReview -> review.getID() == sampleReview.getID())
+            .findFirst().get().removeMessage();
    }
 
    public void validateLogin(String username, String password)
@@ -472,17 +476,15 @@ public class Store implements Serializable, StoreModel
    @Override
    public ArrayList<String> getReviewCommentsByProductID(int productID)
    {
-      List<String> commentsList = new ArrayList<String>();
+      ArrayList<String> commentsList = new ArrayList<String>();
 
-      try
+      for (int i = 0; i < reviews.size(); i++)
       {
-         commentsList = reviews.stream()
-               .filter(review -> review.getProduct().getID() == productID)
-               .map(review -> review.getMessage()).collect(Collectors.toList());
-      }
-      catch (NoSuchElementException e)
-      {
-         commentsList = new ArrayList<String>();
+         if (!(reviews.get(i).getMessage().equals(""))
+               && reviews.get(i).getProduct().getID() == productID)
+         {
+            commentsList.add(reviews.get(i).getMessage());
+         }
       }
 
       support.firePropertyChange("COMMENTS", "", commentsList);

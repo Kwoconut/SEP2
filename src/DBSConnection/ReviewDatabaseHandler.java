@@ -61,6 +61,17 @@ public class ReviewDatabaseHandler implements StoreReviewPersistence
                statement.setInt(1, review.getID());
             });
    }
+   
+   @Override
+   public void updateReview(Review review) throws SQLException
+   {
+      query.executeUpdate(
+            "UPDATE REVIEW SET message = ? WHERE review_id = ?;",
+            statement -> {
+               statement.setString(1, review.getMessage());
+               statement.setInt(2, review.getID());
+            });
+   }
 
    @Override
    public void clearReviews() throws SQLException

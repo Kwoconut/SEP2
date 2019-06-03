@@ -22,6 +22,11 @@ public class Review implements Serializable
       return rating;
    }
 
+   public void removeMessage()
+   {
+      message = "";
+   }
+
    public String getMessage()
    {
       return message;

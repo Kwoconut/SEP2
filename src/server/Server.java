@@ -158,13 +158,13 @@ public class Server implements RIServerWrite, PropertyChangeListener
             }
          }
       }
-      if (evt.getPropertyName().equals("REVIEWREMOVED"))
+      if (evt.getPropertyName().equals("COMMENTREMOVED"))
       {
          for (RIClient element : clients)
          {
             try
             {
-               element.removeReview((Review) evt.getNewValue());
+               element.removeReviewComment((Review) evt.getNewValue());
             }
             catch (RemoteException e)
             {
@@ -213,9 +213,9 @@ public class Server implements RIServerWrite, PropertyChangeListener
    }
 
    @Override
-   public void removeReview(Review review) throws RemoteException
+   public void removeReviewComment(Review review) throws RemoteException
    {
-      model.removeReview(review);
+      model.removeReviewComment(review);
    }
 
    @Override

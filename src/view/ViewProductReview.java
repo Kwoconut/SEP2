@@ -7,8 +7,10 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -18,8 +20,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import viewmodel.MainViewViewModel;
@@ -139,6 +143,8 @@ public class ViewProductReview extends View
       }
 
       GridPane gridPane = new GridPane();
+      ObservableList<ImageView> deleteButtons = FXCollections
+            .observableArrayList();
       gridPane.setPadding(new Insets(20, 20, 20, 31));
       gridPane.setVgap(20);
       gridPane.setHgap(43);
@@ -147,16 +153,51 @@ public class ViewProductReview extends View
       {
          if (!(comments.get(i).equals("")))
          {
+            deleteButtons.add(new ImageView(new Image("images/cross2.png")));
             textBox.add(new TextArea(comments.get(i)));
-            textBox.get(i).setPrefWidth(520);
+            textBox.get(i).setPrefWidth(470);
             textBox.get(i).setPrefHeight(200);
             textBox.get(i).setEditable(false);
             textBox.get(i).setStyle("-fx-opacity: 100;");
             GridPane.setConstraints(textBox.get(i), 0, i);
+            GridPane.setConstraints(deleteButtons.get(i), 1, i);
          }
       }
 
       gridPane.getChildren().addAll(textBox);
+      gridPane.getChildren().addAll(deleteButtons);
+
+      gridPane.addEventHandler(MouseEvent.MOUSE_PRESSED,
+            new EventHandler<MouseEvent>()
+            {
+               public void handle(MouseEvent event)
+               {
+                  Node clickedNode = event.getPickResult().getIntersectedNode();
+                  if (clickedNode != gridPane)
+                  {
+                     try
+                     {
+                        Alert alert = new Alert(AlertType.CONFIRMATION);
+                        alert.setTitle("Confirmation");
+                        alert.setContentText("Remove comment?");
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if ((result.isPresent()) && (result.get() == ButtonType.OK))
+                        {
+                           viewModel
+                           .deleteComment(GridPane.getRowIndex(clickedNode));
+                           onSelectItemPressed();
+                        }
+
+                     }
+                     catch (IOException e)
+                     {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                     }
+                  }
+               }
+            });
+
       commentPane.setContent(gridPane);
    }
 
@@ -201,10 +242,17 @@ public class ViewProductReview extends View
       getScene().getWindow().hide();
       super.getMainView().setWindow("sales");
    }
+
    public void onInfoButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
       super.getMainView().setWindow("info");
+   }
+
+   public void onSelectItemPressed() throws IOException
+   {
+      this.viewModel.refreshComments();
+      refresh();
    }
 
    public void onLeaveReviewButtonPressed() throws RemoteException
