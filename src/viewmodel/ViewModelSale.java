@@ -13,10 +13,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.AvailableSale;
 import model.MyDate;
 import model.Product;
 import model.SSalesModel;
 import model.Sale;
+import model.SaleState;
+import model.UpcomingSale;
 
 public class ViewModelSale implements PropertyChangeListener
 {
@@ -31,7 +34,7 @@ public class ViewModelSale implements PropertyChangeListener
    private StringProperty productImageProperty;
    private IntegerProperty saleIDProperty;
    private IntegerProperty saleAmountProperty;
-   private BooleanProperty saleIsAvailableProperty;
+   private ObjectProperty<SaleState> saleStateProperty;
    private DoubleProperty initialPriceProperty;
    private DoubleProperty priceAfterReductionProperty;
    private StringProperty errorProperty1;
@@ -50,7 +53,7 @@ public class ViewModelSale implements PropertyChangeListener
       this.productImageProperty = new SimpleStringProperty();
       this.saleIDProperty = new SimpleIntegerProperty();
       this.saleAmountProperty = new SimpleIntegerProperty();
-      this.saleIsAvailableProperty = new SimpleBooleanProperty();
+      this.saleStateProperty = new SimpleObjectProperty<SaleState>();
       this.initialPriceProperty = new SimpleDoubleProperty();
       this.priceAfterReductionProperty = new SimpleDoubleProperty();
       this.errorProperty1 = new SimpleStringProperty("");
@@ -78,20 +81,20 @@ public class ViewModelSale implements PropertyChangeListener
             sale.getProduct().getImageID());
       this.saleIDProperty = new SimpleIntegerProperty(sale.getID());
       this.saleAmountProperty = new SimpleIntegerProperty(sale.getAmount());
-      this.saleIsAvailableProperty = new SimpleBooleanProperty(
-            sale.getIsChangedValue());
-      if (sale.getIsChangedValue())
+      this.saleStateProperty = new SimpleObjectProperty<SaleState>(
+            sale.getState());
+      if (saleStateProperty.get() instanceof UpcomingSale)
       {
-         this.initialPriceProperty = new SimpleDoubleProperty(
-               sale.getInitialPrice());
-         this.priceAfterReductionProperty = new SimpleDoubleProperty(
-               sale.getPrice());
+         initialPriceProperty = new SimpleDoubleProperty(sale.getPrice());
+         priceAfterReductionProperty = new SimpleDoubleProperty(
+               ((UpcomingSale) sale.getState()).getPriceAfterSaleApplies(sale));
       }
-      else
+      else if (saleStateProperty.get() instanceof AvailableSale)
       {
-         this.initialPriceProperty = new SimpleDoubleProperty(sale.getPrice());
-         this.priceAfterReductionProperty = new SimpleDoubleProperty(
-               sale.getPriceAfterSaleApplied());
+         initialPriceProperty = new SimpleDoubleProperty(
+               ((AvailableSale) sale.getState()).getInitialPrice(sale));
+         priceAfterReductionProperty = new SimpleDoubleProperty(
+               sale.getPrice());
       }
       this.errorProperty1 = new SimpleStringProperty("");
       this.model.addListener(this);
@@ -157,9 +160,9 @@ public class ViewModelSale implements PropertyChangeListener
       return saleAmountProperty;
    }
 
-   public BooleanProperty getIsAvailableProperty()
+   public ObjectProperty<SaleState> getStateProperty()
    {
-      return saleIsAvailableProperty;
+      return saleStateProperty;
    }
 
    public DoubleProperty getInitialPriceProperty()
@@ -206,8 +209,6 @@ public class ViewModelSale implements PropertyChangeListener
             && other.getEndDateProperty().get().equals(endDateProperty.get())
             && other.getProductIDProperty().get() == productIDProperty.get()
             && other.getAmountProperty().get() == saleAmountProperty.get()
-            && other.getIsAvailableProperty().get() == saleIsAvailableProperty
-                  .get()
             && other.getSaleIDProperty().get() == saleIDProperty.get();
 
    }

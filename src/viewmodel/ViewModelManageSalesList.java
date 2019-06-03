@@ -82,7 +82,7 @@ public class ViewModelManageSalesList implements PropertyChangeListener
             selectedSale.get().getStartDateProperty().get(),
             selectedSale.get().getEndDateProperty().get(), product,
             selectedSale.get().getAmountProperty().get(),
-            selectedSale.get().getIsAvailableProperty().get());
+            selectedSale.get().getStateProperty().get());
 
       model.removeSale(sale);
    }

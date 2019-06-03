@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.AvailableSale;
 import model.SSalesModel;
 import model.Sale;
 
@@ -37,7 +38,7 @@ public class ViewModelSaleList implements PropertyChangeListener
       if (evt.getPropertyName().equals("SALEAVAILABLE"))
       {
          Sale element = (Sale) evt.getNewValue();
-         if (element.getIsChangedValue())
+         if (element.getState() instanceof AvailableSale)
          {
             sales.add(new ViewModelSale(model, element));
          }

@@ -12,7 +12,7 @@ public class Sale implements Serializable
    private MyDate endDate;
    private Product product;
    private int amount;
-   private boolean isChangedValue;
+   private SaleState state;
    private static DecimalFormat df = new DecimalFormat("#.##");
 
    public Sale(int ID, MyDate startDate, MyDate endDate, Product product,
@@ -23,20 +23,35 @@ public class Sale implements Serializable
       this.endDate = endDate;
       this.product = product;
       this.amount = amount;
-      isChangedValue = false;
+      this.state = new UpcomingSale();
    }
 
    public Sale(int ID, MyDate startDate, MyDate endDate, Product product,
-         int amount, boolean isChangedValue)
+         int amount, SaleState state)
    {
       this.ID = ID;
       this.startDate = startDate;
       this.endDate = endDate;
       this.product = product;
       this.amount = amount;
-      this.isChangedValue = isChangedValue;
+      this.state = state;
    }
-   
+
+   public void setState(SaleState state)
+   {
+      this.state = state;
+   }
+
+   public void setNextState()
+   {
+      state.setNextState(this);
+   }
+
+   public SaleState getState()
+   {
+      return state;
+   }
+
    public void setProduct(Product product)
    {
       this.product = product;
@@ -67,19 +82,9 @@ public class Sale implements Serializable
       return amount;
    }
 
-   public boolean getIsChangedValue()
-   {
-      return isChangedValue;
-   }
-
    public int getID()
    {
       return ID;
-   }
-
-   public void setIsChangedValue()
-   {
-      isChangedValue = true;
    }
 
    public boolean validDate()
@@ -115,19 +120,6 @@ public class Sale implements Serializable
       }
    }
 
-   public double getPriceAfterSaleApplied()
-   {
-      return Double
-            .valueOf(df.format(getPrice() - (getAmount() * getPrice()) / 100));
-
-   }
-
-   public double getInitialPrice()
-   {
-      return Double
-            .valueOf(df.format(product.getPrice() / (100 - amount) * 100));
-   }
-
    public static double getPriceBeforeSaleApplies(double price, int amount)
    {
       return Double.valueOf(df.format(price / (100 - amount) * 100));
@@ -147,22 +139,15 @@ public class Sale implements Serializable
       Sale other = (Sale) obj;
       return ID == other.getID() && startDate.equals(other.getStartDate())
             && endDate.equals(other.getEndDate())
-            && product.equals(other.getProduct()) && amount == other.getAmount()
-            && isChangedValue == other.getIsChangedValue();
+            && product.equals(other.getProduct())
+            && amount == other.getAmount();
    }
 
    public String toString()
    {
       String s = "";
-      s += startDate + "" + endDate + "" + product + "" + amount + ""
-            + isChangedValue;
+      s += startDate + "" + endDate + "" + product + "" + amount + "";
       return s;
-   }
-
-   public void setChangedValue(boolean value)
-   {
-      this.isChangedValue = value;
-
    }
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import model.MyDate;
 import model.Sale;
+import model.UpcomingSale;
 
 public class TaskScheduler implements Runnable
 {
@@ -37,7 +38,7 @@ public class TaskScheduler implements Runnable
 
       for (int i = 0; i < sales.size(); i++)
       {
-         if (sales.get(i).getIsChangedValue() == false
+         if (sales.get(i).getState() instanceof UpcomingSale
                && now.equals(((sales.get(i).getStartDate()))))
          {
             model.setSaleAvailable(sales.get(i));

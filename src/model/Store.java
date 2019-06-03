@@ -292,13 +292,11 @@ public class Store implements Serializable, StoreModel
 
       for (Sale element : sales)
       {
-         element.setProduct(products.stream()
-               .filter(
-                     product -> product.getID() == element.getProduct().getID())
-               .findFirst().get());
-         if (element.getIsChangedValue())
+         if (element.getState() instanceof AvailableSale)
          {
-            element.getProduct().setPrice(element.getPriceAfterSaleApplied());
+            products.stream().filter(
+                  product -> product.getID() == element.getProduct().getID())
+                  .findFirst().get().setPrice(element.getPrice());
             support.firePropertyChange("SALEAVAILABLE", "", element);
          }
       }
@@ -319,28 +317,32 @@ public class Store implements Serializable, StoreModel
    public void removeSaleFromServer(Sale sale)
    {
 
-      products.stream()
-            .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get().setPrice(sale.getPrice());
-
-      sale.setProduct(products.stream()
-            .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get());
-
-      sales.remove(sale);
-
-      if (sale.getIsChangedValue())
+      for (Sale element : sales)
       {
-      support.firePropertyChange("SALEPRODUCTPRICEREVERT", "", sale);
+         if (sale.getID() == element.getID())
+         {
+            if (element.getState() instanceof AvailableSale)
+            {
+               element.setNextState();
+            }
+
+
+            if (element.getState() instanceof FinishedSale)
+            {
+               support.firePropertyChange("SALEPRODUCTPRICEREVERT", "",
+                     element);
+            }
+            support.firePropertyChange("MINUSSALE", "", element);
+            
+            sales.remove(element);
+            break;
+         }
       }
-      support.firePropertyChange("MINUSSALE", "", sale);
    }
 
    @Override
    public void addAvailableSaleFromServer(Sale sale)
    {
-
-      System.out.println(sale.getPrice());
       products.stream()
             .filter(product -> product.getID() == sale.getProduct().getID())
             .findFirst().get().setPrice(sale.getPrice());

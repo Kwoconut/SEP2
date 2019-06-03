@@ -62,21 +62,10 @@ public class SaleTest {
 		assertEquals(20,sale.getAmount());
 	}
 
-	@Test
-	public void testGetIsChangedValue() {
-		assertEquals(false,sale.getIsChangedValue());
-	}
 
 	@Test
 	public void testGetID() {
 		assertEquals(1,sale.getID());
-	}
-
-	@Test
-	public void testSetIsChangedValue() {
-		assertEquals(false,sale.getIsChangedValue());
-		sale.setIsChangedValue();
-		assertEquals(true,sale.getIsChangedValue());
 	}
 
 	@Test
@@ -86,18 +75,8 @@ public class SaleTest {
 
 	@Test
 	public void testOverridesOtherSales() {
-		assertEquals(true,sale.overridesOtherSales(sale2));
-		assertEquals(false,sale.overridesOtherSales(sale3));
-	}
-
-	@Test
-	public void testGetPriceAfterSaleApplied() {
-		assertEquals(240,sale.getPriceAfterSaleApplied(),0);
-	}
-
-	@Test
-	public void testGetInitialPrice() {
-		assertEquals(300,sale2.getInitialPrice(),0);
+		assertEquals(true,sale.overridesOtherSalesWithSameProduct(sale2));
+		assertEquals(false,sale.overridesOtherSalesWithSameProduct(sale3));
 	}
 
 	@SuppressWarnings("static-access")
@@ -115,12 +94,6 @@ public class SaleTest {
 	@Test
 	public void testEqualsObject() {
 		assertEquals(sale3,sale4);
-	}
-
-	@Test
-	public void testSetChangedValue() {
-		sale.setChangedValue(true);
-		assertEquals(true,sale.getIsChangedValue());
 	}
 
 }

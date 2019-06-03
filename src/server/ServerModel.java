@@ -16,11 +16,14 @@ import DBSConnection.StoreOfferPersistence;
 import DBSConnection.StoreProductPersistence;
 import DBSConnection.StoreReviewPersistence;
 import DBSConnection.StoreSalePersistence;
+import model.AvailableSale;
+import model.FinishedSale;
 import model.MyDate;
 import model.Offer;
 import model.Product;
 import model.Review;
 import model.Sale;
+import model.UpcomingSale;
 
 public class ServerModel
 {
@@ -32,7 +35,7 @@ public class ServerModel
    private ArrayList<String> password;
    private StoreProductPersistence databaseProductAccess;
    private StoreOfferPersistence databaseOfferAccess;
-   private StoreSalePersistence databaseSaleAccess;
+   // private StoreSalePersistence databaseSaleAccess;
    private StoreReviewPersistence databaseReviewAccess;
    private StoreAccountPersistence databaseAccountAccess;
    private DBSQuery queryHandler;
@@ -53,8 +56,8 @@ public class ServerModel
       loadProducts();
       databaseOfferAccess = new OfferDatabaseHandler(queryHandler);
       loadOffers();
-      databaseSaleAccess = new SaleDatabaseHandler(queryHandler);
-      loadSales();
+      // databaseSaleAccess = new SaleDatabaseHandler(queryHandler);
+      // loadSales();
       databaseReviewAccess = new ReviewDatabaseHandler(queryHandler);
       loadReviews();
       databaseAccountAccess = new AccountDatabaseHandler(queryHandler);
@@ -134,17 +137,11 @@ public class ServerModel
       }
    }
 
-   public void loadSales()
-   {
-      try
-      {
-         sales = databaseSaleAccess.loadSales(products);
-      }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
-   }
+/*
+ * public void loadSales() { try { sales =
+ * databaseSaleAccess.loadSales(products); } catch (SQLException e) {
+ * e.printStackTrace(); } }
+ */
 
    public void loadReviews()
    {
@@ -203,35 +200,25 @@ public class ServerModel
    public void addSale(Sale sale)
    {
 
-      if (sale.getIsChangedValue() == false
+      if (sale.getState() instanceof UpcomingSale
             && MyDate.now().equals(sale.getStartDate()))
       {
-         products.parallelStream()
+         sale.setProduct(products.parallelStream()
                .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get().setPrice((sale.getPriceAfterSaleApplied()));
-         sale.setIsChangedValue();
+               .findFirst().get());
+         sale.setNextState();
       }
-
-      sale.setProduct(products.parallelStream()
-            .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get());
-
-      System.out.println(sale.getPrice());
 
       sales.add(sale);
 
-      try
-      {
-         databaseSaleAccess.addSale(sale);
-      }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
+/*
+ * try { databaseSaleAccess.addSale(sale); } catch (SQLException e) {
+ * e.printStackTrace(); }
+ */
 
       support.firePropertyChange("SALEADDED", null, sale);
 
-      if (sale.getIsChangedValue())
+      if (sale.getState() instanceof AvailableSale)
       {
          support.firePropertyChange("SALEAVAILABLE", null, sale);
       }
@@ -280,24 +267,22 @@ public class ServerModel
 
    public void setSaleAvailable(Sale sale)
    {
-      products.parallelStream()
-            .filter(product -> product.getID() == sale.getID()).findFirst()
-            .get().setPrice((sale.getPriceAfterSaleApplied()));
-      sales.parallelStream()
-            .filter(sampleSale -> sampleSale.getID() == sale.getID())
-            .findFirst().get().setIsChangedValue();
-      sale.setProduct(products.parallelStream()
-            .filter(product -> product.getID() == sale.getID()).findFirst()
-            .get());
-      try
+      for (Sale element : sales)
       {
-         databaseSaleAccess.changedValue(sale);
+         if (element.getID() == sale.getID())
+         {
+            element.setNextState();
+
+            /*
+             * try { databaseSaleAccess.changedValue(sale); } catch
+             * (SQLException e) { e.printStackTrace(); }
+             */
+
+            support.firePropertyChange("SALEAVAILABLE", null, element);
+            break;
+         }
       }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
-      support.firePropertyChange("SALEAVAILABLE", null, sale);
+
    }
 
    // remove methods
@@ -332,34 +317,27 @@ public class ServerModel
    public void removeSale(Sale sale)
    {
 
-      if (sale.getIsChangedValue())
+      for (Sale element : sales)
       {
-         products.stream()
-               .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get().setPrice(sale.getInitialPrice());
-      }
-      else
-      {
-         products.stream()
-               .filter(product -> product.getID() == sale.getProduct().getID())
-               .findFirst().get().setPrice(sale.getPrice());
-      }
+         if (element.getID() == sale.getID())
+         {
+            if (sale.getState() instanceof AvailableSale
+                  && element.getState() instanceof AvailableSale)
+            {
+               element.setNextState();
+            }
 
-      sale.setProduct(products.stream()
-            .filter(product -> product.getID() == sale.getProduct().getID())
-            .findFirst().get());
 
-      sales.remove(sale);
-      System.out.println(sales);
-      try
-      {
-         databaseSaleAccess.removeSale(sale);
+/*
+ * try { databaseSaleAccess.removeSale(sale); } catch (SQLException e) {
+ * e.printStackTrace(); }
+ */
+
+            support.firePropertyChange("SALEREMOVED", null, element);
+            sales.remove(element);
+            break;
+         }
       }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
-      support.firePropertyChange("SALEREMOVED", null, sale);
    }
 
    public void removeReview(Review review)
