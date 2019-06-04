@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -23,6 +24,12 @@ public class ViewSalesList extends View
 
    @FXML
    ScrollPane mainPane;
+   
+   @FXML
+   Button checkOffersButton;
+   
+   @FXML
+   Button manageSalesButton;
 
    private String title;
    private Scene scene;
@@ -41,6 +48,11 @@ public class ViewSalesList extends View
       super.setMainView(view);
       this.scene = scene;
       this.title = title;
+      if(!this.viewModel.getLoginProperty().get().equals("administrator"))
+      {
+         checkOffersButton.setVisible(false);
+         manageSalesButton.setVisible(false);
+      }
    }
 
    public Scene getScene()

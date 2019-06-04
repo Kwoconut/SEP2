@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import viewmodel.MainViewViewModel;
@@ -25,6 +26,12 @@ public class ViewRequestOffer extends View
 
    @FXML
    Label errorLabel;
+   
+   @FXML
+   Button checkOffersButton;
+   
+   @FXML
+   Button manageSalesButton;
 
    private ViewModelRequestOffer model;
 
@@ -49,7 +56,11 @@ public class ViewRequestOffer extends View
       emailField.textProperty().bindBidirectional(model.getEmailProperty());
       messageField.textProperty().bindBidirectional(model.getMessageProperty());
       errorLabel.textProperty().bindBidirectional(model.getErrorProperty());
-
+      if(!this.model.getLoginProperty().get().equals("administrator"))
+      {
+         checkOffersButton.setVisible(false);
+         manageSalesButton.setVisible(false);
+      }
    }
 
    public void onSubmitButton() throws IOException

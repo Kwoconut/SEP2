@@ -24,6 +24,7 @@ public class ViewModelProductReview implements PropertyChangeListener
    private StringProperty productType;
    private StringProperty productPrice;
    private StringProperty imageProperty;
+   private StringProperty loginProperty;
    private SReviewModel model;
 
    public ViewModelProductReview(SReviewModel model) throws RemoteException
@@ -36,6 +37,7 @@ public class ViewModelProductReview implements PropertyChangeListener
       this.productPrice = new SimpleStringProperty();
       this.averageReview = new SimpleDoubleProperty();
       this.imageProperty = new SimpleStringProperty();
+      this.loginProperty = new SimpleStringProperty("");
       this.model.requestReviews();
       this.model.addListener(this);
    }
@@ -75,6 +77,11 @@ public class ViewModelProductReview implements PropertyChangeListener
       return productPrice;
    }
 
+   public StringProperty getLoginProperty()
+   {
+      return loginProperty;
+   }
+
    public void deleteComment(int id) throws RemoteException
    {
       model.removeReviewComment(productReviewComments.get(id), productID.get());
@@ -93,8 +100,9 @@ public class ViewModelProductReview implements PropertyChangeListener
       model.getReviewCommentsByProductID(productID.get());
    }
 
-   @SuppressWarnings("unchecked")
    @Override
+   @SuppressWarnings("unchecked")
+
    public void propertyChange(PropertyChangeEvent evt)
    {
       if (evt.getPropertyName().equals("AVERAGERATING"))
@@ -111,6 +119,10 @@ public class ViewModelProductReview implements PropertyChangeListener
       {
          productReviewComments.clear();
          productReviewComments.addAll((ArrayList<String>) evt.getNewValue());
+      }
+      else if (evt.getPropertyName().equals("VALIDLOGIN"))
+      {
+         loginProperty.set((String) evt.getOldValue());
       }
    }
 

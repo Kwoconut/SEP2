@@ -1,6 +1,9 @@
 package view;
 
 import java.io.IOException;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -9,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -26,6 +30,12 @@ public class ViewProductList extends View
 
    @FXML
    ScrollPane mainPane;
+   
+   @FXML
+   Button checkOffersButton;
+   
+   @FXML
+   Button manageSalesButton;
 
    private String title;
    private Scene scene;
@@ -44,6 +54,12 @@ public class ViewProductList extends View
       super.setMainView(view);
       this.scene = scene;
       this.title = title;
+      if(!viewModel.getLoginProperty().get().equals("administrator"))
+      {
+         checkOffersButton.setVisible(false);
+         manageSalesButton.setVisible(false);
+      }
+    
    }
 
    public Scene getScene()
@@ -55,6 +71,8 @@ public class ViewProductList extends View
    {
       return title;
    }
+   
+ 
 
    public void refresh()
    {

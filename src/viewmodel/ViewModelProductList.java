@@ -4,6 +4,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Product;
@@ -13,13 +15,14 @@ public class ViewModelProductList implements PropertyChangeListener
 {
    private ObservableList<ViewModelProduct> products;
    private SProductModel model;
+   private StringProperty loginProperty;
 
    public ViewModelProductList(SProductModel model)
    {
       this.model = model;
       this.model.addListener(this);
       this.products = FXCollections.observableArrayList();
-
+      this.loginProperty = new SimpleStringProperty("");
    }
 
    public ObservableList<ViewModelProduct> getProducts()
@@ -49,14 +52,14 @@ public class ViewModelProductList implements PropertyChangeListener
       }
    }
 
-   @Override
-   public void propertyChange(PropertyChangeEvent evt)
+   public StringProperty getLoginProperty()
    {
-      executePropertyChange(evt);
+      return loginProperty;
    }
 
+   @Override
    @SuppressWarnings("unchecked")
-   public void executePropertyChange(PropertyChangeEvent evt)
+   public void propertyChange(PropertyChangeEvent evt)
    {
       if (evt.getPropertyName().equals("DETAILS"))
       {
@@ -68,6 +71,11 @@ public class ViewModelProductList implements PropertyChangeListener
             products.add(new ViewModelProduct(model, element));
          }
       }
+      else
+         if (evt.getPropertyName().equals("VALIDLOGIN"))
+         {
+            loginProperty.set((String) evt.getOldValue());
+         }
 
    }
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import model.Product;
 import viewmodel.MainViewViewModel;
@@ -21,6 +22,12 @@ public class ViewStore extends View
 
    @FXML
    ArrayList<Label> priceLabelList;
+   
+   @FXML
+   Button checkOffersButton;
+   
+   @FXML
+   Button manageSalesButton;
 
    private ViewModelStore model;
 
@@ -41,7 +48,11 @@ public class ViewStore extends View
          priceLabelList.get(i).textProperty().bind(model.getPriceProperty(i));
       }
       newSaleLabel.textProperty().bind(model.getNotificationProperty());
-
+      if(!model.getLoginProperty().get().equals("administrator"))
+      {
+         checkOffersButton.setVisible(false);
+         manageSalesButton.setVisible(false);
+      }
    }
 
    public void onDetailsLabelPressedClick() throws IOException

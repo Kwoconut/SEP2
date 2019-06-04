@@ -6,17 +6,18 @@ import java.rmi.RemoteException;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.SLoginModel;
 import model.StoreModel;
 
 public class ViewModelLogin implements PropertyChangeListener
 {
-   private StoreModel model;
+   private SLoginModel model;
    private StringProperty usernameProperty;
    private StringProperty passwordProperty;
    private StringProperty errorProperty;
    private StringProperty loginProperty;
 
-   public ViewModelLogin(StoreModel model)
+   public ViewModelLogin(SLoginModel model)
    {
       this.model = model;
       usernameProperty = new SimpleStringProperty("");

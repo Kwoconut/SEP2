@@ -49,6 +49,13 @@ public class ViewProductReview extends View
 
    @FXML
    ArrayList<StackPane> starList;
+   
+   @FXML
+   Button checkOffersButton;
+   
+   @FXML
+   Button manageSalesButton;
+
 
    private ViewModelProductReview viewModel;
    private Scene scene;
@@ -73,7 +80,11 @@ public class ViewProductReview extends View
             .bindBidirectional(this.viewModel.productPrice());
       averageRating.textProperty()
             .bind(this.viewModel.getAverageReviewProperty().asString());
-
+      if(!this.viewModel.getLoginProperty().get().equals("administrator"))
+      {
+         checkOffersButton.setVisible(false);
+         manageSalesButton.setVisible(false);
+      }
    }
 
    public void refresh()

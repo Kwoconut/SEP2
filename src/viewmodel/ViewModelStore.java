@@ -17,6 +17,7 @@ public class ViewModelStore implements PropertyChangeListener
    private StringProperty[] names;
    private StringProperty[] prices;
    private StringProperty notificationProperty;
+   private StringProperty loginProperty;
 
    public ViewModelStore(SProductModel model) throws RemoteException
    {
@@ -24,9 +25,11 @@ public class ViewModelStore implements PropertyChangeListener
       names = new StringProperty[5];
       prices = new StringProperty[5];
       notificationProperty = new SimpleStringProperty();
+      loginProperty = new SimpleStringProperty("");
       reinitializeArrays();
       this.model.addListener(this);
-      this.model.requestProducts();   }
+      this.model.requestProducts();
+   }
 
    @SuppressWarnings("unchecked")
    public void updateProducts(PropertyChangeEvent evt)
@@ -60,6 +63,11 @@ public class ViewModelStore implements PropertyChangeListener
       return notificationProperty;
    }
 
+   public StringProperty getLoginProperty()
+   {
+      return loginProperty;
+   }
+
    private void reinitializeArrays()
    {
       for (int i = 0; i < 5; i++)
@@ -72,7 +80,14 @@ public class ViewModelStore implements PropertyChangeListener
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
-      Platform.runLater(() -> executePropertyChange(evt));
+      if (evt.getPropertyName().equals("VALIDLOGIN"))
+      {
+         loginProperty.set((String) evt.getOldValue());
+      }
+      else
+      {
+         Platform.runLater(() -> executePropertyChange(evt));
+      }
    }
 
    public void executePropertyChange(PropertyChangeEvent evt)

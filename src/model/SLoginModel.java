@@ -1,5 +1,6 @@
 package model;
 
+import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 
 public interface SLoginModel
@@ -9,4 +10,6 @@ public interface SLoginModel
    void requestUsernames() throws RemoteException;
    
    void requestPasswords() throws RemoteException;
+   
+   void addListener(PropertyChangeListener listener);
 }

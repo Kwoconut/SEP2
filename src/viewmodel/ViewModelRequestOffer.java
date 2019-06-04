@@ -15,6 +15,7 @@ public class ViewModelRequestOffer implements PropertyChangeListener
    private StringProperty emailProperty;
    private StringProperty messageProperty;
    private StringProperty errorProperty;
+   private StringProperty loginProperty;
    private SOfferModel model;
 
    public ViewModelRequestOffer(SOfferModel model)
@@ -25,6 +26,7 @@ public class ViewModelRequestOffer implements PropertyChangeListener
       emailProperty = new SimpleStringProperty("");
       messageProperty = new SimpleStringProperty("");
       errorProperty = new SimpleStringProperty("");
+      loginProperty = new SimpleStringProperty("");
       this.model.addListener(this);
    }
 
@@ -63,6 +65,10 @@ public class ViewModelRequestOffer implements PropertyChangeListener
    {
       return errorProperty;
    }
+   
+   public StringProperty getLoginProperty() {
+      return loginProperty;
+   }
 
    public void addOffer()
    {
@@ -92,6 +98,10 @@ public class ViewModelRequestOffer implements PropertyChangeListener
       else if (evt.getPropertyName().equals("valid"))
       {
          errorProperty.set("");
+      }
+      else if (evt.getPropertyName().equals("VALIDLOGIN"))
+      {
+         loginProperty.set((String) evt.getOldValue());
       }
 
    }
