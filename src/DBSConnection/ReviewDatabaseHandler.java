@@ -73,11 +73,4 @@ public class ReviewDatabaseHandler implements StoreReviewPersistence
             });
    }
 
-   @Override
-   public void clearReviews() throws SQLException
-   {
-      query.executeUpdate("DELETE FROM Review;", statement -> {
-      });
-   }
-
 }

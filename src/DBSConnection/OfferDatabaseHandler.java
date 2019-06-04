@@ -64,11 +64,4 @@ public class OfferDatabaseHandler implements StoreOfferPersistence
                statement.setInt(1, offer.getID());
             });
    }
-
-   @Override
-   public void clearOffers() throws SQLException
-   {
-      query.executeUpdate("DELETE FROM Offer", statement -> {
-      });
-   }
 }

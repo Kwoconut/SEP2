@@ -67,11 +67,4 @@ public class ProductDatabaseHandler implements StoreProductPersistence
                statement.setInt(1, product.getID());
             });
    }
-
-   @Override
-   public void clearProducts() throws SQLException
-   {
-      query.executeUpdate("DELETE FROM Product;", statement -> {
-      });
-   }
 }

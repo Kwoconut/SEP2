@@ -15,6 +15,5 @@ public interface StoreSalePersistence
 
    ArrayList<Sale> loadSales(ArrayList<Product> products) throws SQLException;
 
-   void clearSales() throws SQLException;
 
 }

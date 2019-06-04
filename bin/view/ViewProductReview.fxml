@@ -85,10 +85,10 @@
                   <Image url="@../../Logo.png" />
                </image>
             </ImageView>
-            <Button layoutX="995.0" layoutY="60.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Check Offers" />
+            <Button fx:id="checkOffersButton" layoutX="995.0" layoutY="60.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Check Offers" />
                   <Button layoutX="307.0" layoutY="60.0" mnemonicParsing="false" onAction="#onHomeButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Home" />
                   <Button layoutX="581.0" layoutY="60.0" mnemonicParsing="false" onAction="#onCheckSalesButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Check Sales" />
-                  <Button layoutX="855.0" layoutY="60.0" mnemonicParsing="false" onAction="#onManageSaleButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Manage Sales" />
+                  <Button fx:id="manageSalesButton" layoutX="855.0" layoutY="60.0" mnemonicParsing="false" onAction="#onManageSaleButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Manage Sales" />
                   <Button layoutX="445.0" layoutY="60.0" mnemonicParsing="false" onAction="#onRequestOfferButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Request Offer" />
                   <Button layoutX="718.0" layoutY="60.0" mnemonicParsing="false" onAction="#onInfoButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Info" />
          </children>

@@ -16,6 +16,5 @@ public interface StoreOfferPersistence
    
    void removeOffer(Offer offer) throws SQLException;
    
-   void clearOffers() throws SQLException;
 
 }

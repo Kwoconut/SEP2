@@ -11,6 +11,15 @@ import java.util.stream.Collectors;
 import client.Client;
 import client.IClient;
 
+/**
+ * Store is an implementation of StoreModel, the interface of systems model.
+ * This class handles adding, removal, editing, getting of different values of sales, reviews, usernames, passwords, 
+ * as well as managing the connection and data sharing between view and networking part of the system.
+ * 
+ * 
+ * @author Group 1
+ * @version (Version 1.0, 06/04/2019)
+ */
 public class Store implements Serializable, StoreModel
 {
    private ArrayList<Product> products;
@@ -22,7 +31,10 @@ public class Store implements Serializable, StoreModel
    private ArrayList<String> usernames;
    private ArrayList<String> passwords;
 
-   public Store()
+   /**
+ * A constructor initiating all arraylists of the model
+ */
+public Store()
    {
       products = new ArrayList<Product>();
       offers = new ArrayList<Offer>();
@@ -31,7 +43,10 @@ public class Store implements Serializable, StoreModel
       usernames = new ArrayList<String>();
       passwords = new ArrayList<String>();
    }
-
+/**
+ * Add a specific product locally
+ * @param product product to be added
+ */
    public void addProduct(Product product)
    {
       products.add(product);
@@ -86,22 +101,30 @@ public class Store implements Serializable, StoreModel
       }
 
    }
-
+   /**
+	   * Gets all the products stored locally
+	   */
    public ArrayList<Product> getProducts()
    {
       return products;
    }
-
+   /**
+	   * Gets all the offers stored locally
+	   */
    public ArrayList<Offer> getOffers()
    {
       return offers;
    }
-
+   /**
+	   * Gets all the sales stored locally
+	   */
    public ArrayList<Sale> getSales()
    {
       return sales;
    }
-
+   /**
+	   * Gets all the reviews stored locally
+	   */
    public ArrayList<Review> getReviews()
    {
       return reviews;
@@ -197,7 +220,10 @@ public class Store implements Serializable, StoreModel
    {
       this.client = client;
    }
-
+   /**
+	   * Adds listener in order to respond to further fired events in the system
+	   * @param listener instance of listener
+	   */
    @Override
    public void addListener(PropertyChangeListener listener)
    {
@@ -251,7 +277,10 @@ public class Store implements Serializable, StoreModel
       }
 
    }
-
+   /**
+	   * Check if data input is valid for the sale
+	   * @param sale sale to be checked for validation
+	   */
    private boolean isValidSale(Sale sale)
    {
       if (sale.validDate())
@@ -450,7 +479,11 @@ public class Store implements Serializable, StoreModel
    {
       client.requestPasswords();
    }
-
+   /**
+	   * Returns the average rating of a review
+	   * @param productID id of the product of whom average to be returned
+	   * @throws NoSuchElementException if locally are not stored reviews with product id as the parameter
+	   */
    @Override
    public double getAverage(int productID)
    {
@@ -472,7 +505,10 @@ public class Store implements Serializable, StoreModel
       support.firePropertyChange("AVERAGERATING", product, average);
       return average;
    }
-
+   /**
+	   * Returns all comments of a specific product 
+	   * @param productID id of the product of whom comments to be returned
+	   */
    @Override
    public ArrayList<String> getReviewCommentsByProductID(int productID)
    {

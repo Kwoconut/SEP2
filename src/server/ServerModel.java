@@ -40,8 +40,13 @@ public class ServerModel
    private DBSQuery queryHandler;
 
    private PropertyChangeSupport support = new PropertyChangeSupport(this);
-
-   public ServerModel() throws SQLException
+   /**
+    * ServerModel handles all server based methods of the system
+    * @author Group 1
+    * @version (Version 1.0, 06/04/2019)
+    * @throws SQLException if an network problem occurs
+    */
+public ServerModel() throws SQLException
    {
       products = new ArrayList<Product>();
       offers = new ArrayList<Offer>();
@@ -64,55 +69,56 @@ public class ServerModel
       // clearProducts();
       // sampleDataForCreation();
    }
-
-   // add data for first setup
-   private void sampleDataForCreation() throws SQLException
-   {
-      databaseProductAccess.addProduct(new Product(1, "Metal Sheet", 8888,
-            "Red", Product.TYPE_METAL_SHEET, ""));
-      databaseProductAccess.addProduct(new Product(2, "Click Sheet", 9999,
-            "Black", Product.TYPE_CLICK_SHEET, ""));
-      databaseProductAccess.addProduct(new Product(3, "Plated Sheet", 10000,
-            "Silver", Product.TYPE_PLATED_SHEET, ""));
-      databaseProductAccess.addProduct(new Product(4, "Rain System", 3333,
-            "Silver", Product.TYPE_RAIN_SYSTEM, ""));
-      databaseProductAccess.addProduct(new Product(5, "Metal Tile", 666, "Red",
-            Product.TYPE_METAL_TILE, ""));
-   }
-
    // getters for ArrayLists
-   public ArrayList<Product> getProducts()
+   /**
+ * returns all products from the database
+ */
+public ArrayList<Product> getProducts()
    {
       loadProducts();
       return products;
    }
-
+/**
+* returns all offers stored locally
+*/
    public ArrayList<Offer> getOffers()
    {
       return offers;
    }
-
+   /**
+ * returns all sales stored locally
+ */
    public ArrayList<Sale> getSales()
    {
       return sales;
    }
-
+   /**
+ * returns all reviews stored locally
+ */
    public ArrayList<Review> getReviews()
    {
       return reviews;
    }
-
+   /**
+ * returns all usernames stored locally
+ */
    public ArrayList<String> getUsernames()
    {
       return usernames;
    }
-
+   /**
+    * returns all passwords stored locally
+    */
    public ArrayList<String> getPasswords()
    {
       return password;
    }
 
    // loading methods
+   /**
+    * store locally all products from the database
+    * @throws SQLException if an network problem occurs
+    */
    public void loadProducts()
    {
       try
@@ -124,7 +130,10 @@ public class ServerModel
          e.printStackTrace();
       }
    }
-
+   /**
+    * store locally all offers from the database
+    * @throws SQLException if an network problem occurs
+    */
    public void loadOffers()
    {
       try
@@ -136,7 +145,10 @@ public class ServerModel
          e.printStackTrace();
       }
    }
-
+   /**
+    * store locally all sales from the database
+    * @throws SQLException if an network problem occurs
+    */
    public void loadSales()
    {
       try
@@ -148,7 +160,10 @@ public class ServerModel
          e.printStackTrace();
       }
    }
-
+   /**
+    * store locally all reviews from the database
+    * @throws SQLException if an network problem occurs
+    */
    public void loadReviews()
    {
       try
@@ -160,7 +175,10 @@ public class ServerModel
          e.printStackTrace();
       }
    }
-
+   /**
+    * store locally all of administration usernames and passwords from the database
+    * @throws SQLException if an network problem occurs
+    */
    public void loadUsernamesandPasswords()
    {
       try
@@ -175,6 +193,11 @@ public class ServerModel
    }
 
    // adding methods
+   /**
+    * store a product locally and on database and updates the system through a fire property
+    * @param product product to be stored
+    * @throws SQLException if an network problem occurs
+    */
    public void addProduct(Product product)
    {
       products.add(product);
@@ -188,7 +211,11 @@ public class ServerModel
       }
       support.firePropertyChange("PRODUCTADDED", null, product);
    }
-
+   /**
+    * store an offer locally and on database and updates the system through a fire property
+    * @param offer offer to be stored
+    * @throws SQLException if an network problem occurs
+    */
    public void addOffer(Offer offer)
    {
       offers.add(offer);
@@ -202,7 +229,11 @@ public class ServerModel
       }
       support.firePropertyChange("OFFERADDED", null, offer);
    }
-
+   /**
+    * store a sale locally and on database and updates the system through a fire property
+    * @param sale sale to be stored
+    * @throws SQLException if an network problem occurs
+    */
    public void addSale(Sale sale)
    {
 
@@ -233,7 +264,11 @@ public class ServerModel
          support.firePropertyChange("SALEAVAILABLE", null, sale);
       }
    }
-
+   /**
+    * store a review locally and on database and updates the system through a fire property
+    * @param review review to be stored
+    * @throws SQLException if an network problem occurs
+    */
    public void addReview(Review review)
    {
       reviews.add(review);
@@ -249,6 +284,11 @@ public class ServerModel
    }
 
    // update methods
+   /**
+    * updates a product on database and updates the system through a fire property
+    * @param product product to be updated
+    * @throws SQLException if an network problem occurs
+    */
    public void updateProduct(Product product)
    {
       try
@@ -261,7 +301,11 @@ public class ServerModel
       }
       support.firePropertyChange("PRODUCTUPDATED", null, product);
    }
-
+   /**
+    * updates an offer on database and updates the system through a fire property
+    * @param offer offer to be updated
+    * @throws SQLException if an network problem occurs
+    */
    public void updateOffer(Offer offer)
    {
       try
@@ -274,7 +318,10 @@ public class ServerModel
       }
       support.firePropertyChange("OFFERUPDATED", null, offer);
    }
-
+   /**
+    * Set a sale to available state
+    * @param sale sale to be set to next state
+    */
    public void setSaleAvailable(Sale sale)
    {
       for (Sale element : sales)
@@ -290,6 +337,11 @@ public class ServerModel
    }
 
    // remove methods
+   /**
+    * remove a product locally and on database and updates the system through a fire property
+    * @param product product to be removed
+    * @throws SQLException if an network problem occurs
+    */
    public void removeProduct(Product product)
    {
       products.remove(product);
@@ -303,7 +355,11 @@ public class ServerModel
       }
       support.firePropertyChange("PRODUCTREMOVED", null, product);
    }
-
+   /**
+    * remove an offer locally and on database and updates the system through a fire property
+    * @param offer offer to be removed
+    * @throws SQLException if an network problem occurs
+    */
    public void removeOffer(Offer offer)
    {
       offers.remove(offer);
@@ -317,7 +373,11 @@ public class ServerModel
       }
       support.firePropertyChange("OFFERREMOVED", null, offer);
    }
-
+   /**
+    * remove a sale locally and on database and updates the system through a fire property
+    * @param sale sale to be removed
+    * @throws SQLException if an network problem occurs
+    */
    public void removeSale(Sale sale)
    {
 
@@ -345,7 +405,11 @@ public class ServerModel
          }
       }
    }
-
+   /**
+    * remove locally a comment from a specific review, updates data from database and system through a fire property
+    * @param review review to be removed
+    * @throws SQLException if an network problem occurs
+    */
    public void removeReviewComment(Review review)
    {
       reviews.stream().filter(sampleReview -> sampleReview.getID() == review.getID()).findFirst().get().removeMessage();
@@ -360,43 +424,6 @@ public class ServerModel
          e.printStackTrace();
       }
       support.firePropertyChange("COMMENTREMOVED", null, review);
-   }
-
-   // clear methods
-   public void clearProducts()
-   {
-      try
-      {
-         databaseProductAccess.clearProducts();
-      }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
-   }
-
-   public void clearOffers()
-   {
-      try
-      {
-         databaseOfferAccess.clearOffers();
-      }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
-   }
-
-   public void clearReviews()
-   {
-      try
-      {
-         databaseReviewAccess.clearReviews();
-      }
-      catch (SQLException e)
-      {
-         e.printStackTrace();
-      }
    }
 
    public void addPropertyChangeListener(PropertyChangeListener listener)

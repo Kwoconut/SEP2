@@ -16,5 +16,4 @@ public interface StoreReviewPersistence {
 	
 	void updateReview(Review review) throws SQLException;
 	
-	void clearReviews() throws SQLException;
 }

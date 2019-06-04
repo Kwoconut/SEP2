@@ -15,5 +15,4 @@ public interface StoreProductPersistence
 
    void removeProduct(Product product) throws SQLException;
 
-   void clearProducts() throws SQLException;
 }
