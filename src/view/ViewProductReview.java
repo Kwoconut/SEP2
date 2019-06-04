@@ -179,7 +179,12 @@ public class ViewProductReview extends View
                      {
                         Alert alert = new Alert(AlertType.CONFIRMATION);
                         alert.setTitle("Confirmation");
-                        alert.setContentText("Remove comment?");
+                        alert.setHeaderText("Comment: "+ viewModel.getProductReviewComments().get(GridPane.getRowIndex(clickedNode)));
+                        alert.setContentText("Remove this comment ?");
+                        DialogPane dialogPane = alert.getDialogPane();
+                        dialogPane.getStylesheets()
+                              .add(getClass().getResource("/view/beautify.css").toExternalForm());
+                        dialogPane.getStyleClass().add("beautify");
                         Optional<ButtonType> result = alert.showAndWait();
                         if ((result.isPresent()) && (result.get() == ButtonType.OK))
                         {
