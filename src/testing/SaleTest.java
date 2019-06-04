@@ -2,10 +2,10 @@ package testing;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.FinishedSale;
 import model.MyDate;
 import model.Product;
 import model.Sale;
@@ -17,15 +17,12 @@ public class SaleTest {
 	private Sale sale4;
 	private Product product;
 	private Product product2;
-	private Product product3;
 
 	@Before
 	public void setUp() throws Exception {
 		product = new Product(1, "Denise Metal Tile", 200, "orange",
 	            "Metal Tile", "deniseMetalTile.png");
 		product2 = new Product(2, "Queen Metal Tile", 300, "orange",
-	            "Metal Tile", "deniseMetalTile.png");
-		product3 = new Product(3, "Teenager Metal Tile", 400, "orange",
 	            "Metal Tile", "deniseMetalTile.png");
 		sale = new Sale(1, new MyDate(25,5,2019), new MyDate(30,5,2019), product2,
 	            20);
@@ -35,6 +32,22 @@ public class SaleTest {
 	            20);
 		sale4 = new Sale(3, new MyDate(27,6,2019), new MyDate(30,6,2019), product,
 	            20);
+	}
+	@Test
+	public void testSetState() {
+		sale.setState(new FinishedSale());
+		assertEquals("class model.FinishedSale", sale.getState().getClass().toString());
+	}
+	
+	@Test
+	public void testSetNextState() {
+		sale.setNextState();
+		assertEquals("class model.AvailableSale", sale.getState().getClass().toString());
+	}
+	
+	@Test
+	public void testGetState() {
+		assertEquals("class model.UpcomingSale", sale.getState().getClass().toString());
 	}
 
 	@Test

@@ -44,7 +44,7 @@ public class Review implements Serializable
 
    public boolean equals(Object obj)
    {
-      if (!(obj instanceof Offer))
+      if (!(obj instanceof Review))
       {
          return false;
       }

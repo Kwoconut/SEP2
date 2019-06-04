@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.IDGenerator;
-import model.MyDate;
 import model.Offer;
 import model.Product;
 import model.Review;
@@ -16,9 +15,6 @@ import model.Sale;
 
 public class IDGeneratorTest {
 	
-	private Sale sale;
-	private Sale sale2;
-	private Sale sale3;
 	private ArrayList<Sale> sales;
 	private Product product;
 	private Product product2;
@@ -45,12 +41,6 @@ public class IDGeneratorTest {
 		sales = new ArrayList<Sale>();
 		reviews = new ArrayList<Review>();
 		offers = new ArrayList<Offer>();
-		sale = new Sale(1, new MyDate(25,5,2019), new MyDate(30,5,2019), product2,
-	            20);
-		sale2 = new Sale(2, new MyDate(26,5,2019), new MyDate(30,5,2019), product3,
-	            20);
-		sale3 = new Sale(3, new MyDate(27,6,2019), new MyDate(30,6,2019), product,
-	            20);
 		offer = new Offer(1, "Jack", "+45748565732131", "jack.jackson@gmail.com",
 	            "I want to buy some roof.");
 		offer2 = new Offer(2, "Roger", "+4574857123123", "roger.jackson@gmail.com",
