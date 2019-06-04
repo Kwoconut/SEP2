@@ -164,14 +164,26 @@ public class ViewProductReview extends View
       {
          if (!(comments.get(i).equals("")))
          {
-            deleteButtons.add(new ImageView(new Image("images/cross2.png")));
-            textBox.add(new TextArea(comments.get(i)));
-            textBox.get(i).setPrefWidth(470);
-            textBox.get(i).setPrefHeight(200);
-            textBox.get(i).setEditable(false);
-            textBox.get(i).setStyle("-fx-opacity: 100;");
-            GridPane.setConstraints(textBox.get(i), 0, i);
-            GridPane.setConstraints(deleteButtons.get(i), 1, i);
+            if(!this.viewModel.getLoginProperty().get().equals("administrator"))
+            {
+               textBox.add(new TextArea(comments.get(i)));
+               textBox.get(i).setPrefWidth(530);
+               textBox.get(i).setPrefHeight(200);
+               textBox.get(i).setEditable(false);
+               textBox.get(i).setStyle("-fx-opacity: 100;");
+               GridPane.setConstraints(textBox.get(i), 0, i);
+            }
+            else
+            {               
+               deleteButtons.add(new ImageView(new Image("images/cross2.png")));
+               textBox.add(new TextArea(comments.get(i)));
+               textBox.get(i).setPrefWidth(470);
+               textBox.get(i).setPrefHeight(200);
+               textBox.get(i).setEditable(false);
+               textBox.get(i).setStyle("-fx-opacity: 100;");
+               GridPane.setConstraints(textBox.get(i), 0, i);
+               GridPane.setConstraints(deleteButtons.get(i), 1, i);
+            }
          }
       }
 
