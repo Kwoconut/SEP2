@@ -28,17 +28,17 @@ public class ViewOfferList extends View
    private String title;
    private Scene scene;
    private ViewModelOfferList viewModel;
-   private MainViewViewModel model;
-   
+   private ViewModelManageOffer model;
+
    public ViewOfferList()
    {
-    //empty constructor for FXML Loader
+      // empty constructor for FXML Loader
    }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
    {
-      model = viewModel;
+      this.model = viewModel.getViewModelManageOffer();
       this.viewModel = viewModel.getViewModelOfferList();
       super.setMainView(view);
       this.scene = scene;
@@ -107,6 +107,7 @@ public class ViewOfferList extends View
       getScene().getWindow().hide();
       super.getMainView().setWindow("saleslist");
    }
+
    public void onInfoButtonPressed() throws IOException
    {
       getScene().getWindow().hide();
@@ -128,8 +129,7 @@ public class ViewOfferList extends View
       }
       else
       {
-         model.getViewModelManageOffer()
-               .setSelected(viewModel.getSelected().get());
+         model.setSelected(viewModel.getSelected().get());
          getScene().getWindow().hide();
          super.getMainView().setWindow("manageoffer");
          errorLabel.setText("");

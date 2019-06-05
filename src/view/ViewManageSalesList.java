@@ -57,7 +57,7 @@ public class ViewManageSalesList extends View
    private String title;
    private Scene scene;
    private ViewModelManageSalesList viewModel;
-   private MainViewViewModel model;
+   private ViewModelSale model;
    
    public ViewManageSalesList()
    {
@@ -68,7 +68,7 @@ public class ViewManageSalesList extends View
          String title)
    {
       this.viewModel = viewModel.getViewModelManageSalesList();
-      this.model = viewModel;
+      this.model = viewModel.getViewModelSale();
       super.setMainView(view);
       this.scene = scene;
       this.title = title;
@@ -215,8 +215,7 @@ public class ViewManageSalesList extends View
 
    public void onCreateSaleButtonPressed() throws IOException
    {
-      model.getViewModelSale()
-            .setSelectedProduct(viewModel.getSelectedProduct().get());
+      model.setSelectedProduct(viewModel.getSelectedProduct().get());
       getScene().getWindow().hide();
       super.getMainView().setWindow("createsale");
    }
