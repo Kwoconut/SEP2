@@ -69,8 +69,8 @@ private Product product3;
 	            "Metal Tile", "deniseMetalTile.png");
 		product3 = new Product(2, "Queen Metal Tile", 250, "orange",
 	            "Metal Tile", "deniseMetalTile.png");
-	    assertEquals(true,product2.equals(product));
-	    assertEquals(false,product.equals(product3));
+	    assertTrue(product2.equals(product));
+	    assertFalse(product.equals(product3));
 	}
 	
 	@Test
