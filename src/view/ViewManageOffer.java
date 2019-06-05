@@ -30,7 +30,7 @@ public class ViewManageOffer extends View
 
    public ViewManageOffer()
    {
-
+    //empty constructor for FXML Loader
    }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,

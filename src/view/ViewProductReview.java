@@ -63,7 +63,7 @@ public class ViewProductReview extends View
 
    public ViewProductReview()
    {
-
+    //empty constructor for FXML Loader
    }
 
    @Override

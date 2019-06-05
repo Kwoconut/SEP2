@@ -30,7 +30,7 @@ public class ViewLogin extends View
 
    public ViewLogin()
    {
-
+    //empty constructor for FXML Loader
    }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,

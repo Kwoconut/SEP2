@@ -10,8 +10,6 @@ import viewmodel.ViewModelInfo;
 
 public class ViewInfo extends View
 {
-   private MainView view;
-
    private Scene scene;
 
    private String title;
@@ -24,6 +22,10 @@ public class ViewInfo extends View
    @FXML
    Button manageSalesButton;
 
+   public ViewInfo()
+   {
+    //empty constructor for FXML Loader
+   }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,
          String title)
@@ -40,10 +42,6 @@ public class ViewInfo extends View
       }
    }
    
-   public ViewInfo()
-   {
-      
-   }
 
    public void onHomeButtonPressed() throws IOException
    {

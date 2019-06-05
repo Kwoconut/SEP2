@@ -41,7 +41,7 @@ public class ViewRequestOffer extends View
    
    public ViewRequestOffer()
    {
-      
+    //empty constructor for FXML Loader
    }
 
    public void init(MainViewViewModel viewModel, MainView view, Scene scene,

@@ -43,7 +43,7 @@ public class ViewProductList extends View
 
    public ViewProductList()
    {
-
+    //empty constructor for FXML Loader
    }
 
    @SuppressWarnings("static-access")

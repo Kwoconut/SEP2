@@ -47,9 +47,10 @@ public class ViewCreateSale extends View
    private Scene scene;
    private String title;
 
+   
    public ViewCreateSale()
    {
-
+      //empty constructor for FXML Loader
    }
 
    @Override

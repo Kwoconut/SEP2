@@ -12,10 +12,6 @@ public class MyDate implements Serializable
    private int month;
    private int year;
 
-   public static final String[] STARSIGNS = { "Capricorn", "Aquarius", "Pisces",
-         "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra",
-         "Scorpio", "Sagittarius" };
-
    public MyDate(int day, int month, int year)
    {
       set(day, month, year);
@@ -220,100 +216,6 @@ public class MyDate implements Serializable
    public boolean isBetween(MyDate startDate, MyDate endDate)
    {
       return isAfter(startDate) && isBefore(endDate);
-   }
-
-   public String starsignElement()
-   {
-      switch (starsign())
-      {
-         case "Capricorn":
-         case "Taurus":
-         case "Virgo":
-            return "Earth";
-         case "Aquarius":
-         case "Gemini":
-         case "Libra":
-            return "Air";
-         case "Pisces":
-         case "Cancer":
-         case "Scorpio":
-            return "Water";
-         case "Aries":
-         case "Leo":
-         case "Sagittarius":
-            return "Fire";
-         default:
-            return "????";
-      }
-   }
-
-   public String starsign()
-   {
-      switch (month)
-      {
-         case 1:
-            if (day < 20)
-               return STARSIGNS[0];
-            else
-               return STARSIGNS[1];
-         case 2:
-            if (day < 19)
-               return STARSIGNS[1];
-            else
-               return STARSIGNS[2];
-         case 3:
-            if (day < 21)
-               return STARSIGNS[2];
-            else
-               return STARSIGNS[3];
-         case 4:
-            if (day < 20)
-               return STARSIGNS[3];
-            else
-               return STARSIGNS[4];
-         case 5:
-            if (day < 21)
-               return STARSIGNS[4];
-            else
-               return STARSIGNS[5];
-         case 6:
-            if (day < 21)
-               return STARSIGNS[5];
-            else
-               return STARSIGNS[6];
-         case 7:
-            if (day < 23)
-               return STARSIGNS[6];
-            else
-               return STARSIGNS[7];
-         case 8:
-            if (day < 23)
-               return STARSIGNS[7];
-            else
-               return STARSIGNS[8];
-         case 9:
-            if (day < 23)
-               return STARSIGNS[8];
-            else
-               return STARSIGNS[9];
-         case 10:
-            if (day < 23)
-               return STARSIGNS[9];
-            else
-               return STARSIGNS[10];
-         case 11:
-            if (day < 22)
-               return STARSIGNS[10];
-            else
-               return STARSIGNS[11];
-         case 12:
-            if (day < 22)
-               return STARSIGNS[11];
-            else
-               return STARSIGNS[0];
-         default:
-            return "????";
-      }
    }
 
    public MyDate copy()
