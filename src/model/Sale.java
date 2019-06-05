@@ -19,8 +19,8 @@ public class Sale implements Serializable
          int amount)
    {
       this.ID = ID;
-      this.startDate = startDate;
-      this.endDate = endDate;
+      this.startDate = startDate.copy();
+      this.endDate = endDate.copy();
       this.product = product;
       this.amount = amount;
       this.state = new UpcomingSale();
@@ -30,8 +30,8 @@ public class Sale implements Serializable
          int amount, SaleState state)
    {
       this.ID = ID;
-      this.startDate = startDate;
-      this.endDate = endDate;
+      this.startDate = startDate.copy();
+      this.endDate = endDate.copy();
       this.product = product;
       this.amount = amount;
       this.state = state;
@@ -64,12 +64,12 @@ public class Sale implements Serializable
 
    public MyDate getStartDate()
    {
-      return startDate;
+      return startDate.copy();
    }
 
    public MyDate getEndDate()
    {
-      return endDate;
+      return endDate.copy();
    }
 
    public double getPrice()
