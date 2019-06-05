@@ -6,7 +6,7 @@ package model;
  * @version (Version 1.0, 06/04/2019)
  */
 public interface StoreModel extends SProductModel, SOfferModel,
-      StoreModelClientHandler, SSalesModel, SReviewModel, SLoginModel
+      StoreModelClientHandler, SSalesModel, SReviewModel, SLoginModel , SInfoModel
 {
 
 }
