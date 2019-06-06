@@ -18,7 +18,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="75.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Logo.png" />
+                        <Image url="@../images/Logo.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="checkOffersButton" layoutX="995.0" layoutY="60.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Check Offers" />
@@ -34,19 +34,19 @@
                   <TextArea layoutX="66.0" layoutY="17.0" prefHeight="415.0" prefWidth="680.0" text="Though industry awards are always nice, it is the satisfaction of our clients that truly drives&#10;The Roofing Company. We don’t strive to meet expectations, we work our tails off to exceed&#10;them. That means undergoing continuous factory education from our many manufacturers,&#10; and ensuring that each member of our team is fully versed in the products with which they &#10;work. &#10;The expertise of our installation crew members is ever growing, and their ability to design&#10;roofing projects specifically for Virginia homes is unparalleled.&#10;&#10;Through an elite and well trained team of residential construction professionals, we will:&#10;&#10;-&#9;Strive to employ our faith in God in all we do&#10;&#10;-&#9;Provide a superior construction experience which exceeds our client’s expectations&#10;&#10;-&#9;Continue to ensure our long term stability through continuous improvement&#10;&#10;-&#9;Cultivate long term relationships with our clients, suppliers, communities and team members&#10;&#10;-&#9;Maintain a safe and positive work environment" />
                   <ImageView fitHeight="346.0" fitWidth="442.0" layoutX="798.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../roofModel.png" />
+                        <Image url="@../images/roofModel.png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
             <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="90.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../facebook.png" />
+                  <Image url="@../images/facebook.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="210.0" layoutY="629.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../twitter.png" />
+                  <Image url="@../images/twitter.png" />
                </image>
             </ImageView>
             <Label layoutX="400.0" layoutY="640.0" prefHeight="48.0" prefWidth="349.0" text="Contact phone : +45 99 55 44 69" textFill="#c74c4c">

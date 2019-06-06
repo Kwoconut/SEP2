@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import java.util.ArrayList?>
+
 <VBox prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewStore">
 	<children>
 		<AnchorPane VBox.vgrow="ALWAYS">
@@ -21,7 +22,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="75.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Logo.png" />
+                        <Image url="@../images/Logo.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="checkOffersButton" layoutX="995.0" layoutY="60.0" mnemonicParsing="false" onAction="#onCheckOfferButtonPressed" prefHeight="36.0" prefWidth="119.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Check Offers" />
@@ -48,7 +49,7 @@
                      <children>
                         <ImageView fitHeight="122.0" fitWidth="195.0" layoutX="5.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../tabla_click-1.png" />
+                              <Image url="@../images/tabla_click-1.png" />
                            </image>
                         </ImageView>
                         <Button layoutX="66.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedClick" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
@@ -73,7 +74,7 @@
                      <children>
                         <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../tabla_cutata-1.png" />
+                              <Image url="@../images/tabla_cutata-1.png" />
                            </image>
                         </ImageView>
                         <Button layoutX="69.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedMetal" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
@@ -98,7 +99,7 @@
                      <children>
                         <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../MG_7313-LR-fara-suruburi.jpg" />
+                              <Image url="@../images/MG_7313-LR-fara-suruburi.jpg" />
                            </image>
                         </ImageView>
                         <Button layoutX="68.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedMetalTile" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
@@ -123,7 +124,7 @@
                      <children>
                         <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../bpblackline-1.png" />
+                              <Image url="@../images/bpblackline-1.png" />
                            </image>
                         </ImageView>
                         <Button layoutX="65.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedPlated" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
@@ -148,7 +149,7 @@
                      <children>
                         <ImageView fitHeight="136.0" fitWidth="195.0" layoutX="5.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../bg_image_overlay-sisteme-colectare.jpg" />
+                              <Image url="@../images/bg_image_overlay-sisteme-colectare.jpg" />
                            </image>
                         </ImageView>
                         <Button layoutX="68.0" layoutY="342.0" mnemonicParsing="false" onAction="#onDetailsLabelPressedRain" prefHeight="38.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: #DC7A77;" text="Details" />
