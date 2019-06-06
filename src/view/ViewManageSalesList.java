@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -231,6 +232,10 @@ public class ViewManageSalesList extends View
       alert.setTitle("Confirmation");
       alert.setContentText("Remove sale ?");
       alert.setHeaderText(viewModel.getSelectedSale().getValue().getProductNameProperty().getValue());
+      DialogPane dialogPane = alert.getDialogPane();
+      dialogPane.getStylesheets()
+            .add(getClass().getResource("/view/beautify.css").toExternalForm());
+      dialogPane.getStyleClass().add("beautify");
       Optional<ButtonType> result = alert.showAndWait();
       if ((result.isPresent()) && (result.get() == ButtonType.OK))
       {
