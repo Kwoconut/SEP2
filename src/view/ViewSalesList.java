@@ -68,8 +68,6 @@ public class ViewSalesList extends View
    public void refresh()
    {
       ObservableList<ViewModelSale> sales = this.viewModel.getSales();
-      System.out.println(sales);
-
       ObservableList<StackPane> stackPane = FXCollections.observableArrayList();
       ObservableList<Label> names = FXCollections.observableArrayList();
       ObservableList<Label> prices = FXCollections.observableArrayList();
